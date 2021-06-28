@@ -1,0 +1,43 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceHttp\Requests;
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
+use Illuminate\Http\Request;
+use App\Traits\CrudControllerTrait;
+
+class DummyClass extends Controller
+{
+    use CrudControllerTrait;
+
+    private $model;
+    private $path;
+    private $redirectPath;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct({{modelName}} ${{crudName}})
+    {
+        $this->middleware('auth');
+        $this->model = ${{crudName}};
+        $this->path = '{{viewPath}}{{viewName}}';
+        $this->redirectPath = '{{viewName}}';
+        $this->withFields = [];
+        $this->selectModelFields = [];
+        $this->joinSearch = [];
+        $this->fileName = [];
+        $this->uploadFilePath = 'images/{{viewName}}';
+        $this->validations = [];
+        $this->pdfFields = [['id']];
+        $this->pdfTitles = ['Id'];
+        $this->indexFields = [['id']];
+        $this->indexTitles = ['Id'];
+    }
+
+}

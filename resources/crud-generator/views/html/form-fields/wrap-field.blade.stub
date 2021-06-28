@@ -1,0 +1,9 @@
+<div class="form-group row mb-5 {{ $errors->has('%1$s') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="%1$s" class="control-label">{{ %2$s }}</label>
+    </div>
+    <div class="col-10">
+        %3$s
+        {!! $errors->first('%1$s', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>

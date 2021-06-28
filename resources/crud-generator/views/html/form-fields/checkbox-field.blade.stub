@@ -1,0 +1,6 @@
+<div class="checkbox">
+    <label><input name="{{ %1$s }}" type="checkbox" value="1" {{ (isset($result) && 1 == $result->%1$s) ? 'checked' : old('%%itemName%%') }}> Yes</label>
+</div>
+<div class="checkbox">
+    <label><input name="{{ %1$s }}" type="checkbox" value="0" {{ (isset($result) && 0 == $result->%1$s) ? 'checked' : old('%%itemName%%') }}> No</label>
+</div>

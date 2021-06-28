@@ -1,0 +1,9 @@
+<select name="%%itemName%%" class="form-control" id="%%itemName%%" %%required%%>
+    <option value="">Selecione ...</option>
+    @foreach ($selectModelFields[] as $optionKey => $optionValue)
+        <option value="{{ $optionValue->id }}" 
+            {{ (isset($result->%%itemName%%) && $result->%%itemName%% == $optionValue->id) ? 'selected' : ''}}
+            {{ old('%%itemName%%') == $optionValue->id ? "selected" : "" }} 
+        >{{ $optionValue }}</option>
+    @endforeach
+</select>

@@ -1,0 +1,1 @@
+<input class="form-control" name="%%itemName%%" type="%%fieldType%%" id="%%itemName%%" value="{{ isset($result->%%itemName%%) ? $result->%%itemName%% : ''}}" %%required%%>
