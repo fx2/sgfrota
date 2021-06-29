@@ -1,11 +1,14 @@
-on: 
-  push: 
+on:
+  push:
     branches:
-      - main
-name: 🚀 Deploy website on push MAIN
+    - main
+
 jobs:
-  build:
-    name: Frotas Laravel Build
-    runs-on: ubuntu-18.04
+  pull-request:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "main"
