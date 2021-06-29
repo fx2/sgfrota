@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - main
-name: 🚀 Deploy sgfrota on push MAIN
+
 jobs:
   pull-request:
     runs-on: ubuntu-latest
