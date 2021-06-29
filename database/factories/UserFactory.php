@@ -6,6 +6,15 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 //ssh -4 pei@ftp.pei.kinghost.net 
+// Senha git ssh frotas IIzamFh$t;^Y
+
+// github:
+// key-sgfrotas
+
+// https://www.youtube.com/watch?v=3-6wQIDj-yE
+
+// ssh -p 10428 sgfrota@138.128.185.185
+
 class UserFactory extends Factory
 {
     /**
