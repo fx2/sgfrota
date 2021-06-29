@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 
 // ssh -p 10428 sgfrota@138.128.185.185
 
+//bd  -> sgfrota_faria 372KO0LTJ(Ap
+
 class UserFactory extends Factory
 {
     /**
