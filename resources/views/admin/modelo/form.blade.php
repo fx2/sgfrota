@@ -68,7 +68,6 @@
     async function loadMarcas(_this){
         const marca = await axios.get(`${BASE_URL}/modelo?where=marca_id,=,${_this.value}&first=true`); ///modelo?where=marca_id,=,2
         
-        console.log(marca);
     }
 </script>
 @endpush

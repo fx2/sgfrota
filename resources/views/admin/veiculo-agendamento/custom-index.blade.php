@@ -349,7 +349,6 @@
         },
         selectable: true,
         select: function (info){
-          console.log(info)
             $('[name="previsao_volta"]').val(info.endStr)
             $('[name="previsao_saida"]').val(info.startStr);
               
@@ -388,7 +387,6 @@
             }
             
             
-            console.log(info.event._def.extendedProps.auth_id, user.id)
             $('#visualizar #local').text(info.event._def.extendedProps.local);
             $('#visualizar #periodo').text(title);
             $('#visualizar #start').text(info.event._def.extendedProps.saida);

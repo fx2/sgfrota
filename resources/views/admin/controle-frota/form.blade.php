@@ -369,8 +369,6 @@
 
         hide_show_responsavel_id.fadeOut();
         responsavel_id.val(null);
-
-        console.log(responsavel_id).val();
     }
 
     async function loadModelosByMarca(_this, modelo = null){
