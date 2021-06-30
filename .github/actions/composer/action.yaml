@@ -1,5 +1,12 @@
-name: 'composer-install'
-description: 'Runs PHP Composer'
-run:
-    using: 'Docker'
-    image: 'Dockerfile'
+name: composer-install
+description: 'composite run action'
+
+runs:
+  using: 'Docker'
+  image: 'Dockerfile'
+  steps: 
+    steps:
+    - name: Echo
+      shell: bash
+      run: |
+        echo Heyyyyy
