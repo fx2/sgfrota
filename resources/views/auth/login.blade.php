@@ -1,7 +1,6 @@
 @extends('layouts.authtemplate.index')
 
 @section('content')
-aa
     <form method="POST" action="{{ route('login') }}" class="loginform">
         @csrf
         <h5 class="loginh mt-4">Bem Vindo</h5>
