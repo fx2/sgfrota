@@ -13,5 +13,6 @@ jobs:
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
         port: ${{ secrets.port }}
-        script: ./.github/scripts/actions.sh
+        server-dir: /home/sgfrota/public_html
+        script: git pull
           
