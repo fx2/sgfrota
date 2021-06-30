@@ -41,7 +41,7 @@ img{
     width:50%;
     height:100%;
     position:absolute;
-    right:10%;
+    right:5%;
     bottom:5%;
 }
 
@@ -74,3 +74,21 @@ img{
 .info h6{
     text-align:center;
 }
+
+
+
+@media (max-width: 576px)
+{
+    .info { display: none;}
+    
+    body {background: linear-gradient(90deg, #FFFFFF 40%, #FFFFFF 40%);}
+
+    .loginform{
+        width:80%;
+        height:100%;
+        position:absolute;
+        right:10%;
+        bottom:5%;
+    }
+ 
+} 

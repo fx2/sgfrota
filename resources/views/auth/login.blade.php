@@ -33,8 +33,8 @@
 
     <div class="info">
         <img src="{{ asset('images/Logo_SGFrota_Menor.jpg') }}">
-        <h5>SGFROTA</h5>
-        <h6>Alguma frase aqui</h6>
+        {{-- <h5>SGFROTA</h5>
+        <h6>Alguma frase aqui</h6> --}}
     </div>
 @endsection
 
