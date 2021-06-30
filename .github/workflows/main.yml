@@ -13,4 +13,4 @@ jobs:
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
         port: ${{ secrets.port }}
-        script: git pull
+        script: pwd
