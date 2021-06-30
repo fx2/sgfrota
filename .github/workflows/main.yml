@@ -16,5 +16,6 @@ jobs:
         script: |
           cd public_html
           git pull
-          php artisan migrate
+          php artisan migrate 
+          yes
           
