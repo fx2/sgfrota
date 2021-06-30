@@ -5,10 +5,10 @@ jobs:
   build:
     name: Laravel Build
     runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
+        - uses: ./.github/actions/composer
     with:
         server: ${{ secrets.host }}
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
-    steps:
-        - uses: actions/checkout@v1
-        - uses: ./.github/actions/composer
