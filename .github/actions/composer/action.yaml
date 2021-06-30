@@ -4,7 +4,6 @@ description: 'composite run action'
 runs:
   using: 'Docker'
   image: 'Dockerfile'
-  steps: 
     steps:
     - name: Echo
       shell: bash
