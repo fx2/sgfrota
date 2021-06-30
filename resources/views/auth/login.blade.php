@@ -1,43 +1,41 @@
 @extends('layouts.authtemplate.index')
 
 @section('content')
-        <a class="help" href="#"></a>
-
-        <form method="POST" action="{{ route('login') }}" class="loginform">
-            @csrf
-            <h5 class="loginh mt-4">Bem Vindo</h5>
-            <br>
-            <h6>Email</h6>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-            @error('email')
-                    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-            <br>
-            <h6>Senha</h6>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-            @error('password')
+    <form method="POST" action="{{ route('login') }}" class="loginform">
+        @csrf
+        <h5 class="loginh mt-4">Bem Vindo</h5>
+        <br>
+        <h6>Email</h6>
+        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        @error('email')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        
-            @if (Route::has('password.request'))
-                <a class="btn btn-link forgot" href="{{ route('password.request') }}">
-                    Esqueceu sua senha?
-                </a>
-            @endif
-            <br><br>
-            <input class="btn btn-primary loginbtn" type="submit" value="Login">
-        </form>
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        <br>
+        <h6>Senha</h6>
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-        <div class="info">
-            <img src="{{ asset('images/logo.png') }}">
-            <h5>Empresa</h5>
-            <h6>Alguma frase aqui</h6>
-        </div>
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    
+        @if (Route::has('password.request'))
+            <a class="btn btn-link forgot" href="{{ route('password.request') }}">
+                Esqueceu sua senha?
+            </a>
+        @endif
+        <br><br>
+        <input class="btn btn-primary loginbtn" type="submit" value="Login">
+    </form>
+
+    <div class="info">
+        <img src="{{ asset('images/Logo_SGFrota_Menor.jpg') }}">
+        <h5>SGFROTA</h5>
+        <h6>Alguma frase aqui</h6>
+    </div>
 @endsection
 
 {{-- <div class="container">
