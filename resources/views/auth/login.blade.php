@@ -3,7 +3,7 @@
 @section('content')
     <form method="POST" action="{{ route('login') }}" class="loginform">
         @csrf
-        <h5 class="loginh mt-4">Bem Vindo</h5>
+        <h5 class="loginh mt-5">Bem Vindo</h5>
         <br>
         <h6>Email</h6>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -32,7 +32,7 @@
     </form>
 
     <div class="info">
-        <img src="{{ asset('images/Logo_SGFrota_Menor.jpg') }}">
+        <img src="{{ asset('images/Logo_SGFrota.fw.png') }}">
         {{-- <h5>SGFROTA</h5>
         <h6>Alguma frase aqui</h6> --}}
     </div>
