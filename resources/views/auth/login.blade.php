@@ -3,7 +3,7 @@
 @section('content')
     <form method="POST" action="{{ route('login') }}" class="loginform">
         @csrf
-        <h5 class="loginh mt-5">Bem Vindo</h5>
+        <h5 class="loginh mt-5"> Bem Vindo </h5>
         <br>
         <h6>Email</h6>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -21,7 +21,7 @@
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-    
+
         @if (Route::has('password.request'))
             <a class="btn btn-link forgot" href="{{ route('password.request') }}">
                 Esqueceu sua senha?
@@ -106,4 +106,4 @@
             </div>
         </div>
     </div>
-</div> --}} 
+</div> --}}
