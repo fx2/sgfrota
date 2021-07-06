@@ -1,7 +1,7 @@
 <html>
     <head>
         <style>
-            /** 
+            /**
                 Set the margins of the page to 0, so the footer and the header
                 can be of the full height and width !
              **/
@@ -28,9 +28,9 @@
 
             /** Define the footer rules **/
             footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -69,15 +69,10 @@
             <table width="100%">
                 <thead>
                     <th></th>
-                    <th></th>
-                    <th></th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span style="color:white;">espaco</span></td>
-                        <td><img src="{{ public_path('images/logo.png') }}" width="10%" height="100%"/></td>
-                        <td>Texto informando algo sobre a empresa</td>
-                        
+                    <tr style="text-align: center;">
+                        <td><img src="{{ public_path('images/headerprintPDF.png') }}" width="40%" height="100%"/></td>
                     </tr>
                 </tbody>
             </table>
@@ -85,12 +80,16 @@
 
         <footer>
             <table width="100%">
-                <th><p class="page">Page </p></th>
+                <th>
+                    <p class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000</p>
+                    <p class="page">Page </p>
+                </th>
             </table>
         </footer>
 
         <!-- Wrap the content of your PDF inside a main tag -->
         <main>
+            <p></p>
             @yield('content')
 
             {{-- <p style="page-break-after: always;"> como quebrar paginas
