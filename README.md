@@ -1,3 +1,8 @@
+sail:
+nano ~/.bash_aliases
+alias sail='bash vendor/bin/sail'
+dai: sail artisan serve
+
 para fuincionar rotas custom:
 
 namespace Illuminate\Routing;
