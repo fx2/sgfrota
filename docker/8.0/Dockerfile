@@ -3,7 +3,6 @@ FROM ubuntu:20.04
 LABEL maintainer="Taylor Otwell"
 
 ARG WWWGROUP
-ARG XDEBUG
 
 WORKDIR /var/www/html
 
@@ -28,13 +27,9 @@ RUN apt-get update \
        php8.0-xml php8.0-zip php8.0-bcmath php8.0-soap \
        php8.0-intl php8.0-readline \
        php8.0-msgpack php8.0-igbinary php8.0-ldap \
-       php8.0-redis
-
-RUN if [ ${XDEBUG}] ; then \
-    apt-get install -y php-xdebug; \
-fi;
-
-RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+       php8.0-redis \
+       php8.0-xdebug \
+    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
     && apt-get install -y nodejs \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -42,13 +37,9 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     && apt-get update \
     && apt-get install -y yarn \
     && apt-get install -y mysql-client \
-    && apt-get install -y postgresql-client \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN pecl channel-update https://pecl.php.net/channel.xml \
-    && pecl install swoole
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
 
