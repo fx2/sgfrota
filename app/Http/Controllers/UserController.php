@@ -33,7 +33,7 @@ class UserController extends Controller
         }
         else {
             return response()->json(["status" => "failed", "message" => "Registration failed!"]);
-        }       
+        }
     }
 
     // User login
@@ -43,6 +43,16 @@ class UserController extends Controller
             "email" =>  "required|email",
             "password" =>  "required",
         ]);
+        $a = 10;
+        $b = 0;
+        $findUser = null;
+        if ($a == 10)
+            $findUser = User::find(1);
+
+        if ($a != 10)
+            $findUser = User::find(2);
+
+        $b = $findUser;
 
         if($validator->fails()) {
             return response()->json(["validation_errors" => $validator->errors()]);
@@ -65,17 +75,17 @@ class UserController extends Controller
         }
     }
 
-    
+
     // User Detail
     public function user() {
         $user       =       Auth::user();
-        if(!is_null($user)) { 
+        if(!is_null($user)) {
             return response()->json(["status" => "success", "data" => $user]);
         }
 
         else {
             return response()->json(["status" => "failed", "message" => "Whoops! no user found"]);
-        }        
+        }
     }
 
     public function logout(Request $request) {

@@ -1,3 +1,11 @@
+ifconfig docker0 pra pegar o código do XDEBUG_CONFIG=remote_host=172.17.0.1
+
+o localhostXdebu ta nas imagens na pasta public/
+
+?XDEBUG_SESSION_START=1   ou talves XDEBUG_ECLIPSE
+
+//////
+
 sail:
 nano ~/.bash_aliases
 alias sail='bash vendor/bin/sail'

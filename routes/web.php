@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $a = 12;
+
+
     return redirect('login');
 });
 
