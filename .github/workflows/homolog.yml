@@ -17,6 +17,6 @@ jobs:
         password: ${{ secrets.password }}
         port: ${{ secrets.port }}
         script: |
-          cd homologacao.sgfrota.com.br
+          cd /home/sgfrota/homologacao.sgfrota.com.br
           git pull
           php artisan migrate --force
