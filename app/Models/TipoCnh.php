@@ -30,5 +30,5 @@ class TipoCnh extends BaseModel
      */
     protected $fillable = ['nome', 'descricao', 'status'];
 
-    
+
 }
