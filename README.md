@@ -6,6 +6,13 @@ o localhostXdebu ta nas imagens na pasta public/
 
 //////
 
+rodar o comando no teminal: 
+    docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
+dai pegar o ip do mysql e usar no .env: 
+    DB_HOST=172.23.0.2
+
+
+
 sail:
 nano ~/.bash_aliases
 alias sail='bash vendor/bin/sail'
