@@ -1,0 +1,22 @@
+name: remote ssh command
+on:
+  push:
+    branches:
+      - homolog
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.host }}
+        username: ${{ secrets.username }}
+        password: ${{ secrets.password }}
+        port: ${{ secrets.port }}
+        script: |
+          cd homologacao.sgfrota.com.br
+          git pull
+          php artisan migrate --force
