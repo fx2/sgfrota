@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <span href="index3.html" class="brand-link">
       <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Empresa</span>
+      <span class="brand-text font-weight-light">Câmara Municipal de Arujá</span>
     </span>
 
     <!-- Sidebar -->
@@ -60,7 +60,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('tipo-manutencao') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-manutencao']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -69,7 +69,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('tipo-veiculo') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-veiculo']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -78,7 +78,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('tipo-cnh') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-cnh']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -87,7 +87,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('marca') }}" class="nav-link {{ Str::contains(url()->current(), ['/marca']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -96,7 +96,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('tipo-multas') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-multas']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -105,7 +105,7 @@
                   </p>
                 </a>
               </li>
-    
+
               <li class="nav-item">
                 <a href="{{ url('modelo') }}" class="nav-link {{ Str::contains(url()->current(), ['/modelo']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -153,7 +153,7 @@
             </a>
           </li>
 
-          
+
 
           <li class="nav-item">
             <a href="{{ url('controle-frota') }}" class="nav-link {{ Str::contains(url()->current(), ['/controle-frota']) ? 'active' : '' }}">
@@ -181,8 +181,8 @@
               </p>
             </a>
           </li>
-          
-          
+
+
 
           <li class="nav-item">
             <a href="{{ url('manutencao') }}" class="nav-link {{ Str::contains(url()->current(), ['/manutencao']) ? 'active' : '' }}">
