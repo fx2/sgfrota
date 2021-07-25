@@ -38,6 +38,14 @@
         {!! $errors->first('foto_perfil', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group row mb-5 {{ $errors->has('foto_perfil') ? 'has-error' : ''}}">
+    <div class="col-2">
+    </div>
+    <div class="col-10">
+        <label for="foto_perfil" class="control-label">{{ '' }}</label>
+        <img class="img-fluid" src="{{ isset($result->foto_perfil) ? removePublicPath(asset($result->foto_perfil)) : '' }}" alt="{{ isset($result->foto_perfil) ? $result->foto_perfil : '' }}" >
+    </div>
+</div>
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>

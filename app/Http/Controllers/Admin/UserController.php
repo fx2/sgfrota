@@ -35,10 +35,10 @@ class UserController extends Controller
         $this->indexTitles = ['Name','email'];
         $this->validations = [
             'name' => 'required',
-            'email' => 'required|unique:users|max:255',
             'password' => 'required|min:9',
         ];
-        $this->fileName = ['foto'];
+        $this->fileName = ['foto_perfil'];
+        $this->uploadFilePath = 'images/usuarios';
     }
 
     public function index()
@@ -59,6 +59,17 @@ class UserController extends Controller
         return view($this->path.'.edit', ['result'=>$result, 'withFields' => $this->withFields($result), 'selectModelFields' => $this->selectModelFields()]);
     }
 
+    public function validaEmail($email)
+    {
+        $emailProprio = auth()->user()->email;
+        if ($email == $emailProprio)
+            return true;
+
+        if (User::where('email', $email)->first())
+            return false;
+
+    }
+
     public function update(Request $request, $id)
     {
         if (!empty($this->validations)) {
@@ -69,14 +80,19 @@ class UserController extends Controller
             $this->validate($request, $this->validations);
         }
 
+        if(!$this->validaEmail($request->email)){
+            toastr()->error('Email já está sendo usado por outro usuário.');
+            return redirect()->back();
+        }
+
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+
+        $requestData['password'] = Hash::make($requestData['password']);
 
         if (!empty($this->fileName)) {
             $requestData = $this->eachFiles($requestData, $request);
         }
-
-        $requestData['password'] = Hash::make($requestData['password']);
 
         $result->update($requestData);
         toastr()->success('Seus dados de usuário foram salvos com sucesso.');
