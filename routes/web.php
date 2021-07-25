@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $a = 12;
-
-
     return redirect('login');
 });
 
@@ -26,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks');
 
 
+Route::resource('user', 'App\Http\Controllers\Admin\UserController');
 Route::resource('fornecedor', 'App\Http\Controllers\Admin\FornecedorController');
 Route::resource('tipo-combustivel', 'App\Http\Controllers\Admin\TipoCombustivelController');
 Route::resource('tipo-manutencao', 'App\Http\Controllers\Admin\TipoManutencaoController');

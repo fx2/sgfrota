@@ -13,7 +13,7 @@
           <img src="{{ asset('adminlte/dist/img/avatardefault.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ route('user.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
