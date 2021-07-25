@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <span href="index3.html" class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+{{--      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">--}}
       <span class="brand-text font-weight-light">Câmara Municipal de Arujá</span>
     </span>
 
@@ -10,7 +10,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('adminlte/dist/img/avatardefault.png')}}" class="img-circle elevation-2" alt="User Image">
+            @if(Auth::user()->foto_perfil)
+                <img src="{{ asset(Auth::user()->foto_perfil)}}" class="img-circle elevation-2" alt="User Image">
+            @else
+                <img src="{{ asset('adminlte/dist/img/avatardefault.png')}}" class="img-circle elevation-2" alt="User Image">
+            @endif
         </div>
         <div class="info">
           <a href="{{ route('user.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name }}</a>

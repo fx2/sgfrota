@@ -42,7 +42,7 @@
     <div class="col-2">
     </div>
     <div class="col-10">
-        <label for="foto_perfil" class="control-label">{{ '' }}</label>
+        <label for="foto_perfil" class="control-label">{{ 'Foto Atual' }}</label>
         <img class="img-fluid" src="{{ isset($result->foto_perfil) ? removePublicPath(asset($result->foto_perfil)) : '' }}" alt="{{ isset($result->foto_perfil) ? $result->foto_perfil : '' }}" >
     </div>
 </div>
