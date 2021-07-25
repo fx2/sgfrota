@@ -65,9 +65,12 @@ class UserController extends Controller
         if ($email == $emailProprio)
             return true;
 
-        if (User::where('email', $email)->first())
+        $buscaEmail = User::where('email', $email)->count();
+
+        if ($buscaEmail > 0)
             return false;
 
+        return true;
     }
 
     public function update(Request $request, $id)
