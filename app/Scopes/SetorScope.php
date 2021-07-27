@@ -17,6 +17,6 @@ class SetorScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('id', '>', 1);
+//        $builder->where('id', '>', 1);
     }
 }
