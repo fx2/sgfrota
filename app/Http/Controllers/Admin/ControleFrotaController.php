@@ -30,11 +30,12 @@ class ControleFrotaController extends Controller
         $this->redirectPath = 'controle-frota';
         $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel'];
         $this->selectModelFields = [
-            'TipoVeiculo' => '\App\Models\TipoVeiculo', 
+            'TipoVeiculo' => '\App\Models\TipoVeiculo',
             'TipoCombustivel' => '\App\Models\TipoCombustivel',
             'Marca' => '\App\Models\Marca',
-            'Modelo' => '\App\Models\Modelo', 
-            'TipoResponsavel' => '\App\Models\TipoResponsavel', 
+            'Modelo' => '\App\Models\Modelo',
+            'TipoResponsavel' => '\App\Models\TipoResponsavel',
+            'Setor' => '\App\Models\Setor',
         ];
         $this->joinSearch = [
             'tipo_veiculo_id' => ['nome', '\App\Models\TipoVeiculo'],
@@ -42,6 +43,7 @@ class ControleFrotaController extends Controller
             'marca_id' => ['nome', '\App\Models\Marca'],
             'modelo_id' => ['modelo', '\App\Models\Modelo'],
             'tipo_responsavel_id' => ['responsavel', '\App\Models\TipoResponsavel'],
+            'setor' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = ['dut', 'certificado_vistoria', 'foto'];
         $this->uploadFilePath = 'images/controle-frota';
@@ -52,6 +54,7 @@ class ControleFrotaController extends Controller
             'modelo_id' => 'required',
             'tipo_responsavel' => 'required',
             'tipo_responsavel_id' => 'required',
+            'setor_id' => 'required',
             'tipo_veiculo' => 'required',
             'disponivel_outros_departamentos' => 'required',
             // 'veiculo_escolar' => 'required',
@@ -71,10 +74,10 @@ class ControleFrotaController extends Controller
             'foto' => 'required',
             'status' => 'required',
         ];
-        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
-        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['status']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Setor', 'Status'];
+        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['status']];
+        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Setor', 'Status'];
 
     }
 

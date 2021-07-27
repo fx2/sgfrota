@@ -28,7 +28,7 @@ class ControleFrotum extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['tipo_veiculo', 'nome_proprietario', 'disponivel_outros_departamentos', 'veiculo_escolar', 'certificado_vistoria', 'vencto_vistoria_escolar', 'tipo_veiculo_id', 'renavan', 'placa', 'chassi', 'especie_tipo', 'tipo_combustivel_id', 'marca_id', 'modelo_id', 'veiculo', 'ano_fabricacao', 'ano_modelo', 'capacidade', 'cor', 'patrimonio', 'estado_veiculo', 'km_inicial', 'dut', 'foto', 'status', 'tipo_responsavel', 'tipo_responsavel_id'];
+    protected $fillable = ['tipo_veiculo', 'nome_proprietario', 'disponivel_outros_departamentos', 'veiculo_escolar', 'certificado_vistoria', 'vencto_vistoria_escolar', 'tipo_veiculo_id', 'renavan', 'placa', 'chassi', 'especie_tipo', 'tipo_combustivel_id', 'marca_id', 'modelo_id', 'veiculo', 'ano_fabricacao', 'ano_modelo', 'capacidade', 'cor', 'patrimonio', 'estado_veiculo', 'km_inicial', 'dut', 'foto', 'status', 'tipo_responsavel', 'tipo_responsavel_id', 'setor_id'];
 
     public function tipo_veiculoHasOne()
     {
@@ -55,10 +55,15 @@ class ControleFrotum extends BaseModel
         return $this->hasOne('App\Models\TipoResponsavel', 'id', 'tipo_responsavel_id');
     }
 
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
     public static function veiculosDisponiveisControleDiario($entradaOuSaida)
     {
         $result = self::select('controle_frotas.id', 'controle_frotas.veiculo');
-            
+
         if ($entradaOuSaida == 'saida') {
             $result = $result->whereNotIn('id',function($query){
                 $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('deleted_at');
@@ -69,6 +74,6 @@ class ControleFrotum extends BaseModel
 
         return $result->whereIn('id',function($query){
             $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('deleted_at');
-        })->get();        
-    }    
+        })->get();
+    }
 }
