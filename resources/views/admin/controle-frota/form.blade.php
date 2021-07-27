@@ -58,7 +58,7 @@
     <div class="col-10">
         <label for="certificado_vistoria" class="control-label">{{ '' }}</label>
         <img class="img-fluid" id="img_upload" src="{{ isset($result->certificado_vistoria) ? asset($result->certificado_vistoria) : '' }}" alt="{{ isset($result->certificado_vistoria) ? $result->certificado_vistoria : '' }}" >
-    </div>  
+    </div>
 </div>
 
 <div id="hide_show_vencto_vistoria_escolar" class="form-group row mb-5 {{ $errors->has('vencto_vistoria_escolar') ? 'has-error' : ''}}">
@@ -79,9 +79,9 @@
         <select name="tipo_veiculo_id" class="form-control" id="tipo_veiculo_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['TipoVeiculo'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->tipo_veiculo_id) && $result->tipo_veiculo_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('tipo_veiculo_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('tipo_veiculo_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -132,9 +132,9 @@
         <select name="tipo_combustivel_id" class="form-control" id="tipo_combustivel_id" >
     <option value="">Selecione ...</option>
     @foreach ($selectModelFields['TipoCombustivel'] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}" 
+        <option value="{{ $optionValue->id }}"
             {{ (isset($result->tipo_combustivel_id) && $result->tipo_combustivel_id == $optionValue->id) ? 'selected' : ''}}
-            {{ old('tipo_combustivel_id') == $optionValue->id ? "selected" : "" }} 
+            {{ old('tipo_combustivel_id') == $optionValue->id ? "selected" : "" }}
         >{{ $optionValue->nome }}</option>
     @endforeach
 </select>
@@ -149,9 +149,9 @@
         <select name="marca_id" class="form-control" id="marca_id" onchange="loadModelosByMarca(this, null)">
     <option value="">Selecione ...</option>
     @foreach ($selectModelFields['Marca'] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}" 
+        <option value="{{ $optionValue->id }}"
             {{ (isset($result->marca_id) && $result->marca_id == $optionValue->id) ? 'selected' : ''}}
-            {{ old('marca_id') == $optionValue->id ? "selected" : "" }} 
+            {{ old('marca_id') == $optionValue->id ? "selected" : "" }}
         >{{ $optionValue->nome }}</option>
     @endforeach
 </select>
@@ -166,9 +166,9 @@
         <select name="modelo_id" class="form-control" id="modelo_id" >
     <option value="">Selecione ...</option>
     {{-- @foreach ($selectModelFields['Modelo'] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}" 
+        <option value="{{ $optionValue->id }}"
             {{ (isset($result->modelo_id) && $result->modelo_id == $optionValue->id) ? 'selected' : ''}}
-            {{ old('modelo_id') == $optionValue->id ? "selected" : "" }} 
+            {{ old('modelo_id') == $optionValue->id ? "selected" : "" }}
         >{{ $optionValue->modelo }}</option>
     @endforeach --}}
 </select>
@@ -262,7 +262,7 @@
     <div class="col-10">
         <label for="dut" class="control-label">{{ '' }}</label>
         <img class="img-fluid" id="img_upload" src="{{ isset($result->dut) ? asset($result->dut) : '' }}" alt="{{ isset($result->dut) ? $result->dut : '' }}" >
-    </div>  
+    </div>
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('foto') ? 'has-error' : ''}}">
@@ -280,7 +280,7 @@
     <div class="col-10">
         <label for="foto" class="control-label">{{ '' }}</label>
         <img class="img-fluid" id="img_upload" src="{{ isset($result->foto) ? asset($result->foto) : '' }}" alt="{{ isset($result->foto) ? $result->foto : '' }}" >
-    </div>  
+    </div>
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('tipo_responsavel') ? 'has-error' : ''}}">
@@ -304,9 +304,9 @@
         <select name="tipo_responsavel_id" class="form-control" id="tipo_responsavel_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['TipoResponsavel'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->tipo_responsavel_id) && $result->tipo_responsavel_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('tipo_responsavel_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('tipo_responsavel_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -342,7 +342,7 @@
     const hide_show_responsavel_id = $('#hide_show_responsavel_id');
     const marca_id = {{ $result->marca_id ?? 'undefined' }}
     const modelo_id = {{ $result->modelo_id ?? 'undefined' }}
-    
+
     $(function () {
         tipo_veiculoFn({{ $result->tipo_veiculo ?? 1 }});
         tipo_responsavelFn({{ $result->tipo_responsavel ?? 1 }});
@@ -372,6 +372,9 @@
     }
 
     async function loadModelosByMarca(_this, modelo = null){
+        if (_this === undefined)
+            return true;
+
         marcaId = _this.value !== undefined ? _this.value : _this;
 
 
@@ -384,7 +387,7 @@
             if (modelo === element.id) {
                 $('[name="modelo_id"]').append(`<option value="${element.id}" selected>${element.modelo}</option>`);
             }
-            
+
             $('[name="modelo_id"]').append(`<option value="${element.id}">${element.modelo} - ${element.id}</option>`);
         });
     }
