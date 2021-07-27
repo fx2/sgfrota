@@ -261,7 +261,7 @@
     </div>
     <div class="col-10">
         <label for="dut" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" id="img_upload" src="{{ isset($result->dut) ? asset($result->dut) : '' }}" alt="{{ isset($result->dut) ? $result->dut : '' }}" >
+        <img class="img-fluid" id="img_upload" src="{{ isset($result->dut) ? removePublicPath($result->dut) : '' }}" alt="{{ isset($result->dut) ? $result->dut : '' }}" >
     </div>
 </div>
 
@@ -270,7 +270,7 @@
         <label for="foto" class="control-label">{{ 'Foto do veículo' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="foto" type="file" id="foto" value="{{ isset($result->foto) ? $result->foto : old('foto')}}" >
+        <input class="form-control" name="foto" type="file" id="foto" value="{{ isset($result->foto) ? removePublicPath($result->foto) : old('foto')}}" >
         {!! $errors->first('foto', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -279,7 +279,7 @@
     </div>
     <div class="col-10">
         <label for="foto" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" id="img_upload" src="{{ isset($result->foto) ? asset($result->foto) : '' }}" alt="{{ isset($result->foto) ? $result->foto : '' }}" >
+        <img class="img-fluid" id="img_upload" src="{{ isset($result->foto) ? removePublicPath($result->foto) : '' }}" alt="{{ isset($result->foto) ? $result->foto : '' }}" >
     </div>
 </div>
 

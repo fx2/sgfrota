@@ -6,9 +6,9 @@
         <select name="motorista_id" class="form-control" id="motorista_id" onchange="loadMotorista(this.value)">
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -25,9 +25,9 @@
         <select name="controle_frota_id" class="form-control" id="controle_frota_id" onchange="loadControleFrotum(this.value)">
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}</option>
             @endforeach
         </select>
@@ -45,9 +45,9 @@
         <select name="tipo_multa_id" class="form-control" id="tipo_multa_id" onchange="loadTipoMulta(this.value)">
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['TipoMulta'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->tipo_multa_id) && $result->tipo_multa_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('tipo_multa_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('tipo_multa_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->tipo }}</option>
             @endforeach
         </select>
@@ -187,8 +187,8 @@
     </div>
     <div class="col-10">
         <label for="foto_multa" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->foto_multa) ? removePublicPath(asset($result->foto_multa)) : '' }}" alt="{{ isset($result->foto_multa) ? $result->foto_multa : '' }}" >
-    </div>  
+        <img class="img-fluid" src="{{ isset($result->foto_multa) ? removePublicPath($result->foto_multa) : '' }}" alt="{{ isset($result->foto_multa) ? $result->foto_multa : '' }}" >
+    </div>
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
@@ -216,7 +216,7 @@
     var veiculoAppend = $('#load-veiculo');
     var tipoMultaAppend = $('#load-tipomulta');
 
-    if (result.estado_id === null ){ 
+    if (result.estado_id === null ){
         loadStates();
     } else {
         loadState(result.estado_id);
@@ -248,7 +248,7 @@
             `
         );
     }
-    
+
     async function loadControleFrotum(controle_frota_id = null){
         if (controle_frota_id == null)
             return true;
@@ -292,7 +292,7 @@
             `
         );
     }
-        
+
     //https://servicodados.ibge.gov.br/api/docs/localidades
     async function loadStates(){
         var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`)
@@ -309,7 +309,7 @@
             $('[name="municipio_id"]').children().remove();
 
         var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`)
-        
+
         $('[name="municipio_id"]').append('<option value="">Selecione...</option>');
         resp.data.forEach((element, i) => {
             $('[name="municipio_id"]').append('<option value="' + element.id + '">' + element.nome + '</option>');
@@ -327,7 +327,7 @@
         var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${municipioId}`);
 
         $('[name="municipio_id"]').append('<option value="' + resp.data.id + '">' + resp.data.nome + '</option>');
-        
+
         findMunicipio(result.estado_id, false)
     }
 
