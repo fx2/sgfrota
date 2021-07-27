@@ -11,11 +11,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if(Auth::user()->foto_perfil)
-                @if(App::environment('production'))
-                    <img src="{!! str_replace('public/', '', asset(Auth::user()->foto_perfil)) !!}" class="img-circle elevation-2" alt="User Image">
-                @else
-                    <img src="{{ asset(Auth::user()->foto_perfil)}}" class="img-circle elevation-2" alt="User Image">
-                @endif
+                <img src="{{ removePublicPath(Auth::user()->foto_perfil) }}" class="img-circle elevation-2" alt="User Image">
             @else
                 <img src="{{ asset('adminlte/dist/img/avatardefault.png')}}" class="img-circle elevation-2" alt="User Image">
             @endif

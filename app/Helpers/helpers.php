@@ -16,6 +16,9 @@ if (! function_exists('convertTimestamp')) {
 if (! function_exists('removePublicPath')) {
     function removePublicPath($url)
     {
+        if (env('APP_ENV') == 'local')
+            return asset($url);
+
         return str_replace('public/', '',asset($url));
     }
 }
