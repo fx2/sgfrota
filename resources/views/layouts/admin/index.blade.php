@@ -68,7 +68,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Nome da empresa &copy; {{ date('Y') }}
+    <strong>Câmara Municipal de Arujá &copy; {{ date('Y') }}
   </footer>
 
   <!-- Control Sidebar -->
