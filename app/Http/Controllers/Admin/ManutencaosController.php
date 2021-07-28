@@ -30,8 +30,8 @@ class ManutencaosController extends Controller
         $this->redirectPath = 'manutencao';
         $this->withFields = ['controle_frota', 'tipo_manutencao', 'fornecedor', 'tipo_correcao'];
         $this->selectModelFields = [
-            'ControleFrotum' => '\App\Models\ControleFrotum', 
-            'TipoManutencao' => '\App\Models\TipoManutencao', 
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'TipoManutencao' => '\App\Models\TipoManutencao',
             'Fornecedor' => '\App\Models\Fornecedor',
             'TipoCorrecao' => '\App\Models\TipoCorrecao',
         ];
@@ -60,14 +60,16 @@ class ManutencaosController extends Controller
         $this->pdfTitles = ['Responsável', 'Data', 'Hora', 'Status'];
         $this->indexFields = [['responsavel_retirada'], ['data'], ['hora'], ['status']];
         $this->indexTitles = ['Responsável', 'Data', 'Hora', 'Status'];
+
+        $this->numbersWithDecimal = ['valor'];
     }
 
     public function create()
     {
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
-        $sequencial = $id + 1 . '/' .date('Y');  
-                    
+        $sequencial = $id + 1 . '/' .date('Y');
+
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial]);
     }
-    
+
 }
