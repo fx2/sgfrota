@@ -6,7 +6,7 @@ $(window).on('load', function(e) {
     loadMotorista(motorista_id)
 });
 
-$(motoristaAppend).change(function (e) { 
+$(motoristaAppend).change(function (e) {
     loadMotorista(e.target.value)
 });
 
@@ -22,7 +22,6 @@ async function loadMotorista(motorista_id = null){
         `
             <ul class="ml-3 list-unstyled" id="motorista-remove-append">
                 <li><strong>Proprietário</strong>: ${resp.data.nome} </li>
-                <li><strong>Fornecedor</strong>: ${resp.data.fornecedor.razao_social} </li>
                 <li><strong>Tipo CNH</strong>: ${resp.data.tipo_cnh.nome}</li>
                 <li><strong>CNH</strong>: ${resp.data.cnh}</li>
                 <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>

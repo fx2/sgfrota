@@ -3,7 +3,7 @@
         <label for="motorista_id" class="control-label">{{ 'Motorista' }}</label>
     </div>
     <div class="col-10">
-        <select name="motorista_id" class="form-control" id="motorista_id" onchange="loadMotorista(this.value)">
+        <select name="motorista_id" class="form-control" id="motorista_id">
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
                 <option value="{{ $optionValue->id }}"
@@ -13,8 +13,6 @@
             @endforeach
         </select>
         {!! $errors->first('motorista_id', '<p class="help-block">:message</p>') !!}
-
-        <span id="load-motorista"></span>
     </div>
 </div>
 <div class="form-group row mb-5 {{ $errors->has('controle_frota_id') ? 'has-error' : ''}}">
@@ -22,7 +20,7 @@
         <label for="controle_frota_id" class="control-label">{{ 'Veículo' }}</label>
     </div>
     <div class="col-10">
-        <select name="controle_frota_id" class="form-control" id="controle_frota_id" onchange="loadControleFrotum(this.value)">
+        <select name="controle_frota_id" class="form-control" id="controle_frota_id">
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
                 <option value="{{ $optionValue->id }}"
@@ -32,8 +30,6 @@
             @endforeach
         </select>
         {!! $errors->first('controle_frota_id', '<p class="help-block">:message</p>') !!}
-
-        <span id="load-veiculo"></span>
     </div>
 </div>
 
@@ -157,7 +153,7 @@
         <label for="valor_multa" class="control-label">{{ 'Valor Multa' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="valor_multa" type="number" id="valor_multa" value="{{ isset($result->valor_multa) ? $result->valor_multa : old('valor_multa')}}" >
+        <input class="form-control money" name="valor_multa" type="text" id="valor_multa" value="{{ isset($result->valor_multa) ? $result->valor_multa : old('valor_multa')}}" >
         {!! $errors->first('valor_multa', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -210,10 +206,10 @@
 </div>
 
 @push('js')
+    <script src="{{ asset('js/ajax_motorista.js') }}"></script>
+    <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 <script>
     var result = @json($result ?? ["estado_id" => null, "municipio_id" => null]);
-    var motoristaAppend = $('#load-motorista');
-    var veiculoAppend = $('#load-veiculo');
     var tipoMultaAppend = $('#load-tipomulta');
 
     if (result.estado_id === null ){
@@ -223,56 +219,7 @@
         loadMunicipio(result.municipio_id);
     }
 
-    loadMotorista(result.motorista_id);
-    loadControleFrotum(result.controle_frota_id);
     loadTipoMulta(result.tipo_multa_id);
-
-    async function loadMotorista(motorista_id = null){
-        if (motorista_id == null)
-            return true;
-
-        const resp = await axios.get(`${BASE_URL}/motorista?with=fornecedor,tipoCnh&where=id,=,${motorista_id}&first=true`);
-        motoristaAppend.find('ul').remove();
-
-        motoristaAppend.append(
-            `
-                <ul class="ml-3 list-unstyled">
-                    <li><strong>Proprietário</strong>: ${resp.data.nome} </li>
-                    <li><strong>Fornecedor</strong>: ${resp.data.fornecedor.razao_social} </li>
-                    <li><strong>Tipo CNH</strong>: ${resp.data.tipo_cnh.nome}</li>
-                    <li><strong>CNH</strong>: ${resp.data.cnh}</li>
-                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
-                    <li><strong>RG</strong>: ${resp.data.rg}</li>
-                    <li><strong>CPF</strong>: ${resp.data.cpf}</li>
-                </ul>
-            `
-        );
-    }
-
-    async function loadControleFrotum(controle_frota_id = null){
-        if (controle_frota_id == null)
-            return true;
-
-        const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo&where=id,=,${controle_frota_id}&first=true`);
-        veiculoAppend.find('ul').remove();
-
-        veiculoAppend.append(
-            `
-                <ul class="ml-3 list-unstyled">
-                    <li><strong>Proprietário</strong>: ${resp.data.nome_proprietario} </li>
-                    <li><strong>Marca</strong>: ${resp.data.marca.nome} </li>
-                    <li><strong>Modelo</strong>: ${resp.data.modelo.modelo}</li>
-                    <li><strong>Tipo de combustível</strong>: ${resp.data.tipo_combustivel.nome}</li>
-                    <li><strong>Cor</strong>: ${resp.data.cor}</li>
-                    <li><strong>Capacidade</strong>: ${resp.data.capacidade}</li>
-                    <li><strong>Ano</strong>: ${moment(resp.data.ano_modelo).format('YYYY')}</li>
-                    <li><strong>Km inicial</strong>: ${resp.data.km_inicial}</li>
-                    <li><strong>Placa</strong>: ${resp.data.placa}</li>
-                    <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
-                </ul>
-            `
-        );
-    }
 
     async function loadTipoMulta(tipo_multa_id = null){
         if (tipo_multa_id == null)

@@ -30,8 +30,8 @@ class LancamentoMultasController extends Controller
         $this->redirectPath = 'lancamento-multas';
         $this->withFields = ['motorista', 'controle_frota', 'tipo_multa'];
         $this->selectModelFields = [
-            'Motoristum' => '\App\Models\Motoristum', 
-            'ControleFrotum' => '\App\Models\ControleFrotum', 
+            'Motoristum' => '\App\Models\Motoristum',
+            'ControleFrotum' => '\App\Models\ControleFrotum',
             'TipoMulta' => '\App\Models\TipoMulta',
         ];
         $this->joinSearch = [
@@ -60,12 +60,14 @@ class LancamentoMultasController extends Controller
             'foto_multa' => 'required',
             'status' => 'required',
         ];
-        
+
         $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['tipo_multa', 'tipo'], ['status']];
         $this->indexTitles = ['Motorista', 'Veículo', 'Tipo', 'Status'];
 
         $this->pdfFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['tipo_multa', 'tipo'], ['status']];
         $this->pdfTitles = ['Motorista', 'Veículo', 'Tipo', 'Status'];
+
+        $this->numbersWithDecimal = ['valor_multa'];
     }
 
 }
