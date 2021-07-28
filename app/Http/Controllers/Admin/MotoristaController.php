@@ -28,21 +28,20 @@ class MotoristaController extends Controller
         $this->model = $motorista;
         $this->path = 'admin.motorista';
         $this->redirectPath = 'motorista';
-        $this->withFields = ['fornecedor', 'tipoCnh'];
-        $this->selectModelFields = ['Fornecedor' => '\App\Models\Fornecedor', 'TipoCnh' => '\App\Models\TipoCnh'];
-        $this->joinSearch = ['fornecedor_id' => ['fornecedor' => '\App\Models\Fornecedor'], 'tipo_cnh_id' => ['tipoCnh' => '\App\Models\TipoCnh']];
-        $this->fileName = ['certificado_transporte_escolar', 'imagem', 'cnh_imagem'];
+        $this->withFields = ['tipoCnh'];
+        $this->selectModelFields = ['TipoCnh' => '\App\Models\TipoCnh'];
+        $this->joinSearch = ['tipo_cnh_id' => ['tipoCnh' => '\App\Models\TipoCnh']];
+        $this->fileName = ['imagem', 'cnh_imagem', 'img_upload'];
         $this->uploadFilePath = 'images/motoristas';
-        $this->checkboxExplode = ['tipo_motorista'];
-        
+//        $this->checkboxExplode = ['tipo_motorista'];
+
         $this->indexFields = [['nome'], ['tipoCnh', 'nome'],['status']];
         $this->indexTitles = ['Nome', 'CNH', 'Status'];
-        
+
         $this->pdfFields = [['nome'], ['tipoCnh', 'nome'],['status']];
         $this->pdfTitles = ['Nome', 'CNH', 'Status'];
         $this->validations = [
             // 'motorista_escolar' => 'required',
-            'fornecedor_id' => 'required',
             'nome' => 'required',
             'rg' => 'required',
             'cpf' => 'required',

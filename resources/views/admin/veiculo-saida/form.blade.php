@@ -6,9 +6,9 @@
         <select name="controle_frota_id" class="form-control" id="controle_frota_id" >
             <option value="">Selecione ...</option>
             @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->veiculo }}</option>
             @endforeach
         </select>
@@ -23,9 +23,9 @@
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>

@@ -28,7 +28,31 @@ class Motoristum extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['motorista_escolar', 'tipo_motorista', 'certificado_transporte_escolar', 'data_conclusao_curso', 'fornecedor_id', 'tipo_cnh_id', 'nome', 'rg', 'cpf', 'data_nascimento', 'email', 'telefone', 'celular', 'imagem', 'cnh', 'cnh_primeira', 'cnh_validade', 'cnh_emissao', 'cnh_imagem', 'avisar_antes_qtddias', 'observacoes', 'status'];
+    protected $fillable = [
+        'motorista_escolar',
+        'tipo_motorista',
+        'certificado_transporte_escolar',
+        'data_conclusao_curso',
+        'fornecedor_id',
+        'tipo_cnh_id',
+        'nome',
+        'rg',
+        'cpf',
+        'data_nascimento',
+        'email',
+        'telefone',
+        'celular',
+        'imagem',
+        'cnh',
+        'cnh_primeira',
+        'cnh_validade',
+        'cnh_emissao',
+        'cnh_imagem',
+        'avisar_antes_qtddias',
+        'observacoes',
+        'status',
+        'img_upload'
+    ];
 
     public function fornecedor()
     {
@@ -39,5 +63,5 @@ class Motoristum extends BaseModel
     {
         return $this->hasOne('App\Models\TipoCnh', 'id', 'tipo_cnh_id');
     }
-    
+
 }

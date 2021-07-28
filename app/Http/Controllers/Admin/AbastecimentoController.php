@@ -41,18 +41,20 @@ class AbastecimentoController extends Controller
             'responsavel' => 'required|string',
             'status' => 'required|boolean',
         ];
-        
+
         $this->pdfFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->pdfTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
         $this->indexFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->indexTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
+
+        $this->numbersWithDecimal = ['km_atual', 'qtd_litros', 'valor'];
     }
 
     public function create()
     {
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
-        $sequencial = $id + 1 . '/' .date('Y');  
-                    
+        $sequencial = $id + 1 . '/' .date('Y');
+
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial]);
     }
 }

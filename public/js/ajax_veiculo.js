@@ -7,17 +7,17 @@ $(window).on('load', function(e) {
         loadControleFrotum(veiculo_id)
 });
 
-$(veiculoAppend).change(function (e) { 
+$(veiculoAppend).change(function (e) {
     loadControleFrotum(e.target.value)
 });
 
 async function loadControleFrotum(controle_frota_id = null){
     if (controle_frota_id == null)
         return true;
-        
+
     $('#veiculo-remove-append').remove();
 
-    const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo&where=id,=,${controle_frota_id}&first=true`);
+    const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${controle_frota_id}&first=true`);
 
     let proprietario = resp.data.tipo_veiculo == 1 ? 'Veículo próprio' : resp.data.nome_proprietario;
 
@@ -34,6 +34,8 @@ async function loadControleFrotum(controle_frota_id = null){
                 <li><strong>Km inicial</strong>: ${resp.data.km_inicial}</li>
                 <li><strong>Placa</strong>: ${resp.data.placa}</li>
                 <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
+                <li><strong>Responsavel</strong>: ${resp.data.responsavel.nome}</li>
+                <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
             </ul>
         `
     );
@@ -42,7 +44,7 @@ async function loadControleFrotum(controle_frota_id = null){
 async function loadControleFrotumClass(controle_frota_id = null){
     if (controle_frota_id == null)
         return true;
-        
+
     $('.veiculo-remove-append').remove();
 
     const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo&where=id,=,${controle_frota_id}&first=true`);

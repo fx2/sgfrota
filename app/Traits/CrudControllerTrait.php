@@ -49,7 +49,7 @@ trait CrudControllerTrait
         if (isset($request->all()['like'])) {
             $result = $this->like($request->all()['like'], $result);
         }
-            
+
         if(isset($request->all()['with'])) {
             $result = $this->with($request->all()['with'], $result);
         }
@@ -82,14 +82,14 @@ trait CrudControllerTrait
 
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);
-        
+
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', ['results'=>$result, 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
     public function exportPdf($result)
-    {  
+    {
         $data = [
             'results' => $result->get(),
             'fields' => $this->pdfFields,
@@ -136,8 +136,21 @@ trait CrudControllerTrait
             $requestData = $this->eachFiles($requestData, $request);
         }
 
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
         $this->model->create($requestData);
         return redirect($this->redirectPath)->withInput();
+    }
+
+    public function formatRemoveDecimal($requestData)
+    {
+        foreach ($this->numbersWithDecimal as $numbers){
+            $requestData[$numbers] = str_replace('.', '', str_replace(',', '', $requestData[$numbers]));
+        }
+
+        return $requestData;
     }
 
     /**
@@ -170,7 +183,7 @@ trait CrudControllerTrait
 
         return view($this->path.'.edit', ['result'=>$result, 'withFields' => $this->withFields($result), 'selectModelFields' => $this->selectModelFields()]);
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -187,7 +200,7 @@ trait CrudControllerTrait
 
             $this->validate($request, $this->validations);
         }
-        
+
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
 
@@ -199,16 +212,20 @@ trait CrudControllerTrait
             $requestData = $this->eachFiles($requestData, $request);
         }
 
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
         $result->update($requestData);
         return redirect($this->redirectPath)->withInput();
     }
 
-    public function eachFiles($requestData, $request) 
+    public function eachFiles($requestData, $request)
     {
         foreach ($this->fileName as $value) {
             $fileName = $value;
             $fileNameString = (string) $value;
-            
+
             if (isset($request->$fileName)) {
                 $search = 'data:image';
                 $str = $request->$value;
@@ -229,15 +246,15 @@ trait CrudControllerTrait
         $caminho = $this->uploadFilePath;
 
         $folderPath = $caminho;
-  
+
         $image_parts = explode(";base64,", $request->$fileNameString);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
-    
+
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = uniqid() . '.'.$image_type;
         $file = $folderPath . '/' . $fileName;
-        
+
         file_put_contents($file, $image_base64);
 
         return $file;
@@ -249,13 +266,13 @@ trait CrudControllerTrait
         $nameFile = null;
         if ($request->hasFile($fileNameString) && $request->file($fileNameString)->isValid()) {
             $name = uniqid(date('HisYmd'));
-     
+
             $extension = $request->$fileName->extension();
-     
+
             $nameFile = "{$name}.{$extension}";
-     
+
             $upload = $request->$fileName->move($caminhoAbs, $nameFile);
-            
+
             return $caminhoAbs . '/' . $nameFile;
         } else {
             return false;
@@ -311,19 +328,19 @@ trait CrudControllerTrait
     {
         foreach ($this->checkboxExplode as $key => $value) {
             foreach ($requestData as $k => $val) {
-                if ($k == $value)   
+                if ($k == $value)
                     $requestData[$value] = (implode(",", $val));
             }
         }
 
         return $requestData;
     }
-    
+
     public function loadCheckboxExplode($result)
     {
         foreach ($this->checkboxExplode as $key => $value) {
             foreach ($result->getAttributes() as $k => $val) {
-                if ($k == $value)   
+                if ($k == $value)
                     $result[$value] = explode(",", $val);
             }
         }
@@ -474,10 +491,10 @@ trait CrudControllerTrait
 
     public function search($search, $result){
         if ($search == 'ativo' OR $search == 'Ativo')
-            return $result->orWhere('status', 'LIKE', 1); 
+            return $result->orWhere('status', 'LIKE', 1);
 
         if ($search == 'bloqueado' OR $search == 'Bloqueado')
-            return $result->orWhere('status', 'LIKE', 0); 
+            return $result->orWhere('status', 'LIKE', 0);
 
         foreach ($result->getModel()->getFillable() as $key => $value) {
             $result = $result->orWhere($value, 'LIKE', "%$search%");

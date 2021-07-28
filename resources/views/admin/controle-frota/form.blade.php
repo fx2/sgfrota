@@ -243,7 +243,7 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="km_inicial" type="number" id="km_inicial" value="{{ isset($result->km_inicial) ? $result->km_inicial : old('km_inicial')}}" >
+        <input class="form-control" name="km_inicial" type="number" id="km_inicial"  min="1" step="any" value="{{ isset($result->km_inicial) ? $result->km_inicial : old('km_inicial')}}" >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
