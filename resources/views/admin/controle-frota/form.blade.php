@@ -189,7 +189,7 @@
         <label for="ano_fabricacao" class="control-label">{{ 'Ano Fabricacao' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="ano_fabricacao" type="date" id="ano_fabricacao" value="{{ isset($result->ano_fabricacao) ? $result->ano_fabricacao : old('ano_fabricacao')}}" >
+        <input class="form-control ano" name="ano_fabricacao" type="text" id="ano_fabricacao" value="{{ isset($result->ano_fabricacao) ? $result->ano_fabricacao : old('ano_fabricacao')}}" >
         {!! $errors->first('ano_fabricacao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -198,7 +198,7 @@
         <label for="ano_modelo" class="control-label">{{ 'Ano Modelo' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="ano_modelo" type="date" id="ano_modelo" value="{{ isset($result->ano_modelo) ? $result->ano_modelo : old('ano_modelo')}}" >
+        <input class="form-control ano" name="ano_modelo" type="text" id="ano_modelo" value="{{ isset($result->ano_modelo) ? $result->ano_modelo : old('ano_modelo')}}" >
         {!! $errors->first('ano_modelo', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -243,7 +243,7 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="km_inicial" type="number" id="km_inicial"  min="1" step="any" value="{{ isset($result->km_inicial) ? $result->km_inicial : old('km_inicial')}}" >
+        <input class="form-control decimal" name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? number_format((float) $result->km_inicial, 0) : old('km_inicial')}}" >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

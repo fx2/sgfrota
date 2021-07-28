@@ -79,6 +79,8 @@ class ControleFrotaController extends Controller
         $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['status']];
         $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Setor', 'Status'];
 
+        $this->numbersWithDecimal = ['km_inicial'];
+
     }
 
 }
