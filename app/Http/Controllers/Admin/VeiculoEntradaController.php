@@ -26,6 +26,7 @@ class VeiculoEntradaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $veiculoentrada;
+        $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
         $this->withFields = ['controle_frota', 'motorista'];
@@ -63,12 +64,12 @@ class VeiculoEntradaController extends Controller
     }
 
     public function create()
-    { 
+    {
 
         $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('entrada');
 
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
-    } 
+    }
 
     public function edit($id)
     {
@@ -83,7 +84,7 @@ class VeiculoEntradaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->validations);
-        
+
         $requestData = $request->all();
 
 

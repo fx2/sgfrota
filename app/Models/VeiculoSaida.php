@@ -28,7 +28,29 @@ class VeiculoSaida extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['controle_frota_id', 'motorista_id', 'nome_responsavel', 'km_inicial', 'quantidade_combustivel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'status', 'saida_data', 'saida_hora'];
+    protected $fillable = [
+        'setor_id',
+        'controle_frota_id',
+        'motorista_id',
+        'nome_responsavel',
+        'km_inicial',
+        'quantidade_combustivel',
+        'mecanica',
+        'eletrica',
+        'funilaria',
+        'pintura',
+        'pneus',
+        'observacao_situacao',
+        'macaco',
+        'triangulo',
+        'estepe',
+        'extintor',
+        'chave_roda',
+        'observacao_acessorio',
+        'status',
+        'saida_data',
+        'saida_hora'
+    ];
 
     public function controle_frota()
     {
@@ -38,5 +60,5 @@ class VeiculoSaida extends BaseModel
     public function motorista()
     {
         return $this->hasOne('App\Models\Motoristum', 'id', 'motorista_id');
-    }    
+    }
 }

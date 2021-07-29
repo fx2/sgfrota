@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSetorToControleFrotasTable extends Migration
+class AddSetorAndTypeToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddSetorToControleFrotasTable extends Migration
      */
     public function up()
     {
-        Schema::table('controle_frotas', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->unsignedInteger('setor_id')->after('id');
             $table->foreign('setor_id')->references('id')->on('setors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('type', 50)->after('setor_id');
         });
     }
 
@@ -26,7 +27,7 @@ class AddSetorToControleFrotasTable extends Migration
      */
     public function down()
     {
-        Schema::table('controle_frotas', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

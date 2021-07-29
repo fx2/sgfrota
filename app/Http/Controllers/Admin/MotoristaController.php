@@ -26,6 +26,7 @@ class MotoristaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $motorista;
+        $this->saveSetorScope = true;
         $this->path = 'admin.motorista';
         $this->redirectPath = 'motorista';
         $this->withFields = ['tipoCnh'];

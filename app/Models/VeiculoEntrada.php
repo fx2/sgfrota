@@ -28,7 +28,30 @@ class VeiculoEntrada extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['controle_frota_id', 'km_final', 'relatorio_trajeto_motorista', 'quantidade_combustivel', 'observacao', 'nome_responsavel', 'status' ,'motorista_id' ,'mecanica' ,'eletrica' ,'funilaria' ,'pintura' ,'pneus' ,'observacao_situacao' ,'macaco' ,'triangulo' ,'estepe' ,'extintor' ,'chave_roda' ,'observacao_acessorio' ,'entrada_data' ,'entrada_hora'
+    protected $fillable = [
+        'setor_id',
+        'controle_frota_id',
+        'km_final',
+        'relatorio_trajeto_motorista',
+        'quantidade_combustivel',
+        'observacao',
+        'nome_responsavel',
+        'status' ,
+        'motorista_id' ,
+        'mecanica' ,
+        'eletrica' ,
+        'funilaria' ,
+        'pintura' ,
+        'pneus' ,
+        'observacao_situacao' ,
+        'macaco' ,
+        'triangulo' ,
+        'estepe' ,
+        'extintor' ,
+        'chave_roda' ,
+        'observacao_acessorio' ,
+        'entrada_data' ,
+        'entrada_hora'
     ];
 
     public function controle_frota()
@@ -40,5 +63,5 @@ class VeiculoEntrada extends BaseModel
     {
         return $this->hasOne('App\Models\Motoristum', 'id', 'motorista_id');
     }
-    
+
 }

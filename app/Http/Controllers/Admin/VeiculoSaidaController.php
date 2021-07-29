@@ -26,6 +26,7 @@ class VeiculoSaidaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $veiculosaida;
+        $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-saida';
         $this->redirectPath = 'veiculo-saida';
         $this->withFields = ['controle_frota', 'motorista'];
@@ -64,12 +65,12 @@ class VeiculoSaidaController extends Controller
     public function create()
     {
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
-        $sequencial = $id + 1 . '/' .date('Y');  
+        $sequencial = $id + 1 . '/' .date('Y');
 
         $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('saida');
 
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial, 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
-    } 
+    }
 
     public function edit($id)
     {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSetorToControleFrotasTable extends Migration
+class AddSetorToLancamentoMultasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddSetorToControleFrotasTable extends Migration
      */
     public function up()
     {
-        Schema::table('controle_frotas', function (Blueprint $table) {
+        Schema::table('lancamento_multas', function (Blueprint $table) {
             $table->unsignedInteger('setor_id')->after('id');
             $table->foreign('setor_id')->references('id')->on('setors')->onDelete('cascade')->onUpdate('cascade');
         });
@@ -26,7 +26,7 @@ class AddSetorToControleFrotasTable extends Migration
      */
     public function down()
     {
-        Schema::table('controle_frotas', function (Blueprint $table) {
+        Schema::table('lancamento_multas', function (Blueprint $table) {
             //
         });
     }

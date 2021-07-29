@@ -28,13 +28,13 @@ class VeiculoAgendamento extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['controle_frota_id', 'departamento', 'periodo', 'telefone', 'local', 'previsao_saida', 'previsao_volta', 'auth_id', 'status'];
+    protected $fillable = ['setor_id','controle_frota_id', 'departamento', 'periodo', 'telefone', 'local', 'previsao_saida', 'previsao_volta', 'auth_id', 'status'];
 
     public function controle_frota()
     {
         return $this->hasOne('App\Models\ControleFrotum', 'id', 'controle_frota_id');
     }
-    
+
     public function auth()
     {
         return $this->hasOne('App\Models\User', 'id', 'auth_id');

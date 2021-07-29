@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TipoCnh extends BaseModel
+class TipoCnh extends Model
 {
     use SoftDeletes;
 

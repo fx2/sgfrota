@@ -17,6 +17,9 @@ class SetorScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-//        $builder->where('id', '>', 1);
+        $user = auth('api')->user();
+
+        if (isset($user->setor_id) AND ($user->type != 'master' AND $user->type != 'admin'))
+            $builder->where($model->getTable().".setor_id", $user->setor_id);
     }
 }

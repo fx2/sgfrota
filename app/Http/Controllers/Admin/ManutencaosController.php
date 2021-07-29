@@ -26,6 +26,7 @@ class ManutencaosController extends Controller
     {
         $this->middleware('auth');
         $this->model = $lancamentomultas;
+        $this->saveSetorScope = true;
         $this->path = 'admin.manutencao';
         $this->redirectPath = 'manutencao';
         $this->withFields = ['controle_frota', 'tipo_manutencao', 'fornecedor', 'tipo_correcao'];

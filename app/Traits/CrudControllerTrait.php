@@ -122,11 +122,18 @@ trait CrudControllerTrait
      */
     public function store(Request $request)
     {
+        $userAuth = auth('api')->user();
+
         if (!empty($this->validations)) {
             $this->validate($request, $this->validations);
         }
 
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         if (!empty($this->checkboxExplode)) {
             $requestData = $this->saveCheckboxExplode($requestData);
@@ -193,6 +200,8 @@ trait CrudControllerTrait
      */
     public function update(Request $request, $id)
     {
+        $userAuth = auth('api')->user();
+
         if (!empty($this->validations)) {
             foreach ($this->fileName as $key => $value) {
                 unset($this->validations[$value]);
@@ -203,6 +212,11 @@ trait CrudControllerTrait
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         if (!empty($this->checkboxExplode)) {
             $requestData = $this->saveCheckboxExplode($requestData);

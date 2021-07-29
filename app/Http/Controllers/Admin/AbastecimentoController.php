@@ -23,6 +23,7 @@ class AbastecimentoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $abastecimento;
+        $this->saveSetorScope = true;
         $this->path = 'admin.abastecimento';
         $this->redirectPath = 'abastecimento';
         $this->withFields = ['controle_frota', 'tipo_combustivel', 'fornecedor'];

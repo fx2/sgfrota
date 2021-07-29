@@ -29,6 +29,7 @@ class Motoristum extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'setor_id',
         'motorista_escolar',
         'tipo_motorista',
         'certificado_transporte_escolar',

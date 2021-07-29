@@ -28,7 +28,20 @@ class Manutencao extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['modelo_id', 'tipo_manutencao_id', 'fornecedor_id', 'controle_frota_id', 'tipo_correcao_id', 'responsavel_retirada', 'descricao_manutencao', 'numero_processo', 'data', 'hora', 'valor', 'status'];
+    protected $fillable = [
+        'setor_id',
+        'modelo_id',
+        'tipo_manutencao_id',
+        'fornecedor_id',
+        'controle_frota_id',
+        'tipo_correcao_id',
+        'responsavel_retirada',
+        'descricao_manutencao',
+        'numero_processo',
+        'data',
+        'hora',
+        'valor',
+        'status'];
 
     public function controle_frota()
     {
@@ -49,5 +62,5 @@ class Manutencao extends BaseModel
     {
         return $this->hasOne('App\Models\TipoCorrecao', 'id', 'tipo_correcao_id');
     }
-    
+
 }

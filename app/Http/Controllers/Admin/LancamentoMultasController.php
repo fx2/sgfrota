@@ -26,6 +26,7 @@ class LancamentoMultasController extends Controller
     {
         $this->middleware('auth');
         $this->model = $lancamentomultas;
+        $this->saveSetorScope = true;
         $this->path = 'admin.lancamento-multas';
         $this->redirectPath = 'lancamento-multas';
         $this->withFields = ['motorista', 'controle_frota', 'tipo_multa'];

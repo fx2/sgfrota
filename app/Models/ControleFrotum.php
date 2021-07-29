@@ -28,7 +28,36 @@ class ControleFrotum extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['tipo_veiculo', 'nome_proprietario', 'disponivel_outros_departamentos', 'veiculo_escolar', 'certificado_vistoria', 'vencto_vistoria_escolar', 'tipo_veiculo_id', 'renavan', 'placa', 'chassi', 'especie_tipo', 'tipo_combustivel_id', 'marca_id', 'modelo_id', 'veiculo', 'ano_fabricacao', 'ano_modelo', 'capacidade', 'cor', 'patrimonio', 'estado_veiculo', 'km_inicial', 'dut', 'foto', 'status', 'tipo_responsavel', 'tipo_responsavel_id', 'setor_id'];
+    protected $fillable = [
+        'tipo_veiculo',
+        'nome_proprietario',
+        'disponivel_outros_departamentos',
+        'veiculo_escolar',
+        'certificado_vistoria',
+        'vencto_vistoria_escolar',
+        'tipo_veiculo_id',
+        'renavan',
+        'placa',
+        'chassi',
+        'especie_tipo',
+        'tipo_combustivel_id',
+        'marca_id',
+        'modelo_id',
+        'veiculo',
+        'ano_fabricacao',
+        'ano_modelo',
+        'capacidade',
+        'cor',
+        'patrimonio',
+        'estado_veiculo',
+        'km_inicial',
+        'dut',
+        'foto',
+        'status',
+        'tipo_responsavel',
+        'tipo_responsavel_id',
+        'setor_id'
+    ];
 
     public function tipo_veiculoHasOne()
     {

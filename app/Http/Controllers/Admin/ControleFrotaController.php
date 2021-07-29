@@ -26,6 +26,7 @@ class ControleFrotaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $controlefrota;
+        $this->saveSetorScope = true;
         $this->path = 'admin.controle-frota';
         $this->redirectPath = 'controle-frota';
         $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel'];
