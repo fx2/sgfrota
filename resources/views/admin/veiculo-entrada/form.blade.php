@@ -9,9 +9,9 @@
             @else
                 <option value="">Selecione ...</option>
                 @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}" 
+                    <option value="{{ $optionValue->id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                     >{{ $optionValue->veiculo }}</option>
                 @endforeach
             @endisset
@@ -28,9 +28,9 @@
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -256,6 +256,7 @@
     </div>
 </div>
 
+@include('parts/select-setor')
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>

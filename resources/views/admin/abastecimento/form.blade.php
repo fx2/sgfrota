@@ -131,6 +131,8 @@
     </div>
 </div>
 
+@include('parts/select-setor')
+
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>

@@ -30,10 +30,15 @@ class VeiculoEntradaController extends Controller
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
         $this->withFields = ['controle_frota', 'motorista'];
-        $this->selectModelFields = ['ControleFrotum' => '\App\Models\ControleFrotum', 'Motoristum' => '\App\Models\Motoristum'];
+        $this->selectModelFields = [
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'Motoristum' => '\App\Models\Motoristum',
+            'Setor' => '\App\Models\Setor'
+        ];
         $this->joinSearch = [
             'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
+            'setor_id' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/veiculo-entrada';

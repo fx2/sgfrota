@@ -63,4 +63,8 @@ class Manutencao extends BaseModel
         return $this->hasOne('App\Models\TipoCorrecao', 'id', 'tipo_correcao_id');
     }
 
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
 }

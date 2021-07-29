@@ -39,4 +39,9 @@ class VeiculoAgendamento extends BaseModel
     {
         return $this->hasOne('App\Models\User', 'id', 'auth_id');
     }
+
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
 }

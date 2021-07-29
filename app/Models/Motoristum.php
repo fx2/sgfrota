@@ -65,4 +65,8 @@ class Motoristum extends BaseModel
         return $this->hasOne('App\Models\TipoCnh', 'id', 'tipo_cnh_id');
     }
 
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
 }

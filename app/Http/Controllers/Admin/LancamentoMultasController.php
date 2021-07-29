@@ -34,11 +34,13 @@ class LancamentoMultasController extends Controller
             'Motoristum' => '\App\Models\Motoristum',
             'ControleFrotum' => '\App\Models\ControleFrotum',
             'TipoMulta' => '\App\Models\TipoMulta',
+            'Setor' => '\App\Models\Setor'
         ];
         $this->joinSearch = [
             'motorista_id' => ['nome', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'tipo_multa_id' => ['tipo', '\App\Models\TipoMulta'],
+            'setor_id' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = ['foto_multa'];
         $this->uploadFilePath = 'images/lancamento-multas';

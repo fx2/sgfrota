@@ -29,7 +29,7 @@ class ControleFrotaController extends Controller
         $this->saveSetorScope = true;
         $this->path = 'admin.controle-frota';
         $this->redirectPath = 'controle-frota';
-        $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel'];
+        $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel', 'setor'];
         $this->selectModelFields = [
             'TipoVeiculo' => '\App\Models\TipoVeiculo',
             'TipoCombustivel' => '\App\Models\TipoCombustivel',

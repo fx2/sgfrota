@@ -45,4 +45,9 @@ class LancamentoMulta extends BaseModel
         return $this->hasOne('App\Models\TipoMulta', 'id', 'tipo_multa_id');
     }
 
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
 }

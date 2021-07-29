@@ -54,3 +54,10 @@ if (! function_exists('dateDaysDiff')) {
         return $dateStart->diff($dateNow)->d;
     }
 }
+
+if (! function_exists('decimal')) {
+    function decimal($numero)
+    {
+        return number_format((float) $numero,0);
+    }
+}

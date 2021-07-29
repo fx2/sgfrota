@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Fornecedor extends BaseModel
+class Fornecedor extends Model
 {
     use SoftDeletes;
 
@@ -30,5 +30,5 @@ class Fornecedor extends BaseModel
      */
     protected $fillable = ['razao_social', 'nome_fantasia', 'cnpj', 'telefone', 'cep', 'complemento', 'estado', 'cidade', 'bairro', 'endereco', 'numero', 'status'];
 
-    
+
 }

@@ -64,4 +64,9 @@ class VeiculoEntrada extends BaseModel
         return $this->hasOne('App\Models\Motoristum', 'id', 'motorista_id');
     }
 
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
 }
