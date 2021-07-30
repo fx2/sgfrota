@@ -83,7 +83,7 @@ class VeiculoSaidaController extends Controller
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
         $sequencial = $id + 1 . '/' .date('Y');
 
-        $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('saida');
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida();
 
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial, 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }

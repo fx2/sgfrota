@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ControleFrotum;
 use App\Models\VeiculoEntrada;
 use App\Models\VeiculoSaida;
+use App\Services\VeiculoEntradaService;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
 
@@ -18,13 +19,21 @@ class VeiculoEntradaController extends Controller
     private $redirectPath;
 
     /**
+     * @var VeiculoEntradaService $veiculoEntradaService
+     */
+    private $veiculoEntradaService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(VeiculoEntrada $veiculoentrada)
+    public function __construct(VeiculoEntrada $veiculoentrada, VeiculoEntradaService $veiculoEntradaService)
     {
         $this->middleware('auth');
+
+        $this->veiculoEntradaService = $veiculoEntradaService;
+
         $this->model = $veiculoentrada;
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
@@ -70,15 +79,14 @@ class VeiculoEntradaController extends Controller
 
     public function create()
     {
-
-        $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('entrada');
+        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada();
 
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
 
     public function edit($id)
     {
-        $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('entrada');
+        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($id);
 
         $result = $this->model
           ->findOrFail($id);
