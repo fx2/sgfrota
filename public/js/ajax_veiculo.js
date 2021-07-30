@@ -62,8 +62,8 @@ async function loadControleFrotumClass(controle_frota_id = null){
                 <li><strong>Tipo de combustível</strong>: ${resp.data.tipo_combustivel.nome}</li>
                 <li><strong>Cor</strong>: ${resp.data.cor}</li>
                 <li><strong>Capacidade</strong>: ${resp.data.capacidade}</li>
-                <li><strong>Ano</strong>: ${moment(resp.data.ano_modelo).format('YYYY')}</li>
-                <li><strong>Km inicial</strong>: ${resp.data.km_inicial}</li>
+                <li><strong>Ano</strong>: ${resp.data.ano_modelo}</li>
+                <li><strong>Km inicial</strong>: ${parseFloat(resp.data.km_inicial)}</li>
                 <li><strong>Placa</strong>: ${resp.data.placa}</li>
                 <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
             </ul>
