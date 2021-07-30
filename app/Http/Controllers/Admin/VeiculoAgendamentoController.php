@@ -33,11 +33,12 @@ class VeiculoAgendamentoController extends Controller
         $this->withFields = ['controle_frota'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
-            'User' => '\App\Models\User',
+            'Setor' => '\App\Models\Setor',
         ];
         $this->joinSearch = [
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'auth_id' => ['auth', '\App\Models\User'],
+            'setor_id' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/veiculo-agendamento';
@@ -77,7 +78,10 @@ class VeiculoAgendamentoController extends Controller
                 $agendamentos[$key]['color'] = 'green';
         }
 
-        return view($this->path.'.custom-index', ['agendamentos' => $agendamentos, 'veiculos' => $veiculos, 'selectModelFields' => $this->selectModelFields]);
+        return view($this->path.'.custom-index', [
+            'agendamentos' => $agendamentos,
+            'veiculos' => $veiculos,
+            'selectModelFields' => $this->selectModelFields()]);
     }
 
     public function customStore(Request $request) {
@@ -95,7 +99,13 @@ class VeiculoAgendamentoController extends Controller
     }
 
     public function store(Request $request) {
+        $userAuth = auth('api')->user();
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         $from = date($requestData['previsao_saida']);
         $to = date('Y-m-d', strtotime("-1 day", strtotime($requestData['previsao_volta'])));

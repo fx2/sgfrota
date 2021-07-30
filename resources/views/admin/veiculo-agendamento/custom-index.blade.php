@@ -9,7 +9,7 @@
             <li class="breadcrumb-item"><a href="{{ url('veiculo-agendamento') }}">Agendamentos de Veículos</a></li>
             <li class="breadcrumb-item active" aria-current="page">Cadastrar Agendamentos de Veículos</li>
         </ol>
-    </nav> 
+    </nav>
 
     <div class="card">
         <div class="card-header">
@@ -67,7 +67,7 @@
                     <!-- /btn-group -->
                     <div class="input-group">
                       <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-  
+
                       <div class="input-group-append">
                         <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
                       </div>
@@ -137,7 +137,7 @@
                                 <div class="p-2 bd-highlight"></div>
                             </div>
                         </li>
- 
+
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
                                 <div class="p-2 bd-highlight">Veículo</div>
@@ -145,7 +145,7 @@
                                 <div class="p-2 bd-highlight"></div>
                             </div>
                         </li>
-                    </ul> 
+                    </ul>
                 </div>
 
                 {{-- <button class="btn btn-warning" id="id_delete">Cancelar Agendamento</button> --}}
@@ -172,9 +172,9 @@
                                 <select name="controle_frota_id" class="form-control" id="controle_frota_id" required>
                                     <option value="">Selecione...</option>
                                     @foreach ($veiculos as $optionKey => $optionValue)
-                                        <option value="{{ $optionValue->id }}" 
+                                        <option value="{{ $optionValue->id }}"
                                             {{ (isset($result->departamento) && $result->departamento == $optionValue->id) ? 'selected' : ''}}
-                                            {{ old('departamento') == $optionValue->id ? "selected" : "" }} 
+                                            {{ old('departamento') == $optionValue->id ? "selected" : "" }}
                                         >{{ $optionValue->veiculo }}</option>
                                     @endforeach
                                 </select>
@@ -195,11 +195,11 @@
                             <label class="col-sm-2 col-form-label">Color</label>
                             <div class="col-sm-10">
                                 <select name="color" class="form-control" id="color">
-                                    <option value="">Selecione</option>			
+                                    <option value="">Selecione</option>
                                     <option style="color:#FFD700;" value="#FFD700">Amarelo</option>
                                     <option style="color:#0071c5;" value="#0071c5">Azul Turquesa</option>
                                     <option style="color:#FF4500;" value="#FF4500">Laranja</option>
-                                    <option style="color:#8B4513;" value="#8B4513">Marrom</option>	
+                                    <option style="color:#8B4513;" value="#8B4513">Marrom</option>
                                     <option style="color:#1C1C1C;" value="#1C1C1C">Preto</option>
                                     <option style="color:#436EEE;" value="#436EEE">Royal Blue</option>
                                     <option style="color:#A020F0;" value="#A020F0">Roxo</option>
@@ -209,7 +209,7 @@
                                 </select>
                             </div>
                         </div> --}}
-                       
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Local</label>
@@ -232,8 +232,10 @@
                               <input type="hidden" name="previsao_volta" required>
                               <input type="time" name="previsao_volta_hora" class="form-control" id="previsao_volta"  required>
                           </div>
-                      </div>
-                        
+                        </div>
+
+                        @include('parts/select-setor')
+
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="Cadastar">
                         </div>
@@ -249,34 +251,34 @@
 <script src="{{ asset('adminlte/plugins/fullcalendar/locales/pt-br.js') }}"></script>
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 <script>
-  
+
     $(function () {
       /* initialize the external events
        -----------------------------------------------------------------*/
       function ini_events(ele) {
         ele.each(function () {
-  
+
           // create an Event Object (https://fullcalendar.io/docs/event-object)
           // it doesn't need to have a start or end
           var eventObject = {
             title: $.trim($(this).text()) // use the element's text as the event title
           }
-  
+
           // store the Event Object in the DOM element so we can get to it later
           $(this).data('eventObject', eventObject)
-  
+
           // make the event draggable using jQuery UI
           $(this).draggable({
             zIndex        : 1070,
             revert        : true, // will cause the event to go back to its
             revertDuration: 0  //  original position after the drag
           })
-  
+
         })
       }
-  
+
       ini_events($('#external-events div.external-event'))
-  
+
       /* initialize the calendar
        -----------------------------------------------------------------*/
       //Date for the calendar events (dummy data)
@@ -284,17 +286,17 @@
       var d    = date.getDate(),
           m    = date.getMonth(),
           y    = date.getFullYear()
-  
+
       var Calendar = FullCalendar.Calendar;
       var Draggable = FullCalendar.Draggable;
-  
+
       var containerEl = document.getElementById('external-events');
       var checkbox = document.getElementById('drop-remove');
       var calendarEl = document.getElementById('calendar');
-  
+
       // initialize the external events
       // -----------------------------------------------------------------
-  
+
       new Draggable(containerEl, {
         itemSelector: '.external-event',
         eventData: function(eventEl) {
@@ -306,7 +308,7 @@
           };
         }
       });
-  
+
       var calendar = new Calendar(calendarEl, {
         showNonCurrentDates: true, //false = somente o mes
         locale: 'pt-br',
@@ -318,7 +320,7 @@
         themeSystem: 'bootstrap',
         //Random default events
         // events: `${BASE_URL}/api/veiculo-agendamento?select=id AS fkas_id, auth_id, CONCAT(' - ', periodo,' - ', DATE_FORMAT(previsao_volta, '%H:%i')) as title, DATE_FORMAT(previsao_saida, '%H:%i') AS saida, DATE_FORMAT(previsao_volta, '%H:%i') AS volta, previsao_saida AS start,previsao_volta AS end,local,telefone,controle_frota_id&where=status,=,1&whereYear=created_at,2021&get=true`,
-      
+
         events: [
           <?php foreach($agendamentos as $agendamento): ?>
             {
@@ -351,7 +353,7 @@
         select: function (info){
             $('[name="previsao_volta"]').val(info.endStr)
             $('[name="previsao_saida"]').val(info.startStr);
-              
+
           if (info.startStr !=  moment(info.endStr).subtract(1, "days").format('YYYY-MM-DD')) {
             calendar.unselect()
           } else {
@@ -359,7 +361,7 @@
           }
 
         },
-        
+
         eventClick: function (info) {
             info.jsEvent.preventDefault(); // don't let the browser navigate
 
@@ -367,15 +369,15 @@
 
             if (info.event.title.search("manha") > 0) {
               title = 'Manhã';
-            } 
+            }
 
             if (info.event.title.search("tarde") > 0) {
               title = 'Tarde';
-            } 
+            }
 
             if (info.event.title.search("integral") > 0) {
               title = 'Integral';
-            } 
+            }
 
             const eluser = document.querySelector('#id_delete');
             eluser.dataset.id = info.event._def.extendedProps.fkas_id
@@ -385,8 +387,8 @@
             } else {
               $('#id_delete').hide();
             }
-            
-            
+
+
             $('#visualizar #local').text(info.event._def.extendedProps.local);
             $('#visualizar #periodo').text(title);
             $('#visualizar #start').text(info.event._def.extendedProps.saida);
@@ -400,19 +402,19 @@
 
         //   $('[name="previsao_volta"]').val(info.endStr)
         //   $('[name="previsao_saida"]').val(info.startStr);
-          
-          
+
+
         //   // buscaAgendamentos(info._instance.range);
         //   // $('#cadastrar').modal('show');
-        // } 
-        
-        
+        // }
+
+
       });
-  
-      
+
+
       calendar.render();
       // $('#calendar').fullCalendar()
-  
+
         //   {
         //     title          : 'All Day Event',
         //     start          : new Date(y, m, 1),
@@ -489,7 +491,7 @@
                               showConfirmButton: false,
                               timer: 1000
                             })
-                          
+
                           // $(_this).closest('tr').remove();
                           location.reload()
                       }
