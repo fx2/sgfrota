@@ -1,5 +1,3 @@
-@include('parts/select-setor')
-
 <div class="form-group row mb-5 {{ $errors->has('nome') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="nome" class="control-label">{{ 'Nome' }}</label>
@@ -19,6 +17,8 @@
         {!! $errors->first('descricao', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+@include('parts/select-setor')
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">

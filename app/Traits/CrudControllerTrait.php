@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Marca;
 use App\Models\Modelo;
+use App\Services\VerificaPerfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
@@ -22,12 +23,18 @@ trait CrudControllerTrait
      */
     public function index(Request $request)
     {
+        $verificaPerfil = new VerificaPerfil;
+
         $limit = $request->all()['limit'] ?? 20;
 
         $result = $this->model;
 
         if (isset($request->all()['select'])) {
             $result = $this->select($request->all()['select'], $result);
+        }
+
+        if ($verificaPerfil->isMasterOrAdmin() && in_array("setor_id", $result->getModel()->getFillable())){
+            $result = $this->with('setor', $result);
         }
 
         if (isset($request->all()['order'])) {

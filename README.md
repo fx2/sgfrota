@@ -124,6 +124,8 @@ php artisan crud:generate VeiculoAgendamento --fields='controle_frota_id#select#
 
 php artisan crud:generate Perfil --fields='setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};nome#string;status#boolean' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor" --foreign-keys="setor_id#id#setors#cascade"
 
+php artisan crud:generate Permissoes --fields='titulo#string;quem_pertence#string;chave_ordem#string;ordem_exibicao#string;avo#string;permissao_direta#boolean;pai#integer;descricao#text;status#boolean' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes
+
 
 FALTA OS JOINS e FOREIGH KEY
 

@@ -47,3 +47,4 @@ Route::resource('tipo-responsavel', 'App\Http\Controllers\Admin\TipoResponsavelC
 Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'generatePDF']);
 
 Route::resource('perfil', 'App\Http\Controllers\Configuracoes\PerfilController');
+Route::resource('permissoes', 'App\Http\Controllers\Configuracoes\PermissoesController');

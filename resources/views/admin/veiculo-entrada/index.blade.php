@@ -1,12 +1,12 @@
 @extends('layouts.admin.index')
 
-@section('content')   
+@section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
             <li class="breadcrumb-item">Controle Diário de Entrada</li>
         </ol>
-    </nav> 
+    </nav>
 
     <div class="card">
         <div class="card-header h3">Controle Diário de Entrada</div>
@@ -37,6 +37,9 @@
                 <table class="table">
                     <thead class="thead-hide">
                         <th>#</th>
+                        @can('isMasterOrAdmin')
+                            <th>Setor</th>
+                        @endcan
                         @foreach ($titles as $item)
                             <th>{{ $item }}</th>
                         @endforeach
@@ -46,21 +49,24 @@
                         @forelse($results as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                    @foreach ($fields as $key => $val)                                    
+                                    @can('isMasterOrAdmin')
+                                        <td>{{$item->setor->nome}}</td>
+                                    @endcan
+                                    @foreach ($fields as $key => $val)
                                         <td class="borda" scope="row">
                                             @php
                                             // da pra melhorar esses if e fazer um loop, mas nao quero
                                             if (!empty($val[0])){
                                                 $a = $val[0];
                                                 $valor = $item->$a;
-                                                
+
                                                 if ($val[0] == 'status') {
                                                     $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                                 }
                                                 elseif ($val[0] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
-                                                
+
                                             }
 
                                             if (!empty($val[1])){
@@ -91,7 +97,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-                                            
+
                                             if (!empty($val[3])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -107,7 +113,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-                                            
+
                                             if (!empty($val[4])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -136,7 +142,7 @@
                                     <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
-                        @empty 
+                        @empty
                             <p class="p-1 hide-thead" onload="hideThead()">Nenhum Controle Diário de Entrada encontrado</p>
                         @endforelse
                     </tbody>

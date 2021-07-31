@@ -4,12 +4,12 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('veiculo-agendamento') }}">Veiculoagendamento</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Visualizar Veiculoagendamento</li>
+            <li class="breadcrumb-item"><a href="{{ url('veiculo-agendamento') }}">Veículo Agendamento</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Visualizar Veículo Agendamento</li>
         </ol>
-    </nav> 
+    </nav>
     <div class="card">
-        <div class="card-header">VeiculoAgendamento </div>
+        <div class="card-header">Veículo Agendamento </div>
         <div class="card-body">
 
             <a href="{{ url('/veiculo-agendamento') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>

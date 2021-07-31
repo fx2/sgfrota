@@ -34,6 +34,7 @@ class PerfilController extends Controller
         $this->indexFields = [['nome'],['descricao'], ['status']];
         $this->indexTitles = ['Nome','Descrição', 'Status'];
         $this->selectModelFields = ['Setor' => '\App\Models\Setor'];
+        $this->joinSearch = ['setor_id' => ['nome', '\App\Models\Setor']];
     }
 
 }

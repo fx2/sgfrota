@@ -1,21 +1,21 @@
 @extends('layouts.admin.index')
 
-@section('content')
+@section('content')   
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item">Controle Diário de Saída</li>
+            <li class="breadcrumb-item">Permissoes</li>
         </ol>
-    </nav>
+    </nav> 
 
     <div class="card">
-        <div class="card-header h3">Controle Diário de Saída</div>
+        <div class="card-header h3">Permissoes</div>
         <div class="card-body">
-            <a href="{{ url('/veiculo-saida/create') }}" class="btn btn-success btn-sm" title="Add New Controle diário de saída">
+            <a href="{{ url('/permissoes/create') }}" class="btn btn-success btn-sm" title="Add New Permisso">
                 <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
             </a>
 
-            <form method="GET" action="{{ url('/veiculo-saida') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('/permissoes') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                     <span class="input-group-append">
@@ -37,9 +37,6 @@
                 <table class="table">
                     <thead class="thead-hide">
                         <th>#</th>
-                        @can('isMasterOrAdmin')
-                            <th>Setor</th>
-                        @endcan
                         @foreach ($titles as $item)
                             <th>{{ $item }}</th>
                         @endforeach
@@ -49,24 +46,21 @@
                         @forelse($results as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                    @can('isMasterOrAdmin')
-                                        <td>{{$item->setor->nome}}</td>
-                                    @endcan
-                                    @foreach ($fields as $key => $val)
+                                    @foreach ($fields as $key => $val)                                    
                                         <td class="borda" scope="row">
                                             @php
                                             // da pra melhorar esses if e fazer um loop, mas nao quero
                                             if (!empty($val[0])){
                                                 $a = $val[0];
                                                 $valor = $item->$a;
-
+                                                
                                                 if ($val[0] == 'status') {
                                                     $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                                 }
                                                 elseif ($val[0] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
-
+                                                
                                             }
 
                                             if (!empty($val[1])){
@@ -97,7 +91,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-
+                                            
                                             if (!empty($val[3])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -113,7 +107,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-
+                                            
                                             if (!empty($val[4])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -136,14 +130,14 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-saida/' . $item->id) }}" title="Visualizar Controle diário de saída"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    <a href="{{ url('/veiculo-saida/' . $item->id . '/edit') }}" title="Editar Controle diário de saída"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    {{-- <a href="{{ url('/permissoes/' . $item->id) }}" title="Visualizar Permisso"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
+                                    <a href="{{ url('/permissoes/' . $item->id . '/edit') }}" title="Editar Permisso"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
 
-                                    <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-saida" class="btnDeletar btn btn-danger btn-sm" title="Deletar Controle diário de saída"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button type="submit" data-id="{{ $item->id }}" data-route="/permissoes" class="btnDeletar btn btn-danger btn-sm" title="Deletar Permisso"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
-                        @empty
-                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Controle Diário de Saída encontrado</p>
+                        @empty 
+                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Permissoes encontrado</p>
                         @endforelse
                     </tbody>
                 </table>
