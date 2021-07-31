@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class CreatePerfilsTable extends Migration
 {
@@ -14,14 +13,15 @@ class CreatePerfilsTable extends Migration
     public function up()
     {
         Schema::create('perfils', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 190);
+            $table->increments('id');
             $table->unsignedInteger('setor_id');
-            $table->boolean('status');
+            $table->string('nome')->nullable();
+            $table->text('descricao')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('setor_id')->references('id')->on('setors')->onDelete('cascade')->onUpdate('cascade');
-        });
+//            $table->foreign('setor_id')->references('id')->on('setors')->onDelete('cascade')->onUpdate('cascade');
+            });
     }
 
     /**
@@ -31,6 +31,6 @@ class CreatePerfilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfils');
+        Schema::drop('perfils');
     }
 }

@@ -45,3 +45,5 @@ Route::resource('veiculo-agendamento', 'App\Http\Controllers\Admin\VeiculoAgenda
 Route::resource('tipo-responsavel', 'App\Http\Controllers\Admin\TipoResponsavelController');
 
 Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'generatePDF']);
+
+Route::resource('perfil', 'App\Http\Controllers\Configuracoes\PerfilController');

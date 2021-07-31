@@ -121,6 +121,10 @@ calendario:
 php artisan crud:generate VeiculoAgendamento --fields='controle_frota_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};departamento#select#options={"manha": "Manhã", "tarde": "Tarde", "integral": "Integral"};periodo#select#options={"manha": "Manhã", "tarde": "Tarde", "integral": "Integral"};telefone#string,local#string;previsao_saida#datetime;previsao_volta#datetime;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\ControleFrotum" --foreign-keys="controle_frota_id#id#controle_frotas#cascade"
 
 
+
+php artisan crud:generate Perfil --fields='setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};nome#string;status#boolean' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor" --foreign-keys="setor_id#id#setors#cascade"
+
+
 FALTA OS JOINS e FOREIGH KEY
 
  category#select#options={"technology": "Technology", "tips": "Tips", "health": "Health"}
@@ -129,3 +133,5 @@ FALTA OS JOINS e FOREIGH KEY
 
 
  php artisan migrate --path=/database/migrations/
+
+
