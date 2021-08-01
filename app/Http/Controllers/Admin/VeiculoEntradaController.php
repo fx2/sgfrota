@@ -75,6 +75,8 @@ class VeiculoEntradaController extends Controller
         $this->pdfTitles = ['Veículo', 'Responsável', 'Status'];
         $this->indexFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Responsável', 'Status'];
+
+        $this->numbersWithDecimal = ['km_final', 'quantidade_combustivel'];
     }
 
     public function create()
@@ -96,12 +98,19 @@ class VeiculoEntradaController extends Controller
 
     public function store(Request $request)
     {
+        $userAuth = auth('api')->user();
+
         $this->validate($request, $this->validations);
 
         $requestData = $request->all();
 
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();
+
         $saida->delete();
 
         $this->model->create($requestData);

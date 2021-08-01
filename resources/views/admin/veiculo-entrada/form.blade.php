@@ -43,7 +43,7 @@
         <label for="km_final" class="control-label">{{ 'Km Final' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="km_final" type="number" id="km_final" value="{{ isset($result->km_final) ? $result->km_final : old('km_final')}}" >
+        <input class="form-control decimal" name="km_final" type="text" id="km_final" value="{{ isset($result->km_final) ? $result->km_final : old('km_final')}}" >
         {!! $errors->first('km_final', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -61,7 +61,7 @@
         <label for="quantidade_combustivel" class="control-label">{{ 'Quantidade Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="quantidade_combustivel" type="number" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
+        <input class="form-control decimal" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
         {!! $errors->first('quantidade_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
