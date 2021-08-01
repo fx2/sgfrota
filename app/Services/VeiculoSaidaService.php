@@ -3,7 +3,7 @@
 
 namespace App\Services;
 
-use App\Models\VeiculoSaida;
+use App\Models\ControleFrotum;
 
 /**
  * Class VeiculoSaidaService
@@ -12,32 +12,25 @@ use App\Models\VeiculoSaida;
 class VeiculoSaidaService
 {
     /**
-     * @var VeiculoSaida
+     * @var ControleFrotum
      */
-    protected VeiculoSaida $veiculoSaida;
+    protected ControleFrotum $controleFrotum;
 
-    public function __construct(VeiculoSaida $veiculoSaida)
+    public function __construct(ControleFrotum $controleFrotum)
     {
-        $this->veiculoSaida = $veiculoSaida;
+        $this->controleFrotum = $controleFrotum;
     }
 
     public function veiculosDisponiveisSaida($id = false)
     {
-        $result = $this->veiculoSaida::select('controle_frotas.id', 'controle_frotas.veiculo')
-            ->join('controle_frotas', 'controle_frotas.id', '=', 'veiculo_saidas.controle_frota_id');
+        $result = $this->controleFrotum::select('id', 'veiculo');
 
-        if ($id) {
-            $result = $result->where('veiculo_saidas.id', $id)->get();
+        if ($id)
+            return $result = $result->where('id', $id)->get();
 
-            return $result;
-        }
-
-        $result = $result->whereNotIn('controle_frotas.id',function($query){
-                $query->select('veiculo_saidas.controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at');
-            })
-            ->withTrashed()
-            ->get();
-
-        return $result;
+        return $result = $result->whereNotIn('id',function($query){
+            $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at');
+        })
+        ->get();
     }
 }
