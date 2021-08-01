@@ -47,7 +47,9 @@
               </p>
             </a>
           </li>
-          <li class="nav-item {{ Str::contains(url()->current(), ['/tipo-combustivel', '/tipo-manutencao', '/tipo-veiculo', '/tipo-cnh', '/marca', '/tipo-multas', '/modelo', '/tipo-correcao', 'setor', 'tipo-responsavel']) ? 'menu-open' : '' }}">
+
+          @can('isMasterOrAdmin')
+            <li class="nav-item {{ Str::contains(url()->current(), ['/tipo-combustivel', '/tipo-manutencao', '/tipo-veiculo', '/tipo-cnh', '/marca', '/tipo-multas', '/modelo', '/tipo-correcao', 'setor', 'tipo-responsavel']) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-snowflake"></i>
               <p>
@@ -147,91 +149,106 @@
               </li>
             </ul>
           </li>
+          @endcan
 
-          <li class="nav-item">
-            <a href="{{ url('fornecedor') }}" class="nav-link {{ Str::contains(url()->current(), ['/fornecedor']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-hands-helping"></i>
-              <p>
-                Fornecedor
-              </p>
-            </a>
-          </li>
+          @can('checksetor', FORNECEDOR_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('fornecedor') }}" class="nav-link {{ Str::contains(url()->current(), ['/fornecedor']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-hands-helping"></i>
+                  <p>
+                    Fornecedor
+                  </p>
+                </a>
+              </li>
+          @endcan
 
+          @can('checksetor', CONTROLEDEFROTAS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('controle-frota') }}" class="nav-link {{ Str::contains(url()->current(), ['/controle-frota']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-people-carry"></i>
+                  <p>
+                    Controle de Frotas
+                  </p>
+                </a>
+              </li>
+          @endcan
 
+          @can('checksetor', ABASTECIMENTOS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('abastecimento') }}" class="nav-link {{ Str::contains(url()->current(), ['/abastecimento']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-gas-pump"></i>
+                  <p>
+                    Abastecimentos
+                  </p>
+                </a>
+              </li>
+          @endcan
 
-          <li class="nav-item">
-            <a href="{{ url('controle-frota') }}" class="nav-link {{ Str::contains(url()->current(), ['/controle-frota']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-people-carry"></i>
-              <p>
-                Controle de Frotas
-              </p>
-            </a>
-          </li>
+          @can('checksetor', MOTORISTAS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('motorista') }}" class="nav-link {{ Str::contains(url()->current(), ['/motorista']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-biking"></i>
+                  <p>
+                    Motoristas
+                  </p>
+                </a>
+              </li>
+          @endcan
 
-          <li class="nav-item">
-            <a href="{{ url('abastecimento') }}" class="nav-link {{ Str::contains(url()->current(), ['/abastecimento']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-gas-pump"></i>
-              <p>
-                Abastecimentos
-              </p>
-            </a>
-          </li>
+          @can('checksetor', MANUTENCAODESPESAS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('manutencao') }}" class="nav-link {{ Str::contains(url()->current(), ['/manutencao']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-users-cog"></i>
+                  <p>
+                    Manutenções/Despesas
+                  </p>
+                </a>
+              </li>
+          @endcan
 
-          <li class="nav-item">
-            <a href="{{ url('motorista') }}" class="nav-link {{ Str::contains(url()->current(), ['/motorista']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-biking"></i>
-              <p>
-                Motoristas
-              </p>
-            </a>
-          </li>
+          @can('checksetor', LANCAMENTODEMULTAS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('lancamento-multas') }}" class="nav-link {{ Str::contains(url()->current(), ['/lancamento-multas']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-clipboard-check"></i>
+                  <p>
+                    Lançamento de Multas
+                  </p>
+                </a>
+              </li>
+          @endcan
 
+          @can('checksetor', CONTROLEDIARIODESAIDA_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('veiculo-saida') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-saida']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-route"></i>
+                  <p>
+                    Controle diário de Saida
+                  </p>
+                </a>
+              </li>
+          @endcan
 
+          @can('checksetor', CONTROLEDIARIODEENTRADA_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('veiculo-entrada') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-entrada']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-route"></i>
+                  <p>
+                    Controle diário de Entrada
+                  </p>
+                </a>
+              </li>
+          @endcan
 
-          <li class="nav-item">
-            <a href="{{ url('manutencao') }}" class="nav-link {{ Str::contains(url()->current(), ['/manutencao']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p>
-                Manutenções/Despesas
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('lancamento-multas') }}" class="nav-link {{ Str::contains(url()->current(), ['/lancamento-multas']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-clipboard-check"></i>
-              <p>
-                Lançamento de Multas
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('veiculo-saida') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-saida']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-route"></i>
-              <p>
-                Controle diário de Saida
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('veiculo-entrada') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-entrada']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-route"></i>
-              <p>
-                Controle diário de Entrada
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('veiculo-agendamento/custom/index') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-agendamento/custom/index']) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Agendamento de Veículos
-              </p>
-            </a>
-          </li>
+          @can('checksetor', AGENDAMENTODEVEICULOS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('veiculo-agendamento/custom/index') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-agendamento/custom/index']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Agendamento de Veículos
+                  </p>
+                </a>
+              </li>
+          @endcan
 
 
           <hr style="border-color: white; border-width: 1px;  width:100%;">
@@ -241,7 +258,7 @@
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                 <i class="nav-icon fas fa-reply"></i>
-                {{ __('Logout') }}
+                {{ __('DESLOGAR') }}
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
