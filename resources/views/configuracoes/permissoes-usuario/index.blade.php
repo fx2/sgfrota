@@ -4,18 +4,18 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item">Perfil</li>
+            <li class="breadcrumb-item">Permissoesusuario</li>
         </ol>
     </nav>
 
     <div class="card">
-        <div class="card-header h3">Perfil</div>
+        <div class="card-header h3">Permissoesusuario</div>
         <div class="card-body">
-            <a href="{{ url('/perfil/create') }}" class="btn btn-success btn-sm" title="Add New Perfil">
+            <a href="{{ url('/permissoes-usuario/create') }}" class="btn btn-success btn-sm" title="Add New PermissoesUsuario">
                 <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
             </a>
 
-            <form method="GET" action="{{ url('/perfil') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('/permissoes-usuario') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                     <span class="input-group-append">
@@ -136,14 +136,14 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    <a href="{{ route('perfil.customEdit', $item->id) }}" title="Visualizar Perfil"><button class="btn btn-info btn-sm"><i class="fa fa-list-alt" aria-hidden="true"></i></button></a>
-                                    <a href="{{ url('/perfil/' . $item->id . '/edit') }}" title="Editar Perfil"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    {{-- <a href="{{ url('/permissoes-usuario/' . $item->id) }}" title="Visualizar PermissoesUsuario"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
+                                    <a href="{{ url('/permissoes-usuario/' . $item->id . '/edit') }}" title="Editar PermissoesUsuario"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
 
-                                    <button type="submit" data-id="{{ $item->id }}" data-route="/perfil" class="btnDeletar btn btn-danger btn-sm" title="Deletar Perfil"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button type="submit" data-id="{{ $item->id }}" data-route="/permissoes-usuario" class="btnDeletar btn btn-danger btn-sm" title="Deletar PermissoesUsuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         @empty
-                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Perfil encontrado</p>
+                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Permissoesusuario encontrado</p>
                         @endforelse
                     </tbody>
                 </table>

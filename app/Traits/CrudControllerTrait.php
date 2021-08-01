@@ -345,6 +345,16 @@ trait CrudControllerTrait
         dd('custom show' . $id);
     }
 
+    /**
+     * rota customizada da show
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customEdit($id)
+    {
+        dd('custom edit id: ' . $id);
+    }
+
     public function saveCheckboxExplode($requestData)
     {
         foreach ($this->checkboxExplode as $key => $value) {

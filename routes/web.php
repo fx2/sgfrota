@@ -48,3 +48,4 @@ Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'ge
 
 Route::resource('perfil', 'App\Http\Controllers\Configuracoes\PerfilController');
 Route::resource('permissoes', 'App\Http\Controllers\Configuracoes\PermissoesController');
+Route::resource('permissoes-usuario', 'App\Http\Controllers\Configuracoes\PermissoesUsuarioController');

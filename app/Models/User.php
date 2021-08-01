@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'type',
         'setor_id',
+        'perfil_id',
         'name',
         'email',
         'phone',
