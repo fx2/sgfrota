@@ -43,9 +43,9 @@ Route::resource('veiculo-entrada', 'App\Http\Controllers\Admin\VeiculoEntradaCon
 Route::resource('setor', 'App\Http\Controllers\Admin\SetorController');
 Route::resource('veiculo-agendamento', 'App\Http\Controllers\Admin\VeiculoAgendamentoController');
 Route::resource('tipo-responsavel', 'App\Http\Controllers\Admin\TipoResponsavelController');
-
-Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'generatePDF']);
-
 Route::resource('perfil', 'App\Http\Controllers\Configuracoes\PerfilController');
 Route::resource('permissoes', 'App\Http\Controllers\Configuracoes\PermissoesController');
 Route::resource('permissoes-usuario', 'App\Http\Controllers\Configuracoes\PermissoesUsuarioController');
+
+Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'generatePDF']);
+

@@ -29,6 +29,9 @@ trait CrudControllerTrait
 
         $result = $this->model;
 
+        if (!$this->verifyIfHasMasterOrAdminPermission($verificaPerfil, $request))
+            return redirect()->back();
+
         if (isset($request->all()['select'])) {
             $result = $this->select($request->all()['select'], $result);
         }
@@ -93,6 +96,28 @@ trait CrudControllerTrait
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', ['results'=>$result, 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
+
+    public function verifyIfHasMasterOrAdminPermission($verificaPerfil, $request) // remover no futuro, fazer um middleware
+    {
+        $rotasOnlyMasterOrAdmin = [
+          "/perfil",
+          "/tipo-combustivel",
+          "/tipo-manutencao",
+          "/tipo-veiculo",
+          "/tipo-cnh",
+          "/marca",
+          "/tipo-multas",
+          "/modelo",
+          "/tipo-correcao",
+          "/setor",
+          "/tipo-responsavel"
+        ];
+
+        if (!$verificaPerfil->isMasterOrAdmin() && in_array($request->getRequestUri(), $rotasOnlyMasterOrAdmin))
+            return false;
+
+        return true;
     }
 
     public function exportPdf($result)
