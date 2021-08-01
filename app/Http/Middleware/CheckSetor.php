@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Permisso;
 use App\Models\PermissoesUsuario;
 use Closure;
 use Illuminate\Http\Request;
