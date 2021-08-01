@@ -11,9 +11,11 @@
     <div class="card">
         <div class="card-header h3">Controle Diário de Entrada</div>
         <div class="card-body">
-            <a href="{{ url('/veiculo-entrada/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoEntrada">
-                <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
-            </a>
+            @can('checksetor', CONTROLEDIARIODEENTRADA_ADICIONAR)
+                <a href="{{ url('/veiculo-entrada/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoEntrada">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+                </a>
+            @endcan
 
             <form method="GET" action="{{ url('/veiculo-entrada') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
@@ -23,10 +25,12 @@
                             <i class="fa fa-search"></i>
                         </button>
 
-                        <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                        <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                            <i class="fas fa-file-pdf"></i>
-                        </button>
+                        @can('checksetor', CONTROLEDIARIODEENTRADA_RELATORIO)
+                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
+                        @endcan
                     </span>
                 </div>
             </form>
@@ -137,9 +141,13 @@
                                     @endforeach
                                 <td>
                                     {{-- <a href="{{ url('/veiculo-entrada/' . $item->id) }}" title="Visualizar VeiculoEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @can('checksetor', CONTROLEDIARIODEENTRADA_EDITAR)
+                                        <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @endcan
 
-                                    <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @can('checksetor', CONTROLEDIARIODEENTRADA_DELETAR)
+                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty

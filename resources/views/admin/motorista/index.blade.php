@@ -11,9 +11,11 @@
     <div class="card">
         <div class="card-header h3">Motorista</div>
         <div class="card-body">
-            <a href="{{ url('/motorista/create') }}" class="btn btn-success btn-sm" title="Add New Motoristum">
-                <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
-            </a>
+            @can('checksetor', MOTORISTAS_ADICIONAR)
+                <a href="{{ url('/motorista/create') }}" class="btn btn-success btn-sm" title="Add New Motoristum">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+                </a>
+            @endcan
 
             <form method="GET" action="{{ url('/motorista') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
@@ -23,10 +25,12 @@
                             <i class="fa fa-search"></i>
                         </button>
 
-                        <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                        <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                            <i class="fas fa-file-pdf"></i>
-                        </button>
+                        @can('checksetor', MOTORISTAS_RELATORIO)
+                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
+                        @endcan
                     </span>
                 </div>
             </form>
@@ -139,9 +143,13 @@
                                 @endforeach
                                 <td>
                                     {{-- <a href="{{ url('/motorista/' . $item->id) }}" title="Visualizar Motoristum"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    <a href="{{ url('/motorista/' . $item->id . '/edit') }}" title="Editar Motoristum"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @can('checksetor', MOTORISTAS_EDITAR)
+                                        <a href="{{ url('/motorista/' . $item->id . '/edit') }}" title="Editar Motoristum"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @endcan
 
-                                    <button type="submit" data-id="{{ $item->id }}" data-route="/motorista" class="btnDeletar btn btn-danger btn-sm" title="Deletar Motoristum"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @can('checksetor', MOTORISTAS_DELETAR)
+                                        <button type="submit" data-id="{{ $item->id }}" data-route="/motorista" class="btnDeletar btn btn-danger btn-sm" title="Deletar Motoristum"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
