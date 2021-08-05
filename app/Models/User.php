@@ -54,4 +54,15 @@ class User extends Authenticatable
     {
          return $this->hasMany('App\Models\Task');
     }
+
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
+
+    public function perfil()
+    {
+        return $this->hasOne('App\Models\Perfil', 'id', 'perfil_id');
+    }
 }

@@ -130,7 +130,7 @@ php artisan crud:generate PermissoesUsuario --fields='setor_id#select#options={"
 
 
 
-php artisan crud:generate Users --fields='type#string;perfil_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};name#string;email#string;phone#string;password#string;foto_perfil#string;' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor" --foreign-keys="setor_id#id#setors#cascade"
+php artisan crud:generate Users --fields='name#string;email#string;phone#string;password#string;foto_perfil#string;perfil_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor;perfil#hasOne#App\Models\Perfil" --foreign-keys="perfil_id#id#setors#cascade;setor_id#id#setors#cascade"
 
 
 FALTA OS JOINS e FOREIGH KEY
