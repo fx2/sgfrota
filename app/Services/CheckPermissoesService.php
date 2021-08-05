@@ -14,6 +14,9 @@ class CheckPermissoesService
         if (\Gate::allows('isMasterOrAdmin'))
             return true;
 
+        if (\Gate::allows('isMaster'))
+            return true;
+
         return PermissoesUsuario::where('setor_id', $user->setor_id)
             ->where('perfil_id', $user->perfil_id)
             ->where('idpermissao', $idPermissao)

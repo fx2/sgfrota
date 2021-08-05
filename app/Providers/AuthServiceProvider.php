@@ -30,6 +30,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
         });
 
+        Gate::define('isMaster', function($user){
+            if ($user->type == 'master')
+                return true;
+        });
+
         Gate::define('checksetor', 'App\Policies\CheckSetorPolicy@checksetor');
 
     }

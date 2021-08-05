@@ -100,8 +100,11 @@ trait CrudControllerTrait
 
     public function verifyIfHasMasterOrAdminPermission($verificaPerfil, $request) // remover no futuro, fazer um middleware
     {
+        $rotasOnlyMaster = [
+          "/perfil"
+        ];
+
         $rotasOnlyMasterOrAdmin = [
-          "/perfil",
           "/tipo-combustivel",
           "/tipo-manutencao",
           "/tipo-veiculo",
@@ -111,10 +114,14 @@ trait CrudControllerTrait
           "/modelo",
           "/tipo-correcao",
           "/setor",
-          "/tipo-responsavel"
+          "/tipo-responsavel",
+          "/fornecedor"
         ];
 
         if (!$verificaPerfil->isMasterOrAdmin() && in_array($request->getRequestUri(), $rotasOnlyMasterOrAdmin))
+            return false;
+
+        if (!$verificaPerfil->isMaster() && in_array($request->getRequestUri(), $rotasOnlyMaster))
             return false;
 
         return true;
