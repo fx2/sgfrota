@@ -23,10 +23,16 @@ class AbastecimentoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $abastecimento;
+        $this->saveSetorScope = true;
         $this->path = 'admin.abastecimento';
         $this->redirectPath = 'abastecimento';
-        $this->withFields = ['controle_frota', 'tipo_combustivel', 'fornecedor'];
-        $this->selectModelFields = ['ControleFrotum' => '\App\Models\ControleFrotum', 'TipoCombustivel' => '\App\Models\TipoCombustivel', 'Fornecedor' => '\App\Models\Fornecedor'];
+        $this->withFields = ['controle_frota', 'tipo_combustivel', 'fornecedor', 'setor'];
+        $this->selectModelFields = [
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'TipoCombustivel' => '\App\Models\TipoCombustivel',
+            'Fornecedor' => '\App\Models\Fornecedor',
+            'Setor' => '\App\Models\Setor',
+        ];
         $this->joinSearch = ['controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'], 'tipo_combustivel_id' => ['nome', '\App\Models\TipoCombustivel'], 'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor']];
         $this->fileName = ['foto'];
         $this->uploadFilePath = 'images/abastecimento';

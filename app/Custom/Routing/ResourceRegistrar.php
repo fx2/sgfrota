@@ -12,7 +12,7 @@ class ResourceRegistrar extends OriginalRegistrar
      *
      * @var array
      */
-    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customCreate',  'customShow', 'customStore'];
+    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customShow', 'customCreate', 'customStore', 'customEdit', 'customUpdate', 'customDestroy'];
 
 
     /**
@@ -88,5 +88,65 @@ class ResourceRegistrar extends OriginalRegistrar
         $action = $this->getResourceAction($name, $controller, 'customStore', $options);
 
         return $this->router->post($uri, $action);
+    }
+
+    /**
+     * Add the edit method for a resourceful route.
+     *
+     * @param  string  $name
+     * @param  string  $base
+     * @param  string  $controller
+     * @param  array  $options
+     * @return \Illuminate\Routing\Route
+     */
+    protected function addResourceCustomEdit($name, $base, $controller, $options)
+    {
+        $name = $this->getShallowName($name, $options);
+
+        $uri = $this->getResourceUri($name) . '/custom/' . '{'.$base.'}/' . static::$verbs['edit'];
+
+        $action = $this->getResourceAction($name, $controller, 'customEdit', $options);
+
+        return $this->router->get($uri, $action);
+    }
+
+    /**
+     * Add the update method for a resourceful route.
+     *
+     * @param  string  $name
+     * @param  string  $base
+     * @param  string  $controller
+     * @param  array  $options
+     * @return \Illuminate\Routing\Route
+     */
+    protected function addResourceCustomUpdate($name, $base, $controller, $options)
+    {
+        $name = $this->getShallowName($name, $options);
+
+        $uri = $this->getResourceUri($name) .'/custom' . '/{'.$base.'}';
+
+        $action = $this->getResourceAction($name, $controller, 'customUpdate', $options);
+
+        return $this->router->match(['PUT', 'PATCH'], $uri, $action);
+    }
+
+    /**
+     * Add the destroy method for a resourceful route.
+     *
+     * @param  string  $name
+     * @param  string  $base
+     * @param  string  $controller
+     * @param  array  $options
+     * @return \Illuminate\Routing\Route
+     */
+    protected function addResourceCustomDestroy($name, $base, $controller, $options)
+    {
+        $name = $this->getShallowName($name, $options);
+
+        $uri = $this->getResourceUri($name) . '/custom' . '/{'.$base.'}';
+
+        $action = $this->getResourceAction($name, $controller, 'customDestroy', $options);
+
+        return $this->router->delete($uri, $action);
     }
 }

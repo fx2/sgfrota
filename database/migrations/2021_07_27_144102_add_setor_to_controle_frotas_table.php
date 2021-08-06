@@ -14,7 +14,7 @@ class AddSetorToControleFrotasTable extends Migration
     public function up()
     {
         Schema::table('controle_frotas', function (Blueprint $table) {
-            $table->unsignedInteger('setor_id');
+            $table->unsignedInteger('setor_id')->after('id');
             $table->foreign('setor_id')->references('id')->on('setors')->onDelete('cascade')->onUpdate('cascade');
         });
     }

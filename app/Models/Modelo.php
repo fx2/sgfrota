@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Modelo extends BaseModel
+class Modelo extends Model
 {
     use SoftDeletes;
 
@@ -38,5 +38,5 @@ class Modelo extends BaseModel
     {
         return $this->hasOne('App\Models\Marca', 'id', 'marca_id');
     }
-    
+
 }

@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Marca;
 use App\Models\Modelo;
+use App\Services\VerificaPerfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
@@ -22,12 +23,21 @@ trait CrudControllerTrait
      */
     public function index(Request $request)
     {
+        $verificaPerfil = new VerificaPerfil;
+
         $limit = $request->all()['limit'] ?? 20;
 
         $result = $this->model;
 
+        if (!$this->verifyIfHasMasterOrAdminPermission($verificaPerfil, $request))
+            return redirect()->back();
+
         if (isset($request->all()['select'])) {
             $result = $this->select($request->all()['select'], $result);
+        }
+
+        if ($verificaPerfil->isMasterOrAdmin() && in_array("setor_id", $result->getModel()->getFillable())){
+            $result = $this->with('setor', $result);
         }
 
         if (isset($request->all()['order'])) {
@@ -88,6 +98,28 @@ trait CrudControllerTrait
         return view($this->path.'.index', ['results'=>$result, 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
+    public function verifyIfHasMasterOrAdminPermission($verificaPerfil, $request) // remover no futuro, fazer um middleware
+    {
+        $rotasOnlyMasterOrAdmin = [
+          "/perfil",
+          "/tipo-combustivel",
+          "/tipo-manutencao",
+          "/tipo-veiculo",
+          "/tipo-cnh",
+          "/marca",
+          "/tipo-multas",
+          "/modelo",
+          "/tipo-correcao",
+          "/setor",
+          "/tipo-responsavel"
+        ];
+
+        if (!$verificaPerfil->isMasterOrAdmin() && in_array($request->getRequestUri(), $rotasOnlyMasterOrAdmin))
+            return false;
+
+        return true;
+    }
+
     public function exportPdf($result)
     {
         $data = [
@@ -122,11 +154,18 @@ trait CrudControllerTrait
      */
     public function store(Request $request)
     {
+        $userAuth = auth('api')->user();
+
         if (!empty($this->validations)) {
             $this->validate($request, $this->validations);
         }
 
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         if (!empty($this->checkboxExplode)) {
             $requestData = $this->saveCheckboxExplode($requestData);
@@ -193,6 +232,8 @@ trait CrudControllerTrait
      */
     public function update(Request $request, $id)
     {
+        $userAuth = auth('api')->user();
+
         if (!empty($this->validations)) {
             foreach ($this->fileName as $key => $value) {
                 unset($this->validations[$value]);
@@ -203,6 +244,11 @@ trait CrudControllerTrait
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         if (!empty($this->checkboxExplode)) {
             $requestData = $this->saveCheckboxExplode($requestData);
@@ -322,6 +368,16 @@ trait CrudControllerTrait
     public function customShow($id)
     {
         dd('custom show' . $id);
+    }
+
+    /**
+     * rota customizada da show
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customEdit($id)
+    {
+        dd('custom edit id: ' . $id);
     }
 
     public function saveCheckboxExplode($requestData)

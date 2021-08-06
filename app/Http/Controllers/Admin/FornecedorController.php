@@ -25,6 +25,12 @@ class FornecedorController extends Controller
     public function __construct(Fornecedor $fornecedor)
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:1', ['only' => ['index']]);
+        $this->middleware('checksetor:2', ['only' => ['create']]);
+        $this->middleware('checksetor:3', ['only' => ['edit']]);
+        $this->middleware('checksetor:4', ['only' => ['destroy']]);
+        $this->middleware('checksetor:5', ['only' => ['relatorio']]);
+
         $this->model = $fornecedor;
         $this->path = 'admin.fornecedor';
         $this->redirectPath = 'fornecedor';

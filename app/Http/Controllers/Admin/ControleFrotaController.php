@@ -26,9 +26,10 @@ class ControleFrotaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $controlefrota;
+        $this->saveSetorScope = true;
         $this->path = 'admin.controle-frota';
         $this->redirectPath = 'controle-frota';
-        $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel'];
+        $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel', 'setor'];
         $this->selectModelFields = [
             'TipoVeiculo' => '\App\Models\TipoVeiculo',
             'TipoCombustivel' => '\App\Models\TipoCombustivel',
@@ -54,7 +55,6 @@ class ControleFrotaController extends Controller
             'modelo_id' => 'required',
             'tipo_responsavel' => 'required',
             'tipo_responsavel_id' => 'required',
-            'setor_id' => 'required',
             'tipo_veiculo' => 'required',
             'disponivel_outros_departamentos' => 'required',
             // 'veiculo_escolar' => 'required',
@@ -74,10 +74,10 @@ class ControleFrotaController extends Controller
             'foto' => 'required',
             'status' => 'required',
         ];
-        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Setor', 'Status'];
-        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Setor', 'Status'];
+        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
+        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
 
         $this->numbersWithDecimal = ['km_inicial'];
 

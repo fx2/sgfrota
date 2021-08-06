@@ -26,6 +26,7 @@ class ManutencaosController extends Controller
     {
         $this->middleware('auth');
         $this->model = $lancamentomultas;
+        $this->saveSetorScope = true;
         $this->path = 'admin.manutencao';
         $this->redirectPath = 'manutencao';
         $this->withFields = ['controle_frota', 'tipo_manutencao', 'fornecedor', 'tipo_correcao'];
@@ -34,12 +35,14 @@ class ManutencaosController extends Controller
             'TipoManutencao' => '\App\Models\TipoManutencao',
             'Fornecedor' => '\App\Models\Fornecedor',
             'TipoCorrecao' => '\App\Models\TipoCorrecao',
+            'Setor' => '\App\Models\Setor',
         ];
         $this->joinSearch = [
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'tipo_manutencao_id' => ['nome', '\App\Models\TipoManutencao'],
             'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor'],
             'tipo_correcao_id' => ['nome', '\App\Models\TipoCorrecao'],
+            'setor_id' => ['nome', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/';

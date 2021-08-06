@@ -1,19 +1,21 @@
 @extends('layouts.admin.index')
 
-@section('content')   
+@section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item">Veiculoagendamento</li>
+            <li class="breadcrumb-item">Veículo Agendamento</li>
         </ol>
-    </nav> 
+    </nav>
 
     <div class="card">
-        <div class="card-header h3">Veiculoagendamento</div>
+        <div class="card-header h3">Veículo Agendamento</div>
         <div class="card-body">
-            <a href="{{ url('/veiculo-agendamento/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoAgendamento">
-                <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
-            </a>
+            @can('checksetor', ADMINAGENDAMENTODEVEICULOS_ADICIONAR)
+                <a href="{{ url('/veiculo-agendamento/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoAgendamento">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
+                </a>
+            @endcan
 
             <form method="GET" action="{{ url('/veiculo-agendamento') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
@@ -23,10 +25,12 @@
                             <i class="fa fa-search"></i>
                         </button>
 
-                        <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                        <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                            <i class="fas fa-file-pdf"></i>
-                        </button>
+                        @can('checksetor', ADMINAGENDAMENTODEVEICULOS_RELATORIO)
+                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
+                        @endcan
                     </span>
                 </div>
             </form>
@@ -37,6 +41,9 @@
                 <table class="table">
                     <thead class="thead-hide">
                         <th>#</th>
+                        @can('isMasterOrAdmin')
+                            <th>Setor</th>
+                        @endcan
                         @foreach ($titles as $item)
                             <th>{{ $item }}</th>
                         @endforeach
@@ -46,21 +53,24 @@
                         @forelse($results as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                    @foreach ($fields as $key => $val)                                    
+                                    @can('isMasterOrAdmin')
+                                        <td>{{$item->setor->nome}}</td>
+                                    @endcan
+                                    @foreach ($fields as $key => $val)
                                         <td class="borda" scope="row">
                                             @php
                                             // da pra melhorar esses if e fazer um loop, mas nao quero
                                             if (!empty($val[0])){
                                                 $a = $val[0];
                                                 $valor = $item->$a;
-                                                
+
                                                 if ($val[0] == 'status') {
                                                     $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                                 }
                                                 elseif ($val[0] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
-                                                
+
                                             }
 
                                             if (!empty($val[1])){
@@ -91,7 +101,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-                                            
+
                                             if (!empty($val[3])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -107,7 +117,7 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
                                             }
-                                            
+
                                             if (!empty($val[4])){
                                                 $a = $val[0];
                                                 $b = $val[1];
@@ -131,13 +141,17 @@
                                     @endforeach
                                 <td>
                                     {{-- <a href="{{ url('/veiculo-agendamento/' . $item->id) }}" title="Visualizar VeiculoAgendamento"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    <a href="{{ url('/veiculo-agendamento/' . $item->id . '/edit') }}" title="Editar VeiculoAgendamento"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @can('checksetor', ADMINAGENDAMENTODEVEICULOS_EDITAR)
+                                        <a href="{{ url('/veiculo-agendamento/' . $item->id . '/edit') }}" title="Editar VeiculoAgendamento"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                    @endcan
 
-                                    <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-agendamento" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoAgendamento"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @can('checksetor', ADMINAGENDAMENTODEVEICULOS_DELETAR)
+                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-agendamento" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoAgendamento"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    @endcan
                                 </td>
                             </tr>
-                        @empty 
-                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Veiculoagendamento encontrado</p>
+                        @empty
+                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Veículo Agendamento encontrado</p>
                         @endforelse
                     </tbody>
                 </table>

@@ -6,9 +6,9 @@
         <select name="controle_frota_id" class="form-control" id="controle_frota_id" >
             <option value="">Selecione...</option>
             @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->departamento) && $result->departamento == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('departamento') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('departamento') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->veiculo }}</option>
             @endforeach
         </select>
@@ -90,6 +90,7 @@
     </div>
 </div>
 
+@include('parts/select-setor')
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>

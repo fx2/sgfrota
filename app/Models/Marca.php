@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Marca extends BaseModel
+class Marca extends Model
 {
     use SoftDeletes;
 
@@ -30,5 +30,5 @@ class Marca extends BaseModel
      */
     protected $fillable = ['nome', 'descricao', 'status'];
 
-    
+
 }

@@ -40,7 +40,7 @@
     <div class="col-10">
         <label for="certificado_transporte_escolar" class="control-label">{{ '' }}</label>
         <img class="img-fluid" src="{{ isset($result->certificado_transporte_escolar) ? removePublicPath(asset($result->certificado_transporte_escolar)) : '' }}" alt="{{ isset($result->certificado_transporte_escolar) ? $result->certificado_transporte_escolar : '' }}" >
-    </div>  
+    </div>
 </div>
 
 <div class="form-group row mb-5 hide_show_certificado_transporte_escolar {{ $errors->has('data_conclusao_curso') ? 'has-error' : ''}}">
@@ -67,9 +67,9 @@
     <div class="col-2">
         <label for="imagem" class="control-label">{{ 'Foto' }}</label>
     </div>
-    <div class="col-10">  
+    <div class="col-10">
         <div id="upload">
-            
+
         </div>
 
         <div id="webcam">
@@ -94,7 +94,7 @@
     <div class="col-10">
         <label for="imagem" class="control-label">{{ '' }}</label>
         <img class="img-fluid" id="img_upload" src="{{ isset($result->imagem) ? removePublicPath(asset($result->imagem)) : '' }}" >
-    </div>  
+    </div>
 </div>
 
 {{-- <div class="form-group row mb-5 {{ $errors->has('fornecedor_id') ? 'has-error' : ''}}">
@@ -105,9 +105,9 @@
         <select name="fornecedor_id" class="form-control" id="fornecedor_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Fornecedor'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->fornecedor_id) && $result->fornecedor_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('fornecedor_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('fornecedor_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->razao_social }}</option>
             @endforeach
         </select>
@@ -179,7 +179,7 @@
         <input class="form-control cnh" name="cnh" type="text" id="cnh" value="{{ isset($result->cnh) ? $result->cnh : old('cnh')}}" >
         {!! $errors->first('cnh', '<p class="help-block">:message</p>') !!}
     </div>
-</div> 
+</div>
 
 <div class="form-group row mb-5 {{ $errors->has('tipo_cnh_id') ? 'has-error' : ''}}">
     <div class="col-2">
@@ -189,9 +189,9 @@
         <select name="tipo_cnh_id" class="form-control" id="tipo_cnh_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['TipoCnh'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->tipo_cnh_id) && $result->tipo_cnh_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('tipo_cnh_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('tipo_cnh_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -241,7 +241,7 @@
     <div class="col-10">
         <label for="cnh_imagem" class="control-label">{{ '' }}</label>
         <img class="img-fluid" src="{{ isset($result->cnh_imagem) ? removePublicPath(asset($result->cnh_imagem)) : '' }}" alt="{{ isset($result->cnh_imagem) ? $result->cnh_imagem : '' }}" >
-    </div>  
+    </div>
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('avisar_antes_qtddias') ? 'has-error' : ''}}">
@@ -275,6 +275,8 @@
     </div>
 </div>
 
+@include('parts/select-setor')
+
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
@@ -282,17 +284,17 @@
 
 @push('js')
 <script src="{{ asset('js/webcamsupport.js') }}"></script>
-<script> 
-    let motorista_escolar = $('[name="motorista_escolar"]'); 
-    
+<script>
+    let motorista_escolar = $('[name="motorista_escolar"]');
+
     $(function () {
-        motorista_escolarFn({{ $result->motorista_escolar ?? 1 }}); 
+        motorista_escolarFn({{ $result->motorista_escolar ?? 1 }});
     });
 
     function motorista_escolarFn(value){
         let hide_show_tipo_motorista = $('#hide_show_tipo_motorista');
         let hide_show_certificado_transporte_escolar = $('.hide_show_certificado_transporte_escolar');
-        
+
         if (value == 0){
             hide_show_tipo_motorista.fadeIn();
             hide_show_certificado_transporte_escolar.fadeOut();
@@ -302,9 +304,9 @@
             hide_show_tipo_motorista.fadeOut();
             hide_show_certificado_transporte_escolar.fadeIn();
 
-            $('input[type=checkbox]').each(function() { 
-                this.checked = false; 
-            }); 
+            $('input[type=checkbox]').each(function() {
+                this.checked = false;
+            });
         }
     }
 </script>
