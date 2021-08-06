@@ -30,7 +30,10 @@ class MotoristaController extends Controller
         $this->path = 'admin.motorista';
         $this->redirectPath = 'motorista';
         $this->withFields = ['tipoCnh'];
-        $this->selectModelFields = ['TipoCnh' => '\App\Models\TipoCnh'];
+        $this->selectModelFields = [
+            'TipoCnh' => '\App\Models\TipoCnh',
+            'Setor' => '\App\Models\Setor'
+        ];
         $this->joinSearch = ['tipo_cnh_id' => ['tipoCnh' => '\App\Models\TipoCnh']];
         $this->fileName = ['imagem', 'cnh_imagem', 'img_upload'];
         $this->uploadFilePath = 'images/motoristas';
