@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
-                            @if($item->email == 'master@master.com')
+                            @if($item->email == 'master@master.com.br')
                                 <?php continue; ?>
                             @endif
                             <tr>
