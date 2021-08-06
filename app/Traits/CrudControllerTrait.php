@@ -115,7 +115,8 @@ trait CrudControllerTrait
           "/tipo-correcao",
           "/setor",
           "/tipo-responsavel",
-          "/fornecedor"
+          "/fornecedor",
+          "/users"
         ];
 
         if (!$verificaPerfil->isMasterOrAdmin() && in_array($request->getRequestUri(), $rotasOnlyMasterOrAdmin))

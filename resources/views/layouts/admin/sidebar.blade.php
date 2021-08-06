@@ -70,6 +70,15 @@
               @endcan
 
               <li class="nav-item">
+                <a href="{{ url('users') }}" class="nav-link {{ Str::contains(url()->current(), ['/users']) ? 'active' : '' }}">
+                  <i class="nav-icon far fa-circle nav-icon"></i>
+                  <p>
+                    Cadastro de Usuários
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="{{ url('tipo-combustivel') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-combustivel']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
                   <p>
