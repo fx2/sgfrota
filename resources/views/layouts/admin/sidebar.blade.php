@@ -58,6 +58,26 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('isMaster')
+                  <li class="nav-item">
+                    <a href="{{ url('perfil') }}" class="nav-link {{ Str::contains(url()->current(), ['/perfil']) ? 'active' : '' }}">
+                      <i class="nav-icon far fa-circle nav-icon"></i>
+                      <p>
+                        Perfis
+                      </p>
+                    </a>
+                  </li>
+              @endcan
+
+              <li class="nav-item">
+                <a href="{{ url('users') }}" class="nav-link {{ Str::contains(url()->current(), ['/users']) ? 'active' : '' }}">
+                  <i class="nav-icon far fa-circle nav-icon"></i>
+                  <p>
+                    Cadastro de Usuários
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{ url('tipo-combustivel') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-combustivel']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
@@ -147,19 +167,17 @@
                   </p>
                 </a>
               </li>
-            </ul>
-          </li>
-          @endcan
 
-          @can('checksetor', FORNECEDOR_VISUALIZAR)
               <li class="nav-item">
                 <a href="{{ url('fornecedor') }}" class="nav-link {{ Str::contains(url()->current(), ['/fornecedor']) ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-hands-helping"></i>
+                  <i class="nav-icon far fa-circle nav-icon"></i>
                   <p>
                     Fornecedor
                   </p>
                 </a>
               </li>
+            </ul>
+          </li>
           @endcan
 
           @can('checksetor', CONTROLEDEFROTAS_VISUALIZAR)

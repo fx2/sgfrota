@@ -16,7 +16,8 @@ class PermissoSeeder extends Seeder
     {
         $crudr = ['Visualizar', 'Adicionar', 'Editar', 'Deletar', 'Relatorio'];
         for ($i = 0; $i < COUNT($crudr); $i++) {
-            DB::table('permissoes')->insert(['titulo' => 'Fornecedor', 'quem_pertence' => 'FORNECEDOR', 'chave_ordem' => 'FORNECEDOR', 'ordem_exibicao' => NULL, 'avo' => 'FORNECEDOR', 'permissao_direta' => 1, 'descricao' => $crudr[$i], 'pai' => NULL, 'status' => 1, 'created_at' => '2019-10-31 13:39:37', 'updated_at' => '2019-10-31 13:39:37', 'deleted_at' => NULL]);
+            DB::table('permissoes')->insert(['titulo' => 'Fornecedor', 'quem_pertence' => 'FORNECEDOR', 'chave_ordem' => 'FORNECEDOR', 'ordem_exibicao' => NULL, 'avo' => 'FORNECEDOR', 'permissao_direta' => 1, 'descricao' => $crudr[$i], 'pai' => NULL,
+                'status' => 0, 'created_at' => '2019-10-31 13:39:37', 'updated_at' => '2019-10-31 13:39:37', 'deleted_at' => NULL]);
         }
 
         for ($i = 0; $i < COUNT($crudr); $i++) {

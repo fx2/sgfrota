@@ -25,6 +25,8 @@ class VerificaPerfil
 
         if ($user->type == 'master')
             return true;
+
+        return false;
     }
 
     public function isAdmin(): bool
