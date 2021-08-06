@@ -19,10 +19,3 @@ Route::middleware('auth:api')->group(function() {
 });
 
 Route::resource('veiculo-agendamento', App\Http\Controllers\API\VeiculoAgendamentoController::class);
-
-Route::get('teste', function(){
-    echo phpinfo();
-    $a  = 122;
-
-    return 'aa';
-});

@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $primaryKey = 'id';
 
@@ -20,10 +21,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'type',
+        'setor_id',
+        'perfil_id',
         'name',
         'email',
-        'phone',
         'password',
+        'foto_perfil'
     ];
 
     /**
@@ -45,9 +49,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+
     public function tasks()
     {
          return $this->hasMany('App\Models\Task');
+    }
+
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
+
+    public function perfil()
+    {
+        return $this->hasOne('App\Models\Perfil', 'id', 'perfil_id');
     }
 }

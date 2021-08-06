@@ -25,6 +25,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('isMasterOrAdmin', function($user){
+            if ($user->type == 'master' OR $user->type == 'admin')
+                return true;
+        });
+
+        Gate::define('isMaster', function($user){
+            if ($user->type == 'master')
+                return true;
+        });
+
+        Gate::define('checksetor', 'App\Policies\CheckSetorPolicy@checksetor');
+
     }
 }

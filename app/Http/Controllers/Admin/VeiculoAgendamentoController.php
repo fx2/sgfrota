@@ -27,16 +27,18 @@ class VeiculoAgendamentoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $veiculoagendamento;
+        $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-agendamento';
         $this->redirectPath = 'veiculo-agendamento';
         $this->withFields = ['controle_frota'];
         $this->selectModelFields = [
-            'ControleFrotum' => '\App\Models\ControleFrotum', 
-            'User' => '\App\Models\User', 
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'Setor' => '\App\Models\Setor',
         ];
         $this->joinSearch = [
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'auth_id' => ['auth', '\App\Models\User'],
+            'setor_id' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/veiculo-agendamento';
@@ -56,9 +58,9 @@ class VeiculoAgendamentoController extends Controller
 
         $findAgendamentos = VeiculoAgendamento::selectRaw(
             "id AS fkas_id, auth_id,
-            CONCAT(' - ', periodo,' - ', DATE_FORMAT(previsao_volta, '%H:%i')) AS title, 
-            DATE_FORMAT(previsao_saida, '%H:%i') AS saida, 
-            DATE_FORMAT(previsao_volta, '%H:%i') AS volta, 
+            CONCAT(' - ', periodo,' - ', DATE_FORMAT(previsao_volta, '%H:%i')) AS title,
+            DATE_FORMAT(previsao_saida, '%H:%i') AS saida,
+            DATE_FORMAT(previsao_volta, '%H:%i') AS volta,
             previsao_saida AS start,previsao_volta AS end,
             local,
             telefone,
@@ -66,7 +68,7 @@ class VeiculoAgendamentoController extends Controller
         )->where('status', 1)
         ->whereYear('created_at', date('Y'))
         ->get();
-        
+
         $agendamentos = [];
         foreach ($findAgendamentos as $key => $value) {
             $agendamentos[$key] = $value;
@@ -76,7 +78,10 @@ class VeiculoAgendamentoController extends Controller
                 $agendamentos[$key]['color'] = 'green';
         }
 
-        return view($this->path.'.custom-index', ['agendamentos' => $agendamentos, 'veiculos' => $veiculos, 'selectModelFields' => $this->selectModelFields]);
+        return view($this->path.'.custom-index', [
+            'agendamentos' => $agendamentos,
+            'veiculos' => $veiculos,
+            'selectModelFields' => $this->selectModelFields()]);
     }
 
     public function customStore(Request $request) {
@@ -88,24 +93,30 @@ class VeiculoAgendamentoController extends Controller
         $startDate = $requestData['range']['start'];
 
         $findAgendamentos = DB::select("select * from veiculo_agendamentos WHERE '$startDate' BETWEEN previsao_saida AND previsao_volta");
-        
+
         return $findAgendamentos;
         dd($requestData['range']['start'], $requestData['range']['end'], $findAgendamentos);
     }
 
     public function store(Request $request) {
+        $userAuth = auth('api')->user();
         $requestData = $request->all();
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         $from = date($requestData['previsao_saida']);
         $to = date('Y-m-d', strtotime("-1 day", strtotime($requestData['previsao_volta'])));
- 
+
         $requestData['status'] = 1;
         $requestData['auth_id'] = auth()->user()->id;
         $requestData['previsao_saida'] =  $from . ' ' . $requestData['previsao_saida_hora'];
 
         $requestData['previsao_volta'] =  $to . ' ' . $requestData['previsao_volta_hora'];
 
-               
+
         $volta = (int) convertDateTimeToSeconds($requestData['previsao_volta']);
         $saida = (int) convertDateTimeToSeconds($requestData['previsao_saida']);
 

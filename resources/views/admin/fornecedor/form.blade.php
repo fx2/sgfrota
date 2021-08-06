@@ -121,7 +121,7 @@
         var cep = document.getElementById('cep').value;
 
         var resp = await axios.get(`https://viacep.com.br/ws/${cep}/json`)
-        
+
         document.getElementById("estado").value = resp.data.uf
         document.getElementById("cidade").value = resp.data.localidade
         document.getElementById("bairro").value = resp.data.bairro

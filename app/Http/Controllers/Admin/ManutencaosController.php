@@ -26,20 +26,23 @@ class ManutencaosController extends Controller
     {
         $this->middleware('auth');
         $this->model = $lancamentomultas;
+        $this->saveSetorScope = true;
         $this->path = 'admin.manutencao';
         $this->redirectPath = 'manutencao';
         $this->withFields = ['controle_frota', 'tipo_manutencao', 'fornecedor', 'tipo_correcao'];
         $this->selectModelFields = [
-            'ControleFrotum' => '\App\Models\ControleFrotum', 
-            'TipoManutencao' => '\App\Models\TipoManutencao', 
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'TipoManutencao' => '\App\Models\TipoManutencao',
             'Fornecedor' => '\App\Models\Fornecedor',
             'TipoCorrecao' => '\App\Models\TipoCorrecao',
+            'Setor' => '\App\Models\Setor',
         ];
         $this->joinSearch = [
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'tipo_manutencao_id' => ['nome', '\App\Models\TipoManutencao'],
             'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor'],
             'tipo_correcao_id' => ['nome', '\App\Models\TipoCorrecao'],
+            'setor_id' => ['nome', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/';
@@ -60,14 +63,16 @@ class ManutencaosController extends Controller
         $this->pdfTitles = ['Responsável', 'Data', 'Hora', 'Status'];
         $this->indexFields = [['responsavel_retirada'], ['data'], ['hora'], ['status']];
         $this->indexTitles = ['Responsável', 'Data', 'Hora', 'Status'];
+
+        $this->numbersWithDecimal = ['valor'];
     }
 
     public function create()
     {
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
-        $sequencial = $id + 1 . '/' .date('Y');  
-                    
+        $sequencial = $id + 1 . '/' .date('Y');
+
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial]);
     }
-    
+
 }

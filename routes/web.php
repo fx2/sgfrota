@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $a = 12;
-
-
     return redirect('login');
 });
 
@@ -26,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tasks', [App\Http\Controllers\TaskController::class, 'index'])->name('tasks');
 
 
+Route::resource('user', 'App\Http\Controllers\Admin\UserController');
 Route::resource('fornecedor', 'App\Http\Controllers\Admin\FornecedorController');
 Route::resource('tipo-combustivel', 'App\Http\Controllers\Admin\TipoCombustivelController');
 Route::resource('tipo-manutencao', 'App\Http\Controllers\Admin\TipoManutencaoController');
@@ -45,5 +43,11 @@ Route::resource('veiculo-entrada', 'App\Http\Controllers\Admin\VeiculoEntradaCon
 Route::resource('setor', 'App\Http\Controllers\Admin\SetorController');
 Route::resource('veiculo-agendamento', 'App\Http\Controllers\Admin\VeiculoAgendamentoController');
 Route::resource('tipo-responsavel', 'App\Http\Controllers\Admin\TipoResponsavelController');
+Route::resource('perfil', 'App\Http\Controllers\Configuracoes\PerfilController');
+Route::resource('permissoes', 'App\Http\Controllers\Configuracoes\PermissoesController');
+Route::resource('permissoes-usuario', 'App\Http\Controllers\Configuracoes\PermissoesUsuarioController');
 
 Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'generatePDF']);
+
+
+Route::resource('users', 'App\Http\Controllers\Configuracoes\UsersController');

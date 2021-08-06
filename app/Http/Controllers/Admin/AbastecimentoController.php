@@ -23,10 +23,16 @@ class AbastecimentoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $abastecimento;
+        $this->saveSetorScope = true;
         $this->path = 'admin.abastecimento';
         $this->redirectPath = 'abastecimento';
-        $this->withFields = ['controle_frota', 'tipo_combustivel', 'fornecedor'];
-        $this->selectModelFields = ['ControleFrotum' => '\App\Models\ControleFrotum', 'TipoCombustivel' => '\App\Models\TipoCombustivel', 'Fornecedor' => '\App\Models\Fornecedor'];
+        $this->withFields = ['controle_frota', 'tipo_combustivel', 'fornecedor', 'setor'];
+        $this->selectModelFields = [
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'TipoCombustivel' => '\App\Models\TipoCombustivel',
+            'Fornecedor' => '\App\Models\Fornecedor',
+            'Setor' => '\App\Models\Setor',
+        ];
         $this->joinSearch = ['controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'], 'tipo_combustivel_id' => ['nome', '\App\Models\TipoCombustivel'], 'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor']];
         $this->fileName = ['foto'];
         $this->uploadFilePath = 'images/abastecimento';
@@ -41,18 +47,20 @@ class AbastecimentoController extends Controller
             'responsavel' => 'required|string',
             'status' => 'required|boolean',
         ];
-        
+
         $this->pdfFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->pdfTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
         $this->indexFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->indexTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
+
+        $this->numbersWithDecimal = ['km_atual', 'qtd_litros', 'valor'];
     }
 
     public function create()
     {
         $id = $this->model::orderBy('id', 'desc')->first()['id'] ?? 0;
-        $sequencial = $id + 1 . '/' .date('Y');  
-                    
+        $sequencial = $id + 1 . '/' .date('Y');
+
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial]);
     }
 }

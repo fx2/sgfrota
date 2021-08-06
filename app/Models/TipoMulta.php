@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TipoMulta extends BaseModel
+class TipoMulta extends Model
 {
     use SoftDeletes;
 
@@ -30,5 +30,5 @@ class TipoMulta extends BaseModel
      */
     protected $fillable = ['tipo', 'descricao', 'pontuacao', 'infrator', 'codigo', 'status'];
 
-    
+
 }

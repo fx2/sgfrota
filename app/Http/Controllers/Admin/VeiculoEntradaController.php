@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ControleFrotum;
 use App\Models\VeiculoEntrada;
 use App\Models\VeiculoSaida;
+use App\Services\VeiculoEntradaService;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
 
@@ -18,21 +19,35 @@ class VeiculoEntradaController extends Controller
     private $redirectPath;
 
     /**
+     * @var VeiculoEntradaService $veiculoEntradaService
+     */
+    private $veiculoEntradaService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(VeiculoEntrada $veiculoentrada)
+    public function __construct(VeiculoEntrada $veiculoentrada, VeiculoEntradaService $veiculoEntradaService)
     {
         $this->middleware('auth');
+
+        $this->veiculoEntradaService = $veiculoEntradaService;
+
         $this->model = $veiculoentrada;
+        $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
         $this->withFields = ['controle_frota', 'motorista'];
-        $this->selectModelFields = ['ControleFrotum' => '\App\Models\ControleFrotum', 'Motoristum' => '\App\Models\Motoristum'];
+        $this->selectModelFields = [
+            'ControleFrotum' => '\App\Models\ControleFrotum',
+            'Motoristum' => '\App\Models\Motoristum',
+            'Setor' => '\App\Models\Setor'
+        ];
         $this->joinSearch = [
             'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
+            'setor_id' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = [];
         $this->uploadFilePath = 'images/veiculo-entrada';
@@ -60,19 +75,20 @@ class VeiculoEntradaController extends Controller
         $this->pdfTitles = ['Veículo', 'Responsável', 'Status'];
         $this->indexFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Responsável', 'Status'];
+
+        $this->numbersWithDecimal = ['km_final', 'quantidade_combustivel'];
     }
 
     public function create()
-    { 
-
-        $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('entrada');
+    {
+        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada();
 
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
-    } 
+    }
 
     public function edit($id)
     {
-        $controleFrotumDisponiveis = ControleFrotum::veiculosDisponiveisControleDiario('entrada');
+        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($id);
 
         $result = $this->model
           ->findOrFail($id);
@@ -82,12 +98,19 @@ class VeiculoEntradaController extends Controller
 
     public function store(Request $request)
     {
+        $userAuth = auth('api')->user();
+
         $this->validate($request, $this->validations);
-        
+
         $requestData = $request->all();
 
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
 
         $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();
+
         $saida->delete();
 
         $this->model->create($requestData);

@@ -6,9 +6,9 @@
         <select name="controle_frota_id" class="form-control" id="controle_frota_id" >
             <option value="">Selecione ...</option>
             @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->veiculo }}</option>
             @endforeach
         </select>
@@ -23,9 +23,9 @@
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}" 
+                <option value="{{ $optionValue->id }}"
                     {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }} 
+                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
                 >{{ $optionValue->nome }}</option>
             @endforeach
         </select>
@@ -46,7 +46,7 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="km_inicial" type="number" id="km_inicial" value="{{ isset($result->km_inicial) ? $result->km_inicial : old('km_inicial')}}" >
+        <input class="form-control decimal" name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? decimal($result->km_inicial) : old('km_inicial')}}" >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -55,7 +55,7 @@
         <label for="quantidade_combustivel" class="control-label">{{ 'Quantidade Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="quantidade_combustivel" type="number" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
+        <input class="form-control decimal" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? decimal($result->quantidade_combustivel) : old('quantidade_combustivel')}}" >
         {!! $errors->first('quantidade_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -231,6 +231,7 @@
     </div>
 </div>
 
+@include('parts/select-setor')
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>

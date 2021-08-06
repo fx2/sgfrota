@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TipoCombustivel extends BaseModel
+class TipoCombustivel extends Model
 {
     use SoftDeletes;
 
@@ -30,5 +30,5 @@ class TipoCombustivel extends BaseModel
      */
     protected $fillable = ['nome', 'descricao', 'status'];
 
-    
+
 }
