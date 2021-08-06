@@ -10,7 +10,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Bem vindo!') }}
                 </div>
 
 @endsection
