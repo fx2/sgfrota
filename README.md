@@ -139,6 +139,8 @@ php artisan crud:generate Country --fields='nome#string;nome_pt#string;sigla#str
 
 php artisan crud:generate State --fields='nome#string;uf#string;ibge#integer;country_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};ddd#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\Country" --foreign-keys="country_id#id#countries#cascade"
 
+php artisan crud:generate City --fields='nome#string;state_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};ibge#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\State" --foreign-keys="state_id#id#countries#cascade"
+
  `nome`, `nome_pt`, `sigla`, `bacen`
  `nome`, `uf`, `ibge`, `pais`, `ddd`)
 
