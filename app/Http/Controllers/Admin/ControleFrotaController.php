@@ -76,8 +76,9 @@ class ControleFrotaController extends Controller
         ];
         $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
         $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
-        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+
+        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
+        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
 
         $this->numbersWithDecimal = ['km_inicial'];
 

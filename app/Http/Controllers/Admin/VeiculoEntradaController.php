@@ -38,7 +38,7 @@ class VeiculoEntradaController extends Controller
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
-        $this->withFields = ['controle_frota', 'motorista'];
+        $this->withFields = ['controle_frota', 'motorista', 'setor'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
             'Motoristum' => '\App\Models\Motoristum',
@@ -71,8 +71,11 @@ class VeiculoEntradaController extends Controller
             'entrada_hora' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Responsável', 'Status'];
+        $this->pdfFields = [
+            ['entrada_data'], ['entrada_hora'], ['km_final'], ['motorista', 'nome'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['nome_responsavel'], ['relatorio_trajeto_motorista']
+        ];
+        $this->pdfTitles = ['Data','Horário', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto'];
+
         $this->indexFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Responsável', 'Status'];
 

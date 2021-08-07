@@ -32,7 +32,13 @@
                     elseif ($val[0] == 'hora') {
                         $valor = convertTimestamp($valor, 'H:i');
                     }
+                    elseif ($val[0] == 'entrada_hora') {
+                        $valor = convertTimestamp($valor, 'H:i');
+                    }
                     elseif ($val[0] == 'data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[0] == 'entrada_data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
                     elseif ($val[0] == 'data_nascimento') {
@@ -52,6 +58,12 @@
                     }
                     elseif ($val[0] == 'km_atual') {
                         $valor = decimalSimples($valor);
+                    }
+                    elseif ($val[0] == 'tipo_veiculo') {
+                        $valor = 'Próprio';
+
+                        if($val[0] == 1)
+                            $valor = 'Alugado';
                     }
 
                   }
