@@ -133,6 +133,15 @@ php artisan crud:generate PermissoesUsuario --fields='setor_id#select#options={"
 php artisan crud:generate Users --fields='name#string;email#string;phone#string;password#string;foto_perfil#string;perfil_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor;perfil#hasOne#App\Models\Perfil" --foreign-keys="perfil_id#id#setors#cascade;setor_id#id#setors#cascade"
 
 
+php artisan crud:generate Country --fields='nome#string;nome_pt#string;sigla#string;bacen#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes 
+
+
+
+php artisan crud:generate State --fields='nome#string;uf#string;ibge#integer;country_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};ddd#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\Country" --foreign-keys="country_id#id#countries#cascade"
+
+ `nome`, `nome_pt`, `sigla`, `bacen`
+ `nome`, `uf`, `ibge`, `pais`, `ddd`)
+
 FALTA OS JOINS e FOREIGH KEY
 
  category#select#options={"technology": "Technology", "tips": "Tips", "health": "Health"}

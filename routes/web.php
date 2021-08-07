@@ -51,3 +51,5 @@ Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'ge
 
 
 Route::resource('users', 'App\Http\Controllers\Configuracoes\UsersController');
+
+Route::resource('country', 'App\Http\Controllers\Admin\CountryController');
