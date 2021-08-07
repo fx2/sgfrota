@@ -51,8 +51,8 @@ class ValeCombustiveisLavagensController extends Controller
         $this->validations = [];
         $this->pdfFields = [['data'], ['hour'], ['nome_responsavel'], ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_vale'], ['quantidade_litros'], ['tipo_combustivel', 'nome'], ['observacao']];
         $this->pdfTitles = ['Data', 'Horário', 'Responsável', 'Veículo', 'Setor', 'Produto', 'Qtd Litros', 'Tipo de Combustível', 'Observação'];
-        $this->indexFields = [['id'], ['tipo_vale']];
-        $this->indexTitles = ['Id', 'Tipo de Vale'];
+        $this->indexFields = [['nome_responsavel'], ['controle_frota', 'placa'], ['tipo_vale']];
+        $this->indexTitles = ['nome_responsavel', 'Veículo', 'Tipo de Vale'];
     }
 
 }
