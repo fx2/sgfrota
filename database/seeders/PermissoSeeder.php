@@ -55,5 +55,9 @@ class PermissoSeeder extends Seeder
         for ($i = 0; $i < COUNT($crudr); $i++) {
             DB::table('permissoes')->insert(['titulo' => 'Admin Agendamento de Veículos', 'quem_pertence' => 'ADMINAGENDAMENTODEVEICULOS', 'chave_ordem' => 'ADMINAGENDAMENTODEVEICULOS', 'ordem_exibicao' => NULL, 'avo' => 'ADMINAGENDAMENTODEVEICULOS', 'permissao_direta' => 1, 'descricao' => $crudr[$i], 'pai' => NULL, 'status' => 1, 'created_at' => '2019-10-31 13:39:37', 'updated_at' => '2019-10-31 13:39:37', 'deleted_at' => NULL]);
         }
+
+        for ($i = 0; $i < COUNT($crudr); $i++) {
+            DB::table('permissoes')->insert(['titulo' => 'Vale Combustíveis e Lavagens', 'quem_pertence' => 'VALECOMBUSTIVEISLAVAGENS', 'chave_ordem' => 'VALECOMBUSTIVEISLAVAGENS', 'ordem_exibicao' => NULL, 'avo' => 'VALECOMBUSTIVEISLAVAGENS', 'permissao_direta' => 1, 'descricao' => $crudr[$i], 'pai' => NULL, 'status' => 1, 'created_at' => '2019-10-31 13:39:37', 'updated_at' => '2019-10-31 13:39:37', 'deleted_at' => NULL]);
+        }
     }
 }

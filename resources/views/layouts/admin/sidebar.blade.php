@@ -202,6 +202,17 @@
               </li>
           @endcan
 
+          @can('checksetor', VALECOMBUSTIVEISLAVAGENS_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('vale-combustiveis-lavagens') }}" class="nav-link {{ Str::contains(url()->current(), ['/vale-combustiveis-lavagens']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-gas-pump"></i>
+                  <p>
+                    Vale Combustíveis e Lavagens
+                  </p>
+                </a>
+              </li>
+          @endcan
+
           @can('checksetor', MOTORISTAS_VISUALIZAR)
               <li class="nav-item">
                 <a href="{{ url('motorista') }}" class="nav-link {{ Str::contains(url()->current(), ['/motorista']) ? 'active' : '' }}">

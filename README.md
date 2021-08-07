@@ -141,8 +141,9 @@ php artisan crud:generate State --fields='nome#string;uf#string;ibge#integer;cou
 
 php artisan crud:generate City --fields='nome#string;state_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};ibge#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\State" --foreign-keys="state_id#id#countries#cascade"
 
- `nome`, `nome_pt`, `sigla`, `bacen`
- `nome`, `uf`, `ibge`, `pais`, `ddd`)
+
+
+php artisan crud:generate ValeCombustiveisLavagens --fields='controle_frota_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};quantidade_litros#double;tipo_combustivel_id#select#options={"manha": "Manhã", "tarde": "Tarde", "integral": "Integral"};data#date;hour#time;nome_responsavel#string;observacao#text;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes --relationships="controle_frota_id#hasOne#App\Models\ControleFrotum; tipo_combustivel_id#hasOne#App\Models\Tipocombustivel" --foreign-keys="controle_frota_id#id#controle_frotas#cascade"
 
 FALTA OS JOINS e FOREIGH KEY
 
