@@ -62,6 +62,25 @@ if (! function_exists('decimal')) {
     }
 }
 
+
+if (! function_exists('decimalGambeta')) {
+    function decimalGambeta($numero) // resolve o problema causado na formatação com jquery com moeda
+    {
+        $numberWithoutfinalDot = rtrim($numero);
+        $numberFormatedTop = substr_replace($numberWithoutfinalDot, '.', -2, 0);
+        return number_format((float) $numberFormatedTop,2);
+    }
+}
+if (! function_exists('decimalSimples')) {
+    function decimalSimples($numero) // resolve o problema causado na formatação com jquery com decimais simples
+    {
+        $numeroDecimal = number_format($numero, 2);
+        $numberWithoutfinalDot = substr($numeroDecimal, 0, strlen($numeroDecimal) - 3);
+
+        return $numberWithoutfinalDot;
+    }
+}
+
     const FORNECEDOR_VISUALIZAR = 1;
     const FORNECEDOR_ADICIONAR = 2;
     const FORNECEDOR_EDITAR = 3;

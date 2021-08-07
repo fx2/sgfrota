@@ -33,7 +33,12 @@ class AbastecimentoController extends Controller
             'Fornecedor' => '\App\Models\Fornecedor',
             'Setor' => '\App\Models\Setor',
         ];
-        $this->joinSearch = ['controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'], 'tipo_combustivel_id' => ['nome', '\App\Models\TipoCombustivel'], 'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor']];
+        $this->joinSearch = [
+            'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
+            'tipo_combustivel_id' => ['nome', '\App\Models\TipoCombustivel'],
+            'fornecedor_id' => ['razao_social', '\App\Models\Fornecedor'],
+            'setor_id' => ['nome', '\App\Models\Setor']
+        ];
         $this->fileName = ['foto'];
         $this->uploadFilePath = 'images/abastecimento';
         $this->validations = [
@@ -48,8 +53,12 @@ class AbastecimentoController extends Controller
             'status' => 'required|boolean',
         ];
 
-        $this->pdfFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
-        $this->pdfTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
+        $this->pdfFields = [
+            ['data'], ['hora'], ['km_atual'], ['responsavel'], ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_combustivel', 'nome'],
+            ['fornecedor', 'razao_social'], ['qtd_litros'], ['valor']
+        ];
+        $this->pdfTitles = ['Data','Horário', 'KM', 'Responsável', 'Veículo', 'Setor', 'Combustível', 'Fornecedor', 'Qtd Litros', 'Valor R$'];
+
         $this->indexFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->indexTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
 

@@ -34,16 +34,20 @@ class MotoristaController extends Controller
             'TipoCnh' => '\App\Models\TipoCnh',
             'Setor' => '\App\Models\Setor'
         ];
-        $this->joinSearch = ['tipo_cnh_id' => ['tipoCnh' => '\App\Models\TipoCnh']];
+        $this->joinSearch = [
+            'tipo_cnh_id' => ['tipoCnh' => '\App\Models\TipoCnh'],
+            'setor_id' => ['setor' => '\App\Models\Setor']
+        ];
         $this->fileName = ['imagem', 'cnh_imagem', 'img_upload'];
         $this->uploadFilePath = 'images/motoristas';
 //        $this->checkboxExplode = ['tipo_motorista'];
 
         $this->indexFields = [['nome'], ['tipoCnh', 'nome'],['status']];
-        $this->indexTitles = ['Nome', 'CNH', 'Status'];
+        $this->indexTitles = ['Motorista', 'CNH', 'Status'];
 
-        $this->pdfFields = [['nome'], ['tipoCnh', 'nome'],['status']];
-        $this->pdfTitles = ['Nome', 'CNH', 'Status'];
+        $this->pdfFields = [['nome'], ['data_nascimento'], ['cpf'], ['cnh'], ['tipoCnh', 'nome'],  ['cnh_validade']];
+        $this->pdfTitles = ['Motorista', 'Data Nasc', 'CPF', 'CNH', 'Categoria', 'Venc. da Habilitação'];
+
         $this->validations = [
             // 'motorista_escolar' => 'required',
             'nome' => 'required',

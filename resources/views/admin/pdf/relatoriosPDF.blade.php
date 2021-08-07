@@ -1,6 +1,6 @@
 @extends('layouts.pdf.pdf-padrao')
 
-@section('content')  
+@section('content')
 <table class="table borda">
     <thead>
       <tr>
@@ -17,9 +17,9 @@
               <td class="borda" scope="row">{{ $item->$val == 1 ? 'Ativo' : 'Bloqueado'}}</td>
             @elseif ($val == 'data')
               <td class="borda" scope="row">{{ convertTimestamp($item->data, 'd/m/Y') }}</td>
-            @else 
-            
-              <td class="borda" scope="row">
+            @else
+
+              <td class="borda tdcenter-font13" width="100%" scope="row">
                 @php
                 // da pra melhorar esses if e fazer um loop, mas nao quero
                   if (!empty($val[0])){
@@ -29,16 +29,31 @@
                     if ($val[0] == 'status') {
                         $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                     }
+                    elseif ($val[0] == 'hora') {
+                        $valor = convertTimestamp($valor, 'H:i');
+                    }
                     elseif ($val[0] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[0] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
                     elseif ($val[0] == 'previsao_saida') {
-                        $valor = convertTimestamp($valor, 'd/m/Y H:m');
+                        $valor = convertTimestamp($valor, 'd/m/Y H:i');
                     }
                     elseif ($val[0] == 'previsao_volta') {
-                        $valor = convertTimestamp($valor, 'd/m/Y H:m');
+                        $valor = convertTimestamp($valor, 'd/m/Y H:i');
                     }
-                    
+                    elseif ($val[0] == 'cnh_validade') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[0] == 'valor') {
+                        $valor = decimalGambeta($valor);
+                    }
+                    elseif ($val[0] == 'km_atual') {
+                        $valor = decimalSimples($valor);
+                    }
+
                   }
 
                   if (!empty($val[1])){
@@ -51,6 +66,12 @@
                         $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                     }
                     elseif ($val[1] == 'data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[1] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[1] == 'cnh_validade') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
                   }
@@ -68,8 +89,14 @@
                     elseif ($val[2] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[2] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[2] == 'cnh_validade') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
                   }
-                  
+
                   if (!empty($val[3])){
                     $a = $val[0];
                     $b = $val[1];
@@ -84,8 +111,14 @@
                     elseif ($val[3] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[3] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[3] == 'cnh_validade') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
                   }
-                  
+
                   if (!empty($val[4])){
                     $a = $val[0];
                     $b = $val[1];
@@ -99,6 +132,36 @@
                         $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                     }
                     elseif ($val[4] == 'data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[4] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[4] == 'cnh_validade') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                  }
+
+                  if (!empty($val[5])){
+                    $a = $val[0];
+                    $b = $val[1];
+                    $c = $val[2];
+                    $d = $val[3];
+                    $e = $val[4];
+                    $f = $val[5];
+
+                    $valor = $item->$a->$b->$c->$d->$e->$f;
+
+                    if ($val[5] == 'status') {
+                        $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                    }
+                    elseif ($val[5] == 'data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[5] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[5] == 'cnh_validade') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
                   }

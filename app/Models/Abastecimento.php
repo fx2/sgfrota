@@ -28,7 +28,19 @@ class Abastecimento extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['setor_id', 'controle_frota_id', 'tipo_combustivel_id', 'fornecedor_id', 'km_atual', 'responsavel', 'foto', 'qtd_litros', 'valor', 'status'];
+    protected $fillable = [
+        'setor_id',
+        'controle_frota_id',
+        'tipo_combustivel_id',
+        'fornecedor_id',
+        'km_atual',
+        'responsavel',
+        'foto',
+        'qtd_litros',
+        'data',
+        'hora',
+        'valor',
+        'status'];
 
     public function controle_frota()
     {

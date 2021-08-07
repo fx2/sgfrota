@@ -55,11 +55,6 @@ class Motoristum extends BaseModel
         'img_upload'
     ];
 
-    public function fornecedor()
-    {
-        return $this->hasOne('App\Models\Fornecedor', 'id', 'fornecedor_id');
-    }
-
     public function tipoCnh()
     {
         return $this->hasOne('App\Models\TipoCnh', 'id', 'tipo_cnh_id');
