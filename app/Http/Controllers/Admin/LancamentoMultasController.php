@@ -29,18 +29,22 @@ class LancamentoMultasController extends Controller
         $this->saveSetorScope = true;
         $this->path = 'admin.lancamento-multas';
         $this->redirectPath = 'lancamento-multas';
-        $this->withFields = ['motorista', 'controle_frota', 'tipo_multa'];
+        $this->withFields = ['motorista', 'controle_frota', 'tipo_multa', 'cities', 'state'];
         $this->selectModelFields = [
             'Motoristum' => '\App\Models\Motoristum',
             'ControleFrotum' => '\App\Models\ControleFrotum',
             'TipoMulta' => '\App\Models\TipoMulta',
-            'Setor' => '\App\Models\Setor'
+            'Setor' => '\App\Models\Setor',
+            'State' => '\App\Models\State',
+            'City' => '\App\Models\City',
         ];
         $this->joinSearch = [
             'motorista_id' => ['nome', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'tipo_multa_id' => ['tipo', '\App\Models\TipoMulta'],
             'setor_id' => ['setor', '\App\Models\Setor'],
+            'state_id' => ['state', '\App\Models\State'],
+            'city_id' => ['cities', '\App\Models\City'],
         ];
         $this->fileName = ['foto_multa'];
         $this->uploadFilePath = 'images/lancamento-multas';
@@ -69,7 +73,7 @@ class LancamentoMultasController extends Controller
 
         $this->pdfFields = [['data_multa'], ['hora_multa'], ['motorista', 'nome'], ['controle_frota', 'placa'],
             ['setor', 'nome'],
-            ['pago'], // MUNICIPIO
+            ['cities', 'nome'], // MUNICIPIO
             ['tipo_multa', 'codigo'], ['pago'], ['valor_multa'], ['observacao']
         ];
         $this->pdfTitles = ['Data da Multa', 'Horário', 'Motorista', 'Veículo', 'Setor', 'Município', 'Tipo da Multa', 'Pago', 'Valor R$', 'Observação'];

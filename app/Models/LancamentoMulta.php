@@ -69,4 +69,14 @@ class LancamentoMulta extends BaseModel
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
     }
 
+    public function state()
+    {
+        return $this->hasOne('App\Models\State', 'id', 'estado_id');
+    }
+
+    public function cities()
+    {
+        return $this->hasOne('App\Models\City', 'id', 'municipio_id');
+    }
+
 }

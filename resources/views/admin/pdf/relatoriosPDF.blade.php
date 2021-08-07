@@ -69,16 +69,10 @@
                         $valor = decimalSimples($valor);
                     }
                     elseif ($val[0] == 'tipo_veiculo') {
-                        $valor = 'Próprio';
-
-                        if($val[0] == 1)
-                            $valor = 'Alugado';
+                        $valor = $valor == 1 ? 'Próprio' : 'Alugado';
                     }
                     elseif ($val[0] == 'pago') {
-                        $valor = 'Sim';
-
-                        if($val[0] == 1)
-                            $valor = 'Não';
+                        $valor = $valor == 1 ? 'Sim' : 'Não';
                     }
 
                   }
