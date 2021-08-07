@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration
             $table->string('nome_pt')->nullable();
             $table->string('sigla')->nullable();
             $table->integer('bacen')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(1);
         });
     }
 

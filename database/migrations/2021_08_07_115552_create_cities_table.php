@@ -19,7 +19,7 @@ class CreateCitiesTable extends Migration
             $table->string('nome')->nullable();
             $table->unsignedInteger('state_id');
             $table->integer('ibge')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(1);
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade');
             });
     }

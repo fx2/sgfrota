@@ -20,8 +20,8 @@ class CreateStatesTable extends Migration
             $table->string('uf')->nullable();
             $table->integer('ibge')->nullable();
             $table->unsignedInteger('country_id');
-            $table->integer('ddd')->nullable();
-            $table->boolean('status')->nullable();
+            $table->string('ddd')->nullable();
+            $table->boolean('status')->default(1);
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate('cascade');
             });
     }
