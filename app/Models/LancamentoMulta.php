@@ -46,6 +46,7 @@ class LancamentoMulta extends BaseModel
         'valor_multa',
         'pago',
         'foto_multa',
+        'observacao',
         'status'];
 
     public function motorista()

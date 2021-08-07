@@ -187,6 +187,17 @@
     </div>
 </div>
 
+
+<div class="form-group row mb-5 {{ $errors->has('observacao') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="observacao" class="control-label">{{ 'Observacao' }}</label>
+    </div>
+    <div class="col-10">
+        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao" >{{ isset($result->observacao) ? $result->observacao : old('observacao')}}</textarea>
+        {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="status" class="control-label">{{ 'Status' }}</label>

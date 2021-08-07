@@ -35,6 +35,9 @@
                     elseif ($val[0] == 'entrada_hora') {
                         $valor = convertTimestamp($valor, 'H:i');
                     }
+                    elseif ($val[0] == 'hora_multa') {
+                        $valor = convertTimestamp($valor, 'H:i');
+                    }
                     elseif ($val[0] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
@@ -42,6 +45,9 @@
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
                     elseif ($val[0] == 'data_nascimento') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[0] == 'data_multa') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
                     elseif ($val[0] == 'previsao_saida') {
@@ -56,6 +62,9 @@
                     elseif ($val[0] == 'valor') {
                         $valor = decimalGambeta($valor);
                     }
+                    elseif ($val[0] == 'valor_multa') {
+                        $valor = decimalGambeta($valor);
+                    }
                     elseif ($val[0] == 'km_atual') {
                         $valor = decimalSimples($valor);
                     }
@@ -64,6 +73,12 @@
 
                         if($val[0] == 1)
                             $valor = 'Alugado';
+                    }
+                    elseif ($val[0] == 'pago') {
+                        $valor = 'Sim';
+
+                        if($val[0] == 1)
+                            $valor = 'Não';
                     }
 
                   }

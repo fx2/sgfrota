@@ -1,5 +1,5 @@
 <?php
-  
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -7,7 +7,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use PDF;
-  
+
 class PDFController extends Controller
 {
     /**
@@ -18,13 +18,13 @@ class PDFController extends Controller
     public function generatePDF()
     {
         $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
+            'title' => 'Welcome to sgfrotas.com.br',
             'date' => date('m/d/Y')
         ];
 
         $pdf = PDF::loadView('admin/pdf/relatoriosPDF', $data);
-    
-        // return $pdf->download('itsolutionstuff.pdf');
-        return $pdf->stream('itsolutionstuff.pdf');
+
+        // return $pdf->download('sgfrotas.pdf');
+        return $pdf->stream('sgfrotas.pdf');
     }
 }

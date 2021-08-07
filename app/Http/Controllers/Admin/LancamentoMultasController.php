@@ -68,7 +68,9 @@ class LancamentoMultasController extends Controller
         $this->indexTitles = ['Motorista', 'Veículo', 'Tipo', 'Status'];
 
         $this->pdfFields = [['data_multa'], ['hora_multa'], ['motorista', 'nome'], ['controle_frota', 'placa'],
-            ['setor', 'nome'], [''], ['tipo_multa', 'tipo'], ['valor_multa'], []
+            ['setor', 'nome'],
+            ['pago'], // MUNICIPIO
+            ['tipo_multa', 'codigo'], ['pago'], ['valor_multa'], ['observacao']
         ];
         $this->pdfTitles = ['Data da Multa', 'Horário', 'Motorista', 'Veículo', 'Setor', 'Município', 'Tipo da Multa', 'Pago', 'Valor R$', 'Observação'];
 
