@@ -12,8 +12,25 @@ class ResourceRegistrar extends OriginalRegistrar
      *
      * @var array
      */
-    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customShow', 'customCreate', 'customStore', 'customEdit', 'customUpdate', 'customDestroy'];
+    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customListagem',  'customShow', 'customCreate', 'customStore', 'customEdit', 'customUpdate', 'customDestroy'];
 
+    /**
+     * Add the create method for a resourceful route.
+     *
+     * @param  string  $name
+     * @param  string  $base
+     * @param  string  $controller
+     * @param  array  $options
+     * @return \Illuminate\Routing\Route
+     */
+    protected function addResourceCustomListagem($name, $base, $controller, $options)
+    {
+        $uri = $this->getResourceUri($name). '/custom' . '/listagem';
+
+        $action = $this->getResourceAction($name, $controller, 'customListagem', $options);
+
+        return $this->router->get($uri, $action);
+    }
 
     /**
      * Add the create method for a resourceful route.

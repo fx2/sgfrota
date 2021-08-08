@@ -13,6 +13,18 @@ if (! function_exists('convertTimestamp')) {
     }
 }
 
+
+if (! function_exists('convertTimestampToBd')) {
+    function convertTimestampToBd($datetime, $format = "d-m-Y H:i:s")
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $data = str_replace("/", "-", $datetime);
+        return date($format, strtotime($data));
+
+    }
+}
+
 if (! function_exists('removePublicPath')) {
     function removePublicPath($url)
     {

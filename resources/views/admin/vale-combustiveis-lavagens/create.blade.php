@@ -4,10 +4,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('vale-combustiveis-lavagens') }}">Valecombustiveislavagens</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Cadastrar Valecombustiveislavagens</li>
+            <li class="breadcrumb-item"><a href="{{ url('vale-combustiveis-lavagens') }}">Vale Combustíveis e Lavagens</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadastrar Vale Combustíveis e Lavagens</li>
         </ol>
-    </nav> 
+    </nav>
 
     <div class="card">
         <div class="card-header">Cadastrar ValeCombustiveisLavagen</div>

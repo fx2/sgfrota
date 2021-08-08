@@ -4,6 +4,8 @@ namespace App\Traits;
 
 use App\Models\Marca;
 use App\Models\Modelo;
+use App\Models\Setor;
+use App\Models\TipoCombustivel;
 use App\Services\VerificaPerfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -95,7 +97,11 @@ trait CrudControllerTrait
 
         $result = $result->paginate($limit);
 
-        return view($this->path.'.index', ['results'=>$result, 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+        return view($this->path.'.index', [
+            'results'=>$result, 'fields' => $this->indexFields,
+            'titles' => $this->indexTitles,
+            'selectModelFields' => $this->selectModelFields()
+        ]);
     }
 
     public function verifyIfHasMasterOrAdminPermission($verificaPerfil, $request) // remover no futuro, fazer um middleware

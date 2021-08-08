@@ -17,20 +17,107 @@
                 </a>
             @endcan
 
-            <form method="GET" action="{{ url('/vale-combustiveis-lavagens') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('vale-combustiveis-lavagens/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+{{--                    <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">--}}
                     <span class="input-group-append">
-                        <button class="btn btn-success without-pdf" type="submit">
-                            <i class="fa fa-search"></i>
+{{--                        <button class="btn btn-success without-pdf" type="submit">--}}
+{{--                            <i class="fa fa-search"></i>--}}
+{{--                        </button>--}}
+                        <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
+                          Filtrar
                         </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Filtrar Listagem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+{{--                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="exampleFormControlInput1">Nome do responsável</label>--}}
+{{--                                            <input type="text" name="nome_responsavel" class="form-control">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                        @can('checksetor', VALECOMBUSTIVEISLAVAGENS_RELATORIO)
-                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                                <i class="fas fa-file-pdf"></i>
-                            </button>
-                        @endcan
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Veículo</label>
+                                            <select name="controle_frota_id" class="form-control" id="controle_frota_id" >
+                                                <option value="">Selecione ...</option>
+                                                @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
+                                                    <option value="{{ $optionValue->id }}"
+                                                        {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
+                                                        {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
+                                                    >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
+                                        @include('parts/select-setor-index')
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Data inícial</label>
+                                            <input type="text" name="data_inicial" class="form-control data">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label>Data Final</label>
+                                            <input type="text" name="data_final" class="form-control data">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_vale" id="Abastecimento" value="Abastecimento">
+                                                <label class="form-check-label" for="Abastecimento">
+                                                    Abastecimento
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_vale" id="Lavagem" value="Lavagem">
+                                                <label class="form-check-label" for="Lavagem">
+                                                    Lavagem
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_vale" id="todos" value="" checked>
+                                                <label class="form-check-label" for="todos">
+                                                    Todos
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-warning mr-4" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary without-pdf">Filtrar listagem</button>
+                                @can('checksetor', VALECOMBUSTIVEISLAVAGENS_RELATORIO)
+                                    <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                                    <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                        <i class="fas fa-file-pdf"></i> Filtrar PDF
+                                    </button>
+                                @endcan
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
                     </span>
                 </div>
             </form>
