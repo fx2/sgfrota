@@ -26,6 +26,7 @@ class TipoMultasController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipomultas;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-multas';
         $this->redirectPath = 'tipo-multas';
         $this->pdfFields = [['tipo'],['descricao'], ['pontuacao'],  ['status']];

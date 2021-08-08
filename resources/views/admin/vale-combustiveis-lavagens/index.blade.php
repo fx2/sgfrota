@@ -53,7 +53,6 @@
                                                 @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
                                                     <option value="{{ $optionValue->id }}"
                                                         {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                                                        {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                                                     >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}
                                                     </option>
                                                 @endforeach

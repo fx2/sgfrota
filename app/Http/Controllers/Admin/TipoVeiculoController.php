@@ -26,6 +26,7 @@ class TipoVeiculoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipoveiculo;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-veiculo';
         $this->redirectPath = 'tipo-veiculo';
         $this->pdfFields = [['nome'],['descricao'], ['status']];

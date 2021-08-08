@@ -32,6 +32,7 @@ class CountryController extends Controller
         $this->middleware('checksetor:', ['only' => ['relatorio']]);
 
         $this->model = $country;
+        $this->saveSetorScope = false;
         $this->path = 'admin.country';
         $this->redirectPath = 'country';
         $this->withFields = [];

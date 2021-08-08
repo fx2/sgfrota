@@ -26,6 +26,7 @@ class SetorController extends Controller
     {
         $this->middleware('auth');
         $this->model = $setor;
+        $this->saveSetorScope = false;
         $this->path = 'admin.setor';
         $this->redirectPath = 'setor';
         $this->withFields = [];

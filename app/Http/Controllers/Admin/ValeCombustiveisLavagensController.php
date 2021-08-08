@@ -53,7 +53,7 @@ class ValeCombustiveisLavagensController extends Controller
         $this->pdfFields = [['data'], ['hour'], ['nome_responsavel'], ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_vale'], ['quantidade_litros'], ['tipo_combustivel', 'nome'], ['observacao']];
         $this->pdfTitles = ['Data', 'Horário', 'Responsável', 'Veículo', 'Setor', 'Produto', 'Qtd Litros', 'Tipo de Combustível', 'Observação'];
         $this->indexFields = [['nome_responsavel'], ['controle_frota', 'placa'], ['tipo_vale']];
-        $this->indexTitles = ['nome_responsavel', 'Veículo', 'Tipo de Vale'];
+        $this->indexTitles = ['Responsável', 'Veículo', 'Tipo de Vale'];
     }
 
     public function customListagem(Request $request)
@@ -72,18 +72,18 @@ class ValeCombustiveisLavagensController extends Controller
         if($requestData['controle_frota_id'] !== null)
             $result = $result->orWhere('controle_frota_id', '=', $requestData['controle_frota_id']);
 
-        if (\Gate::allows('isMasterOrAdmin')){
-            if($requestData['setor_id'] !== null)
-                $result = $result->orWhere('setor_id', '=', $requestData['setor_id']);
-        } else {
-            $result = $result->orWhere('setor_id', '=', auth('api')->user()->setor_id);
-        }
-
         if($requestData['data_inicial'] !== null)
             $result = $result->whereDate('data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
 
         if($requestData['data_final'] !== null)
             $result = $result->whereDate('data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
 
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);

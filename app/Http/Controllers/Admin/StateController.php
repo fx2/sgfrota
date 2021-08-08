@@ -33,6 +33,7 @@ class StateController extends Controller
 
         $this->model = $state;
         $this->path = 'admin.state';
+        $this->saveSetorScope = false;
         $this->redirectPath = 'state';
         $this->withFields = [];
         $this->selectModelFields = [];

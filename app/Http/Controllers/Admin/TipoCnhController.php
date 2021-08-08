@@ -26,6 +26,7 @@ class TipoCnhController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipocnh;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-cnh';
         $this->redirectPath = 'tipo-cnh';
         $this->withFields = [];

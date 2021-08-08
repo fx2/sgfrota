@@ -26,6 +26,7 @@ class TipoCorrecaoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipocorrecao;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-correcao';
         $this->redirectPath = 'tipo-correcao';
         $this->withFields = [];

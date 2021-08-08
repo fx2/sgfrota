@@ -26,6 +26,7 @@ class TipoResponsavelController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tiporesponsavel;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-responsavel';
         $this->redirectPath = 'tipo-responsavel';
         $this->withFields = [];

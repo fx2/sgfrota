@@ -17,20 +17,97 @@
                 </a>
             @endcan
 
-            <form method="GET" action="{{ url('/controle-frota') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('controle-frota/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                     <span class="input-group-append">
-                        <button class="btn btn-success without-pdf" type="submit">
-                            <i class="fa fa-search"></i>
+                        <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
+                          Filtrar
                         </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Filtrar Listagem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label>Placa</label>
+                                            <input type="text" name="placa" class="form-control">
+                                        </div>
+                                    </div>
 
-                        @can('checksetor', CONTROLEDEFROTAS_RELATORIO)
-                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                                <i class="fas fa-file-pdf"></i>
-                            </button>
-                        @endcan
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label>Ano Modelo</label>
+                                            <input type="text" name="ano_modelo" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Responsável</label>
+                                            <select name="tipo_responsavel_id" class="form-control" id="tipo_responsavel_id" >
+                                                <option value="">Selecione ...</option>
+                                                @foreach ($selectModelFields['TipoResponsavel'] as $optionKey => $optionValue)
+                                                    <option value="{{ $optionValue->id }}"
+                                                        {{ (isset($result->tipo_responsavel_id) && $result->tipo_responsavel_id == $optionValue->id) ? 'selected' : ''}}
+                                                        {{ old('tipo_responsavel_id') == $optionValue->id ? "selected" : "" }}
+                                                    >{{ $optionValue->nome }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_veiculo" id="Proprio" value="1">
+                                                <label class="form-check-label" for="Proprio">
+                                                    Próprio
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_veiculo" id="Alugado" value="0">
+                                                <label class="form-check-label" for="Alugado">
+                                                    Alugado
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="tipo_veiculo" id="todos" value="" checked>
+                                                <label class="form-check-label" for="todos">
+                                                    Todos
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
+                                        @include('parts/select-setor-index')
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-warning mr-4" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary without-pdf">Filtrar listagem</button>
+                                @can('checksetor', CONTROLEDEFROTAS_RELATORIO)
+                                    <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                                    <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                        <i class="fas fa-file-pdf"></i> Filtrar PDF
+                                    </button>
+                                @endcan
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
                     </span>
                 </div>
             </form>

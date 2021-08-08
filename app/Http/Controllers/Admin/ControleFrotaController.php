@@ -84,4 +84,37 @@ class ControleFrotaController extends Controller
 
     }
 
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['tipo_veiculo'] !== null)
+            $result = $result->where('tipo_veiculo', '=', $requestData['tipo_veiculo']);
+
+        if($requestData['tipo_responsavel_id'] !== null)
+            $result = $result->where('tipo_responsavel_id', '=', $requestData['tipo_responsavel_id']);
+
+        if($requestData['placa'] !== null)
+            $result = $result->where('placa', 'LIKE', "%$requestData[placa]%");
+
+        if($requestData['ano_modelo'] !== null)
+            $result = $result->where('ano_modelo', '=', $requestData['ano_modelo']);
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
 }

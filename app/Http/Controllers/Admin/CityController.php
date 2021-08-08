@@ -32,6 +32,7 @@ class CityController extends Controller
         $this->middleware('checksetor:', ['only' => ['relatorio']]);
 
         $this->model = $city;
+        $this->saveSetorScope = false;
         $this->path = 'admin.city';
         $this->redirectPath = 'city';
         $this->withFields = [];

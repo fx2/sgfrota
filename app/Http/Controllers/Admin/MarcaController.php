@@ -26,6 +26,7 @@ class MarcaController extends Controller
     {
         $this->middleware('auth');
         $this->model = $marca;
+        $this->saveSetorScope = false;
         $this->path = 'admin.marca';
         $this->redirectPath = 'marca';
         $this->pdfFields = [['nome'],['descricao'], ['status']];

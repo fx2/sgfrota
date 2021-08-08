@@ -27,6 +27,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->model = $user;
+        $this->saveSetorScope = false;
         $this->path = 'admin.user';
         $this->redirectPath = 'user';
         $this->pdfFields = [['name'],['email']];
