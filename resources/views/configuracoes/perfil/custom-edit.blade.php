@@ -59,7 +59,7 @@
                                                     name="chaves_ordem[]"
                                                     id="optionsPermissao{{ $p->id }}"
                                                     value="{{ $p->id }}"
-                                                    @if ($p->checarPermissaoTelaPerfil($p->id, $perfil->id))
+                                                    @if ($p->checarPermissaoTelaPerfil($p->id, $perfil->id, $perfil->setor_id))
                                                         checked
                                                     @endif
                                                     class="{{ $p->descricao  }}"
