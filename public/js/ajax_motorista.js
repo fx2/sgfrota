@@ -27,6 +27,7 @@ async function loadMotorista(motorista_id = null){
                 <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
                 <li><strong>RG</strong>: ${resp.data.rg}</li>
                 <li><strong>CPF</strong>: ${resp.data.cpf}</li>
+                <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
             </ul>
         `
     );
