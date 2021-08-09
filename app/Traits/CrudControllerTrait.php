@@ -2,10 +2,12 @@
 
 namespace App\Traits;
 
+use App\Models\ActivityLog;
 use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Setor;
 use App\Models\TipoCombustivel;
+use App\Models\User;
 use App\Services\VerificaPerfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +15,35 @@ use PDF;
 
 trait CrudControllerTrait
 {
+    public static function LogModelo($id, $description, $subjectType, $new, $old = null, $userAuth, $setor_id)
+    {
+        $log = array (
+            'attributes' => $new,
+            'old' => $old ?? null,
+        );
+
+        $setor = '';
+        if ($setor_id)
+            $setor = Setor::find($setor_id)['nome'];
+
+
+        $cre = ActivityLog::create([
+            'log_name' => 'default',
+            'description' => $description,
+            'event' => $description,
+            'subject_id' => $id,
+            'causer_id' => $userAuth->id,
+            'subject_type' => $subjectType,
+            'causer_type' => 'user',
+            'properties' => json_encode($log),
+            'setor_id' => $setor_id,
+            'setor' => $setor,
+            'nome' => $userAuth->name,
+        ]);
+
+        return json_encode($cre);
+    }
+
     /**
      * Display a listing of the resource.
      * ?limit=20
@@ -193,7 +224,9 @@ trait CrudControllerTrait
             $requestData = $this->formatRemoveDecimal($requestData);
         }
 
-        $this->model->create($requestData);
+        $create = $this->model->create($requestData);
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
         return redirect($this->redirectPath)->withInput();
     }
 
@@ -277,6 +310,10 @@ trait CrudControllerTrait
         }
 
         $result->update($requestData);
+
+        $requestData['id'] = $result->id;
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
         return redirect($this->redirectPath)->withInput();
     }
 
@@ -347,8 +384,13 @@ trait CrudControllerTrait
      */
     public function destroy($id)
     {
+        $userAuth = auth('api')->user();
+
         $result = $this->model->findOrFail($id);
         $result->delete();
+
+        $this->LogModelo($result->id, 'deletou', $this->model->getTable(), $result,  null, $userAuth, $result->setor_id);
+
 
         return json_encode(true);
     }

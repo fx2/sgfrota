@@ -116,7 +116,10 @@ class VeiculoEntradaController extends Controller
 
         $saida->delete();
 
-        $this->model->create($requestData);
+        $create = $this->model->create($requestData);
+
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
 
         return redirect($this->redirectPath)->withInput();
     }

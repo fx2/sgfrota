@@ -151,7 +151,10 @@ class VeiculoAgendamentoController extends Controller
             return redirect()->back();
         }
 
-        $this->model->create($requestData);
+        $create = $this->model->create($requestData);
+
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
 
         return redirect()->back();
     }
