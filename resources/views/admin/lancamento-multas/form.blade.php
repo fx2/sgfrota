@@ -76,11 +76,19 @@
         <label for="estado_id" class="control-label">{{ 'Estado' }}</label>
     </div>
     <div class="col-10">
-        <select name="estado_id" class="form-control" id="estado_id" onchange="findMunicipio(this)">
+        <select name="estado_id" class="form-control" id="estado_id">
+            <option value="">Selecione ...</option>
+            @foreach ($selectModelFields['State'] as $optionKey => $optionValue)
+                <option value="{{ $optionValue->id }}"
+                    {{ (isset($result->estado_id) && $result->estado_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ old('estado_id') == $optionValue->id ? "selected" : "" }}
+                >{{ $optionValue->nome }} </option>
+            @endforeach
         </select>
         {!! $errors->first('estado_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
 
 <div class="form-group row mb-5 {{ $errors->has('municipio_id') ? 'has-error' : ''}}">
     <div class="col-2">
@@ -88,6 +96,13 @@
     </div>
     <div class="col-10">
         <select name="municipio_id" class="form-control" id="municipio_id">
+            <option value="">Selecione ...</option>
+            @foreach ($selectModelFields['City'] as $optionKey => $optionValue)
+                <option value="{{ $optionValue->id }}"
+                    {{ (isset($result->municipio_id) && $result->municipio_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ old('municipio_id') == $optionValue->id ? "selected" : "" }}
+                >{{ $optionValue->nome }}</option>
+            @endforeach
         </select>
         {!! $errors->first('municipio_id', '<p class="help-block">:message</p>') !!}
     </div>
@@ -187,6 +202,17 @@
     </div>
 </div>
 
+
+<div class="form-group row mb-5 {{ $errors->has('observacao') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="observacao" class="control-label">{{ 'Observacao' }}</label>
+    </div>
+    <div class="col-10">
+        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao" >{{ isset($result->observacao) ? $result->observacao : old('observacao')}}</textarea>
+        {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="status" class="control-label">{{ 'Status' }}</label>
@@ -211,74 +237,27 @@
     <script src="{{ asset('js/ajax_motorista.js') }}"></script>
     <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 <script>
-    var result = @json($result ?? ["estado_id" => null, "municipio_id" => null]);
-    var tipoMultaAppend = $('#load-tipomulta');
-
-    if (result.estado_id === null ){
-        loadStates();
-    } else {
-        loadState(result.estado_id);
-        loadMunicipio(result.municipio_id);
-    }
-
-    loadTipoMulta(result.tipo_multa_id);
-
-    async function loadTipoMulta(tipo_multa_id = null){
-        if (tipo_multa_id == null)
-            return true;
-
-        const resp = await axios.get(`${BASE_URL}/tipo-multas?where=id,=,${tipo_multa_id}&first=true`);
-        tipoMultaAppend.find('ul').remove();
-
-        tipoMultaAppend.append(
-            `
-                <ul class="ml-3 list-unstyled">
-                    <li><strong>Tipo</strong>: ${resp.data.tipo} </li>
-                    <li><strong>Código</strong>: ${resp.data.codigo} </li>
-                    <li><strong>Infrator</strong>: ${resp.data.infrator}</li>
-                    <li><strong>Pontuação</strong>: ${resp.data.pontuacao}</li>
-                </ul>
-            `
-        );
-    }
-
-    //https://servicodados.ibge.gov.br/api/docs/localidades
-    async function loadStates(){
-        var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`)
-        $('[name="estado_id"]').append('<option value="">Selecione...</option>');
-        resp.data.forEach(element => {
-            $('[name="estado_id"]').append('<option value="' + element.id + '">' + element.nome + '</option>');
-        });
-    }
-
-    async function findMunicipio(_this, apagaCampos = true){
-        stateId = _this.value !== undefined ? _this.value : result.estado_id;
-
-        if (apagaCampos)
-            $('[name="municipio_id"]').children().remove();
-
-        var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`)
-
-        $('[name="municipio_id"]').append('<option value="">Selecione...</option>');
-        resp.data.forEach((element, i) => {
-            $('[name="municipio_id"]').append('<option value="' + element.id + '">' + element.nome + '</option>');
-        });
-    }
-
-    async function loadState(stateId) {
-        var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}`);
-        $('[name="estado_id"]').append('<option value="' + resp.data.id + '">' + resp.data.nome + '</option>');
-
-        loadStates()
-    }
-
-    async function loadMunicipio(municipioId){
-        var resp = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${municipioId}`);
-
-        $('[name="municipio_id"]').append('<option value="' + resp.data.id + '">' + resp.data.nome + '</option>');
-
-        findMunicipio(result.estado_id, false)
-    }
-
+    // var tipoMultaAppend = $('#load-tipomulta');
+    //
+    // loadTipoMulta(result.tipo_multa_id);
+    //
+    // async function loadTipoMulta(tipo_multa_id = null){
+    //     if (tipo_multa_id == null)
+    //         return true;
+    //
+    //     const resp = await axios.get(`${BASE_URL}/tipo-multas?where=id,=,${tipo_multa_id}&first=true`);
+    //     tipoMultaAppend.find('ul').remove();
+    //
+    //     tipoMultaAppend.append(
+    //         `
+    //             <ul class="ml-3 list-unstyled">
+    //                 <li><strong>Tipo</strong>: ${resp.data.tipo} </li>
+    //                 <li><strong>Código</strong>: ${resp.data.codigo} </li>
+    //                 <li><strong>Infrator</strong>: ${resp.data.infrator}</li>
+    //                 <li><strong>Pontuação</strong>: ${resp.data.pontuacao}</li>
+    //             </ul>
+    //         `
+    //     );
+    // }
 </script>
 @endpush

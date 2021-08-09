@@ -9,6 +9,7 @@ use App\Models\VeiculoSaida;
 use App\Services\VeiculoSaidaService;
 use Illuminate\Http\Request;
 use App\Traits\CrudControllerTrait;
+use App\Services\VerificaPerfil;
 
 class VeiculoSaidaController extends Controller
 {
@@ -96,6 +97,123 @@ class VeiculoSaidaController extends Controller
           ->findOrFail($id);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
+    public function index(Request $request)
+    {
+        $verificaPerfil = new VerificaPerfil;
+
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+
+        if (!$this->verifyIfHasMasterOrAdminPermission($verificaPerfil, $request))
+            return redirect()->back();
+
+        if (isset($request->all()['select'])) {
+            $result = $this->select($request->all()['select'], $result);
+        }
+
+        if ($verificaPerfil->isMasterOrAdmin() && in_array("setor_id", $result->getModel()->getFillable())){
+            $result = $this->with('setor', $result);
+        }
+
+        if (isset($request->all()['order'])) {
+            $result = $this->order($request->all()['order'], $result);
+        }
+
+        if (isset($request->all()['join'])) {
+            $result = $this->join($request->all()['join'], $result);
+        }
+
+        if (isset($request->all()['leftJoin'])) {
+            $result = $this->leftJoin($request->all()['leftJoin'], $result);
+        }
+
+        if (isset($request->all()['rightJoin'])) {
+            $result = $this->rightJoin($request->all()['rightJoin'], $result);
+        }
+
+        if (isset($request->all()['like'])) {
+            $result = $this->like($request->all()['like'], $result);
+        }
+
+        if(isset($request->all()['with'])) {
+            $result = $this->with($request->all()['with'], $result);
+        }
+
+        if(isset($request->all()['groupBy'])) {
+            $result = $this->groupBy($request->all()['groupBy'], $result);
+        }
+
+        $result= $result->with($this->relationships());
+
+        if(isset($request->all()['where'])) {
+            $result = $this->where($request->all()['where'], $result);
+        }
+
+        if(isset($request->all()['orWhere'])) {
+            $result = $this->orWhere($request->all()['orWhere'], $result);
+        }
+
+        if(isset($request->all()['search'])) {
+            $result = $this->search($request->search, $result);
+        }
+
+        if(isset($request->all()['get'])) {
+            return $result->get();
+        }
+
+        if(isset($request->all()['first'])) {
+            return $result->first();
+        }
+
+        $result = $result->orderBy('deleted_at')->withTrashed();
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', [
+            'results'=>$result, 'fields' => $this->indexFields,
+            'titles' => $this->indexTitles,
+            'selectModelFields' => $this->selectModelFields()
+        ]);
+    }
+
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['controle_frota_id'] !== null)
+            $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
+
+        if($requestData['motorista_id'] !== null)
+            $result = $result->where('motorista_id', '=', $requestData['motorista_id']);
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('saida_data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('saida_data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
 }

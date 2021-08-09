@@ -38,7 +38,7 @@ class VeiculoEntradaController extends Controller
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
-        $this->withFields = ['controle_frota', 'motorista'];
+        $this->withFields = ['controle_frota', 'motorista', 'setor'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
             'Motoristum' => '\App\Models\Motoristum',
@@ -71,8 +71,11 @@ class VeiculoEntradaController extends Controller
             'entrada_hora' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Responsável', 'Status'];
+        $this->pdfFields = [
+            ['entrada_data'], ['entrada_hora'], ['km_final'], ['motorista', 'nome'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['nome_responsavel'], ['relatorio_trajeto_motorista']
+        ];
+        $this->pdfTitles = ['Data','Horário', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto'];
+
         $this->indexFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Responsável', 'Status'];
 
@@ -113,9 +116,46 @@ class VeiculoEntradaController extends Controller
 
         $saida->delete();
 
-        $this->model->create($requestData);
+        $create = $this->model->create($requestData);
+
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
 
         return redirect($this->redirectPath)->withInput();
+    }
+
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['controle_frota_id'] !== null)
+            $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
+
+        if($requestData['motorista_id'] !== null)
+            $result = $result->where('motorista_id', '=', $requestData['motorista_id']);
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('entrada_hora', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('entrada_hora', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
 }

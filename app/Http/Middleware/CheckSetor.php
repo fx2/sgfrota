@@ -29,7 +29,6 @@ class CheckSetor
      */
     public function handle(Request $request, Closure $next, $id)
     {
-        dd($id);
         $permissao = $this->checarPermissao($id);
 
         if (!$permissao)

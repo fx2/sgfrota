@@ -26,11 +26,12 @@ class TipoCombustivelController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipocombustivel;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-combustivel';
         $this->redirectPath = 'tipo-combustivel';
         $this->pdfFields = [['nome'],['descricao'], ['status']];
         $this->pdfTitles = ['Título','Descrição', 'Status'];
-        $this->indexFields = [['nome'],['descricao'], ['status']]; 
+        $this->indexFields = [['nome'],['descricao'], ['status']];
         $this->indexTitles = ['Título','Descrição', 'Status'];
     }
 

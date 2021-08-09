@@ -32,6 +32,7 @@ class FornecedorController extends Controller
         $this->middleware('checksetor:5', ['only' => ['relatorio']]);
 
         $this->model = $fornecedor;
+        $this->saveSetorScope = false;
         $this->path = 'admin.fornecedor';
         $this->redirectPath = 'fornecedor';
         $this->pdfFields = [['razao_social'], ['nome_fantasia'], ['cnpj'], ['status']];

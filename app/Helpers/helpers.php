@@ -13,6 +13,18 @@ if (! function_exists('convertTimestamp')) {
     }
 }
 
+
+if (! function_exists('convertTimestampToBd')) {
+    function convertTimestampToBd($datetime, $format = "d-m-Y H:i:s")
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $data = str_replace("/", "-", $datetime);
+        return date($format, strtotime($data));
+
+    }
+}
+
 if (! function_exists('removePublicPath')) {
     function removePublicPath($url)
     {
@@ -59,6 +71,25 @@ if (! function_exists('decimal')) {
     function decimal($numero)
     {
         return number_format((float) $numero,0);
+    }
+}
+
+
+if (! function_exists('decimalGambeta')) {
+    function decimalGambeta($numero) // resolve o problema causado na formatação com jquery com moeda
+    {
+        $numberWithoutfinalDot = rtrim($numero);
+        $numberFormatedTop = substr_replace($numberWithoutfinalDot, '.', -2, 0);
+        return number_format((float) $numberFormatedTop,2);
+    }
+}
+if (! function_exists('decimalSimples')) {
+    function decimalSimples($numero) // resolve o problema causado na formatação com jquery com decimais simples
+    {
+        $numeroDecimal = number_format($numero, 2);
+        $numberWithoutfinalDot = substr($numeroDecimal, 0, strlen($numeroDecimal) - 3);
+
+        return $numberWithoutfinalDot;
     }
 }
 
@@ -121,3 +152,9 @@ if (! function_exists('decimal')) {
     const ADMINAGENDAMENTODEVEICULOS_EDITAR = 48;
     const ADMINAGENDAMENTODEVEICULOS_DELETAR = 49;
     const ADMINAGENDAMENTODEVEICULOS_RELATORIO = 50;
+
+    const VALECOMBUSTIVEISLAVAGENS_VISUALIZAR = 51;
+    const VALECOMBUSTIVEISLAVAGENS_ADICIONAR = 52;
+    const VALECOMBUSTIVEISLAVAGENS_EDITAR = 53;
+    const VALECOMBUSTIVEISLAVAGENS_DELETAR = 54;
+    const VALECOMBUSTIVEISLAVAGENS_RELATORIO = 55;

@@ -9,11 +9,11 @@
                 margin: 0cm 0cm;
             }
 
-            /** Define now the real margins of every page in the PDF **/
+            /** Define now the real margins of every page in the PDF   SE A IMPRESSAO DER RUIM NAS LATERAIS, MUDAR DE 0.5 pra 2**/
             body {
                 margin-top: 3cm;
-                margin-left: 2cm;
-                margin-right: 2cm;
+                margin-left: 0.5cm;
+                margin-right: 0.5cm;
                 margin-bottom: 2cm;
             }
 
@@ -58,8 +58,12 @@
                 width: 100%;
             }
 
+            .tdcenter-font13{
+                text-align: center;
+                font-size: 12px;
+            }
             .page:after {
-            content: counter(page, decimal);
+                content: counter(page, decimal);
             }
         </style>
     </head>
@@ -72,7 +76,7 @@
                 </thead>
                 <tbody>
                     <tr style="text-align: center;">
-                        <td><img src="{{ public_path('images/headerprintPDF.png') }}" width="40%" height="100%"/></td>
+                        <td><img src="{{ public_path('images/headerprintPDF.png') }}" width="40%" height="90%"/></td>
                     </tr>
                 </tbody>
             </table>
@@ -82,7 +86,7 @@
             <table width="100%">
                 <th>
                     <p class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000</p>
-                    <p class="page">Page </p>
+                    <p class="page">Pagina </p>
                 </th>
             </table>
         </footer>

@@ -28,7 +28,26 @@ class LancamentoMulta extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['setor_id', 'motorista_id', 'modelo_id', 'tipo_multa_id', 'controle_frota_id', 'ocorrencias', 'numero_ait', 'estado_id', 'municipio_id', 'endereco_multa', 'data_multa', 'hora_multa', 'orgao_correspondente', 'enquadramento', 'data_vencimento', 'valor_multa', 'pago', 'foto_multa', 'status'];
+    protected $fillable = ['setor_id',
+        'motorista_id',
+        'modelo_id',
+        'tipo_multa_id',
+        'controle_frota_id',
+        'ocorrencias',
+        'numero_ait',
+        'estado_id',
+        'municipio_id',
+        'endereco_multa',
+        'data_multa',
+        'hora_multa',
+        'orgao_correspondente',
+        'enquadramento',
+        'data_vencimento',
+        'valor_multa',
+        'pago',
+        'foto_multa',
+        'observacao',
+        'status'];
 
     public function motorista()
     {
@@ -48,6 +67,16 @@ class LancamentoMulta extends BaseModel
     public function setor()
     {
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
+    public function state()
+    {
+        return $this->hasOne('App\Models\State', 'id', 'estado_id');
+    }
+
+    public function cities()
+    {
+        return $this->hasOne('App\Models\City', 'id', 'municipio_id');
     }
 
 }

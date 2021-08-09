@@ -59,10 +59,12 @@ class ManutencaosController extends Controller
             'tipo_correcao_id' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [['responsavel_retirada'], ['data'], ['hora'], ['status']];
-        $this->pdfTitles = ['Responsável', 'Data', 'Hora', 'Status'];
+
         $this->indexFields = [['responsavel_retirada'], ['data'], ['hora'], ['status']];
         $this->indexTitles = ['Responsável', 'Data', 'Hora', 'Status'];
+
+        $this->pdfFields = [['data'], ['responsavel_retirada'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_manutencao', 'nome'], ['descricao_manutencao'], ['fornecedor', 'razao_social'], ['valor']];
+        $this->pdfTitles = ['Data', 'Responsável', 'Veículo', 'Setor', 'Tipo', 'Descrição', 'Fornecedor', 'Valor R$'];
 
         $this->numbersWithDecimal = ['valor'];
     }

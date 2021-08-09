@@ -51,3 +51,8 @@ Route::get('generate-pdf', [App\Http\Controllers\Admin\PDFController::class, 'ge
 
 
 Route::resource('users', 'App\Http\Controllers\Configuracoes\UsersController');
+
+Route::resource('country', 'App\Http\Controllers\Admin\CountryController');
+Route::resource('state', 'App\Http\Controllers\Admin\StateController');
+Route::resource('city', 'App\Http\Controllers\Admin\CityController');
+Route::resource('vale-combustiveis-lavagens', 'App\Http\Controllers\Admin\ValeCombustiveisLavagensController');

@@ -15,6 +15,7 @@ $(document).ready(function() {
     //     }
     // });
 
+    $('.data').mask('99/99/9999');
     $('.ano').mask('9999');
     $('.celular').mask('(99) 9999-99999');
     $('.cep').mask('99999-999');

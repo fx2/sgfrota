@@ -51,6 +51,9 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
+                            @if($item->email == 'master@master.com.br')
+                                <?php continue; ?>
+                            @endif
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 @can('isMasterOrAdmin')

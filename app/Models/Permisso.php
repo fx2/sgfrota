@@ -41,10 +41,10 @@ class Permisso extends Model
     /*
      * Se dada permissao existe dentro do rol de permissao, retorna-se true
      * */
-    public function checarPermissaoTelaPerfil(int $idPermissao, $perfil_id){
-        $user = auth('api')->user();
+    public function checarPermissaoTelaPerfil(int $idPermissao, $perfil_id, $setor_id){
+//        $user = auth('api')->user();
 
-        return PermissoesUsuario::where('setor_id', $user->setor_id)
+        return PermissoesUsuario::where('setor_id', $setor_id)
             ->where('perfil_id', $perfil_id)
             ->where('idpermissao', $idPermissao)
             ->exists();

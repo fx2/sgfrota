@@ -26,11 +26,12 @@ class TipoManutencaoController extends Controller
     {
         $this->middleware('auth');
         $this->model = $tipomanutencao;
+        $this->saveSetorScope = false;
         $this->path = 'admin.tipo-manutencao';
         $this->redirectPath = 'tipo-manutencao';
-        $this->pdfFields = [['nome'],['descricao'], ['status']]; 
+        $this->pdfFields = [['nome'],['descricao'], ['status']];
         $this->pdfTitles = ['Título','Descrição', 'Status'];
-        $this->indexFields = [['nome'],['descricao'], ['status']]; 
+        $this->indexFields = [['nome'],['descricao'], ['status']];
         $this->indexTitles = ['Título','Descrição', 'Status'];
     }
 

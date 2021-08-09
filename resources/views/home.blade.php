@@ -1,7 +1,7 @@
 @extends('layouts.admin.index')
 
 @section('content')
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Home') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -10,7 +10,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Bem vindo!') }}
                 </div>
 
 @endsection

@@ -26,6 +26,7 @@ class ModeloController extends Controller
     {
         $this->middleware('auth');
         $this->model = $modelo;
+        $this->saveSetorScope = false;
         $this->path = 'admin.modelo';
         $this->redirectPath = 'modelo';
         $this->withFields = ['marca', 'tipo_veiculo'];

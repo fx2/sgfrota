@@ -76,11 +76,45 @@ class ControleFrotaController extends Controller
         ];
         $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
         $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
-        $this->pdfFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->pdfTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+
+        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
+        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
 
         $this->numbersWithDecimal = ['km_inicial'];
 
     }
 
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['tipo_veiculo'] !== null)
+            $result = $result->where('tipo_veiculo', '=', $requestData['tipo_veiculo']);
+
+        if($requestData['tipo_responsavel_id'] !== null)
+            $result = $result->where('tipo_responsavel_id', '=', $requestData['tipo_responsavel_id']);
+
+        if($requestData['placa'] !== null)
+            $result = $result->where('placa', 'LIKE', "%$requestData[placa]%");
+
+        if($requestData['ano_modelo'] !== null)
+            $result = $result->where('ano_modelo', '=', $requestData['ano_modelo']);
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
 }

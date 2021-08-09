@@ -17,20 +17,68 @@
                 </a>
             @endcan
 
-            <form method="GET" action="{{ url('/motorista') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('/motorista/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Buscar..." value="{{ request('search') }}">
                     <span class="input-group-append">
-                        <button class="btn btn-success without-pdf" type="submit">
-                            <i class="fa fa-search"></i>
+                        <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
+                          Filtrar
                         </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Filtrar Listagem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
 
-                        @can('checksetor', MOTORISTAS_RELATORIO)
-                            <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                            <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                                <i class="fas fa-file-pdf"></i>
-                            </button>
-                        @endcan
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Motorista</label>
+                                            <input type="text" name="nome" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">CPF</label>
+                                            <input type="text" name="cpf" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Data inícial</label>
+                                            <input type="text" name="data_inicial" class="form-control data">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <div class="form-group">
+                                            <label>Data Final</label>
+                                            <input type="text" name="data_final" class="form-control data">
+                                        </div>
+                                    </div>
+
+                                    @include('parts/select-setor-index')
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-warning mr-4" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary without-pdf">Filtrar listagem</button>
+                                @can('checksetor', MOTORISTAS_RELATORIO)
+                                    <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
+                                    <button class="ml-3 btn btn-secondary export-pdf" type="submit">
+                                        <i class="fas fa-file-pdf"></i> Filtrar PDF
+                                    </button>
+                                @endcan
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     </span>
                 </div>
             </form>

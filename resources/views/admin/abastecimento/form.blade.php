@@ -108,6 +108,26 @@
     </div>
 </div>
 
+
+<div class="form-group row mb-5 {{ $errors->has('data') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="data" class="control-label">{{ 'Data' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="data" type="date" id="data" value="{{ isset($result->data) ? $result->data : ''}}" >
+        {!! $errors->first('data', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group row mb-5 {{ $errors->has('hora') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="hora" class="control-label">{{ 'Hora' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="hora" type="time" id="hora" value="{{ isset($result->hora) ? $result->hora : old('hora')}}" >
+        {!! $errors->first('hora', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 <div class="form-group row mb-5 {{ $errors->has('valor') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="valor" class="control-label">{{ 'Valor R$' }}</label>
