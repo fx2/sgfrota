@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class City extends BaseModel
+class City extends Model
 {
     use SoftDeletes;
 
@@ -34,5 +34,5 @@ class City extends BaseModel
     {
         return $this->hasOne('App\Models\State');
     }
-    
+
 }

@@ -44,7 +44,7 @@
                 <option value="{{ $optionValue->id }}"
                     {{ (isset($result->tipo_multa_id) && $result->tipo_multa_id == $optionValue->id) ? 'selected' : ''}}
                     {{ old('tipo_multa_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->tipo }}</option>
+                >{{ $optionValue->tipo }} - {{ $optionValue->codigo }}</option>
             @endforeach
         </select>
         {!! $errors->first('tipo_multa_id', '<p class="help-block">:message</p>') !!}
