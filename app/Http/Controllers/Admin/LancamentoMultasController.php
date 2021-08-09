@@ -81,4 +81,38 @@ class LancamentoMultasController extends Controller
         $this->numbersWithDecimal = ['valor_multa'];
     }
 
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['motorista_id'] !== null)
+            $result = $result->where('motorista_id', '=', $requestData['motorista_id']);
+
+        if($requestData['controle_frota_id'] !== null)
+            $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
+
 }

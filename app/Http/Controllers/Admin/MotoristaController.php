@@ -67,4 +67,38 @@ class MotoristaController extends Controller
             'status' => 'required|boolean',
         ];
     }
+
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['nome'] !== null)
+            $result = $result->where('nome', 'LIKE', "%$requestData[nome]%");
+
+        if($requestData['cpf'] !== null)
+            $result = $result->where('cpf', 'LIKE', "%$requestData[cpf]%");
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('cnh_validade', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('cnh_validade', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
 }
