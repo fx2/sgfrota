@@ -89,6 +89,7 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
+
                             @if($item->deleted_at )
                                 <tr style="background-color: lightsalmon">
                             @else
