@@ -91,10 +91,10 @@ class VeiculoSaidaController extends Controller
 
     public function edit($id)
     {
-        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($id);
-
         $result = $this->model
-          ->findOrFail($id);
+          ->where('id', '=', $id)->withTrashed()->first();
+
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
@@ -173,6 +173,8 @@ class VeiculoSaidaController extends Controller
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);
 
+        $result = $result->where('status', '!=', 0);
+
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', [
@@ -214,6 +216,29 @@ class VeiculoSaidaController extends Controller
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+    }
+
+    public function show($id)
+    {
+         $result = $this->model
+          ->where('id', '=', $id)->withTrashed()->first();
+
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
+
+        return view($this->path.'.show', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
+    public function destroy($id)
+    {
+        $userAuth = auth('api')->user();
+
+        $result = $this->model->where('id', '=', $id)->withTrashed()->first();
+        $result->status = 0;
+        $result->save();
+
+        $this->LogModelo($result->id, 'deletou', $this->model->getTable(), $result,  null, $userAuth, $result->setor_id);
+
+        return json_encode(true);
     }
 
 }
