@@ -234,6 +234,7 @@ class VeiculoSaidaController extends Controller
 
         $result = $this->model->where('id', '=', $id)->withTrashed()->first();
         $result->status = 0;
+        $result->deleted_at = date("Y-m-d H:i:s");
         $result->save();
 
         $this->LogModelo($result->id, 'deletou', $this->model->getTable(), $result,  null, $userAuth, $result->setor_id);

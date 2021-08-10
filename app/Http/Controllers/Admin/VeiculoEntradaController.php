@@ -113,13 +113,15 @@ class VeiculoEntradaController extends Controller
         }
 
         $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();
-
-        $saida->delete();
+//        $saida->status = 0;
+        $saida->deleted_at = date("Y-m-d H:i:s");
+        $saida->save();
 
         $create = $this->model->create($requestData);
 
         $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
 
+        $this->LogModelo($saida->id, 'deletou', $this->model->getTable(), $saida,  null, $userAuth, $saida->setor_id);
 
         return redirect($this->redirectPath)->withInput();
     }
