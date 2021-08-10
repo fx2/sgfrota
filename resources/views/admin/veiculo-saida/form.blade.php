@@ -55,7 +55,7 @@
         <label for="quantidade_combustivel" class="control-label">{{ 'Quantidade Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? decimal($result->quantidade_combustivel) : old('quantidade_combustivel')}}" >
+        <input class="form-control" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
         {!! $errors->first('quantidade_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

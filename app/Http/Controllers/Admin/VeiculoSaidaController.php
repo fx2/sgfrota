@@ -77,7 +77,7 @@ class VeiculoSaidaController extends Controller
         $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['saida_data'], ['saida_hora'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Motorista', 'Veículo', 'Saida Data', 'Saida Hora', 'Responsável', 'Status'];
 
-        $this->numbersWithDecimal = ['km_inicial', 'quantidade_combustivel'];
+        $this->numbersWithDecimal = ['km_inicial'];
     }
 
     public function create()

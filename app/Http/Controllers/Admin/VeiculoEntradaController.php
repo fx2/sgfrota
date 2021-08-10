@@ -79,7 +79,7 @@ class VeiculoEntradaController extends Controller
         $this->indexFields = [['controle_frota', 'veiculo'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
 
-        $this->numbersWithDecimal = ['km_final', 'quantidade_combustivel'];
+        $this->numbersWithDecimal = ['km_final'];
     }
 
     public function show($id)
