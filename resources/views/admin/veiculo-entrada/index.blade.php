@@ -178,14 +178,14 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-entrada/' . $item->id) }}" title="Visualizar VeiculoEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    @can('checksetor', CONTROLEDIARIODEENTRADA_EDITAR)
-                                        <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                                    @endcan
+                                     <a href="{{ url('/veiculo-entrada/' . $item->id) }}" title="Visualizar VeiculoEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+{{--                                    @can('checksetor', CONTROLEDIARIODEENTRADA_EDITAR)--}}
+{{--                                        <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>--}}
+{{--                                    @endcan--}}
 
-                                    @can('checksetor', CONTROLEDIARIODEENTRADA_DELETAR)
-                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    @endcan
+{{--                                    @can('checksetor', CONTROLEDIARIODEENTRADA_DELETAR)--}}
+{{--                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>--}}
+{{--                                    @endcan--}}
                                 </td>
                             </tr>
                         @empty

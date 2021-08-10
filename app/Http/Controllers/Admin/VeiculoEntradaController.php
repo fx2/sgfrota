@@ -82,6 +82,17 @@ class VeiculoEntradaController extends Controller
         $this->numbersWithDecimal = ['km_final', 'quantidade_combustivel'];
     }
 
+    public function show($id)
+    {
+        $result = $this->model
+          ->findOrFail($id);
+
+        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($result->controle_frota_id);
+
+
+        return view($this->path.'.show', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
     public function create()
     {
         $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada();
