@@ -27,7 +27,7 @@ class VeiculoEntradaService
         $result = $this->veiculoSaida::select('controle_frotas.id', 'controle_frotas.veiculo')
             ->join('controle_frotas', 'controle_frotas.id', '=', 'veiculo_saidas.controle_frota_id')
             ->whereIn('controle_frotas.id',function($query){
-                $query->select('veiculo_saidas.controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at');
+                $query->select('veiculo_saidas.controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at')->orWhere('veiculo_saidas.status', '=', 1);
             });
 
         if ($id) {
