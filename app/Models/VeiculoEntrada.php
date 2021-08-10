@@ -51,8 +51,14 @@ class VeiculoEntrada extends BaseModel
         'chave_roda' ,
         'observacao_acessorio' ,
         'entrada_data' ,
-        'entrada_hora'
+        'entrada_hora',
+        'veiculo_saida_id'
     ];
+
+    public function veiculo_saida()
+    {
+        return $this->hasOne('App\Models\ControleFrotum', 'id', 'veiculo_saida_id');
+    }
 
     public function controle_frota()
     {

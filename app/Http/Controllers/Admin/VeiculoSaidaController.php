@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\ControleFrotum;
+use App\Models\Motoristum;
 use App\Models\VeiculoSaida;
 use App\Services\VeiculoSaidaService;
 use Illuminate\Http\Request;
@@ -226,6 +227,15 @@ class VeiculoSaidaController extends Controller
         $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
 
         return view($this->path.'.show', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
+    public function customShow($id)
+    {
+         $resp = VeiculoSaida::where('controle_frota_id', '=', $id)->first();
+
+         $moto = Motoristum::where('id', '=', $resp->motorista_id)->first();
+
+        return $moto;
     }
 
     public function destroy($id)

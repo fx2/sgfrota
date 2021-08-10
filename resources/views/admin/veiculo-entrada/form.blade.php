@@ -27,12 +27,12 @@
     <div class="col-10">
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
-            @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}"
-                    {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->nome }}</option>
-            @endforeach
+{{--            @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)--}}
+{{--                <option value="{{ $optionValue->id }}"--}}
+{{--                    {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}--}}
+{{--                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}--}}
+{{--                >{{ $optionValue->nome }}</option>--}}
+{{--            @endforeach--}}
         </select>
         {!! $errors->first('motorista_id', '<p class="help-block">:message</p>') !!}
     </div>
@@ -266,5 +266,41 @@
 
 @push('js')
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
-<script src="{{ asset('js/ajax_motorista.js') }}"></script>
+
+<script>
+    $('#controle_frota_id').change(function (e) {
+        loadMotorista(e.target.value)
+    });
+
+    var motoristaAppend = $('#motorista_id');
+
+
+    async function loadMotorista(motorista_id = null){
+        if (motorista_id == null)
+            return true;
+
+        $('#motorista-remove-append').remove();
+
+    const resp = await axios.get(`${BASE_URL}/veiculo-saida?with=motorista&where=controle_frota_id,=,${motorista_id}&first=true`);
+
+        motoristaAppend.html(
+            `
+                <option value="${resp.data.motorista.id}">${resp.data.motorista.nome}</option>
+            `
+        );
+
+        motoristaAppend.after(
+            `
+                <ul class="ml-3 list-unstyled" id="motorista-remove-append">
+                    <li><strong>CNH</strong>: ${resp.data.motorista.cnh}</li>
+                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.motorista.cnh_validade).format('DD/MM/YYYY')}</li>
+                    <li><strong>RG</strong>: ${resp.data.motorista.rg}</li>
+                    <li><strong>CPF</strong>: ${resp.data.motorista.cpf}</li>
+                </ul>
+            `
+        );
+
+        $('#nome_responsavel').val(resp.data.nome_responsavel);
+    }
+</script>
 @endpush
