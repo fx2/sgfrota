@@ -100,6 +100,8 @@
                                     @endcan
                                     <td>{{$item->motorista->nome}}</td>
                                     <td>{{$item->controle_frota->veiculo}}</td>
+                                    <td>{{ convertTimestamp($item->saida_data, 'd/m/Y') }}</td>
+                                    <td>{{ convertTimestamp($item->saida_hora, 'H:i') }}</td>
                                     <td>{{$item->nome_responsavel}}</td>
                                     <td>{{$item->status == 1 ? 'Ativo' : 'Bloqueado'}}</td>
                                 <td>

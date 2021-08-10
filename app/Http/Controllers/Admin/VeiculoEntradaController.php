@@ -76,8 +76,8 @@ class VeiculoEntradaController extends Controller
         ];
         $this->pdfTitles = ['Data','Horário', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto'];
 
-        $this->indexFields = [['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
-        $this->indexTitles = ['Veículo', 'Responsável', 'Status'];
+        $this->indexFields = [['controle_frota', 'veiculo'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
+        $this->indexTitles = ['Veículo', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
 
         $this->numbersWithDecimal = ['km_final', 'quantidade_combustivel'];
     }

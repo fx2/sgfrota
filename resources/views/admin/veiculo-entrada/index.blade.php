@@ -109,6 +109,13 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
 
+                                                elseif ($val[0] == 'entrada_data') {
+                                                    $valor = convertTimestamp($valor, 'd/m/Y');
+                                                }
+                                                elseif ($val[0] == 'entrada_hora') {
+                                                    $valor = convertTimestamp($valor, 'H:i');
+                                                }
+
                                             }
 
                                             if (!empty($val[1])){
@@ -123,6 +130,7 @@
                                                 elseif ($val[1] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
+
                                             }
 
                                             if (!empty($val[2])){
