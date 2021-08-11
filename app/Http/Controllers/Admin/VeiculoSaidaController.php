@@ -98,7 +98,7 @@ class VeiculoSaidaController extends Controller
     public function edit($id)
     {
         $result = $this->model
-          ->where('id', '=', $id)->withTrashed()->first();
+          ->where('id', '=', $id)->first();
 
         $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
 

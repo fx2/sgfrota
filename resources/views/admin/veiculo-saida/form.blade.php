@@ -231,6 +231,17 @@
     </div>
 </div>
 
+<div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="status" class="control-label">{{ 'Registro' }}</label>
+    </div>
+    <div class="col-10">
+        <div class="radio">
+            {{App\Models\User::find($result['auth_id'])['name'] ?? '' }}
+        </div>
+    </div>
+</div>
+
 @include('parts/select-setor')
 
 <div class="form-group">
