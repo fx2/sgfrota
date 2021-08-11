@@ -100,10 +100,14 @@
                                     @endcan
                                     <td>{{$item->motorista->nome}}</td>
                                     <td>{{$item->controle_frota->veiculo}}</td>
+                                    <td>{{$item->controle_frota->placa}}</td>
                                     <td>{{ convertTimestamp($item->saida_data, 'd/m/Y') }}</td>
                                     <td>{{ convertTimestamp($item->saida_hora, 'H:i') }}</td>
                                     <td>{{$item->nome_responsavel}}</td>
                                 <td>
+                                     @can('checksetor', CONTROLEDIARIODESAIDA_RELATORIO)
+                                        <a href="{{ url('/veiculo-saida/custom/show/pdf/' . $item->id) }}" title="Visualizar PDF Controle diário de saída"><button class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf" aria-hidden="true"></i></button></a>
+                                     @endcan
                                     @if(!$item->deleted_at)
                                         @can('checksetor', CONTROLEDIARIODESAIDA_EDITAR)
                                             <a href="{{ url('/veiculo-saida/' . $item->id . '/edit') }}" title="Editar Controle diário de saída"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>

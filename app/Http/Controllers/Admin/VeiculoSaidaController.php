@@ -11,6 +11,7 @@ use App\Services\VeiculoSaidaService;
 use Illuminate\Http\Request;
 use App\Traits\CrudControllerTrait;
 use App\Services\VerificaPerfil;
+use PDF;
 
 class VeiculoSaidaController extends Controller
 {
@@ -74,8 +75,12 @@ class VeiculoSaidaController extends Controller
         ];
         $this->pdfFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['nome_responsavel']];
         $this->pdfTitles = ['Motorista', 'Veículo', 'Responsável'];
-        $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['saida_data'], ['saida_hora'], ['nome_responsavel']];
-        $this->indexTitles = ['Motorista', 'Veículo', 'Saida Data', 'Saida Hora', 'Responsável'];
+        $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['saida_data'], ['saida_hora'], ['nome_responsavel']];
+        $this->indexTitles = ['Motorista', 'Veículo', 'Placa', 'Saida Data', 'Saida Hora', 'Responsável'];
+
+        $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['nome_responsavel'], ['km_inicial'],['quantidade_combustivel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['saida_data'],['saida_hora']];
+        $this->pdfindividualTitles = ['Motorista', 'Veículo', 'Responsável', 'km_inicial', 'quantidade_combustivel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'saida_data', 'saida_hora'];
+        $this->pdfTitle = 'Controle Diário de Saída';
 
         $this->numbersWithDecimal = ['km_inicial'];
     }
@@ -98,6 +103,24 @@ class VeiculoSaidaController extends Controller
         $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
+    public function customShowPdf($id)
+    {
+        $result = $this->model::where('id', $id);
+
+        $data = [
+            'results' => $result->withTrashed()->get(),
+            'fields' => $this->pdfindividualFields,
+            'titles' => $this->pdfindividualTitles,
+            'pdfTitle' => $this->pdfTitle
+        ];
+
+        $pdf = PDF::loadView('admin/pdf/relatorioIndividualPDF', $data);
+        $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
+
+        // return $pdf->download($pdfModelName . '.pdf');
+        return $pdf->stream($pdfModelName . '.pdf');
     }
 
     public function index(Request $request)

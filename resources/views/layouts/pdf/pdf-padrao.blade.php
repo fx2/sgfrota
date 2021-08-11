@@ -65,6 +65,11 @@
             .page:after {
                 content: counter(page, decimal);
             }
+
+            .td-border {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
         </style>
     </head>
     <body>
@@ -77,6 +82,10 @@
                 <tbody>
                     <tr style="text-align: center;">
                         <td><img src="{{ public_path('images/headerprintPDF.png') }}" width="40%" height="90%"/></td>
+                    </tr>
+                    <br>
+                    <tr style="text-align: center;">
+                        <td>@yield('content-title')</td>
                     </tr>
                 </tbody>
             </table>

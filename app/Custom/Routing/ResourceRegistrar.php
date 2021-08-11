@@ -12,7 +12,7 @@ class ResourceRegistrar extends OriginalRegistrar
      *
      * @var array
      */
-    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customListagem',  'customShow', 'customCreate', 'customStore', 'customEdit', 'customUpdate', 'customDestroy'];
+    protected $resourceDefaults = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'customIndex', 'customListagem',  'customShow', 'customShowPdf', 'customCreate', 'customStore', 'customEdit', 'customUpdate', 'customDestroy'];
 
     /**
      * Add the create method for a resourceful route.
@@ -85,6 +85,26 @@ class ResourceRegistrar extends OriginalRegistrar
         $uri = $this->getResourceUri($name). '/custom' . '/show/' . '{'.$base.'}';
 
         $action = $this->getResourceAction($name, $controller, 'customShow', $options);
+
+        return $this->router->get($uri, $action);
+    }
+
+    /**
+     * Add the show method for a resourceful route.
+     *
+     * @param  string  $name
+     * @param  string  $base
+     * @param  string  $controller
+     * @param  array  $options
+     * @return \Illuminate\Routing\Route
+     */
+    protected function addResourceCustomShowPdf($name, $base, $controller, $options)
+    {
+        $name = $this->getShallowName($name, $options);
+
+        $uri = $this->getResourceUri($name). '/custom' . '/show' . '/pdf/' . '{'.$base.'}';
+
+        $action = $this->getResourceAction($name, $controller, 'customShowPdf', $options);
 
         return $this->router->get($uri, $action);
     }
