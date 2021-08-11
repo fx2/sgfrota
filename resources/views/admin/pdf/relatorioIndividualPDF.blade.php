@@ -192,10 +192,10 @@
                         }
                       }
 
-                        if ($valor == 1)
+                        if ($valor === 1)
                             $valor = 'Sim';
 
-                        if ($valor == 0)
+                        if ($valor === 0)
                             $valor = 'Não';
                     @endphp
 

@@ -52,7 +52,8 @@ class VeiculoEntrada extends BaseModel
         'observacao_acessorio' ,
         'entrada_data' ,
         'entrada_hora',
-        'veiculo_saida_id'
+        'veiculo_saida_id',
+        'auth_id'
     ];
 
     public function veiculo_saida()

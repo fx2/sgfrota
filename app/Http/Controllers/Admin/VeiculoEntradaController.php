@@ -9,6 +9,7 @@ use App\Models\VeiculoSaida;
 use App\Services\VeiculoEntradaService;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
+use PDF;
 
 class VeiculoEntradaController extends Controller
 {
@@ -76,10 +77,33 @@ class VeiculoEntradaController extends Controller
         ];
         $this->pdfTitles = ['Data','Horário', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto'];
 
-        $this->indexFields = [['controle_frota', 'veiculo'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
-        $this->indexTitles = ['Veículo', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
+        $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
+
+        $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['km_final'],['relatorio_trajeto_motorista'],['quantidade_combustivel'],['observacao'],['nome_responsavel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['entrada_data'],['entrada_hora']];
+        $this->pdfindividualTitles = ['Motorista', 'Veículo', 'km_final', 'relatorio_trajeto_motorista', 'quantidade_combustivel', 'observacao', 'nome_responsavel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'entrada_data', 'entrada_hora'];
+
+        $this->pdfTitle = 'Controle Diário de Entrada';
 
         $this->numbersWithDecimal = ['km_final'];
+    }
+
+    public function customShowPdf($id)
+    {
+        $result = $this->model::where('id', $id);
+
+        $data = [
+            'results' => $result->withTrashed()->get(),
+            'fields' => $this->pdfindividualFields,
+            'titles' => $this->pdfindividualTitles,
+            'pdfTitle' => $this->pdfTitle
+        ];
+
+        $pdf = PDF::loadView('admin/pdf/relatorioIndividualPDF', $data);
+        $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
+
+        // return $pdf->download($pdfModelName . '.pdf');
+        return $pdf->stream($pdfModelName . '.pdf');
     }
 
     public function show($id)
@@ -118,6 +142,7 @@ class VeiculoEntradaController extends Controller
         $this->validate($request, $this->validations);
 
         $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
