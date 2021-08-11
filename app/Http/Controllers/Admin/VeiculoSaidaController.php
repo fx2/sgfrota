@@ -72,10 +72,10 @@ class VeiculoSaidaController extends Controller
             'saida_hora' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['nome_responsavel'], ['status']];
-        $this->pdfTitles = ['Motorista', 'Veículo', 'Responsável', 'Status'];
-        $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['saida_data'], ['saida_hora'], ['nome_responsavel'], ['status']];
-        $this->indexTitles = ['Motorista', 'Veículo', 'Saida Data', 'Saida Hora', 'Responsável', 'Status'];
+        $this->pdfFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['nome_responsavel']];
+        $this->pdfTitles = ['Motorista', 'Veículo', 'Responsável'];
+        $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['saida_data'], ['saida_hora'], ['nome_responsavel']];
+        $this->indexTitles = ['Motorista', 'Veículo', 'Saida Data', 'Saida Hora', 'Responsável'];
 
         $this->numbersWithDecimal = ['km_inicial'];
     }

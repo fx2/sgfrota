@@ -103,7 +103,6 @@
                                     <td>{{ convertTimestamp($item->saida_data, 'd/m/Y') }}</td>
                                     <td>{{ convertTimestamp($item->saida_hora, 'H:i') }}</td>
                                     <td>{{$item->nome_responsavel}}</td>
-                                    <td>{{$item->status == 1 ? 'Ativo' : 'Bloqueado'}}</td>
                                 <td>
                                     @if(!$item->deleted_at)
                                         @can('checksetor', CONTROLEDIARIODESAIDA_EDITAR)

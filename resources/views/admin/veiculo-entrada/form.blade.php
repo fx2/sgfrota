@@ -27,12 +27,17 @@
     <div class="col-10">
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
-{{--            @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)--}}
-{{--                <option value="{{ $optionValue->id }}"--}}
-{{--                    {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}--}}
-{{--                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}--}}
-{{--                >{{ $optionValue->nome }}</option>--}}
-{{--            @endforeach--}}
+
+            @if($formMode == 'show')
+                @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
+                    <option value="{{ $optionValue->id }}"
+                        {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
+                        {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
+                    >{{ $optionValue->nome }}</option>
+                @endforeach
+            @endif
+
+
         </select>
         {!! $errors->first('motorista_id', '<p class="help-block">:message</p>') !!}
     </div>
@@ -269,6 +274,10 @@
 @push('js')
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 
+@if($formMode == 'show')
+    <script src="{{ asset('js/ajax_motorista.js') }}"></script>
+@else
+
 <script>
     $('#controle_frota_id').change(function (e) {
         loadMotorista(e.target.value)
@@ -282,22 +291,25 @@
             return true;
 
         $('#motorista-remove-append').remove();
-
-    const resp = await axios.get(`${BASE_URL}/veiculo-saida?with=motorista&where=controle_frota_id,=,${motorista_id}&first=true`);
+    const resp = await axios.get(`${BASE_URL}/veiculo-saida?select=veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id&where=controle_frota_id,=,${motorista_id}&first=true`);
+    // const resp = await axios.get(`${BASE_URL}/veiculo-saida?with=motorista&where=controle_frota_id,=,${motorista_id}&first=true`);
 
         motoristaAppend.html(
             `
-                <option value="${resp.data.motorista.id}">${resp.data.motorista.nome}</option>
+                <option value="${resp.data.id}">${resp.data.moto_nome}</option>
             `
         );
 
         motoristaAppend.after(
             `
                 <ul class="ml-3 list-unstyled" id="motorista-remove-append">
-                    <li><strong>CNH</strong>: ${resp.data.motorista.cnh}</li>
-                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.motorista.cnh_validade).format('DD/MM/YYYY')}</li>
-                    <li><strong>RG</strong>: ${resp.data.motorista.rg}</li>
-                    <li><strong>CPF</strong>: ${resp.data.motorista.cpf}</li>
+                    <li><strong>TIPO CNH</strong>: ${resp.data.cnh_nome}</li>
+                    <li><strong>CNH</strong>: ${resp.data.cnh}</li>
+                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
+                    <li><strong>RG</strong>: ${resp.data.rg}</li>
+                    <li><strong>CPF</strong>: ${resp.data.cpf}</li>
+
+
                 </ul>
             `
         );
@@ -305,4 +317,6 @@
         $('#nome_responsavel').val(resp.data.nome_responsavel);
     }
 </script>
+
+@endif
 @endpush

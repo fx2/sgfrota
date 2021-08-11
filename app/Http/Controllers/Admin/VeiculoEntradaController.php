@@ -87,8 +87,9 @@ class VeiculoEntradaController extends Controller
         $result = $this->model
           ->findOrFail($id);
 
-        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($result->controle_frota_id);
-
+        $controleFrotumDisponiveis = VeiculoEntrada::select('controle_frotas.id', 'controle_frotas.veiculo')
+            ->join('controle_frotas', 'controle_frotas.id', '=', 'veiculo_entradas.controle_frota_id')
+            ->where('veiculo_entradas.id', $id)->withTrashed()->get();
 
         return view($this->path.'.show', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
