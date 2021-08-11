@@ -206,6 +206,7 @@ trait CrudControllerTrait
         }
 
         $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
@@ -291,6 +292,7 @@ trait CrudControllerTrait
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')

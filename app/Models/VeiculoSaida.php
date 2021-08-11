@@ -49,7 +49,8 @@ class VeiculoSaida extends BaseModel
         'observacao_acessorio',
         'status',
         'saida_data',
-        'saida_hora'
+        'saida_hora',
+        'auth_id'
     ];
 
     public function controle_frota()
@@ -65,5 +66,10 @@ class VeiculoSaida extends BaseModel
     public function setor()
     {
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
+    public function userAuth()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'auth_id');
     }
 }

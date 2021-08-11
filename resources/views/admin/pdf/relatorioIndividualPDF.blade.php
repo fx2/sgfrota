@@ -204,6 +204,10 @@
                 @endif
               </tr>
           @endforeach
+          <tr>
+              <th class="tdcenter-font13 td-border">Registro</th>
+              <td class="borda tdcenter-font13" width="100%" scope="row">{{App\Models\User::find($results[0]['auth_id'])['name'] ?? '' }}</td>
+          </tr>
       @endforeach
   </table>
 @endsection
