@@ -53,7 +53,8 @@ class VeiculoEntrada extends BaseModel
         'entrada_data' ,
         'entrada_hora',
         'veiculo_saida_id',
-        'auth_id'
+        'auth_id',
+        'document'
     ];
 
     public function veiculo_saida()

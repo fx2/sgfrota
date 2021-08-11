@@ -50,7 +50,7 @@ class VeiculoEntradaController extends Controller
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'setor_id' => ['setor', '\App\Models\Setor'],
         ];
-        $this->fileName = [];
+        $this->fileName = ['document'];
         $this->uploadFilePath = 'images/veiculo-entrada';
         $this->validations = [
             'nome_responsavel' => 'required',
@@ -125,15 +125,15 @@ class VeiculoEntradaController extends Controller
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
 
-    public function edit($id)
-    {
-        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($id);
-
-        $result = $this->model
-          ->findOrFail($id);
-
-        return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'withFields' => $this->withFields($result), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
-    }
+//    public function edit($id)
+//    {
+//        $controleFrotumDisponiveis = $this->veiculoEntradaService->veiculosDisponiveisEntrada($id);
+//
+//        $result = $this->model
+//          ->findOrFail($id);
+//
+//        return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'withFields' => $this->withFields($result), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+//    }
 
     public function store(Request $request)
     {
@@ -147,6 +147,10 @@ class VeiculoEntradaController extends Controller
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
                 $requestData['setor_id'] = $userAuth->setor_id;
+        }
+
+        if (!empty($this->fileName)) {
+            $requestData = $this->eachFiles($requestData, $request);
         }
 
         $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();

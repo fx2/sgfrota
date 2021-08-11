@@ -261,16 +261,36 @@
     </div>
 </div>
 
+<div class="form-group row {{ $errors->has('document') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="document" class="control-label">{{ 'Anexar documento' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="document" type="file" id="document" value="{{ isset($result->document) ? $result->document : ''}}" >
+        {!! $errors->first('document', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group row mb-5 {{ $errors->has('document') ? 'has-error' : ''}}">
+    <div class="col-2">
+    </div>
+    <div class="col-10">
+        <label for="document" class="control-label">{{ '' }}</label>
+        <img class="img-fluid" src="{{ isset($result->document) ? removePublicPath(asset($result->document)) : '' }}" alt="{{ isset($result->document) ? $result->document : '' }}" >
+    </div>
+</div>
+
+@if($formMode != 'create')
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="status" class="control-label">{{ 'Registro' }}</label>
     </div>
     <div class="col-10">
         <div class="radio">
-            {{App\Models\User::find($result['auth_id'])['name'] ?? '' }}
+            {{  App\Models\User::find($result['auth_id'])['name'] ?? '' }}
         </div>
     </div>
 </div>
+@endif
 
 @include('parts/select-setor')
 
