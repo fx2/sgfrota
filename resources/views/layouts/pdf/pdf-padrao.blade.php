@@ -11,10 +11,10 @@
 
             /** Define now the real margins of every page in the PDF   SE A IMPRESSAO DER RUIM NAS LATERAIS, MUDAR DE 0.5 pra 2**/
             body {
-                margin-top: 3cm;
+                margin-top: 3.5cm;
                 margin-left: 0.5cm;
                 margin-right: 0.5cm;
-                margin-bottom: 2cm;
+                margin-bottom: 5cm;
             }
 
             /** Define the header rules **/
@@ -29,7 +29,7 @@
             /** Define the footer rules **/
             footer {
                 position: fixed;
-                bottom: 0cm;
+                bottom: 2cm;
                 left: 0cm;
                 right: 0cm;
                 height: 2cm;
@@ -94,6 +94,8 @@
         <footer>
             <table width="100%">
                 <th>
+                    <p>_____________________________________________</p>
+                    <p>Assinatura do Responsável.</p>
                     <p class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000</p>
                     <p class="page">Pagina </p>
                 </th>
