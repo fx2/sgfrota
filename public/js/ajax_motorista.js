@@ -42,6 +42,7 @@ function cnhAvisarAntesXdias(dateInfo){
     let startDate   = moment(dateSub, "YYYY-MM-DD");
     let endDate     = moment(dateInfo.cnh_validade, "YYYY-MM-DD");
 
+
     // console.log('cnh validade', moment(dateInfo.cnh_validade).format("YYYY-MM-DD"));
     // console.log('qtd dias', dateInfo.avisar_antes_qtddias);
     // console.log('avisar antes', moment(dateInfo.cnh_validade).subtract(dateInfo.avisar_antes_qtddias, "days").format("YYYY-MM-DD"));
