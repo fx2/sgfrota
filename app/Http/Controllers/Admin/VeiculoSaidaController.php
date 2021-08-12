@@ -234,6 +234,8 @@ class VeiculoSaidaController extends Controller
             $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
         }
 
+        $result = $result->orderBy('deleted_at')->withTrashed();
+
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);
 
