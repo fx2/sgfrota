@@ -16,7 +16,7 @@ async function loadMotorista(motorista_id = null){
 
     $('#motorista-remove-append').remove();
 
-    const resp = await axios.get(`${BASE_URL}/motorista?with=fornecedor,tipoCnh&where=id,=,${motorista_id}&first=true`);
+    const resp = await axios.get(`${BASE_URL}/motorista?with=fornecedor,tipoCnh,setor&where=id,=,${motorista_id}&first=true`);
 
     validade = cnhAvisarAntesXdias(resp.data);
 
