@@ -231,6 +231,7 @@
     </div>
 </div>
 
+@if($formMode != 'create')
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="status" class="control-label">{{ 'Registro' }}</label>
@@ -241,6 +242,7 @@
         </div>
     </div>
 </div>
+@endif
 
 @include('parts/select-setor')
 
