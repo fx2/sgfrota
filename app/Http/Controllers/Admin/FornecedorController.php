@@ -38,7 +38,8 @@ class FornecedorController extends Controller
         $this->pdfFields = [['razao_social'], ['nome_fantasia'], ['cnpj'], ['status']];
         $this->pdfTitles = ['Razão Social','Nome Fantasia', 'CNPJ', 'Status'];
         $this->indexFields = [['razao_social'], ['nome_fantasia'], ['cnpj'], ['status']];;
-        $this->indexTitles = ['Razão Social','Nome Fantasia', 'CNPJ', 'Status'];;
+        $this->indexTitles = ['Razão Social','Nome Fantasia', 'CNPJ', 'Status'];
+        $this->pdfTitle = 'Fornecedor';
     }
 
 }

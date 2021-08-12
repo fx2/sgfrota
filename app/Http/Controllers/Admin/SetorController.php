@@ -39,6 +39,8 @@ class SetorController extends Controller
         $this->pdfTitles = ['Nome', 'Descrição', 'Status'];
         $this->indexFields = [['nome'], ['descricao'], ['status']];
         $this->indexTitles = ['Nome', 'Descrição', 'Status'];
+
+        $this->pdfTitle = 'Setores';
     }
 
 }

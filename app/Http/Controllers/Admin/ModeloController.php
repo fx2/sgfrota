@@ -34,8 +34,10 @@ class ModeloController extends Controller
         $this->joinSearch = ['marca_id' => ['nome', '\App\Models\Marca'], 'tipo_veiculo_id' => ['nome', '\App\Models\TipoVeiculo']];
         $this->indexFields = [['modelo'], ['descricao'],['status']];
         $this->indexTitles = ['Modelo', 'Descrição','Status'];
+
         $this->pdfFields = ['modelo', 'descricao','status'];
         $this->pdfTitles = [['Modelo'], ['Descrição'],['Status']];
+
         $this->fileName = ['foto'];
         $this->uploadFilePath = 'images/modelos';
         $this->validations = [
@@ -43,5 +45,7 @@ class ModeloController extends Controller
             'marca_id' => 'required',
             'modelo' => 'required',
         ];
+
+        $this->pdfTitle = 'Modelos';
     }
 }

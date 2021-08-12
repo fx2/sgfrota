@@ -85,7 +85,7 @@
                     </tr>
                     <br>
                     <tr style="text-align: center;">
-                        <td>@yield('content-title')</td>
+                        <td><strong>@yield('content-title')</strong></td>
                     </tr>
                 </tbody>
             </table>

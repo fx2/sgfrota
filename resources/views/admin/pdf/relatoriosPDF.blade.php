@@ -1,5 +1,9 @@
 @extends('layouts.pdf.pdf-padrao')
 
+@section('content-title')
+{{$pdfTitle}}
+@endsection
+
 @section('content')
 <table class="table borda">
     <thead>

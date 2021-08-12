@@ -62,6 +62,9 @@ class UsersController extends Controller
         $this->pdfTitles = ['Nome', 'Email', 'Perfil'];
         $this->indexFields = [['name'], ['email'], ['perfil', 'nome']];
         $this->indexTitles = ['nome', 'Email', 'Perfil'];
+
+                $this->pdfTitle = 'Usuáriosde';
+
     }
 
     public function store(Request $request)

@@ -78,6 +78,8 @@ class LancamentoMultasController extends Controller
         ];
         $this->pdfTitles = ['Data da Multa', 'Horário', 'Motorista', 'Veículo', 'Setor', 'Município', 'Tipo da Multa', 'Pago', 'Valor R$', 'Observação'];
 
+        $this->pdfTitle = 'Lançamento de Multas';
+
         $this->numbersWithDecimal = ['valor_multa'];
     }
 

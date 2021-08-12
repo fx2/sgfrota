@@ -171,7 +171,7 @@ trait CrudControllerTrait
             'results' => $result->get(),
             'fields' => $this->pdfFields,
             'titles' => $this->pdfTitles,
-            'valor' => ''
+            'pdfTitle' => $this->pdfTitle
         ];
 
         $pdf = PDF::loadView('admin/pdf/relatoriosPDF', $data);

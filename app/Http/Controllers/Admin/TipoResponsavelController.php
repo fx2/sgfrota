@@ -39,6 +39,8 @@ class TipoResponsavelController extends Controller
         $this->pdfTitles = ['Nome', 'Descricao'];
         $this->indexFields = [['nome'], ['descricao']];
         $this->indexTitles = ['Nome', 'Descricao'];
+
+        $this->pdfTitle = 'Tipo de Responsáveis';
     }
 
 }
