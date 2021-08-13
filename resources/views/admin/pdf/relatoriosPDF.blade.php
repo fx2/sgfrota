@@ -45,6 +45,12 @@
                     elseif ($val[0] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[0] == 'saida_data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[0] == 'saida_horario') {
+                        $valor = convertTimestamp($valor, 'H:i');
+                    }
                     elseif ($val[0] == 'entrada_data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }

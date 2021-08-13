@@ -74,14 +74,15 @@ class VeiculoSaidaController extends Controller
             'saida_hora' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['nome_responsavel']];
-        $this->pdfTitles = ['Motorista', 'Veículo', 'Responsável'];
+        $this->pdfFields = [['saida_data'], ['saida_hora'], ['km_inicial'], ['motorista', 'nome'], ['controle_frota', 'veiculo'], ['nome_responsavel']];
+        $this->pdfTitles = ['Data', 'Horário', 'KM', 'Motorista', 'Veículo', 'Responsável'];
+
         $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['saida_data'], ['saida_hora'], ['nome_responsavel']];
         $this->indexTitles = ['Motorista', 'Veículo', 'Placa', 'Saida Data', 'Saida Hora', 'Responsável'];
 
         $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['nome_responsavel'], ['km_inicial'],['quantidade_combustivel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['saida_data'],['saida_hora']];
         $this->pdfindividualTitles = ['Motorista', 'Veículo', 'Responsável', 'km_inicial', 'quantidade_combustivel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'saida_data', 'saida_hora'];
-        $this->pdfTitle = 'Controle Diário de Saída';
+        $this->pdfTitle = 'Relatório de Veículos de Saída';
 
         $this->numbersWithDecimal = ['km_inicial'];
 
