@@ -48,7 +48,7 @@
         <label for="km_final" class="control-label">{{ 'Km Final' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="km_final" type="text" id="km_final" value="{{ isset($result->km_final) ? $result->km_final : old('km_final')}}" >
+        <input class="form-control decimal" name="km_final" type="text" id="km_final" value="{{ isset($result->km_final) ? decimal($result->km_final) : old('km_final')}}" >
         {!! $errors->first('km_final', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
