@@ -9,7 +9,7 @@
             @else
                 <option value="">Selecione ...</option>
                 @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}"
+                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_saida_id}}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
                     {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                     >{{ $optionValue->veiculo }}</option>
@@ -84,7 +84,7 @@
         <label for="nome_responsavel" class="control-label">{{ 'Nome Responsavel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : old('nome_responsavel')}}" >
+        <input class="form-control" readonly name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : old('nome_responsavel')}}" >
         {!! $errors->first('nome_responsavel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -321,8 +321,11 @@
         if (motorista_id == null)
             return true;
 
+        values = motorista_id.split("-");
+        // $('[name="veiculo_saida_id"]').val(values[1]);
+
         $('#motorista-remove-append').remove();
-    const resp = await axios.get(`${BASE_URL}/veiculo-saida?select=veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id&where=controle_frota_id,=,${motorista_id}&first=true`);
+    const resp = await axios.get(`${BASE_URL}/veiculo-saida?select=veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id&where=controle_frota_id,=,${values[0]}&first=true`);
     // const resp = await axios.get(`${BASE_URL}/veiculo-saida?with=motorista&where=controle_frota_id,=,${motorista_id}&first=true`);
 
         motoristaAppend.html(

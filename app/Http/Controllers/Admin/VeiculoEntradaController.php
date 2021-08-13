@@ -144,6 +144,10 @@ class VeiculoEntradaController extends Controller
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 
+        $veiculo_saida = explode('-', $requestData['controle_frota_id']);
+        $requestData['controle_frota_id'] = $veiculo_saida[0];
+        $requestData['veiculo_saida_id'] = $veiculo_saida[1];
+
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
                 $requestData['setor_id'] = $userAuth->setor_id;
