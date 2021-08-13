@@ -205,6 +205,15 @@ trait CrudControllerTrait
             $this->validate($request, $this->validations);
         }
 
+        if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
+            foreach ($this->plusValidationStore as $key => $value){
+                if ($value === false){
+                    toastr()->error($key);
+                    return redirect()->back()->withInput();
+                }
+            }
+        }
+
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 

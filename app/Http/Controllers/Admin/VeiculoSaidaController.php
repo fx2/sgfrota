@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\CustomValidations\VeiculoSaidaKmInicialValidation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\ControleFrotum;
@@ -31,7 +32,7 @@ class VeiculoSaidaController extends Controller
      *
      * @return void
      */
-    public function __construct(VeiculoSaida $veiculosaida, VeiculoSaidaService $veiculoSaidaService)
+    public function __construct(VeiculoSaida $veiculosaida, VeiculoSaidaService $veiculoSaidaService, VeiculoSaidaKmInicialValidation $veiculoSaidaKmInicialValidation)
     {
         $this->middleware('auth');
 
@@ -83,6 +84,8 @@ class VeiculoSaidaController extends Controller
         $this->pdfTitle = 'Controle Diário de Saída';
 
         $this->numbersWithDecimal = ['km_inicial'];
+
+//        $this->plusValidationStore = ['Erro inicial' => $veiculoSaidaKmInicialValidation->verifyKmInicial(), 'erro final ' => $veiculoSaidaKmInicialValidation->testeLower()];
     }
 
     public function create()
