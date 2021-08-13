@@ -39,16 +39,18 @@ class VeiculoEntradaController extends Controller
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-entrada';
         $this->redirectPath = 'veiculo-entrada';
-        $this->withFields = ['controle_frota', 'motorista', 'setor'];
+        $this->withFields = ['controle_frota', 'motorista', 'setor', 'veiculo_saida'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
             'Motoristum' => '\App\Models\Motoristum',
-            'Setor' => '\App\Models\Setor'
+            'Setor' => '\App\Models\Setor',
+            'VeiculoSaida' => '\App\Models\VeiculoSaida'
         ];
         $this->joinSearch = [
             'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
             'setor_id' => ['setor', '\App\Models\Setor'],
+            'veiculo_saida_id' => ['veiculo_saida', '\App\Models\VeiculoSaida'],
         ];
         $this->fileName = ['document'];
         $this->uploadFilePath = 'images/veiculo-entrada';
@@ -73,9 +75,9 @@ class VeiculoEntradaController extends Controller
             'status' => 'required',
         ];
         $this->pdfFields = [
-            ['entrada_data'], ['entrada_hora'], ['km_final'], ['motorista', 'nome'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['nome_responsavel'], ['relatorio_trajeto_motorista']
+
         ];
-        $this->pdfTitles = ['Data','Horário', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto'];
+        $this->pdfTitles = ['Data Entrada','Hora Entrada', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto', 'Data Saída', 'Hora Saída'];
 
         $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Veículo', 'Placa', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
@@ -86,6 +88,8 @@ class VeiculoEntradaController extends Controller
         $this->pdfTitle = 'Controle Diário de Entrada';
 
         $this->numbersWithDecimal = ['km_final'];
+
+        $this->pdfGeralPath = 'admin/pdf/veiculoEntrada/relatorio-geral';
     }
 
     public function customShowPdf($id)

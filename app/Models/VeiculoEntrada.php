@@ -59,7 +59,7 @@ class VeiculoEntrada extends BaseModel
 
     public function veiculo_saida()
     {
-        return $this->hasOne('App\Models\ControleFrotum', 'id', 'veiculo_saida_id');
+        return $this->hasOne('App\Models\VeiculoSaida', 'id', 'veiculo_saida_id')->withTrashed();
     }
 
     public function controle_frota()

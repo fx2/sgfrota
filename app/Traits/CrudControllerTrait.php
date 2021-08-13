@@ -174,7 +174,12 @@ trait CrudControllerTrait
             'pdfTitle' => $this->pdfTitle
         ];
 
-        $pdf = PDF::loadView('admin/pdf/relatoriosPDF', $data);
+        $path = 'admin/pdf/relatoriosPDF';
+
+        if (isset($this->pdfGeralPath))
+            $path = $this->pdfGeralPath;
+
+        $pdf = PDF::loadView($path, $data);
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');
