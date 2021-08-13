@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Models\ControleFrotum;
 use App\Models\Motoristum;
 use App\Models\VeiculoSaida;
+use App\Services\ControleFrotumKmService;
 use App\Services\VeiculoSaidaService;
 use Illuminate\Http\Request;
 use App\Traits\CrudControllerTrait;
@@ -28,15 +29,26 @@ class VeiculoSaidaController extends Controller
     private $veiculoSaidaService;
 
     /**
+     * @var ControleFrotumKmService $controleFrotumKmService
+     */
+    private $controleFrotumKmService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(VeiculoSaida $veiculosaida, VeiculoSaidaService $veiculoSaidaService, VeiculoSaidaKmInicialValidation $veiculoSaidaKmInicialValidation)
+    public function __construct(
+        VeiculoSaida $veiculosaida,
+        VeiculoSaidaService $veiculoSaidaService,
+        VeiculoSaidaKmInicialValidation $veiculoSaidaKmInicialValidation,
+        ControleFrotumKmService $controleFrotumKmService
+    )
     {
         $this->middleware('auth');
 
         $this->veiculoSaidaService = $veiculoSaidaService;
+        $this->controleFrotumKmService = $controleFrotumKmService;
 
         $this->model = $veiculosaida;
         $this->saveSetorScope = true;
@@ -99,6 +111,55 @@ class VeiculoSaidaController extends Controller
         return view($this->path.'.create', ['selectModelFields' => $this->selectModelFields(), 'sequencial' => $sequencial, 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
 
+    public function store(Request $request)
+    {
+        $userAuth = auth('api')->user();
+
+        if (!empty($this->validations)) {
+            $this->validate($request, $this->validations);
+        }
+
+        if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
+            foreach ($this->plusValidationStore as $key => $value){
+                if ($value === false){
+                    toastr()->error($key);
+                    return redirect()->back()->withInput();
+                }
+            }
+        }
+
+        $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
+
+        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_inicial']);
+        if ($verificaKM !== true){
+            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
+            return redirect()->back()->withInput();
+        }
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
+
+        if (!empty($this->checkboxExplode)) {
+            $requestData = $this->saveCheckboxExplode($requestData);
+        }
+
+        if (!empty($this->fileName)) {
+            $requestData = $this->eachFiles($requestData, $request);
+        }
+
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
+        $create = $this->model->create($requestData);
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
+        return redirect($this->redirectPath)->withInput();
+    }
+
     public function edit($id)
     {
         $result = $this->model
@@ -107,6 +168,53 @@ class VeiculoSaidaController extends Controller
         $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $userAuth = auth('api')->user();
+
+        if (!empty($this->validations)) {
+            foreach ($this->fileName as $key => $value) {
+                unset($this->validations[$value]);
+            }
+
+            $this->validate($request, $this->validations);
+        }
+
+        $result = $this->model->findOrFail($id);
+        $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
+
+        if (!empty($this->checkboxExplode)) {
+            $requestData = $this->saveCheckboxExplode($requestData);
+        }
+
+        if (!empty($this->fileName)) {
+            $requestData = $this->eachFiles($requestData, $request);
+        }
+
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
+        $result->update($requestData);
+
+        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_inicial']);
+        if ($verificaKM !== true){
+            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
+            return redirect()->back()->withInput();
+        }
+
+        $requestData['id'] = $result->id;
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
+        return redirect($this->redirectPath)->withInput();
     }
 
     public function customShowPdf($id)

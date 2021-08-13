@@ -254,7 +254,7 @@
             <label for="km_atual" class="control-label">{{ 'Km Atual' }}</label>
         </div>
         <div class="col-10">
-            <input class="form-control decimal" disabled name="km_atual" type="text" id="km_atual" value="{{ isset($result->km_atual) ? number_format((float) $result->km_atual, 0) : old('km_atual')}}" >
+            <input class="form-control decimal" readonly name="km_atual" type="text" id="km_atual" value="{{ isset($result->km_atual) ? number_format((float) $result->km_atual, 0) : old('km_atual')}}" >
             {!! $errors->first('km_atual', '<p class="help-block">:message</p>') !!}
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ControleFrotum;
 use App\Models\VeiculoEntrada;
 use App\Models\VeiculoSaida;
+use App\Services\ControleFrotumKmService;
 use App\Services\VeiculoEntradaService;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
@@ -25,15 +26,21 @@ class VeiculoEntradaController extends Controller
     private $veiculoEntradaService;
 
     /**
+     * @var ControleFrotumKmService $controleFrotumKmService
+     */
+    private $controleFrotumKmService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(VeiculoEntrada $veiculoentrada, VeiculoEntradaService $veiculoEntradaService)
+    public function __construct(VeiculoEntrada $veiculoentrada, VeiculoEntradaService $veiculoEntradaService, ControleFrotumKmService $controleFrotumKmService)
     {
         $this->middleware('auth');
 
         $this->veiculoEntradaService = $veiculoEntradaService;
+        $this->controleFrotumKmService = $controleFrotumKmService;
 
         $this->model = $veiculoentrada;
         $this->saveSetorScope = true;
@@ -147,6 +154,12 @@ class VeiculoEntradaController extends Controller
 
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
+
+        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_final']);
+        if ($verificaKM !== true){
+            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
+            return redirect()->back()->withInput();
+        }
 
         $veiculo_saida = explode('-', $requestData['controle_frota_id']);
         $requestData['controle_frota_id'] = $veiculo_saida[0];
