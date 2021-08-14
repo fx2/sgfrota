@@ -39,6 +39,10 @@ async function loadControleFrotum(controle_frota_id = null){
             </ul>
         `
     );
+
+    str = resp.data.km_atual;
+    str = str.substring(0, str.length-5);
+    $('.km_atual').val(str);
 }
 
 async function loadControleFrotumClass(controle_frota_id = null){

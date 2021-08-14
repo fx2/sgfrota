@@ -104,7 +104,7 @@ class VeiculoEntradaController extends Controller
         $result = $this->model::where('id', $id);
 
         $data = [
-            'results' => $result->withTrashed()->get(),
+            'results' => $result->withTrashed()->first(),
             'fields' => $this->pdfindividualFields,
             'titles' => $this->pdfindividualTitles,
             'pdfTitle' => $this->pdfTitle
@@ -155,7 +155,7 @@ class VeiculoEntradaController extends Controller
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 
-        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_final']);
+        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_final'], true);
         if ($verificaKM !== true){
             toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
             return redirect()->back()->withInput();
@@ -172,6 +172,10 @@ class VeiculoEntradaController extends Controller
 
         if (!empty($this->fileName)) {
             $requestData = $this->eachFiles($requestData, $request);
+        }
+
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
         }
 
         $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();

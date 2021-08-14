@@ -102,9 +102,9 @@
             <table width="100%">
                 <th>
                     <p>_____________________________________________</p>
-                    <p>Assinatura do Responsável.</p>
-                    <p class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000</p>
-                    <p class="page">Pagina </p>
+                    <p style="font-size: 12px;">Assinatura do Responsável.</p>
+                    <p style="font-size: 12px;" class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000 <span style="font-size: 12px;">{{date('d/m/Y')}}</span></p>
+                    <p style="font-size: 12px;" class="page">Pagina </p>
                 </th>
             </table>
         </footer>

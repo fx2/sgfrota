@@ -46,7 +46,7 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? decimal($result->km_inicial) : old('km_inicial')}}" >
+        <input class="form-control decimal km_atual" readonly name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? decimal($result->km_inicial) : old('km_inicial')}}" >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -256,4 +256,5 @@
 @push('js')
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 <script src="{{ asset('js/ajax_motorista.js') }}"></script>
+
 @endpush
