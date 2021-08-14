@@ -70,6 +70,9 @@
                   border: 1px solid black;
                   border-collapse: collapse;
                 }
+
+            .text-leftzinho{text-align: left; margin-left: 2%;}
+    td{ font-size: 12px;}
         </style>
     </head>
     <body>
@@ -85,7 +88,11 @@
                     </tr>
                     <br>
                     <tr style="text-align: center;">
-                        <td><strong>@yield('content-title')</strong></td>
+                        <td>
+                            <strong>@yield('content-title') </strong>
+                            <br>
+                            <strong>@yield('content-title-2') </strong>
+                        </td>
                     </tr>
                 </tbody>
             </table>

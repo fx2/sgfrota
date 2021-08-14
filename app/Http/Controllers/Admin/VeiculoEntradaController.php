@@ -92,7 +92,7 @@ class VeiculoEntradaController extends Controller
         $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['km_final'],['relatorio_trajeto_motorista'],['quantidade_combustivel'],['observacao'],['nome_responsavel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['entrada_data'],['entrada_hora']];
         $this->pdfindividualTitles = ['Motorista', 'Veículo', 'km_final', 'relatorio_trajeto_motorista', 'quantidade_combustivel', 'observacao', 'nome_responsavel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'entrada_data', 'entrada_hora'];
 
-        $this->pdfTitle = 'Controle Diário de Entrada';
+        $this->pdfTitle = 'REGISTRO DIÁRIO DE SAÍDA E TRAJETÓRIA DO VEÍCULO';
 
         $this->numbersWithDecimal = ['km_final'];
 
@@ -110,7 +110,7 @@ class VeiculoEntradaController extends Controller
             'pdfTitle' => $this->pdfTitle
         ];
 
-        $pdf = PDF::loadView('admin/pdf/relatorioIndividualPDF', $data);
+        $pdf = PDF::loadView('admin/pdf/veiculoEntrada/relatorio-geral-new', $data);
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');
