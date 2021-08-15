@@ -110,7 +110,7 @@ class VeiculoEntradaController extends Controller
             'pdfTitle' => $this->pdfTitle
         ];
 
-        $pdf = PDF::loadView('admin/pdf/veiculoEntrada/relatorio-geral-new', $data);
+        $pdf = PDF::loadView('admin/veiculo-entrada/pdf/relatorio-individual', $data);
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');

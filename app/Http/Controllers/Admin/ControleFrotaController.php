@@ -129,6 +129,49 @@ class ControleFrotaController extends Controller
         return redirect($this->redirectPath)->withInput();
     }
 
+    public function update(Request $request, $id)
+    {
+        $userAuth = auth('api')->user();
+
+        if (!empty($this->validations)) {
+            foreach ($this->fileName as $key => $value) {
+                unset($this->validations[$value]);
+            }
+
+            $this->validate($request, $this->validations);
+        }
+
+        $result = $this->model->findOrFail($id);
+        $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
+
+        if (!empty($this->checkboxExplode)) {
+            $requestData = $this->saveCheckboxExplode($requestData);
+        }
+
+        if (!empty($this->fileName)) {
+            $requestData = $this->eachFiles($requestData, $request);
+        }
+
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
+        $requestData['km_atual'] = str_replace('.', '', str_replace(',', '', $requestData['km_atual']));
+
+        $result->update($requestData);
+
+        $requestData['id'] = $result->id;
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
+        return redirect($this->redirectPath)->withInput();
+    }
+
     public function customListagem(Request $request)
     {
         $limit = $request->all()['limit'] ?? 20;
