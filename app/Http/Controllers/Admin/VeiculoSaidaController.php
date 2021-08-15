@@ -222,13 +222,13 @@ class VeiculoSaidaController extends Controller
         $result = $this->model::where('id', $id);
 
         $data = [
-            'results' => $result->withTrashed()->get(),
+            'results' => $result->withTrashed()->first(),
             'fields' => $this->pdfindividualFields,
             'titles' => $this->pdfindividualTitles,
             'pdfTitle' => $this->pdfTitle
         ];
 
-        $pdf = PDF::loadView('admin/pdf/relatorioIndividualPDF', $data);
+        $pdf = PDF::loadView('admin/veiculo-saida/pdf/relatorio-individual', $data);
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');
