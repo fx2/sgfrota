@@ -19,13 +19,15 @@ class ControleFrotumKmService
         $findKmAtual = decimal($car->km_atual);
         $km_atual = decimal(str_replace('.', '', str_replace(',', '', $km_atual)));
 
+        $findKmAtualInt = (int) $findKmAtual;
+        $kmAtualInt = (int) $km_atual;
+
         if ($entrada){
-            if ($findKmAtual == null || $findKmAtual >= $km_atual){
-            return $findKmAtual;
+            if ($findKmAtual == null || $findKmAtualInt >= $kmAtualInt)
+                return $findKmAtual;
         }
 
-        }
-        if ($findKmAtual == null || $findKmAtual > $km_atual){
+        if ($findKmAtual == null || $findKmAtualInt > $kmAtualInt){
             return $findKmAtual;
         }
 

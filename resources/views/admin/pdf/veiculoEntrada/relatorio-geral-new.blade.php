@@ -97,12 +97,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->mecanica == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->mecanica == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -116,12 +116,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->eletrica == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->eletrica == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -135,12 +135,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->funilaria == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->funilaria == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -154,12 +154,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->pintura == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->pintura == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -173,12 +173,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->pneus == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->pneus == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -202,12 +202,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->macaco == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->macaco == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -221,12 +221,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->triangulo == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->triangulo == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -240,12 +240,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->estepe == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->estepe == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -259,12 +259,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->extintor == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->extintor == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -278,12 +278,12 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->chave_roda == 1) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Bom</span></td>
 
                                             <td>
-                                                <input type="radio" name="title">
+                                                <input type="radio" name="title" @if($results->chave_roda == 0) checked @endif>
                                             </td>
                                             <td><span style="margin-left: 10px;">Ruim</span></td>
                                         </tr>
@@ -313,17 +313,17 @@ NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Km Entrada</strong>: {{ decimal($results->km_final) }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Qtd. Combustível</strong>: {{ $results->quantidade_combustivel }} </p></td>
     </tr>
-</table>VeiculoEntrada
+</table>
 
 <table class="table borda" style="margin-top: 8px;">
     <tr>
-        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Relatório do Trajeto</strong>: 180.000 </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Relatório do Trajeto</strong>: {{ $results->relatorio_trajeto_motorista }} </p></td>
     </tr>
 </table>
 
 <table class="table borda" style="margin-top: 8px;">
     <tr>
-        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Observação</strong>: 180.000 </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Observação</strong>: {{ $results->observacao }} </p></td>
     </tr>
 </table>
 

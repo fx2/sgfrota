@@ -80,8 +80,53 @@ class ControleFrotaController extends Controller
         $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
         $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
         $this->pdfTitle = 'Controle de Frotas';
-        $this->numbersWithDecimal = ['km_inicial'];
+        $this->numbersWithDecimal = ['km_inicial']; //'km_atual' tambem
 
+    }
+
+    public function store(Request $request)
+    {
+        $userAuth = auth('api')->user();
+
+        if (!empty($this->validations)) {
+            $this->validate($request, $this->validations);
+        }
+
+        if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
+            foreach ($this->plusValidationStore as $key => $value){
+                if ($value === false){
+                    toastr()->error($key);
+                    return redirect()->back()->withInput();
+                }
+            }
+        }
+
+        $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
+
+        if ($this->saveSetorScope){
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+                $requestData['setor_id'] = $userAuth->setor_id;
+        }
+
+        if (!empty($this->checkboxExplode)) {
+            $requestData = $this->saveCheckboxExplode($requestData);
+        }
+
+        if (!empty($this->fileName)) {
+            $requestData = $this->eachFiles($requestData, $request);
+        }
+
+        if (!empty($this->numbersWithDecimal)) {
+            $requestData = $this->formatRemoveDecimal($requestData);
+        }
+
+        $requestData['km_atual'] = $requestData['km_inicial'];
+
+        $create = $this->model->create($requestData);
+        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
+
+        return redirect($this->redirectPath)->withInput();
     }
 
     public function customListagem(Request $request)
