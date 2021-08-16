@@ -109,6 +109,13 @@
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
 
+                                                elseif ($val[0] == 'entrada_data') {
+                                                    $valor = convertTimestamp($valor, 'd/m/Y');
+                                                }
+                                                elseif ($val[0] == 'entrada_hora') {
+                                                    $valor = convertTimestamp($valor, 'H:i');
+                                                }
+
                                             }
 
                                             if (!empty($val[1])){
@@ -123,6 +130,7 @@
                                                 elseif ($val[1] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
                                                 }
+
                                             }
 
                                             if (!empty($val[2])){
@@ -178,14 +186,17 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-entrada/' . $item->id) }}" title="Visualizar VeiculoEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    @can('checksetor', CONTROLEDIARIODEENTRADA_EDITAR)
-                                        <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                                    @endcan
+                                    @can('checksetor', CONTROLEDIARIODESAIDA_RELATORIO)
+                                        <a href="{{ url('/veiculo-entrada/custom/show/pdf/' . $item->id) }}" title="Visualizar PDF Controle diário de saída"><button class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf" aria-hidden="true"></i></button></a>
+                                     @endcan
+                                     <a href="{{ url('/veiculo-entrada/' . $item->id) }}" title="Visualizar VeiculoEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+{{--                                    @can('checksetor', CONTROLEDIARIODEENTRADA_EDITAR)--}}
+{{--                                        <a href="{{ url('/veiculo-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>--}}
+{{--                                    @endcan--}}
 
-                                    @can('checksetor', CONTROLEDIARIODEENTRADA_DELETAR)
-                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    @endcan
+{{--                                    @can('checksetor', CONTROLEDIARIODEENTRADA_DELETAR)--}}
+{{--                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>--}}
+{{--                                    @endcan--}}
                                 </td>
                             </tr>
                         @empty

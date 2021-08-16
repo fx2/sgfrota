@@ -46,7 +46,7 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? decimal($result->km_inicial) : old('km_inicial')}}" >
+        <input class="form-control decimal km_atual" readonly name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? decimal($result->km_inicial) : old('km_inicial')}}" >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -55,7 +55,7 @@
         <label for="quantidade_combustivel" class="control-label">{{ 'Quantidade Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? decimal($result->quantidade_combustivel) : old('quantidade_combustivel')}}" >
+        <input class="form-control" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
         {!! $errors->first('quantidade_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -121,7 +121,7 @@
 </div>
 <div class="form-group row mb-5 {{ $errors->has('observacao_situacao') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="observacao_situacao" class="control-label">{{ 'Observacao Situacao' }}</label>
+        <label for="observacao_situacao" class="control-label">{{ 'Observação Situação' }}</label>
     </div>
     <div class="col-10">
         <textarea class="form-control" rows="5" name="observacao_situacao" type="textarea" id="observacao_situacao" >{{ isset($result->observacao_situacao) ? $result->observacao_situacao : old('observacao_situacao')}}</textarea>
@@ -190,7 +190,7 @@
 </div>
 <div class="form-group row mb-5 {{ $errors->has('observacao_acessorio') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="observacao_acessorio" class="control-label">{{ 'Observacao Acessorio' }}</label>
+        <label for="observacao_acessorio" class="control-label">{{ 'Observação Acessorio' }}</label>
     </div>
     <div class="col-10">
         <textarea class="form-control" rows="5" name="observacao_acessorio" type="textarea" id="observacao_acessorio" >{{ isset($result->observacao_acessorio) ? $result->observacao_acessorio : old('observacao_acessorio')}}</textarea>
@@ -231,14 +231,30 @@
     </div>
 </div>
 
+@if($formMode != 'create')
+<div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="status" class="control-label">{{ 'Registro' }}</label>
+    </div>
+    <div class="col-10">
+        <div class="radio">
+            {{App\Models\User::find($result['auth_id'])['name'] ?? '' }}
+        </div>
+    </div>
+</div>
+@endif
+
 @include('parts/select-setor')
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
-    <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
+    @if($formMode != 'show')
+        <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
+    @endif
 </div>
 
 @push('js')
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
 <script src="{{ asset('js/ajax_motorista.js') }}"></script>
+
 @endpush

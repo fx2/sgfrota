@@ -38,6 +38,9 @@ class PermissoesController extends Controller
         $this->pdfTitles = ['Id'];
         $this->indexFields = [['id']];
         $this->indexTitles = ['Id'];
+
+                $this->pdfTitle = 'Permissões';
+
     }
 
 }

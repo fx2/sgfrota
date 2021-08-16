@@ -247,6 +247,19 @@
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+@if($formMode != 'create')
+    <div class="form-group row mb-5 {{ $errors->has('km_atual') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="km_atual" class="control-label">{{ 'Km Atual' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control decimal" readonly name="km_atual" type="text" id="km_atual" value="{{ isset($result->km_atual) ? number_format((float) $result->km_atual, 0) : old('km_atual')}}" >
+            {!! $errors->first('km_atual', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+@endif
+
 <div class="form-group row mb-5 {{ $errors->has('dut') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="dut" class="control-label">{{ 'Dut' }}</label>

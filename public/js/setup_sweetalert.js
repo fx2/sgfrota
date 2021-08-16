@@ -25,7 +25,7 @@ $(".btnUpdate").click(function () {
                             showConfirmButton: false,
                             timer: 1000
                           })
-                        
+
                         $(_this).closest('tr').remove();
                     }
                     else {
@@ -75,7 +75,7 @@ $(".btnDeletar").click(function () {
                             showConfirmButton: false,
                             timer: 1000
                           })
-                        
+
                         $(_this).closest('tr').remove();
                     }
                     else {

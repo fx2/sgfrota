@@ -33,6 +33,8 @@ class TipoMultasController extends Controller
         $this->pdfTitles = ['Tipo','Descrição', 'Pontuação', 'Status'];
         $this->indexFields = [['tipo'],['descricao'], ['pontuacao'], ['status']];
         $this->indexTitles = ['Tipo','Descrição', 'Pontuação', 'Status'];
+
+        $this->pdfTitle = 'Tipos de Multas';
     }
 
 }

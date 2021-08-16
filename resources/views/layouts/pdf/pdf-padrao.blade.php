@@ -11,10 +11,10 @@
 
             /** Define now the real margins of every page in the PDF   SE A IMPRESSAO DER RUIM NAS LATERAIS, MUDAR DE 0.5 pra 2**/
             body {
-                margin-top: 3cm;
+                margin-top: 3.5cm;
                 margin-left: 0.5cm;
                 margin-right: 0.5cm;
-                margin-bottom: 2cm;
+                margin-bottom: 5cm;
             }
 
             /** Define the header rules **/
@@ -29,7 +29,7 @@
             /** Define the footer rules **/
             footer {
                 position: fixed;
-                bottom: 0cm;
+                bottom: 2cm;
                 left: 0cm;
                 right: 0cm;
                 height: 2cm;
@@ -65,6 +65,14 @@
             .page:after {
                 content: counter(page, decimal);
             }
+
+            .td-border {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+
+            .text-leftzinho{text-align: left; margin-left: 2%;}
+    td{ font-size: 12px;}
         </style>
     </head>
     <body>
@@ -78,6 +86,14 @@
                     <tr style="text-align: center;">
                         <td><img src="{{ public_path('images/headerprintPDF.png') }}" width="40%" height="90%"/></td>
                     </tr>
+                    <br>
+                    <tr style="text-align: center;">
+                        <td>
+                            <strong>@yield('content-title') </strong>
+                            <br>
+                            <strong>@yield('content-title-2') </strong>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </header>
@@ -85,8 +101,10 @@
         <footer>
             <table width="100%">
                 <th>
-                    <p class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000</p>
-                    <p class="page">Pagina </p>
+                    <p>_____________________________________________</p>
+                    <p style="font-size: 12px;">Assinatura do Responsável.</p>
+                    <p style="font-size: 12px;" class="page">Rua Rodrigues Alves, 51, Jardim Albino Neves Arujá/SP - 07400-575 PABX: (11) 4652-7000 <span style="font-size: 12px;">{{date('d/m/Y')}}</span></p>
+                    <p style="font-size: 12px;" class="page">Pagina </p>
                 </th>
             </table>
         </footer>

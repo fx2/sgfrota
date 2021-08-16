@@ -100,17 +100,25 @@
                                     @endcan
                                     <td>{{$item->motorista->nome}}</td>
                                     <td>{{$item->controle_frota->veiculo}}</td>
+                                    <td>{{$item->controle_frota->placa}}</td>
+                                    <td>{{ convertTimestamp($item->saida_data, 'd/m/Y') }}</td>
+                                    <td>{{ convertTimestamp($item->saida_hora, 'H:i') }}</td>
                                     <td>{{$item->nome_responsavel}}</td>
-                                    <td>{{$item->status == 1 ? 'Ativo' : 'Bloqueado'}}</td>
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-saida/' . $item->id) }}" title="Visualizar Controle diário de saída"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    @can('checksetor', CONTROLEDIARIODESAIDA_EDITAR)
-                                        <a href="{{ url('/veiculo-saida/' . $item->id . '/edit') }}" title="Editar Controle diário de saída"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
-                                    @endcan
+                                     @can('checksetor', CONTROLEDIARIODESAIDA_RELATORIO)
+                                        <a href="{{ url('/veiculo-saida/custom/show/pdf/' . $item->id) }}" title="Visualizar PDF Controle diário de saída"><button class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf" aria-hidden="true"></i></button></a>
+                                     @endcan
+                                    @if(!$item->deleted_at)
+                                        @can('checksetor', CONTROLEDIARIODESAIDA_EDITAR)
+                                            <a href="{{ url('/veiculo-saida/' . $item->id . '/edit') }}" title="Editar Controle diário de saída"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                        @endcan
 
-                                    @can('checksetor', CONTROLEDIARIODESAIDA_DELETAR)
-                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-saida" class="btnDeletar btn btn-danger btn-sm" title="Deletar Controle diário de saída"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    @endcan
+                                        @can('checksetor', CONTROLEDIARIODESAIDA_DELETAR)
+                                            <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-saida" class="btnDeletar btn btn-danger btn-sm" title="Deletar Controle diário de saída"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        @endcan
+                                    @else
+                                         <a href="{{ url('/veiculo-saida/' . $item->id) }}" title="Visualizar Controle diário de saída"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

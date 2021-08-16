@@ -33,6 +33,8 @@ class TipoCombustivelController extends Controller
         $this->pdfTitles = ['Título','Descrição', 'Status'];
         $this->indexFields = [['nome'],['descricao'], ['status']];
         $this->indexTitles = ['Título','Descrição', 'Status'];
+
+        $this->pdfTitle = 'Tipos de Combustíveis';
     }
 
 }

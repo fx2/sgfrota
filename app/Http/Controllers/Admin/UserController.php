@@ -40,6 +40,8 @@ class UserController extends Controller
         ];
         $this->fileName = ['foto_perfil'];
         $this->uploadFilePath = 'images/usuarios';
+
+        $this->pdfTitle = 'Usuários';
     }
 
     public function index()

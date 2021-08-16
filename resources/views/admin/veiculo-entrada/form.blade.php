@@ -9,9 +9,9 @@
             @else
                 <option value="">Selecione ...</option>
                 @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}"
+                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_saida_id}}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
+{{--                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}--}}
                     >{{ $optionValue->veiculo }}</option>
                 @endforeach
             @endisset
@@ -27,12 +27,17 @@
     <div class="col-10">
         <select name="motorista_id" class="form-control" id="motorista_id" >
             <option value="">Selecione ...</option>
-            @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}"
-                    {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
-                    {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->nome }}</option>
-            @endforeach
+
+            @if($formMode == 'show')
+                @foreach ($selectModelFields['Motoristum'] as $optionKey => $optionValue)
+                    <option value="{{ $optionValue->id }}"
+                        {{ (isset($result->motorista_id) && $result->motorista_id == $optionValue->id) ? 'selected' : ''}}
+                        {{ old('motorista_id') == $optionValue->id ? "selected" : "" }}
+                    >{{ $optionValue->nome }}</option>
+                @endforeach
+            @endif
+
+
         </select>
         {!! $errors->first('motorista_id', '<p class="help-block">:message</p>') !!}
     </div>
@@ -43,8 +48,9 @@
         <label for="km_final" class="control-label">{{ 'Km Final' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="km_final" type="text" id="km_final" value="{{ isset($result->km_final) ? $result->km_final : old('km_final')}}" >
+        <input class="form-control decimal" name="km_final" type="text" id="km_final" value="{{ isset($result->km_final) ? decimal($result->km_final) : old('km_final')}}" >
         {!! $errors->first('km_final', '<p class="help-block">:message</p>') !!}
+        <span id="km_final_sugerido"></span>
     </div>
 </div>
 <div class="form-group row mb-5 {{ $errors->has('relatorio_trajeto_motorista') ? 'has-error' : ''}}">
@@ -61,7 +67,7 @@
         <label for="quantidade_combustivel" class="control-label">{{ 'Quantidade Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
+        <input class="form-control" name="quantidade_combustivel" type="text" id="quantidade_combustivel" value="{{ isset($result->quantidade_combustivel) ? $result->quantidade_combustivel : old('quantidade_combustivel')}}" >
         {!! $errors->first('quantidade_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -79,7 +85,7 @@
         <label for="nome_responsavel" class="control-label">{{ 'Nome Responsavel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : old('nome_responsavel')}}" >
+        <input class="form-control" readonly name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : old('nome_responsavel')}}" >
         {!! $errors->first('nome_responsavel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -256,15 +262,101 @@
     </div>
 </div>
 
+<div class="form-group row {{ $errors->has('document') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="document" class="control-label">{{ 'Anexar documento' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="document" type="file" id="document" value="{{ isset($result->document) ? $result->document : ''}}" >
+        {!! $errors->first('document', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group row mb-5 {{ $errors->has('document') ? 'has-error' : ''}}">
+    <div class="col-2">
+    </div>
+    <div class="col-10">
+        <label for="document" class="control-label">{{ '' }}</label>
+        <img class="img-fluid" src="{{ isset($result->document) ? removePublicPath(asset($result->document)) : '' }}" alt="{{ isset($result->document) ? $result->document : '' }}" >
+    </div>
+</div>
+
+@if($formMode != 'create')
+<div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="status" class="control-label">{{ 'Registro' }}</label>
+    </div>
+    <div class="col-10">
+        <div class="radio">
+            {{  App\Models\User::find($result['auth_id'])['name'] ?? '' }}
+        </div>
+    </div>
+</div>
+@endif
+
 @include('parts/select-setor')
 
 <div class="form-group">
     <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
+    @if($formMode != 'show')
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
+    @endif
 </div>
 
 
 @push('js')
 <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
-<script src="{{ asset('js/ajax_motorista.js') }}"></script>
+
+@if($formMode == 'show')
+    <script src="{{ asset('js/ajax_motorista.js') }}"></script>
+@else
+
+<script>
+    $('#controle_frota_id').change(function (e) {
+        loadMotorista(e.target.value)
+    });
+
+    var motoristaAppend = $('#motorista_id');
+
+
+    async function loadMotorista(motorista_id = null){
+        if (motorista_id == null)
+            return true;
+
+        values = motorista_id.split("-");
+        // $('[name="veiculo_saida_id"]').val(values[1]);
+
+        $('#motorista-remove-append').remove();
+    const resp = await axios.get(`${BASE_URL}/veiculo-saida?select=controle_frotas.km_atual,veiculo_saidas.km_inicial,veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id,controle_frotas,controle_frotas.id,veiculo_saidas.controle_frota_id&where=controle_frota_id,=,${values[0]}&first=true`);
+    // const resp = await axios.get(`${BASE_URL}/veiculo-saida?with=motorista&where=controle_frota_id,=,${motorista_id}&first=true`);
+
+        motoristaAppend.html(
+            `
+                <option value="${resp.data.id}">${resp.data.moto_nome}</option>
+            `
+        );
+
+        motoristaAppend.after(
+            `
+                <ul class="ml-3 list-unstyled" id="motorista-remove-append">
+                    <li><strong>TIPO CNH</strong>: ${resp.data.cnh_nome}</li>
+                    <li><strong>CNH</strong>: ${resp.data.cnh}</li>
+                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
+                    <li><strong>RG</strong>: ${resp.data.rg}</li>
+                    <li><strong>CPF</strong>: ${resp.data.cpf}</li>
+
+
+                </ul>
+            `
+        );
+
+
+
+        str = resp.data.km_atual;
+        str = str.substring(0, str.length-5);
+        $('#km_final_sugerido').append(`<span>KM atual: ${str}</span>`)
+        $('#nome_responsavel').val(resp.data.nome_responsavel);
+    }
+</script>
+
+@endif
 @endpush

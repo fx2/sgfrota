@@ -47,6 +47,8 @@ class VeiculoAgendamentoController extends Controller
         $this->pdfTitles = ['Veículo', 'Locatário', 'Período', 'Saida', 'Volta'];
         $this->indexFields = [['controle_frota', 'veiculo'],['auth', 'name'], ['periodo'],['previsao_saida'],['previsao_volta']];
         $this->indexTitles = ['Veículo', 'Locatário', 'Período', 'Saida', 'Volta'];
+
+        $this->pdfTitle = 'Agendamentos';
     }
 
     public function customIndex(Request $request)

@@ -171,10 +171,15 @@ trait CrudControllerTrait
             'results' => $result->get(),
             'fields' => $this->pdfFields,
             'titles' => $this->pdfTitles,
-            'valor' => ''
+            'pdfTitle' => $this->pdfTitle
         ];
 
-        $pdf = PDF::loadView('admin/pdf/relatoriosPDF', $data);
+        $path = 'admin/pdf/relatoriosPDF';
+
+        if (isset($this->pdfGeralPath))
+            $path = $this->pdfGeralPath;
+
+        $pdf = PDF::loadView($path, $data);
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');
@@ -205,7 +210,17 @@ trait CrudControllerTrait
             $this->validate($request, $this->validations);
         }
 
+        if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
+            foreach ($this->plusValidationStore as $key => $value){
+                if ($value === false){
+                    toastr()->error($key);
+                    return redirect()->back()->withInput();
+                }
+            }
+        }
+
         $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
@@ -291,6 +306,7 @@ trait CrudControllerTrait
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')

@@ -29,7 +29,7 @@ class VeiculoSaidaService
             return $result = $result->where('id', $id)->get();
 
         return $result = $result->whereNotIn('id',function($query){
-            $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at');
+            $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('veiculo_saidas.deleted_at')->where('veiculo_saidas.status', '=', 1);
         })
         ->get();
     }

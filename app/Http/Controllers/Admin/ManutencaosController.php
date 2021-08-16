@@ -66,6 +66,8 @@ class ManutencaosController extends Controller
         $this->pdfFields = [['data'], ['responsavel_retirada'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_manutencao', 'nome'], ['descricao_manutencao'], ['fornecedor', 'razao_social'], ['valor']];
         $this->pdfTitles = ['Data', 'Responsável', 'Veículo', 'Setor', 'Tipo', 'Descrição', 'Fornecedor', 'Valor R$'];
 
+        $this->pdfTitle = 'Manutenções/Despesas';
+
         $this->numbersWithDecimal = ['valor'];
     }
 

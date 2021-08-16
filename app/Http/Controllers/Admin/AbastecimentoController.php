@@ -63,6 +63,8 @@ class AbastecimentoController extends Controller
         $this->indexFields = [['responsavel'], ['tipo_combustivel', 'nome'],['fornecedor', 'razao_social'], ['status']];
         $this->indexTitles = ['Responsável','Tipo de Combustível', 'Fornecedor', 'Status'];
 
+                $this->pdfTitle = 'Abastecimento';
+
         $this->numbersWithDecimal = ['km_atual', 'qtd_litros', 'valor'];
     }
 

@@ -4,7 +4,7 @@
             <label for="setor_id" class="control-label">{{ 'Setor' }}</label>
         </div>
         <div class="col-10">
-            <select name="setor_id" class="form-control" id="setor_id">
+            <select name="setor_id" class="form-control" id="setor_id" required>
                 <option value="">Selecione ...</option>
                 @foreach ($selectModelFields['Setor'] as $optionKey => $optionValue)
                     <option value="{{ $optionValue->id }}"

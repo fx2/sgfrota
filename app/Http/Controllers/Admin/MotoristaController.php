@@ -66,6 +66,8 @@ class MotoristaController extends Controller
             'cnh_imagem' => 'required',
             'status' => 'required|boolean',
         ];
+
+        $this->pdfTitle = 'Motoristas';
     }
 
     public function customListagem(Request $request)

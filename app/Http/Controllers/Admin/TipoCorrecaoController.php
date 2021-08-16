@@ -39,6 +39,8 @@ class TipoCorrecaoController extends Controller
         $this->pdfTitles = ['Id', 'Descrição', 'Status'];
         $this->indexFields = [['nome'], ['descricao'], ['status']];
         $this->indexTitles = ['Id', 'Descrição', 'Status'];
+
+        $this->pdfTitle = 'Tipo de Correções';
     }
 
 }
