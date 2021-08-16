@@ -22,11 +22,11 @@
             </span>
         @enderror
 
-        @if (Route::has('password.request'))
-            <a class="btn btn-link forgot" href="{{ route('password.request') }}">
-                Esqueceu sua senha?
-            </a>
-        @endif
+{{--        @if (Route::has('password.request'))--}}
+{{--            <a class="btn btn-link forgot" href="{{ route('password.request') }}">--}}
+{{--                Esqueceu sua senha?--}}
+{{--            </a>--}}
+{{--        @endif--}}
         <br><br>
         <input class="btn btn-primary loginbtn" type="submit" value="Login">
     </form>
