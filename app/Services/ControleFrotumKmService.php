@@ -16,21 +16,21 @@ class ControleFrotumKmService
     {
         $car = ControleFrotum::where('id', $id)->first();
 
-        $findKmAtual = decimal($car->km_atual);
-        $km_atual = decimal(str_replace('.', '', str_replace(',', '', $km_atual)));
+        $findKmAtual = decimal( $car->km_atual);
+        $findKmAtual = str_replace(',', '', $findKmAtual);
 
-        $findKmAtualInt = (int) $findKmAtual;
-        $kmAtualInt = (int) $km_atual;
+        $kmAtual = str_replace('.', '', $km_atual);
 
         if ($entrada){
-            if ($findKmAtual == null || $findKmAtualInt >= $kmAtualInt)
+            if ($findKmAtual == null || $findKmAtual >= $kmAtual)
                 return $findKmAtual;
         }
 
-        if ($findKmAtual == null || $findKmAtualInt > $kmAtualInt){
+        if ($findKmAtual == null || $findKmAtual > $kmAtual){
             return $findKmAtual;
         }
 
+        $km_atual = decimal(str_replace('.', '', str_replace(',', '', $km_atual)));
         $car->km_atual = str_replace('.', '', str_replace(',', '', $km_atual));
         $car->save();
 
