@@ -23,16 +23,16 @@ async function loadMotorista(motorista_id = null){
     motoristaAppend.after(
         `
             <ul class="ml-3 list-unstyled" id="motorista-remove-append">
-                <li><strong>Proprietário</strong>: ${resp.data.nome} </li>
                 <li><strong>Tipo CNH</strong>: ${resp.data.tipo_cnh.nome}</li>
                 <li><strong>CNH</strong>: ${resp.data.cnh}</li>
-                <li ${validade ? 'style="color: red;"' : ''}><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
-                <li><strong>RG</strong>: ${resp.data.rg}</li>
-                <li><strong>CPF</strong>: ${resp.data.cpf}</li>
-                <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
             </ul>
         `
     );
+
+    // <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
+    // <li ${validade ? 'style="color: red;"' : ''}><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
+    //             <li><strong>RG</strong>: ${resp.data.rg}</li>
+    //             <li><strong>CPF</strong>: ${resp.data.cpf}</li>
 }
 
 

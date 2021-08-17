@@ -66,7 +66,7 @@ class VeiculoEntradaController extends Controller
             'controle_frota_id' => 'required',
             'motorista_id' => 'required',
             'km_final' => 'required',
-            'quantidade_combustivel' => 'required',
+//            'quantidade_combustivel' => 'required',
             'mecanica' => 'required',
             'eletrica' => 'required',
             'funilaria' => 'required',

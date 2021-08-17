@@ -340,14 +340,13 @@
                 <ul class="ml-3 list-unstyled" id="motorista-remove-append">
                     <li><strong>TIPO CNH</strong>: ${resp.data.cnh_nome}</li>
                     <li><strong>CNH</strong>: ${resp.data.cnh}</li>
-                    <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
-                    <li><strong>RG</strong>: ${resp.data.rg}</li>
-                    <li><strong>CPF</strong>: ${resp.data.cpf}</li>
-
-
                 </ul>
             `
         );
+
+        // <li><strong>Validade da CNH</strong>: ${moment(resp.data.cnh_validade).format('DD/MM/YYYY')}</li>
+        //             <li><strong>RG</strong>: ${resp.data.rg}</li>
+        //             <li><strong>CPF</strong>: ${resp.data.cpf}</li>
 
 
 

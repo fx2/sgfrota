@@ -71,7 +71,7 @@ class VeiculoSaidaController extends Controller
             'nome_responsavel' => 'required',
             'motorista_id' => 'required',
             'km_inicial' => 'required',
-            'quantidade_combustivel' => 'required',
+//            'quantidade_combustivel' => 'required',
             'mecanica' => 'required',
             'eletrica' => 'required',
             'funilaria' => 'required',

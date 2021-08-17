@@ -67,6 +67,6 @@ class Motoristum extends Model
 
     public function fornecedor()
     {
-        return $this->hasOne('App\Models\Setor', 'id', 'fornecedor_id');
+        return $this->hasOne('App\Models\Fornecedor', 'id', 'fornecedor_id');
     }
 }
