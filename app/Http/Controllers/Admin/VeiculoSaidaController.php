@@ -94,7 +94,7 @@ class VeiculoSaidaController extends Controller
 
         $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['nome_responsavel'], ['km_inicial'],['quantidade_combustivel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['saida_data'],['saida_hora']];
         $this->pdfindividualTitles = ['Motorista', 'Veículo', 'Responsável', 'km_inicial', 'quantidade_combustivel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'saida_data', 'saida_hora'];
-        $this->pdfTitle = 'Relatório de Veículos de Saída';
+        $this->pdfTitle = 'REGISTRO DIÁRIO DE SAÍDA E TRAJETÓRIA DO VEÍCULO ';
 
         $this->numbersWithDecimal = ['km_inicial'];
 

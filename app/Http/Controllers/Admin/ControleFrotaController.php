@@ -67,7 +67,7 @@ class ControleFrotaController extends Controller
             'ano_modelo' => 'required',
             'capacidade' => 'required',
             'cor' => 'required',
-            'patrimonio' => 'required',
+//            'patrimonio' => 'required',
             'estado_veiculo' => 'required',
             'km_inicial' => 'required',
             'dut' => 'required',

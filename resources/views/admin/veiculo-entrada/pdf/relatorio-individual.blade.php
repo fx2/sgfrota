@@ -4,7 +4,7 @@
 {{$pdfTitle}}
 @endsection
 @section('content-title-2')
-NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020
+{{--NOS TERMOS DO ANEXO I – ATO DA MESA Nº 635/2020 e 636/2020--}}
 @endsection
 
 @section('content')
