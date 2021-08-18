@@ -37,9 +37,9 @@
             <table class="borda" style="margin-bottom: 0px; width:78%; left:40px; position:relative;">
                 <tr><td><strong class="text-leftzinho">Proprietário</strong>: {{ $results->motorista->nome }} </td></tr>
                 <tr><td><strong class="text-leftzinho">Típo CNH</strong>: {{ $results->motorista->tipoCnh->nome }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Validade CNH</strong>: {{ convertTimestamp($results->motorista->cnh_validade, 'd/m/Y') }}</td></tr>
-                <tr><td><strong class="text-leftzinho">RG</strong>: {{ $results->motorista->rg }}</td></tr>
-                <tr><td><strong class="text-leftzinho">CPF</strong>: {{ $results->motorista->cpf }} </td></tr>
+                <tr><td><strong class="text-leftzinho">CNH</strong>: {{ $results->motorista->cnh }}</td></tr>
+                <tr><td style="color:white;"><strong class="text-leftzinho">RG</strong>: {{ $results->motorista->rg }}</td></tr>
+                <tr><td style="color:white;"><strong class="text-leftzinho">CPF</strong>: {{ $results->motorista->cpf }} </td></tr>
                                 <tr><td><strong class="text-leftzinho" style="color:white;">a</strong> </td></tr>
 
             </table>
