@@ -17,6 +17,7 @@ class ValeCombustiveisLavagensController extends Controller
     private $model;
     private $path;
     private $redirectPath;
+    private $valecombustiveislavagens;
 
     /**
      * Create a new controller instance.
@@ -33,6 +34,7 @@ class ValeCombustiveisLavagensController extends Controller
         $this->middleware('checksetor:55', ['only' => ['relatorio']]);
 
         $this->model = $valecombustiveislavagens;
+        $this->valecombustiveislavagens = $valecombustiveislavagens;
         $this->saveSetorScope = true;
         $this->path = 'admin.vale-combustiveis-lavagens';
         $this->redirectPath = 'vale-combustiveis-lavagens';
@@ -92,7 +94,24 @@ class ValeCombustiveisLavagensController extends Controller
 
         $result = $result->paginate($limit);
 
-        return view($this->path.'.index', ['results'=>$result, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+        return view($this->path.'.index', [
+            'results'=>$result,
+            'selectModelFields' => $this->selectModelFields(),
+            'fields' => $this->indexFields,
+            'titles' => $this->indexTitles,
+            'quantidadeLitros' => $this->quantidadeLitros($result)
+        ]);
+    }
+
+    public function quantidadeLitros($results)
+    {
+        $sumLitros = 0;
+
+        foreach ($results as $result){
+            $sumLitros += (double) $result->quantidade_litros;
+        }
+
+        return $sumLitros;
     }
 
 }
