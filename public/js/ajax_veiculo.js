@@ -33,6 +33,7 @@ async function loadControleFrotum(controle_frota_id = null){
                 <li><strong>Ano</strong>: ${resp.data.ano_modelo}</li>
                 <li><strong>Km inicial</strong>: ${parseFloat(resp.data.km_inicial)}</li>
                 <li><strong>Placa</strong>: ${resp.data.placa}</li>
+                <li><strong>Dia de Rodízio</strong>: ${diaRodizio(resp.data.placa)}</li>
                 <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
                 <li><strong>Responsavel</strong>: ${resp.data.responsavel.nome}</li>
                 <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
@@ -43,6 +44,27 @@ async function loadControleFrotum(controle_frota_id = null){
     str = resp.data.km_atual !== null ? resp.data.km_atual : resp.data.km_inicial;
     str = str.substring(0, str.length-5);
     $('.km_atual').val(str);
+}
+
+function diaRodizio(placa){
+    numero = placa.slice(-1);
+
+    if (numero == 1 || numero == 2)
+        return 'Segunda-feira';
+
+    if (numero == 3 || numero == 4)
+        return 'Terça-feira';
+
+    if (numero == 5 || numero == 6)
+        return 'Quarta-feira';
+
+    if (numero == 7 || numero == 8)
+        return 'Quinta-feira';
+
+    if (numero == 9 || numero == 0)
+        return 'Sexta-feira';
+
+    return 'Sabado e Domingo Livre';
 }
 
 async function loadControleFrotumClass(controle_frota_id = null){

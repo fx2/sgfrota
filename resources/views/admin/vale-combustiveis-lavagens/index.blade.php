@@ -9,7 +9,16 @@
     </nav>
 
     <div class="card">
-        <div class="card-header h3">Vale de Combustiveis e Lavagens</div>
+        <div class="card-header h3">
+            <div class="d-flex justify-content-between">
+                <span>Vale de Combustiveis e Lavagens</span>
+                @isset($quantidadeLitros)
+                    <span>Litros: {{ $quantidadeLitros }} </span>
+                @else
+                    <span>Litros: {{ \App\Models\ValeCombustiveisLavagen::sum('quantidade_litros') }}</span>
+                @endisset
+            </div>
+        </div>
         <div class="card-body">
             @can('checksetor', VALECOMBUSTIVEISLAVAGENS_ADICIONAR)
                 <a href="{{ url('/vale-combustiveis-lavagens/create') }}" class="btn btn-success btn-sm" title="Add New ValeCombustiveisLavagen">
