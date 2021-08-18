@@ -40,7 +40,7 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead class="thead-hide">
-                        <th>#</th>
+{{--                        <th>#</th>--}}
                         @can('isMasterOrAdmin')
                             <th>Setor</th>
                         @endcan
@@ -55,7 +55,7 @@
                                 <?php continue; ?>
                             @endif
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+{{--                                <td>{{ $loop->iteration }}</td>--}}
                                 @can('isMasterOrAdmin')
                                     <td>{{$item->setor->nome}}</td>
                                 @endcan

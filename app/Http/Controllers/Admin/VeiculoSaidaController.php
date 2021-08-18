@@ -311,6 +311,8 @@ class VeiculoSaidaController extends Controller
 
         $result = $result->where('status', '!=', 0);
 
+        $result = $result->orderBy('id', 'DESC');
+
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', [

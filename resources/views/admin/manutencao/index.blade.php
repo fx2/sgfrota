@@ -41,7 +41,7 @@
                 <table class="table">
                     <thead class="thead-hide">
                         <tr>
-                            <th>#</th>
+{{--                            <th>#</th>--}}
                             @can('isMasterOrAdmin')
                                 <th>Setor</th>
                             @endcan
@@ -54,7 +54,7 @@
                     <tbody>
                         @forelse($results as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+{{--                                <td>{{ $loop->iteration }}</td>--}}
                                 @can('isMasterOrAdmin')
                                     <td>{{$item->setor->nome}}</td>
                                 @endcan

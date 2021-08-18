@@ -41,7 +41,7 @@
                 <table class="table">
                     <thead class="thead-hide">
                         <tr>
-                            <th>#</th>
+{{--                            <th>#</th>--}}
                             @foreach ($titles as $item)
                                 <th>{{ $item }}</th>
                             @endforeach
@@ -51,7 +51,7 @@
                     <tbody>
                         @forelse($results as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+{{--                                <td>{{ $loop->iteration }}</td>--}}
                                 @foreach ($fields as $key => $val)
                                     <td class="borda" scope="row">
                                         @php
