@@ -77,4 +77,11 @@ class VeiculoEntrada extends BaseModel
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
     }
 
+
+
+    public function userAuth()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'auth_id');
+    }
+
 }

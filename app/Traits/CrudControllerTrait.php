@@ -126,6 +126,8 @@ trait CrudControllerTrait
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);
 
+        $result = $result->orderBy('id', 'DESC');
+
         $result = $result->paginate($limit);
 
         return view($this->path.'.index', [
