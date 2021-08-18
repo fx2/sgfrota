@@ -80,7 +80,7 @@
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>KM SAIDA</strong>: {{ decimal($results->veiculo_saida->km_inicial) }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Qtd. Combustível</strong>: {{ $results->veiculo_saida->quantidade_combustivel }}</p></td>
-        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário</strong>: {{ $results->veiculo_saida->userAuth->name }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário SAIDA</strong>: {{ $results->veiculo_saida->userAuth->name }} </p></td>
     </tr>
 </table>
 
@@ -311,7 +311,13 @@
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Data Entrada</strong>: {{ convertTimestamp($results->entrada_data, 'd/m/Y') }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Horário Entrada</strong>: {{ convertTimestamp($results->entrada_hora, 'H:i') }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Km Entrada</strong>: {{ decimal($results->km_final) }} </p></td>
+    </tr>
+</table>
+
+<table class="table borda" style="margin-top: 8px;">
+    <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Qtd. Combustível</strong>: {{ $results->quantidade_combustivel }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário ENTRADA</strong>: {{ $results->userAuth->name  }} </p></td>
     </tr>
 </table>
 
