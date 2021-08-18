@@ -243,7 +243,15 @@
         <label for="km_inicial" class="control-label">{{ 'Km Inicial' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="km_inicial" type="text" id="km_inicial" value="{{ isset($result->km_inicial) ? number_format((float) $result->km_inicial, 0) : old('km_inicial')}}" >
+        <input
+            class="form-control decimal"
+            name="km_inicial" type="text"
+            id="km_inicial"
+            value="{{ isset($result->km_inicial) ? number_format((float) $result->km_inicial, 0) : old('km_inicial')}}"
+            @if ($formMode != 'create')
+                readonly
+            @endif
+        >
         {!! $errors->first('km_inicial', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
