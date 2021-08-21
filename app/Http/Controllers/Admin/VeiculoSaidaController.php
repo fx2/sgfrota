@@ -57,12 +57,14 @@ class VeiculoSaidaController extends Controller
         $this->withFields = ['controle_frota', 'motorista'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
+            'VeiculoReservaEntrada' => '\App\Models\VeiculoReservaEntrada',
             'Motoristum' => '\App\Models\Motoristum',
             'Setor' => '\App\Models\Setor'
         ];
         $this->joinSearch = [
-            'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
+            'veiculo_reserva_entrada_id' => ['veiculo_reserva_entrada', '\App\Models\VeiculoReservaEntrada'],
+            'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'setor_id' => ['controle_frota', '\App\Models\Setor'],
         ];
         $this->fileName = [];

@@ -59,6 +59,11 @@ class VeiculoSaida extends BaseModel
         return $this->hasOne('App\Models\ControleFrotum', 'id', 'controle_frota_id');
     }
 
+    public function veiculo_reserva_entrada()
+    {
+        return $this->hasOne('App\Models\VeiculoReservaEntrada', 'id', 'veiculo_reserva_entrada_id');
+    }
+
     public function motorista()
     {
         return $this->hasOne('App\Models\Motoristum', 'id', 'motorista_id');
