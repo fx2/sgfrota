@@ -57,12 +57,14 @@ class VeiculoSaidaController extends Controller
         $this->withFields = ['controle_frota', 'motorista'];
         $this->selectModelFields = [
             'ControleFrotum' => '\App\Models\ControleFrotum',
+            'VeiculoReservaEntrada' => '\App\Models\VeiculoReservaEntrada',
             'Motoristum' => '\App\Models\Motoristum',
             'Setor' => '\App\Models\Setor'
         ];
         $this->joinSearch = [
-            'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'controle_frota_id' => ['controle_frota', '\App\Models\ControleFrotum'],
+            'veiculo_reserva_entrada_id' => ['veiculo_reserva_entrada', '\App\Models\VeiculoReservaEntrada'],
+            'motorista_id' => ['motorista', '\App\Models\Motoristum'],
             'setor_id' => ['controle_frota', '\App\Models\Setor'],
         ];
         $this->fileName = [];
@@ -131,7 +133,17 @@ class VeiculoSaidaController extends Controller
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 
-        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_inicial']);
+        $veiculo = explode('-', $requestData['controle_frota_id']);
+        if ($veiculo[1] != ''){
+            $verificaKM = true;
+            $requestData['controle_frota_id'] = null;
+            $requestData['veiculo_reserva_entrada_id'] = $veiculo[1];
+        } else {
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_inicial']);
+            $requestData['controle_frota_id'] = $veiculo[0];
+            $requestData['veiculo_reserva_entrada_id'] = null;
+        }
+
         if ($verificaKM !== true){
             toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
             return redirect()->back()->withInput();
@@ -165,7 +177,7 @@ class VeiculoSaidaController extends Controller
         $result = $this->model
           ->where('id', '=', $id)->first();
 
-        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }

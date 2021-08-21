@@ -99,8 +99,13 @@
                                         <td>{{$item->setor->nome}}</td>
                                     @endcan
                                     <td>{{$item->motorista->nome}}</td>
-                                    <td>{{$item->controle_frota->veiculo}}</td>
-                                    <td>{{$item->controle_frota->placa}}</td>
+                                    @if($item->controle_frota_id)
+                                        <td>{{$item->controle_frota->veiculo}}</td>
+                                        <td>{{$item->controle_frota->placa}}</td>
+                                    @else
+                                        <td>{{$item->veiculo_reserva_entrada->veiculo}}</td>
+                                        <td>{{$item->veiculo_reserva_entrada->placa}}</td>
+                                    @endif
                                     <td>{{ convertTimestamp($item->saida_data, 'd/m/Y') }}</td>
                                     <td>{{ convertTimestamp($item->saida_hora, 'H:i') }}</td>
                                     <td>{{$item->nome_responsavel}}</td>

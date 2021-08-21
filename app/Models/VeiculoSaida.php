@@ -31,6 +31,7 @@ class VeiculoSaida extends BaseModel
     protected $fillable = [
         'setor_id',
         'controle_frota_id',
+        'veiculo_reserva_entrada_id',
         'motorista_id',
         'nome_responsavel',
         'km_inicial',
@@ -56,6 +57,11 @@ class VeiculoSaida extends BaseModel
     public function controle_frota()
     {
         return $this->hasOne('App\Models\ControleFrotum', 'id', 'controle_frota_id');
+    }
+
+    public function veiculo_reserva_entrada()
+    {
+        return $this->hasOne('App\Models\VeiculoReservaEntrada', 'id', 'veiculo_reserva_entrada_id');
     }
 
     public function motorista()

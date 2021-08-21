@@ -6,10 +6,10 @@
         <select name="controle_frota_id" class="form-control" id="controle_frota_id" >
             <option value="">Selecione ...</option>
             @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                <option value="{{ $optionValue->id }}"
+                <option value="{{ $optionValue->id }}-{{ $optionValue->veiculo_reserva_entrada_id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
                     {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->veiculo }}</option>
+                >{{ $optionValue->veiculo }}-{{ $optionValue->id }}</option>
             @endforeach
         </select>
         {!! $errors->first('controle_frota_id', '<p class="help-block">:message</p>') !!}
