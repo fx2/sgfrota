@@ -293,10 +293,10 @@
               </li>
           @endcan
 
-          @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVASAIDA_VISUALIZAR))
+          @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVADEVOLUCAO_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
-                '/veiculo-reserva-saida',
                 '/veiculo-reserva-entrada',
+                '/veiculo-reserva-devolucao',
             ]) ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-snowflake"></i>
@@ -306,12 +306,22 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  @can('checksetor', VEICULORESERVASAIDA_VISUALIZAR)
+                  @can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR)
                       <li class="nav-item">
                         <a href="{{ url('veiculo-reserva-entrada') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-reserva-entrada']) ? 'active' : '' }}">
                           <i class="nav-icon far fa-circle nav-icon"></i>
                           <p>
                             Entrada
+                          </p>
+                        </a>
+                      </li>
+                  @endcan
+                  @can('checksetor', VEICULORESERVADEVOLUCAO_VISUALIZAR)
+                      <li class="nav-item">
+                        <a href="{{ url('veiculo-reserva-devolucao') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-reserva-devolucao']) ? 'active' : '' }}">
+                          <i class="nav-icon far fa-circle nav-icon"></i>
+                          <p>
+                            Devolução
                           </p>
                         </a>
                       </li>

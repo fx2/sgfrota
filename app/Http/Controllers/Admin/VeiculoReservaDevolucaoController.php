@@ -1,16 +1,16 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
 
+use App\Http\Controllers\Controller;
 use App\Models\VeiculoReservaEntrada;
 use App\Services\VerificaPerfil;
-use Illuminate\Http\Request;
 use App\Traits\CrudControllerTrait;
+use Illuminate\Http\Request;
 
-class VeiculoReservaEntradaController extends Controller
+class VeiculoReservaDevolucaoController extends Controller
 {
     use CrudControllerTrait;
 
@@ -23,20 +23,13 @@ class VeiculoReservaEntradaController extends Controller
      *
      * @return void
      */
-    public function __construct(VeiculoReservaEntrada $veiculoreservaentrada)
+    public function __construct(VeiculoReservaEntrada $veiculoReservaEntrada)
     {
-
         $this->middleware('auth');
-//        $this->middleware('checksetor:', ['only' => ['index']]);
-//        $this->middleware('checksetor:', ['only' => ['create']]);
-//        $this->middleware('checksetor:', ['only' => ['edit']]);
-//        $this->middleware('checksetor:', ['only' => ['destroy']]);
-//        $this->middleware('checksetor:', ['only' => ['relatorio']]);
-
-        $this->model = $veiculoreservaentrada;
+        $this->model = $veiculoReservaEntrada;
         $this->saveSetorScope = true;
-        $this->path = 'admin.veiculo-reserva-entrada';
-        $this->redirectPath = 'veiculo-reserva-entrada';
+        $this->path = 'admin.veiculo-reserva-devolucao';
+        $this->redirectPath = 'veiculo-reserva-devolucao';
         $this->withFields = ['tipo_veiculoHasOne', 'tipo_combustivel', 'marca', 'modelo', 'responsavel', 'setor'];
         $this->selectModelFields = [
             'TipoVeiculo' => '\App\Models\TipoVeiculo',
@@ -56,32 +49,9 @@ class VeiculoReservaEntradaController extends Controller
             'setor' => ['setor', '\App\Models\Setor'],
         ];
         $this->fileName = ['dut', 'certificado_vistoria', 'foto'];
-        $this->uploadFilePath = 'images/veiculo-reserva-entrada';
+        $this->uploadFilePath = 'images/veiculo-reserva-devolucao';
         $this->validations = [
-            'tipo_veiculo_id' => 'required',
-            'tipo_combustivel_id' => 'required',
-            'marca_id' => 'required',
-            'modelo_id' => 'required',
-            'tipo_responsavel' => 'required',
-            'tipo_responsavel_id' => 'required',
-            'tipo_veiculo' => 'required',
-            'disponivel_outros_departamentos' => 'required',
-            // 'veiculo_escolar' => 'required',
-            'renavan' => 'required',
-            'placa' => 'required',
-            'chassi' => 'required',
-            'especie_tipo' => 'required',
-            'veiculo' => 'required',
-            'ano_fabricacao' => 'required',
-            'ano_modelo' => 'required',
-            'capacidade' => 'required',
-            'cor' => 'required',
-//            'patrimonio' => 'required',
-            'estado_veiculo' => 'required',
-            'km_inicial' => 'required',
-            'dut' => 'required',
-            'foto' => 'required',
-            'status' => 'required',
+
         ];
         $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
         $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
@@ -92,6 +62,16 @@ class VeiculoReservaEntradaController extends Controller
         $this->numbersWithDecimal = ['km_inicial', 'entrada_km_atual']; //'km_atual' tambem
     }
 
+    /**
+     * Display a listing of the resource.
+     * ?limit=20
+     * ?order=title,asc
+     * ?field=value -> where
+     * ?like=field,value
+     * ?where=field,condition,value
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $verificaPerfil = new VerificaPerfil;
@@ -161,11 +141,10 @@ class VeiculoReservaEntradaController extends Controller
             return $result->first();
         }
 
-        $result = $result->withTrashed();
-
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);
 
+        $result = $result->withTrashed();
         $result = $result->orderBy('id', 'DESC');
 
         $result = $result->paginate($limit);
@@ -177,54 +156,11 @@ class VeiculoReservaEntradaController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $userAuth = auth('api')->user();
-
-        if (!empty($this->validations)) {
-            $this->validate($request, $this->validations);
-        }
-
-        if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
-            foreach ($this->plusValidationStore as $key => $value){
-                if ($value === false){
-                    toastr()->error($key);
-                    return redirect()->back()->withInput();
-                }
-            }
-        }
-
-        $requestData = $request->all();
-        $requestData['auth_id'] = $userAuth->id;
-
-        if ($this->saveSetorScope){
-            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
-                $requestData['setor_id'] = $userAuth->setor_id;
-        }
-
-        if (!empty($this->checkboxExplode)) {
-            $requestData = $this->saveCheckboxExplode($requestData);
-        }
-
-        if (!empty($this->fileName)) {
-            $requestData = $this->eachFiles($requestData, $request);
-        }
-
-        if (!empty($this->numbersWithDecimal)) {
-            $requestData = $this->formatRemoveDecimal($requestData);
-        }
-
-        $requestData['km_atual'] = $requestData['km_inicial'];
-
-        $create = $this->model->create($requestData);
-        $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
-
-        return redirect($this->redirectPath)->withInput();
-    }
-
     public function update(Request $request, $id)
     {
         $userAuth = auth('api')->user();
+
+        $requestToUpdate = [];
 
         if (!empty($this->validations)) {
             foreach ($this->fileName as $key => $value) {
@@ -239,8 +175,10 @@ class VeiculoReservaEntradaController extends Controller
         $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
-            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
+            if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin'){
                 $requestData['setor_id'] = $userAuth->setor_id;
+                $requestToUpdate['setor_id'] = $requestData['setor_id'];
+            }
         }
 
         if (!empty($this->checkboxExplode)) {
@@ -251,13 +189,19 @@ class VeiculoReservaEntradaController extends Controller
             $requestData = $this->eachFiles($requestData, $request);
         }
 
-        if (!empty($this->numbersWithDecimal)) {
-            $requestData = $this->formatRemoveDecimal($requestData);
-        }
+        $requestToUpdate['devolucao_data'] = $requestData['devolucao_data'];
+        $requestToUpdate['devolucao_horario'] = $requestData['devolucao_horario'];
+        $requestToUpdate['devolucao_km_atual'] = $requestData['devolucao_km_atual'] = str_replace('.', '', str_replace(',', '', $requestData['devolucao_km_atual']));
+        $requestToUpdate['devolucao_combustivel'] = $requestData['devolucao_combustivel'];
+        $requestToUpdate['devolucao_recebido_por'] = $requestData['devolucao_recebido_por'];
+        $requestToUpdate['devolucao_observacao'] = $requestData['devolucao_observacao'];
+        $requestToUpdate['auth_id'] = $requestData['auth_id'];
 
-        $requestData['km_atual'] = str_replace('.', '', str_replace(',', '', $requestData['km_atual']));
+        $requestToUpdate['tipo'] = VeiculoReservaEntrada::TIPO_DEVOLUCAO;
 
-        $result->update($requestData);
+        $result->update($requestToUpdate);
+
+        $result->delete();
 
         $requestData['id'] = $result->id;
         $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);

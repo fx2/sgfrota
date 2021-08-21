@@ -4,20 +4,20 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item">Veiculo Reserva Entrada</li>
+            <li class="breadcrumb-item">Veiculo Reserva Devolução</li>
         </ol>
     </nav>
 
     <div class="card">
-        <div class="card-header h3">Veiculo Reserva Entrada</div>
+        <div class="card-header h3">Veiculo Reserva Devolução</div>
         <div class="card-body">
-            @can('checksetor', VEICULORESERVAENTRADA_ADICIONAR)
-                <a href="{{ url('/veiculo-reserva-entrada/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoReservaEntrada">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
-                </a>
-            @endcan
+{{--            @can('checksetor', VEICULORESERVADEVOLUCAO_ADICIONAR)--}}
+{{--                <a href="{{ url('/veiculo-reserva-devolucao/create') }}" class="btn btn-success btn-sm" title="Add New VeiculoReservaDevolucao">--}}
+{{--                    <i class="fa fa-plus" aria-hidden="true"></i> Adicionar--}}
+{{--                </a>--}}
+{{--            @endcan--}}
 
-            <form method="GET" action="{{ url('veiculo-reserva-entrada/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+            <form method="GET" action="{{ url('veiculo-reserva-devolucao/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <span class="input-group-append">
                         <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
@@ -96,7 +96,7 @@
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-warning mr-4" data-dismiss="modal">Fechar</button>
                                 <button type="submit" class="btn btn-primary without-pdf">Filtrar listagem</button>
-                                @can('checksetor', VEICULORESERVAENTRADA_RELATORIO)
+                                @can('checksetor', VEICULORESERVADEVOLUCAO_RELATORIO)
                                     <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
                                     <button class="ml-3 btn btn-secondary export-pdf" type="submit">
                                         <i class="fas fa-file-pdf"></i> Filtrar PDF
@@ -221,22 +221,20 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-reserva-entrada/' . $item->id) }}" title="Visualizar VeiculoReservaEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-
-
                                     @if(!$item->deleted_at)
-                                         @can('checksetor', VEICULORESERVAENTRADA_EDITAR)
-                                            <a href="{{ url('/veiculo-reserva-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoReservaEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                        {{-- <a href="{{ url('/veiculo-reserva-devolucao/' . $item->id) }}" title="Visualizar VeiculoReservaDevolucao"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
+                                        @can('checksetor', VEICULORESERVADEVOLUCAO_EDITAR)
+                                            <a href="{{ url('/veiculo-reserva-devolucao/' . $item->id . '/edit') }}" title="Editar VeiculoReservaDevolucao"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
                                         @endcan
 
-                                        @can('checksetor', VEICULORESERVAENTRADA_DELETAR)
-                                            <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-reserva-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoReservaEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                        @endcan
+{{--                                    @can('checksetor', VEICULORESERVADEVOLUCAO_DELETAR)--}}
+{{--                                        <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-reserva-devolucao" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoReservaDevolucao"><i class="fa fa-trash" aria-hidden="true"></i></button>--}}
+{{--                                    @endcan--}}
                                     @endif
                                 </td>
                             </tr>
                         @empty
-                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Veículo Reserva Entrada encontrado</p>
+                            <p class="p-1 hide-thead" onload="hideThead()">Nenhum Veiculo Reserva Devolução encontrado</p>
                         @endforelse
                     </tbody>
                 </table>

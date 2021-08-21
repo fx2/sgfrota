@@ -9,6 +9,9 @@ class VeiculoReservaEntrada extends BaseModel
 {
     use SoftDeletes;
 
+    const TIPO_DEVOLUCAO = 'devolucao';
+    const TIPO_ENTRADA = 'entrada';
+
     /**
      * The database table used by the model.
      *
@@ -58,14 +61,24 @@ class VeiculoReservaEntrada extends BaseModel
         'foto',
         'controle_frota_id',
         'entrada_forma_substituicao',
-        'entrada_entrada',
+        'entrada_data',
         'entrada_horario',
         'entrada_km_atual',
         'entrada_combustivel',
         'entrada_recebido_por',
         'entrada_observacao',
         'auth_id',
-        'status'
+        'status',
+
+        'tipo',
+
+        // devolucao
+        'devolucao_data',
+        'devolucao_horario',
+        'devolucao_km_atual',
+        'devolucao_combustivel',
+        'devolucao_recebido_por',
+        'devolucao_observacao',
     ];
 
      public function tipo_veiculoHasOne()

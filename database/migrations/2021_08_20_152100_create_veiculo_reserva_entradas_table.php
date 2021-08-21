@@ -46,7 +46,7 @@ class CreateVeiculoReservaEntradasTable extends Migration
             $table->string('foto')->nullable();
             $table->integer('controle_frota_id')->nullable();
             $table->text('entrada_forma_substituicao')->nullable();
-            $table->date('entrada_entrada')->nullable();
+            $table->date('entrada_data')->nullable();
             $table->time('entrada_horario')->nullable();
             $table->double('entrada_km_atual')->nullable();
             $table->string('entrada_combustivel')->nullable();

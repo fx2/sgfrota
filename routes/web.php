@@ -58,3 +58,4 @@ Route::resource('city', 'App\Http\Controllers\Admin\CityController');
 Route::resource('vale-combustiveis-lavagens', 'App\Http\Controllers\Admin\ValeCombustiveisLavagensController');
 Route::resource('veiculo-reserva-entrada', 'App\Http\Controllers\Admin\VeiculoReservaEntradaController');
 Route::resource('veiculo-reserva-entrada', 'App\Http\Controllers\Admin\VeiculoReservaEntradaController');
+Route::resource('veiculo-reserva-devolucao', 'App\Http\Controllers\Admin\VeiculoReservaDevolucaoController');

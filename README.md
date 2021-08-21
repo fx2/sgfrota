@@ -149,6 +149,7 @@ php artisan crud:generate ValeCombustiveisLavagens --fields='controle_frota_id#s
 php artisan crud:generate VeiculoReservaEntrada --fields='tipo_veiculo_id#integer;setor_id#integer;tipo_responsavel_id#integer;tipo_responsavel#boolean;tipo_combustivel_id#integer;marca_id#integer;modelo_id#integer;tipo_veiculo#boolean;nome_proprietario#string;disponivel_outros_departamentos#boolean;veiculo_escolar#boolean;certificado_vistoria#string;vencto_vistoria_escolar#date;renavan#string;placa#string;chassi#string;especie_tipo#string;veiculo#string;ano_fabricacao#integer;ano_modelo#integer;capacidade#string;cor#string;patrimonio#string;estado_veiculo#text;km_inicial#decimal;km_atual#decimal;dut#string;foto#string;controle_frota_id#integer;entrada_forma_substituicao#text;entrada_entrada#date;entrada_horario#time;entrada_km_atual#double;entrada_combustivel#string;entrada_recebido_por#string;entrada_observacao#text;auth_id#integer;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes 
 
 
+php artisan crud:generate VeiculoReservaDevolucao --fields='veiculo_reserva_entrada_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};data#date;horario#time;km_atual#double;combustivel#string;devolvido_por#string;observacao#text;auth_id#integer;status#boolean '  --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes
 
 
 FALTA OS JOINS e FOREIGH KEY
