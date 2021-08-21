@@ -49,7 +49,21 @@
           </li>
 
           @can('isMasterOrAdmin')
-            <li class="nav-item {{ Str::contains(url()->current(), ['/tipo-combustivel', '/tipo-manutencao', '/tipo-veiculo', '/tipo-cnh', '/marca', '/tipo-multas', '/modelo', '/tipo-correcao', 'setor', 'tipo-responsavel']) ? 'menu-open' : '' }}">
+            <li class="nav-item {{ Str::contains(url()->current(), [
+                '/perfil',
+                '/users',
+                '/tipo-combustivel',
+                '/tipo-manutencao',
+                '/tipo-veiculo',
+                '/tipo-cnh',
+                '/marca',
+                '/tipo-multas',
+                '/modelo',
+                '/tipo-correcao',
+                '/setor',
+                '/tipo-responsavel',
+                '/fornecedor',
+            ]) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-snowflake"></i>
               <p>
@@ -279,13 +293,40 @@
               </li>
           @endcan
 
+          @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVASAIDA_VISUALIZAR))
+            <li class="nav-item {{ Str::contains(url()->current(), [
+                '/veiculo-reserva-saida',
+                '/veiculo-reserva-entrada',
+            ]) ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-snowflake"></i>
+                  <p>
+                    Veículo Reserva
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  @can('checksetor', VEICULORESERVASAIDA_VISUALIZAR)
+                      <li class="nav-item">
+                        <a href="{{ url('veiculo-reserva-entrada') }}" class="nav-link {{ Str::contains(url()->current(), ['/veiculo-reserva-entrada']) ? 'active' : '' }}">
+                          <i class="nav-icon far fa-circle nav-icon"></i>
+                          <p>
+                            Entrada
+                          </p>
+                        </a>
+                      </li>
+                  @endcan
+                </ul>
+            </li>
+        @endif
+
 
           <hr style="border-color: white; border-width: 1px;  width:100%;">
 
           <li class="nav-item mb-5">
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();">
+                document.getElementById('logout-form').submit();">
                 <i class="nav-icon fas fa-reply"></i>
                 {{ __('DESLOGAR') }}
             </a>
