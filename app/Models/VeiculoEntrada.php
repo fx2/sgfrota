@@ -31,6 +31,7 @@ class VeiculoEntrada extends BaseModel
     protected $fillable = [
         'setor_id',
         'controle_frota_id',
+        'veiculo_reserva_entrada_id',
         'km_final',
         'relatorio_trajeto_motorista',
         'quantidade_combustivel',

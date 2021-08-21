@@ -245,4 +245,8 @@ class VeiculoReservaDevolucaoController extends Controller
         return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
+    public function customShow($id)
+    {
+        return 'ovo';
+    }
 }

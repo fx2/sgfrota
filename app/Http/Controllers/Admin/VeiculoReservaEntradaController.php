@@ -216,6 +216,8 @@ class VeiculoReservaEntradaController extends Controller
 
         $requestData['km_atual'] = $requestData['km_inicial'];
 
+        $requestData['controle_frota_id'] = explode('-', $requestData['controle_frota_id'])[0];
+
         $create = $this->model->create($requestData);
         $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
 
@@ -301,4 +303,8 @@ class VeiculoReservaEntradaController extends Controller
         return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
+    public function customShow($id)
+    {
+        return 'ovo';
+    }
 }

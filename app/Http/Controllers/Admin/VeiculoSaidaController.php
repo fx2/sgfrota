@@ -131,7 +131,17 @@ class VeiculoSaidaController extends Controller
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 
-        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_inicial']);
+        $veiculo = explode('-', $requestData['controle_frota_id']);
+        if ($veiculo[1] != ''){
+            $verificaKM = true;
+            $requestData['controle_frota_id'] = null;
+            $requestData['veiculo_reserva_entrada_id'] = $veiculo[1];
+        } else {
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_inicial']);
+            $requestData['controle_frota_id'] = $veiculo[0];
+            $requestData['veiculo_reserva_entrada_id'] = null;
+        }
+
         if ($verificaKM !== true){
             toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
             return redirect()->back()->withInput();
@@ -165,7 +175,7 @@ class VeiculoSaidaController extends Controller
         $result = $this->model
           ->where('id', '=', $id)->first();
 
-        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result);
 
         return view($this->path.'.edit', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }

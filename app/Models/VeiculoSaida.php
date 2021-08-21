@@ -31,6 +31,7 @@ class VeiculoSaida extends BaseModel
     protected $fillable = [
         'setor_id',
         'controle_frota_id',
+        'veiculo_reserva_entrada_id',
         'motorista_id',
         'nome_responsavel',
         'km_inicial',

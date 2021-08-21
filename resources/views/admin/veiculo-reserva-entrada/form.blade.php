@@ -345,7 +345,7 @@
             <select name="controle_frota_id" class="form-control" id="controle_frota_id">
                 <option value="">Selecione ...</option>
                 @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}"
+                    <option value="{{ $optionValue->id }}-"
                         {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
                         {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
                     >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}</option>

@@ -15,9 +15,13 @@ async function loadControleFrotum(controle_frota_id = null){
     if (controle_frota_id == null)
         return true;
 
+    veiculo_id = verificaVeiculoReserva(controle_frota_id);
+
     $('#veiculo-remove-append').remove();
 
-    const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${controle_frota_id}&first=true`);
+    route = verificaVeiculoReserva(controle_frota_id);
+    console.log(route);
+    let resp = await axios.get(route);
 
     let proprietario = resp.data.tipo_veiculo == 1 ? 'Veículo próprio' : resp.data.nome_proprietario;
 
@@ -44,6 +48,15 @@ async function loadControleFrotum(controle_frota_id = null){
     str = resp.data.km_atual !== null ? resp.data.km_atual : resp.data.km_inicial;
     str = str.substring(0, str.length-5);
     $('.km_atual').val(str);
+}
+
+function verificaVeiculoReserva(controle_frota_id){
+    const idList = controle_frota_id.split('-');
+
+    if (idList[1] != "")
+        return `${BASE_URL}/veiculo-reserva-entrada?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${idList[1]}&first=true`;
+
+    return `${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${idList[0]}&first=true`;
 }
 
 function diaRodizio(placa){
@@ -73,7 +86,7 @@ async function loadControleFrotumClass(controle_frota_id = null){
 
     $('.veiculo-remove-append').remove();
 
-    const resp = await axios.get(`${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo&where=id,=,${controle_frota_id}&first=true`);
+    let resp = await axios.get(verificaVeiculoReserva(controle_frota_id));
 
     let proprietario = resp.data.tipo_veiculo == 1 ? 'Veículo próprio' : resp.data.nome_proprietario;
 
