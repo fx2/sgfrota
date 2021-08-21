@@ -20,7 +20,7 @@ async function loadControleFrotum(controle_frota_id = null){
     $('#veiculo-remove-append').remove();
 
     route = verificaVeiculoReserva(controle_frota_id);
-    console.log(route);
+
     let resp = await axios.get(route);
 
     let proprietario = resp.data.tipo_veiculo == 1 ? 'Veículo próprio' : resp.data.nome_proprietario;
