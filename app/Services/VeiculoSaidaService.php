@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\ControleFrotum;
 use App\Models\VeiculoReservaEntrada;
+use App\Models\VeiculoSaida;
 
 /**
  * Class VeiculoSaidaService
@@ -35,14 +36,14 @@ class VeiculoSaidaService
         return $this->veiculosDisponiveisComReservas();
     }
 
-    public function exibeDisponivel($result, $id)
+    public function exibeDisponivel($id)
     {
         return $this->controleFrotum::select('id', 'veiculo')->where('id', $id)->get();
     }
 
     public function exibeDisponivelVeiculoReserva($id)
     {
-        $result = VeiculoReservaEntrada('id', 'veiculo')->where('id', $id)->get();
+        $result = VeiculoReservaEntrada::select('id', 'veiculo', 'id as veiculo_reserva_entrada_id')->where('id', $id)->get();
 
         return $result;
     }
@@ -57,7 +58,14 @@ class VeiculoSaidaService
         })
         ->get();
 
-        $veiculos = VeiculoReservaEntrada::select('controle_frota_id as id', 'veiculo', 'id as veiculo_reserva_entrada_id')->whereIn('controle_frota_id', $result->keys())->get();
+        $ids = [];
+        foreach ($result as $key => $val){
+            $ids[$key] = $val->id;
+        }
+
+        $veiculos = VeiculoReservaEntrada::select('controle_frota_id as id', 'veiculo', 'id as veiculo_reserva_entrada_id')
+            ->whereIn('controle_frota_id', $ids)
+            ->get();
 
         if ($veiculos->isEmpty())
             return $result;
@@ -69,7 +77,9 @@ class VeiculoSaidaService
         });
 
         foreach ($veiculos as $vel){
-            $filtered->push($vel);
+            $verify = VeiculoSaida::where('veiculo_reserva_entrada_id', $vel->veiculo_reserva_entrada_id)->exists();
+            if (!$verify)
+                $filtered->push($vel);
         }
 
         return $filtered;

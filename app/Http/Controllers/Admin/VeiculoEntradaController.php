@@ -178,7 +178,21 @@ class VeiculoEntradaController extends Controller
             $requestData = $this->formatRemoveDecimal($requestData);
         }
 
-        $saida = VeiculoSaida::where('controle_frota_id', $requestData['controle_frota_id'])->first();
+        $veiculo = explode('-', $requestData['controle_frota_id']);
+        if ($veiculo[1] != ''){
+            $verificaKM = true;
+            $requestData['controle_frota_id'] = null;
+            $requestData['veiculo_reserva_entrada_id'] = $veiculo[1];
+
+            $saida = VeiculoSaida::where('controle_frota_id', $veiculo[1])->first();
+        } else {
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_inicial']);
+            $requestData['controle_frota_id'] = $veiculo[0];
+            $requestData['veiculo_reserva_entrada_id'] = null;
+
+            $saida = VeiculoSaida::where('controle_frota_id', $veiculo[0])->first();
+        }
+
 //        $saida->status = 0;
         $saida->deleted_at = date("Y-m-d H:i:s");
         $saida->save();

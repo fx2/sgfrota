@@ -9,7 +9,7 @@
             @else
                 <option value="">Selecione ...</option>
                 @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_saida_id}}"
+                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_reserva_entrada_id}}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
 {{--                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}--}}
                     >{{ $optionValue->veiculo }}</option>
