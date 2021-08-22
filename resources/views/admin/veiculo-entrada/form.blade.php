@@ -9,7 +9,7 @@
             @else
                 <option value="">Selecione ...</option>
                 @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
-                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_reserva_entrada_id}}"
+                    <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_reserva_entrada_id}}-{{$optionValue->veiculo_saida_id}}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
 {{--                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}--}}
                     >{{ $optionValue->veiculo }}</option>
@@ -357,9 +357,11 @@
 
 
 
+        $('#kmfinaltoremoveappend').remove();
+
         str = resp.data.km_atual;
         str = str.substring(0, str.length-5);
-        $('#km_final_sugerido').append(`<span>KM atual: ${str}</span>`)
+        $('#km_final_sugerido').append(`<span id="kmfinaltoremoveappend">KM atual: ${str}</span>`)
         $('#nome_responsavel').val(resp.data.nome_responsavel);
     }
 </script>

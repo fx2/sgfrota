@@ -42,7 +42,15 @@ class VeiculoEntradaService
 
         $result = $result->get();
 
-        $veiculos = VeiculoReservaEntrada::select('controle_frota_id as id', 'veiculo', 'id as veiculo_reserva_entrada_id')
+        $veiculos = VeiculoReservaEntrada::select(
+            'veiculo_reserva_entradas.controle_frota_id as id',
+            'veiculo_reserva_entradas.veiculo',
+            'veiculo_reserva_entradas.id as veiculo_reserva_entrada_id',
+            'veiculo_saidas.id as veiculo_saida_id'
+        )
+            ->join('veiculo_saidas', 'veiculo_saidas.veiculo_reserva_entrada_id', 'veiculo_reserva_entradas.id')
+            ->whereNotNull('veiculo_saidas.veiculo_reserva_entrada_id')
+            ->whereNull('veiculo_saidas.deleted_at')
             ->get();
 
         if ($veiculos->isEmpty())

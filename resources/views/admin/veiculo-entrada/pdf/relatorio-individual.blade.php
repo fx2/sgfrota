@@ -15,16 +15,29 @@
                 <span style="margin-left: 5%;"><strong>Veículo</strong></span>
             </p>
             <table class="borda" style="margin-bottom: 15px; width:78%; left:40px; position:relative;">
-                <tr><td><strong class="text-leftzinho">Proprietário</strong>: {{ $results->controle_frota->nome_proprietario }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Marca</strong>: {{ $results->controle_frota->marca->nome }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Modelo</strong>: {{ $results->controle_frota->modelo->modelo }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Típo de combustível</strong>: {{ $results->controle_frota->tipo_combustivel->nome }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Cor</strong>: {{ $results->controle_frota->cor }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Capacidade</strong>: {{ $results->controle_frota->capacidade }} </td></tr>
-                <tr><td><strong class="text-leftzinho">Ano</strong>: {{ $results->controle_frota->ano_modelo }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Km inícial</strong>: {{ decimal($results->controle_frota->km_inicial) }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Placa</strong>: {{ $results->controle_frota->placa }}</td></tr>
-                <tr><td><strong class="text-leftzinho">Renavan</strong>: {{ $results->controle_frota->renavan }}</td></tr>
+                @if($results->controle_frota_id)
+                    <tr><td><strong class="text-leftzinho">Proprietário</strong>: {{ $results->controle_frota->nome_proprietario }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Marca</strong>: {{ $results->controle_frota->marca->nome }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Modelo</strong>: {{ $results->controle_frota->modelo->modelo }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Típo de combustível</strong>: {{ $results->controle_frota->tipo_combustivel->nome }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Cor</strong>: {{ $results->controle_frota->cor }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Capacidade</strong>: {{ $results->controle_frota->capacidade }} </td></tr>
+                    <tr><td><strong class="text-leftzinho">Ano</strong>: {{ $results->controle_frota->ano_modelo }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Km inícial</strong>: {{ decimal($results->controle_frota->km_inicial) }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Placa</strong>: {{ $results->controle_frota->placa }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Renavan</strong>: {{ $results->controle_frota->renavan }}</td></tr>
+                @else
+                    <tr><td><strong class="text-leftzinho">Proprietário</strong>: {{ $results->veiculo_reserva_entrada->nome_proprietario }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Marca</strong>: {{ $results->veiculo_reserva_entrada->marca->nome }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Modelo</strong>: {{ $results->veiculo_reserva_entrada->modelo->modelo }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Típo de combustível</strong>: {{ $results->veiculo_reserva_entrada->tipo_combustivel->nome }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Cor</strong>: {{ $results->veiculo_reserva_entrada->cor }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Capacidade</strong>: {{ $results->veiculo_reserva_entrada->capacidade }} </td></tr>
+                    <tr><td><strong class="text-leftzinho">Ano</strong>: {{ $results->veiculo_reserva_entrada->ano_modelo }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Km inícial</strong>: {{ decimal($results->veiculo_reserva_entrada->km_inicial) }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Placa</strong>: {{ $results->veiculo_reserva_entrada->placa }}</td></tr>
+                    <tr><td><strong class="text-leftzinho">Renavan</strong>: {{ $results->veiculo_reserva_entrada->renavan }}</td></tr>
+                @endif
                 <tr><td><strong class="text-leftzinho">Responsável</strong>: {{ $results->veiculo_saida->nome_responsavel }}</td></tr>
                 <tr><td><strong class="text-leftzinho">Setor</strong>: {{ $results->veiculo_saida->setor->nome }}</td></tr>
             </table>
@@ -47,7 +60,11 @@
 
             <table class="borda" style="width:85%; left:30px; position:relative;">
                 <tr>
-                    <td><strong class="text-leftzinho">Responsável</strong>: {{ $results->controle_frota->responsavel->nome }}</td>
+                    @if($results->controle_frota_id)
+                        <td><strong class="text-leftzinho">Responsável</strong>: {{ $results->controle_frota->responsavel->nome }}</td>
+                    @else
+                        <td><strong class="text-leftzinho">Responsável</strong>: {{ $results->veiculo_reserva_entrada->responsavel->nome }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <td><span class="text-leftzinho" style="color:white;">a</span> </td>

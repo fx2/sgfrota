@@ -155,16 +155,6 @@ class VeiculoEntradaController extends Controller
         $requestData = $request->all();
         $requestData['auth_id'] = $userAuth->id;
 
-        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_final'], true);
-        if ($verificaKM !== true){
-            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
-            return redirect()->back()->withInput();
-        }
-
-        $veiculo_saida = explode('-', $requestData['controle_frota_id']);
-        $requestData['controle_frota_id'] = $veiculo_saida[0];
-        $requestData['veiculo_saida_id'] = $veiculo_saida[1];
-
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
                 $requestData['setor_id'] = $userAuth->setor_id;
@@ -179,23 +169,29 @@ class VeiculoEntradaController extends Controller
         }
 
         $veiculo = explode('-', $requestData['controle_frota_id']);
+        $requestData['veiculo_saida_id'] = $veiculo[2];
+
         if ($veiculo[1] != ''){
-            $verificaKM = true;
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragemVeiculoReserva($veiculo[1], $requestData['km_final']);
             $requestData['controle_frota_id'] = null;
             $requestData['veiculo_reserva_entrada_id'] = $veiculo[1];
 
-            $saida = VeiculoSaida::where('controle_frota_id', $veiculo[1])->first();
+            $saida = VeiculoSaida::where('veiculo_reserva_entrada_id', $veiculo[1])->first();
         } else {
-            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_inicial']);
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_final']);
             $requestData['controle_frota_id'] = $veiculo[0];
             $requestData['veiculo_reserva_entrada_id'] = null;
 
             $saida = VeiculoSaida::where('controle_frota_id', $veiculo[0])->first();
         }
 
+        if ($verificaKM !== true){
+            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
+            return redirect()->back()->withInput();
+        }
+
 //        $saida->status = 0;
-        $saida->deleted_at = date("Y-m-d H:i:s");
-        $saida->save();
+        $saida->delete();
 
         $create = $this->model->create($requestData);
 
