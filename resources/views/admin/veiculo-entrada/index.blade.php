@@ -94,97 +94,17 @@
                                     @can('isMasterOrAdmin')
                                         <td>{{$item->setor->nome}}</td>
                                     @endcan
-                                    @foreach ($fields as $key => $val)
-                                        <td class="borda" scope="row">
-                                            @php
-                                            // da pra melhorar esses if e fazer um loop, mas nao quero
-                                            if (!empty($val[0])){
-                                                $a = $val[0];
-                                                $valor = $item->$a;
-
-                                                if ($val[0] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
-                                                }
-                                                elseif ($val[0] == 'data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-
-                                                elseif ($val[0] == 'entrada_data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-                                                elseif ($val[0] == 'entrada_hora') {
-                                                    $valor = convertTimestamp($valor, 'H:i');
-                                                }
-
-                                            }
-
-                                            if (!empty($val[1])){
-                                                $a = $val[0];
-                                                $b = $val[1];
-
-                                                $valor = $item->$a->$b;
-
-                                                if ($val[1] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
-                                                }
-                                                elseif ($val[1] == 'data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-
-                                            }
-
-                                            if (!empty($val[2])){
-                                                $a = $val[0];
-                                                $b = $val[1];
-                                                $c = $val[2];
-
-                                                $valor = $item->$a->$b->$c;
-
-                                                if ($val[2] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
-                                                }
-                                                elseif ($val[2] == 'data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-                                            }
-
-                                            if (!empty($val[3])){
-                                                $a = $val[0];
-                                                $b = $val[1];
-                                                $c = $val[2];
-                                                $d = $val[3];
-
-                                                $valor = $item->$a->$b->$c->$d;
-
-                                                if ($val[3] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
-                                                }
-                                                elseif ($val[3] == 'data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-                                            }
-
-                                            if (!empty($val[4])){
-                                                $a = $val[0];
-                                                $b = $val[1];
-                                                $c = $val[2];
-                                                $d = $val[3];
-                                                $e = $val[4];
-
-                                                $valor = $item->$a->$b->$c->$d->$e;
-
-                                                if ($val[4] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
-                                                }
-                                                elseif ($val[4] == 'data') {
-                                                    $valor = convertTimestamp($valor, 'd/m/Y');
-                                                }
-                                            }
-                                            @endphp
-
-                                            {{$valor}}
-                                        </td>
-                                    @endforeach
+                                    <td>{{$item->motorista->nome}}</td>
+                                    @if($item->controle_frota_id)
+                                        <td>{{$item->controle_frota->veiculo}}</td>
+                                        <td>{{$item->controle_frota->placa}}</td>
+                                    @else
+                                        <td>{{$item->veiculo_reserva_entrada->veiculo}}</td>
+                                        <td>{{$item->veiculo_reserva_entrada->placa}}</td>
+                                    @endif
+                                    <td>{{ convertTimestamp($item->entrada_data, 'd/m/Y') }}</td>
+                                    <td>{{ convertTimestamp($item->entrada_hora, 'H:i') }}</td>
+                                    <td>{{$item->nome_responsavel}}</td>
                                 <td>
                                     @can('checksetor', CONTROLEDIARIODESAIDA_RELATORIO)
                                         <a href="{{ url('/veiculo-entrada/custom/show/pdf/' . $item->id) }}" title="Visualizar PDF Controle diário de saída"><button class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf" aria-hidden="true"></i></button></a>

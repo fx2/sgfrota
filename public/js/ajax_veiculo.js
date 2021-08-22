@@ -15,8 +15,6 @@ async function loadControleFrotum(controle_frota_id = null){
     if (controle_frota_id == null)
         return true;
 
-    veiculo_id = verificaVeiculoReserva(controle_frota_id);
-
     $('#veiculo-remove-append').remove();
 
     route = verificaVeiculoReserva(controle_frota_id);

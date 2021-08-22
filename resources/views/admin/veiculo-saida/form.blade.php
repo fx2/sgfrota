@@ -8,8 +8,9 @@
             @foreach ($controleFrotumDisponiveis as $optionKey => $optionValue)
                 <option value="{{ $optionValue->id }}-{{ $optionValue->veiculo_reserva_entrada_id }}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ (isset($result->veiculo_reserva_entrada_id) && $result->veiculo_reserva_entrada_id == $optionValue->id) ? 'selected' : ''}}
                     {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->veiculo }}-{{ $optionValue->id }}</option>
+                >{{ $optionValue->veiculo }}</option>
             @endforeach
         </select>
         {!! $errors->first('controle_frota_id', '<p class="help-block">:message</p>') !!}
