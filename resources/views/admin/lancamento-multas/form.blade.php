@@ -235,7 +235,7 @@
 
 @push('js')
     <script src="{{ asset('js/ajax_motorista.js') }}"></script>
-    <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
+    <script src="{{ asset('js/ajax_veiculoTemporario.js') }}"></script>
 <script>
     // var tipoMultaAppend = $('#load-tipomulta');
     //

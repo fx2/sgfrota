@@ -161,7 +161,7 @@
 
 
 @push('js')
-    <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
+    <script src="{{ asset('js/ajax_veiculoTemporario.js') }}"></script>
 <script>
     var result = @json($result ?? ["fornecedor_id" => null]);
     var fornecedorAppend = $('#load-fornecedor');

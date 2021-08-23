@@ -115,7 +115,7 @@
 </div>
 
 @push('js')
-    <script src="{{ asset('js/ajax_veiculo.js') }}"></script>
+    <script src="{{ asset('js/ajax_veiculoTemporario.js') }}"></script>
     <script>
         const hide_show_lavagem = $('#hide_show_lavagem');
         const quantidade_litros = $('#quantidade_litros');
