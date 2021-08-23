@@ -66,7 +66,7 @@ class VeiculoEntrada extends BaseModel
 
     public function veiculo_reserva_entrada()
     {
-        return $this->hasOne('App\Models\VeiculoReservaEntrada', 'id', 'veiculo_reserva_entrada_id');
+        return $this->hasOne('App\Models\VeiculoReservaEntrada', 'id', 'veiculo_reserva_entrada_id')->withTrashed();
     }
 
     public function controle_frota()
