@@ -199,12 +199,13 @@ class VeiculoReservaDevolucaoController extends Controller
 
         $requestToUpdate['tipo'] = VeiculoReservaEntrada::TIPO_DEVOLUCAO;
 
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
         $result->update($requestToUpdate);
 
         $result->delete();
 
         $requestData['id'] = $result->id;
-        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
 
         return redirect($this->redirectPath)->withInput();
     }

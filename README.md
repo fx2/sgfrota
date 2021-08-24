@@ -152,6 +152,10 @@ php artisan crud:generate VeiculoReservaEntrada --fields='tipo_veiculo_id#intege
 php artisan crud:generate VeiculoReservaDevolucao --fields='veiculo_reserva_entrada_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};data#date;horario#time;km_atual#double;combustivel#string;devolvido_por#string;observacao#text;auth_id#integer;status#boolean '  --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes
 
 
+php artisan crud:generate ActivityLog --fields='log_name#string;description#text;subject_type#string;event#string;subject_id#integer;causer_type#string;causer_id#integer;properties#longtext;batch_uuid#string;setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};setor#string;nome#string;' --view-path=configuracoes --controller-namespace=App\\Http\\Controllers\\Configuracoes --form-helper=html --soft-deletes=yes --relationships="setor#hasOne#App\Models\Setor" --foreign-keys="setor_id#id#setors#cascade"
+
+
+
 FALTA OS JOINS e FOREIGH KEY
 
  category#select#options={"technology": "Technology", "tips": "Tips", "health": "Health"}
