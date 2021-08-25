@@ -215,16 +215,28 @@ class VeiculoSaidaController extends Controller
             $requestData = $this->formatRemoveDecimal($requestData);
         }
 
-        $result->update($requestData);
 
-        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($requestData['controle_frota_id'], $requestData['km_inicial']);
+        $veiculo = explode('-', $requestData['controle_frota_id']);
+        if ($veiculo[1] != ''){
+            $verificaKM = true;
+            $requestData['controle_frota_id'] = null;
+            $requestData['veiculo_reserva_entrada_id'] = $veiculo[1];
+        } else {
+            $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($veiculo[0], $requestData['km_inicial']);
+            $requestData['controle_frota_id'] = $veiculo[0];
+            $requestData['veiculo_reserva_entrada_id'] = null;
+        }
+
         if ($verificaKM !== true){
             toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
             return redirect()->back()->withInput();
         }
 
-        $requestData['id'] = $result->id;
         $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+        $result->update($requestData);
+
+        $requestData['id'] = $result->id;
+
 
         return redirect($this->redirectPath)->withInput();
     }

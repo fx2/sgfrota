@@ -27,4 +27,15 @@ class ActivityLog extends Model
       'nome',
     ];
 
+
+    public function setor()
+    {
+        return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'causer_id');
+    }
+
 }

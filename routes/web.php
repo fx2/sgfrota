@@ -59,3 +59,4 @@ Route::resource('vale-combustiveis-lavagens', 'App\Http\Controllers\Admin\ValeCo
 Route::resource('veiculo-reserva-entrada', 'App\Http\Controllers\Admin\VeiculoReservaEntradaController');
 Route::resource('veiculo-reserva-entrada', 'App\Http\Controllers\Admin\VeiculoReservaEntradaController');
 Route::resource('veiculo-reserva-devolucao', 'App\Http\Controllers\Admin\VeiculoReservaDevolucaoController');
+Route::resource('activity-log', 'App\Http\Controllers\Configuracoes\ActivityLogController');

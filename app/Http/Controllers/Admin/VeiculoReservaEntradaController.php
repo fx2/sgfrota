@@ -259,10 +259,11 @@ class VeiculoReservaEntradaController extends Controller
 
         $requestData['km_atual'] = str_replace('.', '', str_replace(',', '', $requestData['km_atual']));
 
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
         $result->update($requestData);
 
         $requestData['id'] = $result->id;
-        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
 
         return redirect($this->redirectPath)->withInput();
     }

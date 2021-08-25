@@ -197,8 +197,6 @@ class VeiculoEntradaController extends Controller
 
         $this->LogModelo($create->id, 'cadastro', $this->model->getTable(), $requestData, null, $userAuth, $create->setor_id);
 
-        $this->LogModelo($saida->id, 'deletou', $this->model->getTable(), $saida,  null, $userAuth, $saida->setor_id);
-
         return redirect($this->redirectPath)->withInput();
     }
 

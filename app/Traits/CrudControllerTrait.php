@@ -17,9 +17,11 @@ trait CrudControllerTrait
 {
     public static function LogModelo($id, $description, $subjectType, $new, $old = null, $userAuth, $setor_id)
     {
+        $oldd = isset($old) ? $old->getOriginal() : null;
+
         $log = array (
             'attributes' => $new,
-            'old' => $old ?? null,
+            'old' => $oldd ,
         );
 
         $setor = '';
@@ -327,10 +329,11 @@ trait CrudControllerTrait
             $requestData = $this->formatRemoveDecimal($requestData);
         }
 
+        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
+
         $result->update($requestData);
 
         $requestData['id'] = $result->id;
-        $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
 
         return redirect($this->redirectPath)->withInput();
     }
@@ -405,9 +408,9 @@ trait CrudControllerTrait
         $userAuth = auth('api')->user();
 
         $result = $this->model->findOrFail($id);
+        $this->LogModelo($result->id, 'deletou', $this->model->getTable(), $result,  null, $userAuth, $result->setor_id);
         $result->delete();
 
-        $this->LogModelo($result->id, 'deletou', $this->model->getTable(), $result,  null, $userAuth, $result->setor_id);
 
 
         return json_encode(true);
