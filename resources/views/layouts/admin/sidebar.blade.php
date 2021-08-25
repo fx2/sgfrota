@@ -330,6 +330,31 @@
             </li>
         @endif
 
+            @if (Auth::user()->can('checksetor', ACTIVITYLOG_VISUALIZAR)))
+            <li class="nav-item {{ Str::contains(url()->current(), [
+                '/activity-log',
+            ]) ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-snowflake"></i>
+                  <p>
+                    Configurações
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  @can('checksetor', ACTIVITYLOG_VISUALIZAR)
+                      <li class="nav-item">
+                        <a href="{{ url('activity-log') }}" class="nav-link {{ Str::contains(url()->current(), ['/activity-log']) ? 'active' : '' }}">
+                          <i class="nav-icon far fa-circle nav-icon"></i>
+                          <p>
+                            Logs
+                          </p>
+                        </a>
+                      </li>
+                  @endcan
+                </ul>
+            </li>
+        @endif
 
           <hr style="border-color: white; border-width: 1px;  width:100%;">
 

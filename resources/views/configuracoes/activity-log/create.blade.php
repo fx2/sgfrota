@@ -7,10 +7,10 @@
             <li class="breadcrumb-item"><a href="{{ url('activity-log') }}">Activitylog</a></li>
             <li class="breadcrumb-item active" aria-current="page">Cadastrar Activitylog</li>
         </ol>
-    </nav> 
+    </nav>
 
     <div class="card">
-        <div class="card-header">Cadastrar ActivityLog</div>
+        <div class="card-header">Cadastrar Log de atividades</div>
         <div class="card-body">
             <a href="{{ url('/activity-log') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
             <br />
