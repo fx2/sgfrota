@@ -12,7 +12,7 @@
         <div class="card-header h3">Log de atividades</div>
         <div class="card-body">
             @can('d', ACTIVITYLOG_ADICIONAR)
-                <a href="{{ url('/activity-log/create') }}" class="btn btn-success btn-sm" title="Add New ActivityLog">
+                <a href="{{ url('/activity-log/create') }}" class="btn btn-success btn-sm" title="Add New Log de atividades">
                     <i class="fa fa-plus" aria-hidden="true"></i> Adicionar
                 </a>
             @endcan
@@ -54,13 +54,13 @@
                                 <td>{{ $item->name }}</td>
 
                                 <td>
-                                    {{-- <a href="{{ url('/activity-log/' . $item->id) }}" title="Visualizar ActivityLog"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-                                    @can('checksetor', ACTIVITYLOG_EDITAR)
-                                        <a href="{{ url('/activity-log/' . $item->id ) }}" title="Editar ActivityLog"><button class="btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button></a>
+                                    {{-- <a href="{{ url('/activity-log/' . $item->id) }}" title="Visualizar Log de atividades"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
+                                    @can('checksetor', ACTIVITYLOG_VISUALIZAR)
+                                        <a href="{{ url('/activity-log/' . $item->id ) }}" title="Visualizar Log de atividades"><button class="btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button></a>
                                     @endcan
 
 {{--                                    @can('checksetor', ACTIVITYLOG_DELETAR)--}}
-{{--                                        <button type="submit" data-id="{{ $item->id }}" data-route="/activity-log" class="btnDeletar btn btn-danger btn-sm" title="Deletar ActivityLog"><i class="fa fa-trash" aria-hidden="true"></i></button>--}}
+{{--                                        <button type="submit" data-id="{{ $item->id }}" data-route="/activity-log" class="btnDeletar btn btn-danger btn-sm" title="Deletar Log de atividades"><i class="fa fa-trash" aria-hidden="true"></i></button>--}}
 {{--                                    @endcan--}}
                                 </td>
                             </tr>

@@ -26,7 +26,7 @@ class ActivityLogController extends Controller
     public function __construct(ActivityLog $activitylog)
     {
         $this->middleware('auth');
-//        $this->middleware('checksetor:', ['only' => ['index']]);
+        $this->middleware('checksetor:' . ACTIVITYLOG_VISUALIZAR, ['only' => ['index']]);
 //        $this->middleware('checksetor:', ['only' => ['create']]);
 //        $this->middleware('checksetor:', ['only' => ['edit']]);
 //        $this->middleware('checksetor:', ['only' => ['destroy']]);
