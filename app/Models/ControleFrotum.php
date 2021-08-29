@@ -90,20 +90,19 @@ class ControleFrotum extends BaseModel
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
     }
 
-    public static function veiculosDisponiveisControleDiario($entradaOuSaida)
+    public function validaPlaca($placa, $id = null)
     {
-        $result = self::select('controle_frotas.id', 'controle_frotas.veiculo');
-
-        if ($entradaOuSaida == 'saida') {
-            $result = $result->whereNotIn('id',function($query){
-                $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('deleted_at');
-            })->get();
-
-            return $result;
+        if ($id){
+            $propriaPlaca = ControleFrotum::where('id', '=', $id)->where('placa', '=', $placa)->exists();
+            if ($propriaPlaca)
+                return true;
         }
 
-        return $result->whereIn('id',function($query){
-            $query->select('controle_frota_id')->from('veiculo_saidas')->whereNull('deleted_at');
-        })->get();
+        $placa = ControleFrotum::where('placa', '=', $placa)->exists();
+
+        if ($placa)
+            return false;
+
+        return true;
     }
 }

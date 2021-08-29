@@ -92,6 +92,11 @@ class ControleFrotaController extends Controller
             $this->validate($request, $this->validations);
         }
 
+        if(!$this->model->validaPlaca($request->placa)){
+            toastr()->error('Placa já está sendo usado por outro veículo.');
+            return redirect()->back()->withInput();
+        }
+
         if (!empty($this->plusValidationStore)) { // se tiver algum falso, retorna erro
             foreach ($this->plusValidationStore as $key => $value){
                 if ($value === false){
@@ -139,6 +144,11 @@ class ControleFrotaController extends Controller
             }
 
             $this->validate($request, $this->validations);
+        }
+
+        if(!$this->model->validaPlaca($request->placa, $id)){
+            toastr()->error('Placa já está sendo usado por outro veículo.');
+            return redirect()->back()->withInput();
         }
 
         $result = $this->model->findOrFail($id);
