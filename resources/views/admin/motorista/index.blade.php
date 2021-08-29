@@ -101,7 +101,11 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
-                            <tr>
+                            @if(verificaDataCNH($item->cnh_validade, $item->avisar_antes_qtddias))
+                                <tr style="background-color: orange;">
+                            @else
+                                <tr>
+                            @endif
 {{--                                <td>{{ $loop->iteration }}</td>--}}
                                 @can('isMasterOrAdmin')
                                     <td>{{$item->setor->nome}}</td>
