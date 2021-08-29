@@ -93,6 +93,29 @@ if (! function_exists('decimalSimples')) {
     }
 }
 
+if (! function_exists('verificaDataCNH')) {
+    function verificaDataCNH($cnh_validade, $avisar_antes_qtddias)
+    {
+        $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+        $date2 = new DateTime(date('Y-m-d', strtotime($cnh_validade)));
+
+        $days = $date1->diff($date2)->days;
+//        $diff = abs(strtotime($date2) - strtotime($date1));
+//
+//        $years = floor($diff / (365*60*60*24));
+//        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+//        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+//        printf("%d years, %d months, %d days\n", $years, $months, $days);
+
+        if ($date1 > $date2)
+            return true;
+
+        if ($avisar_antes_qtddias >= $days)
+            return true;
+    }
+}
+
     const FORNECEDOR_VISUALIZAR = 1;
     const FORNECEDOR_ADICIONAR = 2;
     const FORNECEDOR_EDITAR = 3;
