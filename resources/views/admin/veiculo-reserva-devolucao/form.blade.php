@@ -350,15 +350,15 @@
             {!! $errors->first('entrada_horario', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
-    <div class="form-group row mb-5 {{ $errors->has('entrada_km_atual') ? 'has-error' : ''}}">
-        <div class="col-2">
-            <label for="entrada_km_atual" class="control-label">{{ 'Entrada Km Atual' }}</label>
-        </div>
-        <div class="col-10">
-            <input disabled class="form-control decimal" name="entrada_km_atual" type="text" id="entrada_km_atual" value="{{ isset($result->entrada_km_atual) ? number_format((float) $result->entrada_km_atual, 0) : ''}}" >
-            {!! $errors->first('entrada_km_atual', '<p class="help-block">:message</p>') !!}
-        </div>
-    </div>
+{{--    <div class="form-group row mb-5 {{ $errors->has('entrada_km_atual') ? 'has-error' : ''}}">--}}
+{{--        <div class="col-2">--}}
+{{--            <label for="entrada_km_atual" class="control-label">{{ 'Entrada Km Atual' }}</label>--}}
+{{--        </div>--}}
+{{--        <div class="col-10">--}}
+{{--            <input disabled class="form-control decimal" name="entrada_km_atual" type="text" id="entrada_km_atual" value="{{ isset($result->entrada_km_atual) ? number_format((float) $result->entrada_km_atual, 0) : ''}}" >--}}
+{{--            {!! $errors->first('entrada_km_atual', '<p class="help-block">:message</p>') !!}--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div class="form-group row mb-5 {{ $errors->has('entrada_combustivel') ? 'has-error' : ''}}">
         <div class="col-2">
             <label for="entrada_combustivel" class="control-label">{{ 'Entrada Combustivel' }}</label>
