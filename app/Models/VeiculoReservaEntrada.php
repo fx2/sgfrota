@@ -63,7 +63,6 @@ class VeiculoReservaEntrada extends BaseModel
         'entrada_forma_substituicao',
         'entrada_data',
         'entrada_horario',
-        'entrada_km_atual',
         'entrada_combustivel',
         'entrada_recebido_por',
         'entrada_observacao',

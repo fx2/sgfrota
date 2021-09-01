@@ -59,7 +59,7 @@ class VeiculoReservaDevolucaoController extends Controller
         $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
         $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
         $this->pdfTitle = 'Controle de Frotas';
-        $this->numbersWithDecimal = ['km_inicial', 'entrada_km_atual']; //'km_atual' tambem
+        $this->numbersWithDecimal = ['km_inicial']; //'km_atual' tambem
     }
 
     /**
