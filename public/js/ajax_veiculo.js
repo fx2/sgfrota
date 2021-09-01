@@ -33,7 +33,7 @@ async function loadControleFrotum(controle_frota_id = null){
                 <li><strong>Cor</strong>: ${resp.data.cor}</li>
                 <li><strong>Capacidade</strong>: ${resp.data.capacidade}</li>
                 <li><strong>Ano</strong>: ${resp.data.ano_modelo}</li>
-                <li><strong>Km inicial</strong>: ${parseFloat(resp.data.km_inicial)}</li>
+                <li><strong>Km Atual</strong>: ${parseFloat(resp.data.km_atual)}</li>
                 <li><strong>Placa</strong>: ${resp.data.placa}</li>
                 <li><strong>Dia de Rodízio</strong>: ${diaRodizio(resp.data.placa)}</li>
                 <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
