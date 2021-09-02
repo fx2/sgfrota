@@ -87,7 +87,7 @@ class VeiculoEntradaController extends Controller
         $this->pdfTitles = ['Data Entrada','Hora Entrada', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto', 'Data Saída', 'Hora Saída'];
 
         $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Data Entrada', 'Hora Entrada', 'Responsável',  'Status'];
+        $this->indexTitles = ['Motorista', 'Veículo', 'Placa', 'Data Entrada', 'Hora Entrada',  'Responsável'];
 
         $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['km_final'],['relatorio_trajeto_motorista'],['quantidade_combustivel'],['observacao'],['nome_responsavel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['entrada_data'],['entrada_hora']];
         $this->pdfindividualTitles = ['Motorista', 'Veículo', 'km_final', 'relatorio_trajeto_motorista', 'quantidade_combustivel', 'observacao', 'nome_responsavel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'entrada_data', 'entrada_hora'];
