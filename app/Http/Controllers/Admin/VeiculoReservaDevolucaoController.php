@@ -48,7 +48,7 @@ class VeiculoReservaDevolucaoController extends Controller
             'tipo_responsavel_id' => ['responsavel', '\App\Models\TipoResponsavel'],
             'setor' => ['setor', '\App\Models\Setor'],
         ];
-        $this->fileName = ['dut', 'certificado_vistoria', 'foto'];
+        $this->fileName = ['dut', 'documento_devolucao', 'foto'];
         $this->uploadFilePath = 'images/veiculo-reserva-devolucao';
         $this->validations = [
 
@@ -195,17 +195,16 @@ class VeiculoReservaDevolucaoController extends Controller
         $requestToUpdate['devolucao_combustivel'] = $requestData['devolucao_combustivel'];
         $requestToUpdate['devolucao_recebido_por'] = $requestData['devolucao_recebido_por'];
         $requestToUpdate['devolucao_observacao'] = $requestData['devolucao_observacao'];
+        $requestToUpdate['documento_devolucao'] = $requestData['documento_devolucao'];
         $requestToUpdate['auth_id'] = $requestData['auth_id'];
 
         $requestToUpdate['tipo'] = VeiculoReservaEntrada::TIPO_DEVOLUCAO;
+        $requestData['id'] = $result->id;
 
         $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
         $result->update($requestToUpdate);
 
         $result->delete();
-
-        $requestData['id'] = $result->id;
-
 
         return redirect($this->redirectPath)->withInput();
     }

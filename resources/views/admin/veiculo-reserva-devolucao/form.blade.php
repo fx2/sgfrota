@@ -389,7 +389,7 @@
 
     <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
         <div class="col-2">
-            <label for="documento" class="control-label">{{ 'Anexar documento' }}</label>
+            <label for="documento" class="control-label">{{ 'Documento referente a entrada' }}</label>
         </div>
         <div class="col-10">
     {{--        <input disabled class="form-control" name="documento" type="file" id="documento" value="{{ isset($result->documento) ? $result->documento : old('documento')}}" >--}}
@@ -458,6 +458,25 @@
         {!! $errors->first('devolucao_recebido_por', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+<div class="form-group row mb-5 {{ $errors->has('documento_devolucao') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="documento_devolucao" class="control-label">{{ 'Anexar documento referente a saída' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="documento_devolucao" type="file" id="documento_devolucao" value="{{ isset($result->documento_devolucao) ? $result->documento_devolucao : old('documento_devolucao')}}" >
+        {!! $errors->first('documento_devolucao', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group row mb-5 {{ $errors->has('documento_devolucao') ? 'has-error' : ''}}">
+    <div class="col-2">
+    </div>
+    <div class="col-10">
+        <label for="documento_devolucao" class="control-label">{{ '' }}</label>
+        <img class="img-fluid" id="img_upload" src="{{ isset($result->documento_devolucao) ? removePublicPath($result->documento_devolucao) : '' }}" alt="{{ isset($result->documento_devolucao) ? $result->documento_devolucao : '' }}" >
+    </div>
+</div>
+
 <div class="form-group row mb-5 {{ $errors->has('devolucao_observacao') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="devolucao_observacao" class="control-label">{{ 'Observacao' }}</label>

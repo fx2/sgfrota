@@ -435,7 +435,7 @@
 
 <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="documento" class="control-label">{{ 'Anexar Documento' }}</label>
+        <label for="documento" class="control-label">{{ 'Anexar Documento referente a entrada' }}</label>
     </div>
     <div class="col-10">
         <input class="form-control" name="documento" type="file" id="documento" value="{{ isset($result->documento) ? $result->documento : old('documento')}}" >
