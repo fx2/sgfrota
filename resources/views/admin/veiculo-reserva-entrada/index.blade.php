@@ -221,9 +221,6 @@
                                         </td>
                                     @endforeach
                                 <td>
-                                    {{-- <a href="{{ url('/veiculo-reserva-entrada/' . $item->id) }}" title="Visualizar VeiculoReservaEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
-
-
                                     @if(!$item->deleted_at)
                                          @can('checksetor', VEICULORESERVAENTRADA_EDITAR)
                                             <a href="{{ url('/veiculo-reserva-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoReservaEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
@@ -232,6 +229,8 @@
                                         @can('checksetor', VEICULORESERVAENTRADA_DELETAR)
                                             <button type="submit" data-id="{{ $item->id }}" data-route="/veiculo-reserva-entrada" class="btnDeletar btn btn-danger btn-sm" title="Deletar VeiculoReservaEntrada"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                         @endcan
+                                    @else
+                                        <a href="{{ url('/veiculo-reserva-entrada/' . $item->id) }}" title="Visualizar VeiculoReservaEntrada"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                     @endif
                                 </td>
                             </tr>
