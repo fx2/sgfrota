@@ -68,6 +68,7 @@ class VeiculoReservaEntrada extends BaseModel
         'entrada_observacao',
         'auth_id',
         'status',
+        'documento',
 
         'tipo',
 

@@ -55,7 +55,7 @@ class VeiculoReservaEntradaController extends Controller
             'tipo_responsavel_id' => ['responsavel', '\App\Models\TipoResponsavel'],
             'setor' => ['setor', '\App\Models\Setor'],
         ];
-        $this->fileName = ['dut', 'certificado_vistoria', 'foto'];
+        $this->fileName = ['dut', 'documento', 'foto'];
         $this->uploadFilePath = 'images/veiculo-reserva-entrada';
         $this->validations = [
             'tipo_veiculo_id' => 'required',
@@ -258,6 +258,8 @@ class VeiculoReservaEntradaController extends Controller
         }
 
         $requestData['km_atual'] = str_replace('.', '', str_replace(',', '', $requestData['km_atual']));
+
+        $requestData['controle_frota_id'] = explode('-', $requestData['controle_frota_id'])[0];
 
         $this->LogModelo($result->id, 'edição', $this->model->getTable(), $requestData,  $result, $userAuth, $result->setor_id);
         $result->update($requestData);
