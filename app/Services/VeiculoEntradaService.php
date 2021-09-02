@@ -25,7 +25,7 @@ class VeiculoEntradaService
 
     public function veiculosDisponiveisEntrada($id = false)
     {
-        $result = $this->veiculoSaida::select('controle_frotas.id', 'controle_frotas.veiculo', 'veiculo_saidas.id as veiculo_saida_id')
+        $result = $this->veiculoSaida::select('controle_frotas.id', 'controle_frotas.veiculo', 'controle_frotas.placa', 'veiculo_saidas.id as veiculo_saida_id')
             ->join('controle_frotas', 'controle_frotas.id', '=', 'veiculo_saidas.controle_frota_id')
             ->whereIn('controle_frotas.id',function($query){
                 $query->select('veiculo_saidas.controle_frota_id')->from('veiculo_saidas')

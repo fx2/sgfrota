@@ -12,7 +12,7 @@
                     <option value="{{ $optionValue->id }}-{{$optionValue->veiculo_reserva_entrada_id}}-{{$optionValue->veiculo_saida_id}}"
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
 {{--                    {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}--}}
-                    >{{ $optionValue->veiculo }}</option>
+                    >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}</option>
                 @endforeach
             @endisset
         </select>
