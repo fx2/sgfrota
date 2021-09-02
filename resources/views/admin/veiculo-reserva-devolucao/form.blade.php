@@ -386,6 +386,25 @@
             {!! $errors->first('entrada_observacao', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
+
+    <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="documento" class="control-label">{{ 'Anexar documento' }}</label>
+        </div>
+        <div class="col-10">
+    {{--        <input disabled class="form-control" name="documento" type="file" id="documento" value="{{ isset($result->documento) ? $result->documento : old('documento')}}" >--}}
+            {!! $errors->first('documento', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+    <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
+        <div class="col-2">
+        </div>
+        <div class="col-10">
+            <label for="documento" class="control-label">{{ '' }}</label>
+            <img class="img-fluid" id="img_upload" src="{{ isset($result->documento) ? removePublicPath($result->documento) : '' }}" alt="{{ isset($result->documento) ? $result->documento : '' }}" >
+        </div>
+    </div>
+
 {{--</div>--}}
 
 
