@@ -246,8 +246,11 @@ class VeiculoReservaDevolucaoController extends Controller
         return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
-    public function customShow($id)
+    public function show($id)
     {
-        return 'ovo';
+        $result = $this->model
+          ->where('id', '=', $id)->withTrashed()->first();
+
+        return view('admin.veiculo-reserva-devolucao.show', ['result'=>$result, 'withFields' => $this->withFields($result), 'selectModelFields' => $this->selectModelFields()]);
     }
 }

@@ -12,7 +12,7 @@
         <div class="card-header">VeiculoReservaEntrada </div>
         <div class="card-body">
 
-            <a href="{{ url('/veiculo-saida') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+            <a href="{{ url('/veiculo-reserva-entrada') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
             <br />
             <br />
 
@@ -20,8 +20,8 @@
                 <p class="alert alert-danger">Ops, algo deu errado... confira os campos e tente novamente.</p>
             @endif
 
-            <form method="POST" action="{{ url('/veiculo-saida/' . $result->id) }}" id="form1" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                @include ('admin.veiculo-saida.form', ['formMode' => 'show'])
+            <form method="POST" action="{{ url('/veiculo-reserva-entrada/' . $result->id) }}" id="form1" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                @include ('admin.veiculo-reserva-entrada.form', ['formMode' => 'show'])
 
             </form>
 
