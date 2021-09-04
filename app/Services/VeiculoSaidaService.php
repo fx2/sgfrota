@@ -38,19 +38,19 @@ class VeiculoSaidaService
 
     public function exibeDisponivel($id)
     {
-        return $this->controleFrotum::select('id', 'veiculo')->where('id', $id)->get();
+        return $this->controleFrotum::select('id', 'veiculo', 'placa')->where('id', $id)->get();
     }
 
     public function exibeDisponivelVeiculoReserva($id)
     {
-        $result = VeiculoReservaEntrada::select('id', 'veiculo', 'id as veiculo_reserva_entrada_id')->where('id', $id)->get();
+        $result = VeiculoReservaEntrada::select('id', 'veiculo', 'placa', 'id as veiculo_reserva_entrada_id')->where('id', $id)->get();
 
         return $result;
     }
 
     public function veiculosDisponiveisComReservas()
     {
-        $result = $this->controleFrotum::select('id', 'veiculo')->whereNotIn('id',function($query){
+        $result = $this->controleFrotum::select('id', 'veiculo', 'placa')->whereNotIn('id',function($query){
             $query->select('controle_frota_id')->from('veiculo_saidas')
                 ->whereNull('veiculo_saidas.deleted_at')
                 ->whereNotNull('veiculo_saidas.controle_frota_id')
@@ -63,7 +63,7 @@ class VeiculoSaidaService
             $ids[$key] = $val->id;
         }
 
-        $veiculos = VeiculoReservaEntrada::select('controle_frota_id as id', 'veiculo', 'id as veiculo_reserva_entrada_id')
+        $veiculos = VeiculoReservaEntrada::select('controle_frota_id as id', 'veiculo', 'placa', 'id as veiculo_reserva_entrada_id')
             ->whereIn('controle_frota_id', $ids)
             ->get();
 

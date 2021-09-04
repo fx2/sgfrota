@@ -10,7 +10,7 @@
                     {{ (isset($result->controle_frota_id) && $result->controle_frota_id == $optionValue->id) ? 'selected' : ''}}
                     {{ (isset($result->veiculo_reserva_entrada_id) && $result->veiculo_reserva_entrada_id == $optionValue->id) ? 'selected' : ''}}
                     {{ old('controle_frota_id') == $optionValue->id ? "selected" : "" }}
-                >{{ $optionValue->veiculo }}</option>
+                >{{ $optionValue->veiculo }} - {{ $optionValue->placa }}</option>
             @endforeach
         </select>
         {!! $errors->first('controle_frota_id', '<p class="help-block">:message</p>') !!}

@@ -45,8 +45,8 @@ class MotoristaController extends Controller
         $this->indexFields = [['nome'], ['tipoCnh', 'nome'],['status']];
         $this->indexTitles = ['Motorista', 'CNH', 'Status'];
 
-        $this->pdfFields = [['nome'], ['data_nascimento'], ['cpf'], ['cnh'], ['tipoCnh', 'nome'],  ['cnh_validade']];
-        $this->pdfTitles = ['Motorista', 'Data Nasc', 'CPF', 'CNH', 'Categoria', 'Venc. da Habilitação'];
+        $this->pdfFields = [['setor', 'nome'], ['nome'], ['data_nascimento'], ['cnh'], ['tipoCnh', 'nome'],  ['cnh_validade']];
+        $this->pdfTitles = ['Setor', 'Motorista', 'Data Nasc', 'CNH', 'Categoria', 'Venc. da Habilitação'];
 
         $this->validations = [
             // 'motorista_escolar' => 'required',
