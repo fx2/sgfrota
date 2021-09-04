@@ -65,7 +65,8 @@ class AgendaController extends Controller
             horario,
             data as start,
             data as end,
-            setor_id"
+            setor_id,
+            auth_id"
         )->where('status', 1)
         ->whereYear('created_at', date('Y'))
         ->get();

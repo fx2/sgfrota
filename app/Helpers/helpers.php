@@ -199,3 +199,9 @@ if (! function_exists('verificaDataCNH')) {
     const ACTIVITYLOG_EDITAR = 68;
     const ACTIVITYLOG_DELETAR = 69;
     const ACTIVITYLOG_RELATORIO = 70;
+
+    const AGENDA_VISUALIZAR = 71;
+    const AGENDA_ADICIONAR = 72;
+    const AGENDA_EDITAR = 73; // nao esta usando, status = 0
+    const AGENDA_DELETAR = 74;
+    const AGENDA_RELATORIO = 75;
