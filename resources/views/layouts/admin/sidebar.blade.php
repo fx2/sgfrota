@@ -293,6 +293,17 @@
               </li>
           @endcan
 
+          @can('checksetor', AGENDA_VISUALIZAR)
+              <li class="nav-item">
+                <a href="{{ url('agenda/custom/index') }}" class="nav-link {{ Str::contains(url()->current(), ['/agenda/custom/index']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Agenda
+                  </p>
+                </a>
+              </li>
+          @endcan
+
           @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVADEVOLUCAO_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
                 '/veiculo-reserva-entrada',

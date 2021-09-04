@@ -25,11 +25,11 @@ class AgendaController extends Controller
     public function __construct(Agenda $agenda)
     {
         $this->middleware('auth');
-//        $this->middleware('checksetor:', ['only' => ['index']]);
-//        $this->middleware('checksetor:', ['only' => ['create']]);
-//        $this->middleware('checksetor:', ['only' => ['edit']]);
-//        $this->middleware('checksetor:', ['only' => ['destroy']]);
-//        $this->middleware('checksetor:', ['only' => ['relatorio']]);
+        $this->middleware('checksetor:' . AGENDA_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . AGENDA_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . AGENDA_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . AGENDA_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . AGENDA_RELATORIO, ['only' => ['relatorio']]);
 
         $this->model = $agenda;
         $this->path = 'admin.agenda';
@@ -65,7 +65,8 @@ class AgendaController extends Controller
             horario,
             data as start,
             data as end,
-            setor_id"
+            setor_id,
+            auth_id"
         )->where('status', 1)
         ->whereYear('created_at', date('Y'))
         ->get();

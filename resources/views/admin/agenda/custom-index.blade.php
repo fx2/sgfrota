@@ -15,14 +15,14 @@
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <div class="">Agenda</div>
-            <div class="">
-              <form method="GET" action="{{ url('/agenda') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">
-                <button class="ml-3 btn btn-secondary export-pdf" type="submit">
-                    <i class="fas fa-file-pdf"></i>
-                </button>
-              </form>
-            </div>
+{{--            <div class="">--}}
+{{--              <form method="GET" action="{{ url('/agenda') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">--}}
+{{--                <input type="hidden" class="form-control" name="export_pdf" placeholder="Buscar...">--}}
+{{--                <button class="ml-3 btn btn-secondary export-pdf" type="submit">--}}
+{{--                    <i class="fas fa-file-pdf"></i>--}}
+{{--                </button>--}}
+{{--              </form>--}}
+{{--            </div>--}}
           </div>
         </div>
         <div class="card-body">
@@ -134,8 +134,11 @@
 
                 <input type="hidden" name="fkas_id" id="fkas_id">
 
-                 <button type="submit" id="id_delete" data-id="" data-route="/agenda" class="btnDeletarAgendamento">Cancelar Agendamento</button>
+                @can('checksetor', AGENDA_DELETAR)
                  <button type="submit" id="id_delete" data-id="" data-route="/agenda" class="btnDeletarAgendamento btn btn-danger btn-sm">Cancelar Agendamento</button>
+                @else
+                    <button type="submit" id="id_delete" data-id="" data-route="/agenda" class="d-none btn btn-danger btn-sm">Cancelar Agendamento</button>
+                @endcan
             </div>
         </div>
     </div>
@@ -302,7 +305,9 @@
           if (info.startStr !=  moment(info.endStr).subtract(1, "days").format('YYYY-MM-DD')) {
             calendar.unselect()
           } else {
-            $('#cadastrar').modal('show');
+              @can('checksetor', AGENDA_ADICIONAR)
+                $('#cadastrar').modal('show');
+              @endcan
           }
 
         },
@@ -314,7 +319,7 @@
 
             eluser.dataset.id = info.event._def.extendedProps.fkas_id
 
-            if (info.event._def.extendedProps.auth_id == user.id) {
+            if (info.event._def.extendedProps.auth_id == user.id || user.type == "master") {
               $('#id_delete').show();
             } else {
               $('#id_delete').hide();

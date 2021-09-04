@@ -55,6 +55,7 @@
                                         @foreach ($permissoes as $p)
                                             <td>
                                                 <input
+                                                    @if($p->status == 0) disabled @endif
                                                     type="checkbox"
                                                     name="chaves_ordem[]"
                                                     id="optionsPermissao{{ $p->id }}"
