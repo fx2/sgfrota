@@ -221,6 +221,9 @@
                                         </td>
                                     @endforeach
                                 <td>
+                                    @can('checksetor', CONTROLEDIARIODESAIDA_RELATORIO)
+                                        <a href="{{ url('/veiculo-reserva-entrada/custom/show/pdf/' . $item->id) }}" title="Visualizar PDF Controle diário de saída"><button class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf" aria-hidden="true"></i></button></a>
+                                    @endcan
                                     @if(!$item->deleted_at)
                                          @can('checksetor', VEICULORESERVAENTRADA_EDITAR)
                                             <a href="{{ url('/veiculo-reserva-entrada/' . $item->id . '/edit') }}" title="Editar VeiculoReservaEntrada"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
