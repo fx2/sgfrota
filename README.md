@@ -156,6 +156,9 @@ php artisan crud:generate ActivityLog --fields='log_name#string;description#text
 
 
 
+php artisan crud:generate Agenda --fields='setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};titulo#string;descricao#text;data#date;horario#time;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes 
+
+
 FALTA OS JOINS e FOREIGH KEY
 
  category#select#options={"technology": "Technology", "tips": "Tips", "health": "Health"}
