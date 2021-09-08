@@ -387,7 +387,7 @@ class VeiculoSaidaController extends Controller
          $result = $this->model
           ->where('id', '=', $id)->withTrashed()->first();
 
-        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result->controle_frota_id);
+        $controleFrotumDisponiveis = $this->veiculoSaidaService->veiculosDisponiveisSaida($result);
 
         return view($this->path.'.show', ['result' => $result, 'selectModelFields' => $this->selectModelFields(), 'controleFrotumDisponiveis' => $controleFrotumDisponiveis]);
     }
