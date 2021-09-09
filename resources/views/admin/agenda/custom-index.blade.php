@@ -280,8 +280,8 @@
               descricao         : '{{ $agendamento->descricao }}',
               data              : '{{ $agendamento->data }}',
               horario           : '{{ $agendamento->horario }}',
-              start             : '{{ $agendamento->start }}',
-              end               : '{{ $agendamento->end }}',
+              start             : new Date('{{ $agendamento->start }} {{ $agendamento->horario }}'),
+              end               : new Date('{{ $agendamento->end }} {{ $agendamento->horario }}'),
               backgroundColor   : '{{ $agendamento->color }}',
               borderColor       : '{{ $agendamento->color }}'
             },
