@@ -341,7 +341,7 @@
             </li>
         @endif
 
-            @if (Auth::user()->can('checksetor', ACTIVITYLOG_VISUALIZAR)))
+            @if (Auth::user()->can('checksetor', ACTIVITYLOG_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
                 '/activity-log',
             ]) ? 'menu-open' : '' }}">

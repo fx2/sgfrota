@@ -159,6 +159,8 @@ php artisan crud:generate ActivityLog --fields='log_name#string;description#text
 php artisan crud:generate Agenda --fields='setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};titulo#string;descricao#text;data#date;horario#time;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes 
 
 
+php artisan crud:generate Solicitacoes --fields='sequencia#string;user_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};setor_id#select#options={"1": "Technology", "2": "Tips", "3": "Health"};data#date;horario#time;prioridade#select#options={"1": "Alta", "2": "Normal", "3": "Baixa"};solicitacao#select#options={"1": "Alta", "2": "Normal", "3": "Baixa"};numero_oficio#string;descricao#text;documento#string;respondendo_descricao#text;respondendo_user_id#integer;respondendo_data#date;respondendo_horario#time;respondendo_documento#string;status#boolean' --view-path=admin --controller-namespace=App\\Http\\Controllers\\Admin --form-helper=html --soft-deletes=yes 
+
 FALTA OS JOINS e FOREIGH KEY
 
  category#select#options={"technology": "Technology", "tips": "Tips", "health": "Health"}
