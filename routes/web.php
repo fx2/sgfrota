@@ -62,3 +62,4 @@ Route::resource('veiculo-reserva-devolucao', 'App\Http\Controllers\Admin\Veiculo
 Route::resource('activity-log', 'App\Http\Controllers\Configuracoes\ActivityLogController');
 Route::resource('agenda', 'App\Http\Controllers\Admin\AgendaController');
 Route::resource('solicitacoes', 'App\Http\Controllers\Admin\SolicitacoesController');
+Route::resource('tipo-solicitacao', 'App\Http\Controllers\Admin\TipoSolicitacaoController');

@@ -183,6 +183,15 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{ url('tipo-solicitacao') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-solicitacao']) ? 'active' : '' }}">
+                  <i class="nav-icon far fa-circle nav-icon"></i>
+                  <p>
+                    Tipos de Solicitações
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="{{ url('fornecedor') }}" class="nav-link {{ Str::contains(url()->current(), ['/fornecedor']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
                   <p>
