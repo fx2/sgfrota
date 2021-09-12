@@ -313,6 +313,17 @@
               </li>
           @endcan
 
+          @can('checksetor', SOLICITACOES_VISUALIZAR)
+            <li class="nav-item">
+              <a href="{{ url('solicitacoes') }}" class="nav-link {{ Str::contains(url()->current(), ['/solicitacoes']) ? 'active' : '' }}">
+                <i class="fas fa-sort-amount-up-alt"></i>
+                <p>
+                  Solicitações
+                </p>
+              </a>
+            </li>
+          @endcan
+
           @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVADEVOLUCAO_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
                 '/veiculo-reserva-entrada',

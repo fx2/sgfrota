@@ -1,37 +1,9 @@
-<div class="form-group row mb-5 {{ $errors->has('sequencia') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="sequencia" class="control-label">{{ 'Sequencia' }}</label>
-    </div>
-    <div class="col-10">
-        <input class="form-control" name="sequencia" type="text" id="sequencia" value="{{ isset($result->sequencia) ? $result->sequencia : ''}}" >
-        {!! $errors->first('sequencia', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group row mb-5 {{ $errors->has('data') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="data" class="control-label">{{ 'Data' }}</label>
-    </div>
-    <div class="col-10">
-        <input class="form-control" name="data" type="date" id="data" value="{{ isset($result->data) ? $result->data : ''}}" >
-        {!! $errors->first('data', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group row mb-5 {{ $errors->has('horario') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="horario" class="control-label">{{ 'Horario' }}</label>
-    </div>
-    <div class="col-10">
-        <input class="form-control" name="horario" type="time" id="horario" value="{{ isset($result->horario) ? $result->horario : old('horario')}}" >
-        {!! $errors->first('horario', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
 <div class="form-group row mb-5 {{ $errors->has('prioridade') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="prioridade" class="control-label">{{ 'Prioridade' }}</label>
     </div>
     <div class="col-10">
-        <select name="prioridade" class="form-control" id="prioridade" >
+        <select name="prioridade" class="form-control" id="prioridade" @if ($formMode != 'create') disabled @endif>
             <option value="">Selecione ...</option>
             <option value="1" {{ (isset($result->prioridade) && $result->prioridade == 1) ? 'selected' : ''}} {{ old('prioridade') == 1 ? "selected" : "" }}>Alta</option>
             <option value="2" {{ (isset($result->prioridade) && $result->prioridade == 2) ? 'selected' : ''}} {{ old('prioridade') == 2 ? "selected" : "" }}>Normal</option>
@@ -40,109 +12,137 @@
         {!! $errors->first('prioridade', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group row mb-5 {{ $errors->has('solicitacao') ? 'has-error' : ''}}">
+<div class="form-group row mb-5 {{ $errors->has('solicitacao_id') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="solicitacao" class="control-label">{{ 'Solicitacao' }}</label>
+        <label for="solicitacao_id" class="control-label">{{ 'Solicitação' }}</label>
     </div>
     <div class="col-10">
-        <select name="solicitacao" class="form-control" id="solicitacao" >
-    <option value="">Selecione ...</option>
-    {{-- @foreach ($selectModelFields[] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}" 
-            {{ (isset($result->solicitacao) && $result->solicitacao == $optionValue->id) ? 'selected' : ''}}
-            {{ old('solicitacao') == $optionValue->id ? "selected" : "" }} 
-        >{{ $optionValue }}</option>
-    @endforeach --}}
-</select>
-        {!! $errors->first('solicitacao', '<p class="help-block">:message</p>') !!}
+        <select name="solicitacao_id" class="form-control" id="solicitacao_id" @if ($formMode != 'create') disabled @endif>
+            <option value="">Selecione ...</option>
+            @foreach ($selectModelFields['tipoSolicitacao'] as $optionKey => $optionValue)
+                <option value="{{ $optionValue->id }}" 
+                    {{ (isset($result->solicitacao_id) && $result->solicitacao_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ old('solicitacao_id') == $optionValue->id ? "selected" : "" }} 
+                >{{ $optionValue->nome }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('solicitacao_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group row mb-5 {{ $errors->has('numero_oficio') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="numero_oficio" class="control-label">{{ 'Numero Oficio' }}</label>
+        <label for="numero_oficio" class="control-label">{{ 'Número Oficio' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="numero_oficio" type="text" id="numero_oficio" value="{{ isset($result->numero_oficio) ? $result->numero_oficio : ''}}" >
+        <input class="form-control" name="numero_oficio" type="text" id="numero_oficio" value="{{ isset($result->numero_oficio) ? $result->numero_oficio : ''}}" @if ($formMode != 'create') disabled @endif>
         {!! $errors->first('numero_oficio', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group row mb-5 {{ $errors->has('descricao') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="descricao" class="control-label">{{ 'Descricao' }}</label>
+        <label for="descricao" class="control-label">{{ 'Descrição' }}</label>
     </div>
     <div class="col-10">
-        <textarea class="form-control" rows="5" name="descricao" type="textarea" id="descricao" >{{ isset($result->descricao) ? $result->descricao : old('descricao')}}</textarea>
+        <textarea class="form-control" rows="5" name="descricao" type="textarea" id="descricao" @if ($formMode != 'create') disabled @endif>{{ isset($result->descricao) ? $result->descricao : old('descricao')}}</textarea>
         {!! $errors->first('descricao', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group row {{ $errors->has('documento') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="documento" class="control-label">{{ 'Anexar documento' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="documento" type="file" id="documento" value="{{ isset($result->documento) ? $result->documento : ''}}" @if ($formMode != 'create') disabled @endif>
+        {!! $errors->first('documento', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="documento" class="control-label">{{ 'Documento' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="documento" type="text" id="documento" value="{{ isset($result->documento) ? $result->documento : ''}}" >
-        {!! $errors->first('documento', '<p class="help-block">:message</p>') !!}
+        <label for="documento" class="control-label">{{ '' }}</label>
+        <img class="img-fluid" src="{{ isset($result->documento) ? removePublicPath(asset($result->documento)) : '' }}" alt="{{ isset($result->documento) ? $result->documento : '' }}" >
     </div>
 </div>
-<div class="form-group row mb-5 {{ $errors->has('respondendo_descricao') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="respondendo_descricao" class="control-label">{{ 'Respondendo Descricao' }}</label>
+
+
+@if ($formMode != 'create')
+
+    <div class="form-group row mb-5 {{ $errors->has('respondendo_descricao') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="respondendo_descricao" class="control-label">{{ 'Descrição' }}</label>
+        </div>
+        <div class="col-10">
+            <textarea class="form-control" required rows="5" name="respondendo_descricao" type="textarea" id="respondendo_descricao" @if (isset($result->respondendo_descricao)) disabled @endif>{{ isset($result->respondendo_descricao) ? $result->respondendo_descricao : old('respondendo_descricao')}}</textarea>
+            {!! $errors->first('respondendo_descricao', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
-    <div class="col-10">
-        <textarea class="form-control" rows="5" name="respondendo_descricao" type="textarea" id="respondendo_descricao" >{{ isset($result->respondendo_descricao) ? $result->respondendo_descricao : old('respondendo_descricao')}}</textarea>
-        {!! $errors->first('respondendo_descricao', '<p class="help-block">:message</p>') !!}
+
+    {{-- <div class="form-group row mb-5 {{ $errors->has('respondendo_data') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="respondendo_data" class="control-label">{{ 'Data' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="respondendo_data" type="date" id="respondendo_data" value="{{ isset($result->respondendo_data) ? $result->respondendo_data : ''}}" @if (isset($result->respondendo_data)) disabled @endif>
+            {!! $errors->first('respondendo_data', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
-</div>
-{{-- <div class="form-group row mb-5 {{ $errors->has('respondendo_user_id') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="respondendo_user_id" class="control-label">{{ 'Respondendo User Id' }}</label>
+
+    <div class="form-group row mb-5 {{ $errors->has('respondendo_horario') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="respondendo_horario" class="control-label">{{ 'Horário' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="respondendo_horario" type="time" id="respondendo_horario" value="{{ isset($result->respondendo_horario) ? $result->respondendo_horario : old('respondendo_horario')}}" @if (isset($result->respondendo_horario)) disabled @endif>
+            {!! $errors->first('respondendo_horario', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div> --}}
+
+    <div class="form-group row {{ $errors->has('respondendo_documento') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="respondendo_documento" class="control-label">{{ 'Anexar Documento' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="respondendo_documento" type="file" id="respondendo_documento" value="{{ isset($result->respondendo_documento) ? $result->respondendo_documento : ''}}" @if (isset($result->respondendo_documento)) disabled @endif>
+            {!! $errors->first('respondendo_documento', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
-    <div class="col-10">
-        <input class="form-control" name="respondendo_user_id" type="number" id="respondendo_user_id" value="{{ isset($result->respondendo_user_id) ? $result->respondendo_user_id : ''}}" >
-        {!! $errors->first('respondendo_user_id', '<p class="help-block">:message</p>') !!}
+
+    <div class="form-group row mb-5 {{ $errors->has('respondendo_documento') ? 'has-error' : ''}}">
+        <div class="col-2">
+        </div>
+        <div class="col-10">
+            <label for="respondendo_documento" class="control-label">{{ '' }}</label>
+            <img class="img-fluid" src="{{ isset($result->respondendo_documento) ? removePublicPath(asset($result->respondendo_documento)) : '' }}">
+        </div>
     </div>
-</div> --}}
-<div class="form-group row mb-5 {{ $errors->has('respondendo_data') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="respondendo_data" class="control-label">{{ 'Respondendo Data' }}</label>
+
+
+
+
+    {{-- <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="status" class="control-label">{{ 'Status' }}</label>
+        </div>
+        <div class="col-10">
+            <div class="radio">
+        <label><input name="status" type="radio" value="1" @if (isset($result)) {{ (1 == $result->status) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Ativo</label>
+        <label><input name="status" type="radio" value="0" {{ (isset($result) && 0 == $result->status) ? 'checked' : '' }}> Bloqueado</label>
     </div>
-    <div class="col-10">
-        <input class="form-control" name="respondendo_data" type="date" id="respondendo_data" value="{{ isset($result->respondendo_data) ? $result->respondendo_data : ''}}" >
-        {!! $errors->first('respondendo_data', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group row mb-5 {{ $errors->has('respondendo_horario') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="respondendo_horario" class="control-label">{{ 'Respondendo Horario' }}</label>
-    </div>
-    <div class="col-10">
-        <input class="form-control" name="respondendo_horario" type="time" id="respondendo_horario" value="{{ isset($result->respondendo_horario) ? $result->respondendo_horario : old('respondendo_horario')}}" >
-        {!! $errors->first('respondendo_horario', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group row mb-5 {{ $errors->has('respondendo_documento') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="respondendo_documento" class="control-label">{{ 'Respondendo Documento' }}</label>
-    </div>
-    <div class="col-10">
-        <input class="form-control" name="respondendo_documento" type="text" id="respondendo_documento" value="{{ isset($result->respondendo_documento) ? $result->respondendo_documento : ''}}" >
-        {!! $errors->first('respondendo_documento', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-<div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="status" class="control-label">{{ 'Status' }}</label>
-    </div>
-    <div class="col-10">
-        <div class="radio">
-    <label><input name="status" type="radio" value="1" @if (isset($result)) {{ (1 == $result->status) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Ativo</label>
-    <label><input name="status" type="radio" value="0" {{ (isset($result) && 0 == $result->status) ? 'checked' : '' }}> Bloqueado</label>
-</div>
-        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+            {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div> --}}
+@endif
+
+@include('parts/select-setor')
 
 
 <div class="form-group">
-    <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
+    <a href="{{ url()->previous() }}" title="Voltar" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
+    @if ($result->etapa != 2)
+        <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Editar' : 'Cadastar' }}">
+    @else
+        <input class="btn btn-primary" type="submit" value="Finalizar">
+    @endif
 </div>

@@ -4,12 +4,12 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item">Solicitacoes</li>
+            <li class="breadcrumb-item">Solicitacões</li>
         </ol>
     </nav>
 
     <div class="card">
-        <div class="card-header h3">Solicitacoes</div>
+        <div class="card-header h3">Solicitacões</div>
         <div class="card-body">
             @can('checksetor', SOLICITACOES_ADICIONAR)
                 <a href="{{ url('/solicitacoes/create') }}" class="btn btn-success btn-sm" title="Add New Solicitaco">
@@ -40,7 +40,6 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead class="thead-hide">
-                        <th>#</th>
                         @can('isMasterOrAdmin')
                             <th>Setor</th>
                         @endcan
@@ -52,7 +51,6 @@
                     <tbody>
                         @forelse($results as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
                                 @can('isMasterOrAdmin')
                                     <td>{{$item->setor->nome}}</td>
                                 @endcan
@@ -65,7 +63,16 @@
                                                 $valor = $item->$a;
 
                                                 if ($val[0] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                                                    $valor = $valor == 1 ? 'Aberto' : 'Finalizado';
+                                                }
+                                                elseif ($val[0] == 'prioridade') {
+                                                    
+                                                    if ($valor == 1)
+                                                        $valor = 'Alta';
+                                                    if ($valor == 2)
+                                                        $valor = 'Normal';
+                                                    if ($valor == 3)
+                                                        $valor = 'Baixa';
                                                 }
                                                 elseif ($val[0] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
@@ -80,7 +87,15 @@
                                                 $valor = $item->$a->$b;
 
                                                 if ($val[1] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                                                    $valor = $valor == 1 ? 'Aberto' : 'Finalizado';
+                                                }
+                                                elseif ($val[1] == 'prioridade') {
+                                                    if ($valor == 1)
+                                                        $valor == 'Alta';
+                                                    if ($valor == 2)
+                                                        $valor == 'Normal';
+                                                    if ($valor == 3)
+                                                        $valor == 'Baixa';
                                                 }
                                                 elseif ($val[1] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
@@ -95,7 +110,15 @@
                                                 $valor = $item->$a->$b->$c;
 
                                                 if ($val[2] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                                                    $valor = $valor == 1 ? 'Aberto' : 'Finalizado';
+                                                }
+                                                elseif ($val[2] == 'prioridade') {
+                                                    if ($valor == 1)
+                                                        $valor == 'Alta';
+                                                    if ($valor == 2)
+                                                        $valor == 'Normal';
+                                                    if ($valor == 3)
+                                                        $valor == 'Baixa';
                                                 }
                                                 elseif ($val[2] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
@@ -111,7 +134,15 @@
                                                 $valor = $item->$a->$b->$c->$d;
 
                                                 if ($val[3] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                                                    $valor = $valor == 1 ? 'Aberto' : 'Finalizado';
+                                                }
+                                                elseif ($val[3] == 'prioridade') {
+                                                    if ($valor == 1)
+                                                        $valor == 'Alta';
+                                                    if ($valor == 2)
+                                                        $valor == 'Normal';
+                                                    if ($valor == 3)
+                                                        $valor == 'Baixa';
                                                 }
                                                 elseif ($val[3] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
@@ -128,7 +159,15 @@
                                                 $valor = $item->$a->$b->$c->$d->$e;
 
                                                 if ($val[4] == 'status') {
-                                                    $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
+                                                    $valor = $valor == 1 ? 'Aberto' : 'Finalizado';
+                                                }
+                                                elseif ($val[4] == 'prioridade') {
+                                                    if ($valor == 1)
+                                                        $valor == 'Alta';
+                                                    if ($valor == 2)
+                                                        $valor == 'Normal';
+                                                    if ($valor == 3)
+                                                        $valor == 'Baixa';
                                                 }
                                                 elseif ($val[4] == 'data') {
                                                     $valor = convertTimestamp($valor, 'd/m/Y');
@@ -142,7 +181,7 @@
                                 <td>
                                     {{-- <a href="{{ url('/solicitacoes/' . $item->id) }}" title="Visualizar Solicitaco"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
                                     @can('checksetor', SOLICITACOES_EDITAR)
-                                        <a href="{{ url('/solicitacoes/' . $item->id . '/edit') }}" title="Editar Solicitaco"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+                                        <a href="{{ url('/solicitacoes/' . $item->id . '/edit') }}" title="Editar Solicitação"><button class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
                                     @endcan
 
                                     @can('checksetor', SOLICITACOES_DELETAR)

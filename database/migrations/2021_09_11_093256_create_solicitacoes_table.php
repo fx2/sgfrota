@@ -15,8 +15,8 @@ class CreateSolicitacoesTable extends Migration
         Schema::create('solicitacoes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('solicitacao_id');
-            $table->string('user_id');
-            $table->string('setor_id');
+            $table->unsignedInteger('auth_id');
+            $table->unsignedInteger('setor_id');
             $table->string('sequencia')->nullable();
             $table->date('data')->nullable();
             $table->time('horario')->nullable();
@@ -25,11 +25,12 @@ class CreateSolicitacoesTable extends Migration
             $table->text('descricao')->nullable();
             $table->string('documento')->nullable();
             $table->text('respondendo_descricao')->nullable();
-            $table->integer('respondendo_user_id')->nullable();
+            $table->unsignedInteger('respondendo_auth_id')->nullable();
             $table->date('respondendo_data')->nullable();
             $table->time('respondendo_horario')->nullable();
             $table->string('respondendo_documento')->nullable();
-            $table->boolean('status')->nullable();
+            $table->integer('etapa')->default(1);
+            $table->boolean('status')->default(1)->nullable();
             $table->timestamps();
             $table->softDeletes();
             });

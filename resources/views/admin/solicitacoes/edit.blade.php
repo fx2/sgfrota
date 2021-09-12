@@ -4,13 +4,20 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('solicitacoes') }}">Solicitacoes</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Editar Solicitacoes</li>
+            <li class="breadcrumb-item"><a href="{{ url('solicitacoes') }}">Solicitacões</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar Solicitacões</li>
         </ol>
     </nav> 
 
     <div class="card">
-        <div class="card-header">Editar Solicitaco </div>
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="">Editar Solicitacões</div>
+                <div class="">Data: {{ convertTimestamp($result->data, 'd/m/Y') }}</div>
+                <div class="">Hora: {{ $result->horario }}</div>
+                <div class="">Sequencial/Ano: <strong>{{ $result->sequencia }}</strong></div>
+            </div>
+        </div>
         <div class="card-body">
             <a href="{{ url('/solicitacoes') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
             <br />

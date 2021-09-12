@@ -40,10 +40,10 @@ class TipoSolicitacaoController extends Controller
         $this->fileName = [];
         $this->uploadFilePath = 'images/tipo-solicitacao';
         $this->validations = [];
-        $this->pdfFields = [['id'], ['nome']];
-        $this->pdfTitles = ['Id', 'Nome'];
-        $this->indexFields = [['id'], ['nome']];
-        $this->indexTitles = ['Id', 'Nome'];
+        $this->pdfFields = [['nome'], ['descricao']];
+        $this->pdfTitles = ['Nome', 'Descrição'];
+        $this->indexFields = [['nome'], ['descricao']];
+        $this->indexTitles = ['Nome', 'Descrição'];
         $this->saveSetorScope = false;
     }
 
