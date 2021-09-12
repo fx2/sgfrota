@@ -183,6 +183,15 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{ url('tipo-solicitacao') }}" class="nav-link {{ Str::contains(url()->current(), ['/tipo-solicitacao']) ? 'active' : '' }}">
+                  <i class="nav-icon far fa-circle nav-icon"></i>
+                  <p>
+                    Tipos de Solicitações
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="{{ url('fornecedor') }}" class="nav-link {{ Str::contains(url()->current(), ['/fornecedor']) ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle nav-icon"></i>
                   <p>
@@ -304,6 +313,17 @@
               </li>
           @endcan
 
+          @can('checksetor', SOLICITACOES_VISUALIZAR)
+            <li class="nav-item">
+              <a href="{{ url('solicitacoes') }}" class="nav-link {{ Str::contains(url()->current(), ['/solicitacoes']) ? 'active' : '' }}">
+                <i class="fas fa-sort-amount-up-alt"></i>
+                <p>
+                  Solicitações
+                </p>
+              </a>
+            </li>
+          @endcan
+
           @if (Auth::user()->can('checksetor', VEICULORESERVAENTRADA_VISUALIZAR) || Auth::user()->can('checksetor', VEICULORESERVADEVOLUCAO_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
                 '/veiculo-reserva-entrada',
@@ -341,7 +361,7 @@
             </li>
         @endif
 
-            @if (Auth::user()->can('checksetor', ACTIVITYLOG_VISUALIZAR)))
+            @if (Auth::user()->can('checksetor', ACTIVITYLOG_VISUALIZAR))
             <li class="nav-item {{ Str::contains(url()->current(), [
                 '/activity-log',
             ]) ? 'menu-open' : '' }}">

@@ -205,3 +205,15 @@ if (! function_exists('verificaDataCNH')) {
     const AGENDA_EDITAR = 73; // nao esta usando, status = 0
     const AGENDA_DELETAR = 74;
     const AGENDA_RELATORIO = 75;
+
+    const SOLICITACOES_VISUALIZAR = 76;
+    const SOLICITACOES_ADICIONAR = 77;
+    const SOLICITACOES_EDITAR = 78;
+    const SOLICITACOES_DELETAR = 79;
+    const SOLICITACOES_RELATORIO = 80;
+
+    const TIPOSOLICITACOES_VISUALIZAR = 81;
+    const TIPOSOLICITACOES_ADICIONAR = 82;
+    const TIPOSOLICITACOES_EDITAR = 83;
+    const TIPOSOLICITACOES_DELETAR = 84;
+    const TIPOSOLICITACOES_RELATORIO = 85;
