@@ -25,11 +25,11 @@ class TipoSolicitacaoController extends Controller
     public function __construct(TipoSolicitacao $tiposolicitacao)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:' . TIPOSOLICITACOES_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . TIPOSOLICITACOES_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . TIPOSOLICITACOES_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . TIPOSOLICITACOES_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . TIPOSOLICITACOES_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . TIPOSOLICITACOES_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . TIPOSOLICITACOES_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . TIPOSOLICITACOES_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . TIPOSOLICITACOES_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . TIPOSOLICITACOES_RELATORIO, ['only' => ['relatorio']]);
 
         $this->model = $tiposolicitacao;
         $this->path = 'admin.tipo-solicitacao';
