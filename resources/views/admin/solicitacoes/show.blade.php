@@ -12,7 +12,7 @@
         <div class="card-header">Solicitaco </div>
         <div class="card-body">
 
-            <a href="{{ url('/veiculo-saida') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
+            <a href="{{ url('/solicitacoes') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
             <br />
             <br />
 
@@ -20,8 +20,8 @@
                 <p class="alert alert-danger">Ops, algo deu errado... confira os campos e tente novamente.</p>
             @endif
 
-            <form method="POST" action="{{ url('/veiculo-saida/' . $result->id) }}" id="form1" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                @include ('admin.veiculo-saida.form', ['formMode' => 'show'])
+            <form method="POST" action="{{ url('/solicitacoes/' . $result->id) }}" id="form1" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                @include ('admin.solicitacoes.form', ['formMode' => 'show'])
 
             </form>
 
