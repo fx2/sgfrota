@@ -304,6 +304,11 @@
     </div>
 </div>
 
+
+<h3 class="text-danger">Informações do Veículo que está voltando</h3>
+<br>
+<br>
+
 <div class="form-group row mb-5 {{ $errors->has('tipo_responsavel') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="tipo_responsavel" class="control-label">{{ 'Veículo pertencente a algum gabinete' }}</label>

@@ -53,10 +53,48 @@ class SolicitacoesController extends Controller
         $this->fileName = ['documento', 'respondendo_documento'];
         $this->uploadFilePath = 'images/solicitacoes';
         $this->validations = [];
-        $this->pdfFields = [['data'], ['horario'], ['prioridade'], ['status']];
-        $this->pdfTitles = ['Data', 'Hora', 'Prioridade', 'Status'];
-        $this->indexFields = [['data'], ['horario'], ['prioridade'], ['status']];
-        $this->indexTitles = ['Data', 'Hora', 'Prioridade', 'Status'];
+        $this->pdfFields = [['data'], ['horario'], ['prioridade'], ['respondendo_data'], ['respondendo_horario'], ['status']];
+        $this->pdfTitles = ['Data Abertura', 'Hora Abertura', 'Prioridade', 'Data Respondida', 'Horário Respondido','Status'];
+        $this->pdfTitle = 'Solicitação';
+        $this->indexFields = [['data'], ['horario'], ['prioridade'], ['respondendo_data'], ['respondendo_horario'], ['status']];
+        $this->indexTitles = ['Data Abertura', 'Hora Abertura', 'Prioridade', 'Data Respondida', 'Horário Respondido', 'Status'];
+    }
+
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['prioridade'] !== null)
+            $result = $result->where('prioridade', '=', $requestData['prioridade']);
+
+        if($requestData['solicitacao_id'] !== null)
+            $result = $result->where('solicitacao_id', '=', $requestData['solicitacao_id']);
+
+        if($requestData['status'] !== null)
+            $result = $result->where('status', '=', $requestData['status']);
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('respondendo_data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('respondendo_data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
     public function create()
@@ -88,9 +126,18 @@ class SolicitacoesController extends Controller
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
-        $requestData['respondendo_auth_id'] = $userAuth->id;
 
-        $requestData['etapa'] = $result->respondendo_descricao == NULL ? 2 : 3;
+        if ($userAuth->id != $result['auth_id']){
+            $requestData['respondendo_auth_id'] = $userAuth->id;
+            $requestData['respondendo_data'] = date('Y-m-d');
+            $requestData['respondendo_horario'] = date('H:i:s');
+            $requestData['etapa'] = 2;
+        }
+
+        if ($result['respondendo_descricao'] && $userAuth->id == $result['auth_id']){
+            $requestData['status'] = 0;
+            $requestData['etapa'] = 3;
+        }
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')
