@@ -42,6 +42,9 @@
                     elseif ($val[0] == 'hora_multa') {
                         $valor = convertTimestamp($valor, 'H:i');
                     }
+                    elseif ($val[0] == 'respondendo_horario') {
+                        $valor = $valor!= null ? convertTimestamp($valor, 'H:i') . ':00': '';
+                    }
                     elseif ($val[0] == 'data') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
@@ -69,6 +72,9 @@
                     elseif ($val[0] == 'cnh_validade') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[0] == 'respondendo_data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
                     elseif ($val[0] == 'valor') {
                         $valor = decimalGambeta($valor);
                     }
@@ -83,6 +89,14 @@
                     }
                     elseif ($val[0] == 'pago') {
                         $valor = $valor == 1 ? 'Sim' : 'Não';
+                    }
+                    elseif ($val[0] == 'prioridade') {
+                        if ($valor == 1)
+                            $valor = 'Alta';
+                        if ($valor == 2)
+                            $valor = 'Normal';
+                        if ($valor == 3)
+                            $valor = 'Baixa';
                     }
 
                   }

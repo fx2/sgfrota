@@ -409,7 +409,8 @@
 
 
 
-
+<h3 class="text-danger">Informações do Veículo que está voltando</h3>
+<br>
 
 
 {{--FORM--}}
@@ -451,7 +452,7 @@
 </div>
 <div class="form-group row mb-5 {{ $errors->has('devolucao_recebido_por') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="devolucao_recebido_por" class="control-label">{{ 'Devolvido Por' }}</label>
+        <label for="devolucao_recebido_por" class="control-label">{{ 'Recebido Por' }}</label>
     </div>
     <div class="col-10">
         <input class="form-control" name="devolucao_recebido_por" type="text" id="devolucao_recebido_por" value="{{ isset($result->devolucao_recebido_por) ? $result->devolucao_recebido_por : ''}}" >
