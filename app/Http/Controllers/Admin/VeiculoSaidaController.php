@@ -348,7 +348,7 @@ class VeiculoSaidaController extends Controller
 
     public function customListagem(Request $request)
     {
-        $limit = $request->all()['limit'] ?? 3;
+        $limit = $request->all()['limit'] ?? 20;
         $filters = $request->except('_token');
 
         $result = $this->model;
