@@ -131,7 +131,11 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="pagination-wrapper"> {!! $results->appends(['search' => Request::get('search')])->render() !!} </div>
+                @if (isset($filters))
+                    {!! $results->appends($filters)->links() !!}
+                @else
+                    {!! $results->links() !!}
+                @endif
             </div>
 
         </div>
