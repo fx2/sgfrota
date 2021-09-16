@@ -62,7 +62,7 @@
             <table class="borda" style="width:85%; left:30px; position:relative;">
                 <tr>
                     @if($results->controle_frota_id)
-                        <td><strong class="text-leftzinho">Responsável</strong>: {{ $results->controle_frota->responsavel->nome }}</td>
+                        <td><strong class="text-leftzinho">Responsável</strong>: {{ isset($results->controle_frota->responsavel) ? $results->controle_frota->responsavel->nome : '' }}</td>
                     @else
                         <td><strong class="text-leftzinho">Responsável</strong>: {{ $results->veiculo_reserva_entrada->responsavel->nome }}</td>
                     @endif
