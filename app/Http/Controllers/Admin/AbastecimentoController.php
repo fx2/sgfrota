@@ -23,6 +23,12 @@ class AbastecimentoController extends Controller
     public function __construct(Abastecimento $abastecimento)
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:' . ABASTECIMENTOS_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . ABASTECIMENTOS_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . ABASTECIMENTOS_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . ABASTECIMENTOS_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . ABASTECIMENTOS_RELATORIO, ['only' => ['relatorio']]);
+        
         $this->model = $abastecimento;
         $this->saveSetorScope = true;
         $this->path = 'admin.abastecimento';

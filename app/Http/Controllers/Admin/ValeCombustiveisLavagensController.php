@@ -27,11 +27,11 @@ class ValeCombustiveisLavagensController extends Controller
     public function __construct(ValeCombustiveisLavagen $valecombustiveislavagens)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:51', ['only' => ['index']]);
-        $this->middleware('checksetor:52', ['only' => ['create']]);
-        $this->middleware('checksetor:53', ['only' => ['edit']]);
-        $this->middleware('checksetor:54', ['only' => ['destroy']]);
-        $this->middleware('checksetor:55', ['only' => ['relatorio']]);
+        $this->middleware('checksetor:' . VALECOMBUSTIVEISLAVAGENS_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . VALECOMBUSTIVEISLAVAGENS_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . VALECOMBUSTIVEISLAVAGENS_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . VALECOMBUSTIVEISLAVAGENS_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . VALECOMBUSTIVEISLAVAGENS_RELATORIO, ['only' => ['relatorio']]);
 
         $this->model = $valecombustiveislavagens;
         $this->valecombustiveislavagens = $valecombustiveislavagens;

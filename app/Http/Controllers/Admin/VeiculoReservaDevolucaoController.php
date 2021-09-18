@@ -27,6 +27,11 @@ class VeiculoReservaDevolucaoController extends Controller
     public function __construct(VeiculoReservaEntrada $veiculoReservaEntrada)
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_RELATORIO, ['only' => ['relatorio']]);
         $this->model = $veiculoReservaEntrada;
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-reserva-devolucao';

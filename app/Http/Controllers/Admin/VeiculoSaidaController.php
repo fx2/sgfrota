@@ -46,6 +46,11 @@ class VeiculoSaidaController extends Controller
     )
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:' . CONTROLEDIARIODESAIDA_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . CONTROLEDIARIODESAIDA_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . CONTROLEDIARIODESAIDA_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . CONTROLEDIARIODESAIDA_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . CONTROLEDIARIODESAIDA_RELATORIO, ['only' => ['relatorio']]);
 
         $this->veiculoSaidaService = $veiculoSaidaService;
         $this->controleFrotumKmService = $controleFrotumKmService;
