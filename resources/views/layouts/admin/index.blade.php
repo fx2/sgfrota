@@ -139,6 +139,8 @@
 
 @stack('js')
 
+<script src="{{ asset('js/ajax_solicitacoes_alerta.js') }}"></script>
+
 @toastr_js
 @toastr_render
 </body>

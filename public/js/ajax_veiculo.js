@@ -20,7 +20,6 @@ async function loadControleFrotum(controle_frota_id = null){
     route = verificaVeiculoReserva(controle_frota_id);
 
     let resp = await axios.get(route);
-    
     let proprietario = resp.data.tipo_veiculo == 1 ? 'Veículo próprio' : resp.data.nome_proprietario;
 
     veiculoAppend.after(
@@ -39,6 +38,7 @@ async function loadControleFrotum(controle_frota_id = null){
                 <li><strong>Renavan</strong>: ${resp.data.renavan}</li>
                 <li><strong>Responsavel</strong>: ${resp.data.responsavel != null ? resp.data.responsavel.nome : ''}</li>
                 <li><strong>Setor</strong>: ${resp.data.setor.nome}</li>
+                <li><strong>Veículo reserva</strong>: ${resp.data.entrada_data ? 'Sim' : 'Não'}</li>
             </ul>
         `
     );

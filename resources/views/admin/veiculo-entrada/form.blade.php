@@ -327,7 +327,6 @@
 
         if (values[1] != ""){
             url = `${BASE_URL}/veiculo-saida?select=veiculo_reserva_entradas.km_atual,veiculo_saidas.km_inicial,veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id,veiculo_reserva_entradas,veiculo_reserva_entradas.id,veiculo_saidas.veiculo_reserva_entrada_id&where=veiculo_reserva_entrada_id,=,${values[1]}&first=true`;
-            console.log(url)
         } else {
             url = `${BASE_URL}/veiculo-saida?select=controle_frotas.km_atual,veiculo_saidas.km_inicial,veiculo_saidas.nome_responsavel,tipo_cnhs.nome%20AS%20cnh_nome,%20motoristas.cnh,motoristas.cnh_validade,motoristas.rg,motoristas.cpf,motoristas.id,motoristas.nome%20as%20moto_nome&join=motoristas,motoristas.id,veiculo_saidas.motorista_id,tipo_cnhs,tipo_cnhs.id,motoristas.tipo_cnh_id,controle_frotas,controle_frotas.id,veiculo_saidas.controle_frota_id&where=controle_frota_id,=,${values[0]}&first=true`;
         }

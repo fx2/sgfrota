@@ -25,6 +25,12 @@ class MotoristaController extends Controller
     public function __construct(Motoristum $motorista)
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:' . MOTORISTAS_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . MOTORISTAS_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . MOTORISTAS_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . MOTORISTAS_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . MOTORISTAS_RELATORIO, ['only' => ['relatorio']]);
+        
         $this->model = $motorista;
         $this->saveSetorScope = true;
         $this->path = 'admin.motorista';

@@ -25,6 +25,12 @@ class ControleFrotaController extends Controller
     public function __construct(ControleFrotum $controlefrota)
     {
         $this->middleware('auth');
+        $this->middleware('checksetor:' . CONTROLEDEFROTAS_VISUALIZAR, ['only' => ['index']]);
+        $this->middleware('checksetor:' . CONTROLEDEFROTAS_ADICIONAR, ['only' => ['create']]);
+        $this->middleware('checksetor:' . CONTROLEDEFROTAS_EDITAR, ['only' => ['edit']]);
+        $this->middleware('checksetor:' . CONTROLEDEFROTAS_DELETAR, ['only' => ['destroy']]);
+        $this->middleware('checksetor:' . CONTROLEDEFROTAS_RELATORIO, ['only' => ['relatorio']]);
+        
         $this->model = $controlefrota;
         $this->saveSetorScope = true;
         $this->path = 'admin.controle-frota';

@@ -307,7 +307,9 @@
                                         @endcan
 
                                         @can('checksetor', SOLICITACOES_DELETAR)
-                                            <button type="submit" data-id="{{ $item->id }}" data-route="/solicitacoes" class="btnDeletar btn btn-danger btn-sm" title="Deletar Solicitaco"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            @if ($item->auth_id == auth('api')->user()->id)
+                                                <button type="submit" data-id="{{ $item->id }}" data-route="/solicitacoes" class="btnDeletar btn btn-danger btn-sm" title="Deletar Solicitaco"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            @endif
                                         @endcan
                                     @else
                                         <a href="{{ url('/solicitacoes/' . $item->id) }}" title="Visualizar Solicitaco"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
