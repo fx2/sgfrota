@@ -111,4 +111,14 @@ class VeiculoReservaEntrada extends BaseModel
     {
         return $this->hasOne('App\Models\Setor', 'id', 'setor_id');
     }
+
+    public function controle_frota()
+    {
+        return $this->hasOne('App\Models\ControleFrotum', 'id', 'controle_frota_id');
+    }
+
+    public function auth()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'auth_id');
+    }
 }
