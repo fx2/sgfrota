@@ -62,14 +62,14 @@
     </div>
     <div class="col-10">
         <select name="perfil_id" class="form-control" id="perfil_id" >
-    <option value="">Selecione ...</option>
-    @foreach ($selectModelFields['Perfil'] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}"
-            {{ (isset($result->perfil_id) && $result->perfil_id == $optionValue->id) ? 'selected' : ''}}
-            {{ old('perfil_id') == $optionValue->id ? "selected" : "" }}
-        >{{ $optionValue->nome }}</option>
-    @endforeach
-</select>
+            <option value="">Selecione ...</option>
+            @foreach ($selectModelFields['Perfil'] as $optionKey => $optionValue)
+                <option value="{{ $optionValue->id }}"
+                    {{ (isset($result->perfil_id) && $result->perfil_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ old('perfil_id') == $optionValue->id ? "selected" : "" }}
+                >{{ $optionValue->nome }}</option>
+            @endforeach
+        </select>
         {!! $errors->first('perfil_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -79,15 +79,30 @@
     </div>
     <div class="col-10">
         <select name="setor_id" class="form-control" id="setor_id" >
-    <option value="">Selecione ...</option>
-    @foreach ($selectModelFields['Setor'] as $optionKey => $optionValue)
-        <option value="{{ $optionValue->id }}"
-            {{ (isset($result->setor_id) && $result->setor_id == $optionValue->id) ? 'selected' : ''}}
-            {{ old('setor_id') == $optionValue->id ? "selected" : "" }}
-        >{{ $optionValue->nome }}</option>
-    @endforeach
-</select>
+            <option value="">Selecione ...</option>
+            @foreach ($selectModelFields['Setor'] as $optionKey => $optionValue)
+                <option value="{{ $optionValue->id }}"
+                    {{ (isset($result->setor_id) && $result->setor_id == $optionValue->id) ? 'selected' : ''}}
+                    {{ old('setor_id') == $optionValue->id ? "selected" : "" }}
+                >{{ $optionValue->nome }}</option>
+            @endforeach
+        </select>
         {!! $errors->first('setor_id', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group row mb-5 {{ $errors->has('type') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="type" class="control-label">{{ 'Tipo' }}</label>
+    </div>
+    <div class="col-10">
+        <select name="type" class="form-control" id="type" >
+            <option value="">Selecione ...</option>
+            @foreach (json_decode('{"admin": "admin", "colaborador": "colaborador"}', true) as $optionKey => $optionValue)
+                <option value="{{ $optionKey }}" {{ (isset($result->type) && $result->type == $optionKey) ? 'selected' : ''}}>{{ $optionKey }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
