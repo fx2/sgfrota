@@ -45,6 +45,7 @@ class VeiculoEntradaService
         $veiculos = VeiculoReservaEntrada::select(
             'veiculo_reserva_entradas.controle_frota_id as id',
             'veiculo_reserva_entradas.veiculo',
+            'veiculo_reserva_entradas.placa',
             'veiculo_reserva_entradas.id as veiculo_reserva_entrada_id',
             'veiculo_saidas.id as veiculo_saida_id'
         )
