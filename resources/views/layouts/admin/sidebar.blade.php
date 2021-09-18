@@ -317,7 +317,7 @@
             <li class="nav-item">
               <a href="{{ url('solicitacoes') }}" class="nav-link {{ Str::contains(url()->current(), ['/solicitacoes']) ? 'active' : '' }}">
                 <i class="fas fa-sort-amount-up-alt"></i>
-                <p>
+                <p id="solicitacoesSino">
                   Solicitações
                 </p>
               </a>
