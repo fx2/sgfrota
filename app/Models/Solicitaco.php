@@ -58,6 +58,11 @@ class Solicitaco extends BaseModel
         return $this->hasOne('App\Models\User', 'id', 'auth_id');
     }
     
+    public function userAuthRespondido()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'respondendo_auth_id');
+    }
+    
     public function respondendoUserAuth()
     {
         return $this->hasOne('App\Models\User', 'id', 'respondendo_auth_id');

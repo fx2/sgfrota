@@ -131,13 +131,15 @@ class SolicitacoesController extends Controller
             $requestData['respondendo_auth_id'] = $userAuth->id;
             $requestData['respondendo_data'] = date('Y-m-d');
             $requestData['respondendo_horario'] = date('H:i:s');
-            $requestData['etapa'] = 2;
-        }
-
-        if ($result['respondendo_descricao'] && $userAuth->id == $result['auth_id']){
+            // $requestData['etapa'] = 2;
             $requestData['status'] = 0;
             $requestData['etapa'] = 3;
         }
+
+        // if ($result['respondendo_descricao'] && $userAuth->id == $result['auth_id']){
+        //     $requestData['status'] = 0;
+        //     $requestData['etapa'] = 3;
+        // }
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin')

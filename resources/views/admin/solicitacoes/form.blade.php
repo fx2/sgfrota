@@ -139,6 +139,16 @@
         </div>
     </div>
 
+    @if (isset($result->respondendo_auth_id))
+        <div class="form-group row mb-5 {{ $errors->has('respondendo_auth_id') ? 'has-error' : ''}}">
+            <div class="col-2">
+                <label for="respondendo_auth_id" class="control-label">{{ 'Respondido por' }}</label>
+            </div>
+            <div class="col-10">
+                <strong>{{ isset($result->respondendo_auth_id) ? $result->userAuthRespondido->name : ''}}</strong>
+            </div>
+        </div>
+    @endif
 
 
 
@@ -165,7 +175,7 @@
     @if (!isset($result))
         <input class="btn btn-primary" type="submit" value="Cadastar">
     @elseif (isset($result->respondendo_auth_id) && $result->auth_id == auth('api')->user()->id)
-        <input class="btn btn-primary" type="submit" value="Finalizar">
+        {{-- <input class="btn btn-primary" type="submit" value="Finalizar"> --}}
     @else
         <input class="btn btn-primary" type="submit" value="Editar">
     @endif
