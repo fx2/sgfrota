@@ -9,6 +9,7 @@ use App\Models\VeiculoReservaEntrada;
 use App\Services\VerificaPerfil;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
+use PDF;
 
 class VeiculoReservaDevolucaoController extends Controller
 {
@@ -53,13 +54,15 @@ class VeiculoReservaDevolucaoController extends Controller
         $this->validations = [
 
         ];
-        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['status']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Status'];
 
-        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
-        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
+        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['setor', 'nome'], ['tipo_veiculo']];
+        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Setor', 'Tipo'];
         $this->pdfTitle = 'Controle de Frotas';
         $this->numbersWithDecimal = ['km_inicial']; //'km_atual' tambem
+        $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['km_final'],['relatorio_trajeto_motorista'],['quantidade_combustivel'],['observacao'],['nome_responsavel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['entrada_data'],['entrada_hora']];
+        $this->pdfindividualTitles = ['Motorista', 'Veículo', 'km_final', 'relatorio_trajeto_motorista', 'quantidade_combustivel', 'observacao', 'nome_responsavel', 'mecanica', 'eletrica', 'funilaria', 'pintura', 'pneus', 'observacao_situacao', 'macaco', 'triangulo', 'estepe', 'extintor', 'chave_roda', 'observacao_acessorio', 'entrada_data', 'entrada_hora'];
     }
 
     /**
@@ -172,7 +175,6 @@ class VeiculoReservaDevolucaoController extends Controller
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
-        $requestData['auth_id'] = $userAuth->id;
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin'){
@@ -196,7 +198,7 @@ class VeiculoReservaDevolucaoController extends Controller
         $requestToUpdate['devolucao_recebido_por'] = $requestData['devolucao_recebido_por'];
         $requestToUpdate['devolucao_observacao'] = $requestData['devolucao_observacao'];
         $requestToUpdate['documento_devolucao'] = $requestData['documento_devolucao'];
-        $requestToUpdate['auth_id'] = $requestData['auth_id'];
+        $requestToUpdate['devolucao_auth_id'] = $userAuth->id;
 
         $requestToUpdate['tipo'] = VeiculoReservaEntrada::TIPO_DEVOLUCAO;
         $requestData['id'] = $result->id;
@@ -251,5 +253,23 @@ class VeiculoReservaDevolucaoController extends Controller
           ->where('id', '=', $id)->withTrashed()->first();
 
         return view('admin.veiculo-reserva-devolucao.show', ['result'=>$result, 'withFields' => $this->withFields($result), 'selectModelFields' => $this->selectModelFields()]);
+    }
+
+    public function customShowPdf($id)
+    {
+        $result = $this->model::where('id', $id)->withTrashed()->first();
+
+        $data = [
+            'results' => $result,
+            'fields' => $this->pdfindividualFields,
+            'titles' => $this->pdfindividualTitles,
+            'pdfTitle' => $this->pdfTitle
+        ];
+
+        $pdf = PDF::loadView('admin/veiculo-reserva-devolucao/pdf/relatorio-individual', $data);
+        $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
+
+        // return $pdf->download($pdfModelName . '.pdf');
+        return $pdf->stream($pdfModelName . '.pdf');
     }
 }

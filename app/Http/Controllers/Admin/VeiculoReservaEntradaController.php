@@ -64,7 +64,7 @@ class VeiculoReservaEntradaController extends Controller
             'marca_id' => 'required',
             'modelo_id' => 'required',
             'tipo_responsavel' => 'required',
-            'tipo_responsavel_id' => 'required',
+            // 'tipo_responsavel_id' => 'required',
             'tipo_veiculo' => 'required',
             'disponivel_outros_departamentos' => 'required',
             // 'veiculo_escolar' => 'required',
@@ -84,11 +84,11 @@ class VeiculoReservaEntradaController extends Controller
             'foto' => 'required',
             'status' => 'required',
         ];
-        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Responsável', 'Status'];
+        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], ['status']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 'Status'];
 
-        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['responsavel', 'nome'], ['setor', 'nome'], ['tipo_veiculo']];
-        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Responsável', 'Setor', 'Tipo'];
+        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], ['setor', 'nome'], ['tipo_veiculo']];
+        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 'Setor', 'Tipo'];
         $this->pdfTitle = 'Entrada de Veículo Reserva';
 
         $this->pdfindividualFields = [['controle_frota', 'veiculo'], ['motorista', 'nome'], ['km_final'],['relatorio_trajeto_motorista'],['quantidade_combustivel'],['observacao'],['nome_responsavel'],['mecanica'],['eletrica'],['funilaria'],['pintura'],['pneus'],['observacao_situacao'],['macaco'],['triangulo'],['estepe'],['extintor'],['chave_roda'],['observacao_acessorio'],['entrada_data'],['entrada_hora']];

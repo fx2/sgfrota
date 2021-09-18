@@ -74,6 +74,7 @@ class VeiculoReservaEntrada extends BaseModel
         'tipo',
 
         // devolucao
+        'devolucao_auth_id',
         'devolucao_data',
         'devolucao_horario',
         'devolucao_km_atual',
@@ -120,5 +121,10 @@ class VeiculoReservaEntrada extends BaseModel
     public function auth()
     {
         return $this->hasOne('App\Models\User', 'id', 'auth_id');
+    }
+
+    public function devolucaoAuth()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'devolucao_auth_id');
     }
 }
