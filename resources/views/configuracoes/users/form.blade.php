@@ -91,20 +91,22 @@
     </div>
 </div>
 
-<div class="form-group row mb-5 {{ $errors->has('type') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="type" class="control-label">{{ 'Tipo' }}</label>
-    </div>
-    <div class="col-10">
-        <select name="type" class="form-control" id="type" >
-            <option value="">Selecione ...</option>
-            @foreach (json_decode('{"admin": "admin", "colaborador": "colaborador"}', true) as $optionKey => $optionValue)
+@if (auth('api')->user()->type == 'master')
+    <div class="form-group row mb-5 {{ $errors->has('type') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="type" class="control-label">{{ 'Tipo' }}</label>
+        </div>
+        <div class="col-10">
+            <select name="type" class="form-control" id="type" >
+                <option value="">Selecione ...</option>
+                @foreach (json_decode('{"admin": "admin", "colaborador": "colaborador"}', true) as $optionKey => $optionValue)
                 <option value="{{ $optionKey }}" {{ (isset($result->type) && $result->type == $optionKey) ? 'selected' : ''}}>{{ $optionKey }}</option>
-            @endforeach
-        </select>
-        {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
+                @endforeach
+            </select>
+            {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
-</div>
+@endif
 
 
 <div class="form-group">
