@@ -85,9 +85,29 @@
     </tr>
 </table>
 
+    <h4 class="text-center">Dados do retorno do veículo</h4>
+
+
+<table class="table borda" style="margin-top: 8px;">
+    <tr>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Recebido por</strong>: {{ $results->devolucao_recebido_por }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Data</strong>: {{ convertTimestamp($results->devolucao_data, 'd/m/Y') }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Horário</strong>: {{ convertTimestamp($results->devolucao_horario, 'H:i') }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Visual combustivel</strong>: {{ $results->devolucao_combustivel }} </p></td>
+    </tr>
+</table>
+
+
+<table class="table borda" style="margin-top: 8px;">
+    <tr>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Observação</strong>: {{ $results->devolucao_observacao }} </p></td>
+    </tr>
+</table>
+
 <table class="table borda" style="margin-top: 8px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário da entrada</strong>: {{ $results->auth->name }} </p></td>
+        <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário da devolução</strong>: {{ $results->devolucaoAuth->name }} </p></td>
     </tr>
 </table>
 
