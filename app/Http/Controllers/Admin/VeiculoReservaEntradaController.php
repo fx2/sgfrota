@@ -28,11 +28,11 @@ class VeiculoReservaEntradaController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('checksetor:' . VEICULORESERVAENTRADA_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . VEICULORESERVAENTRADA_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . VEICULORESERVAENTRADA_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . VEICULORESERVAENTRADA_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . VEICULORESERVAENTRADA_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . VEICULORESERVAENTRADA_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . VEICULORESERVAENTRADA_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . VEICULORESERVAENTRADA_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . VEICULORESERVAENTRADA_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . VEICULORESERVAENTRADA_RELATORIO, ['only' => ['relatorio']]);
 
         $this->model = $veiculoreservaentrada;
         $this->saveSetorScope = true;
