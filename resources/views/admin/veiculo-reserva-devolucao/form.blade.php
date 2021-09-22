@@ -332,13 +332,13 @@
             {!! $errors->first('entrada_forma_substituicao', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
-    <div class="form-group row mb-5 {{ $errors->has('entrada_entrada') ? 'has-error' : ''}}">
+    <div class="form-group row mb-5 {{ $errors->has('entrada_data') ? 'has-error' : ''}}">
         <div class="col-2">
-            <label for="entrada_entrada" class="control-label">{{ 'Entrada Data' }}</label>
+            <label for="entrada_data" class="control-label">{{ 'Entrada Data' }}</label>
         </div>
         <div class="col-10">
-            <input disabled class="form-control" name="entrada_entrada" type="date" id="entrada_entrada" value="{{ isset($result->entrada_entrada) ? $result->entrada_entrada : ''}}" >
-            {!! $errors->first('entrada_entrada', '<p class="help-block">:message</p>') !!}
+            <input disabled class="form-control" name="entrada_data" type="date" id="entrada_data" value="{{ isset($result->entrada_data) ? $result->entrada_data : ''}}" >
+            {!! $errors->first('entrada_data', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
     <div class="form-group row mb-5 {{ $errors->has('entrada_horario') ? 'has-error' : ''}}">
