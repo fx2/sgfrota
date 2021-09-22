@@ -208,24 +208,25 @@ class VeiculoEntradaController extends Controller
     public function customListagem(Request $request)
     {
         $limit = $request->all()['limit'] ?? 20;
+        $filters = $request->except('_token');
 
         $result = $this->model;
         $requestData = $request->all();
 
-        if($requestData['controle_frota_id'] !== null)
+        if(isset($requestData['controle_frota_id']))
             $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
 
-        if($requestData['motorista_id'] !== null)
+        if(isset($requestData['motorista_id']))
             $result = $result->where('motorista_id', '=', $requestData['motorista_id']);
 
-        if($requestData['data_inicial'] !== null)
+        if(isset($requestData['data_inicial']))
             $result = $result->whereDate('entrada_hora', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
 
-        if($requestData['data_final'] !== null)
+        if(isset($requestData['data_final']))
             $result = $result->whereDate('entrada_hora', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
 
         if (\Gate::allows('isMasterOrAdmin')){
-            if($requestData['setor_id'] !== null)
+            if(isset($requestData['setor_id']))
                 $result = $result->where('setor_id', '=', $requestData['setor_id']);
         } else {
             $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
@@ -236,7 +237,7 @@ class VeiculoEntradaController extends Controller
 
         $result = $result->paginate($limit);
 
-        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles, 'filters' => $filters]);
     }
 
 }
