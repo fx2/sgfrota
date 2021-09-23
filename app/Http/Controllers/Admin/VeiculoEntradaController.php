@@ -38,11 +38,11 @@ class VeiculoEntradaController extends Controller
     public function __construct(VeiculoEntrada $veiculoentrada, VeiculoEntradaService $veiculoEntradaService, ControleFrotumKmService $controleFrotumKmService)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . CONTROLEDIARIODEENTRADA_RELATORIO, ['only' => ['relatorio']]);
 
         $this->veiculoEntradaService = $veiculoEntradaService;
         $this->controleFrotumKmService = $controleFrotumKmService;

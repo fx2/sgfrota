@@ -25,11 +25,11 @@ class SolicitacoesController extends Controller
     public function __construct(Solicitaco $solicitacoes)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:' . SOLICITACOES_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . SOLICITACOES_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . SOLICITACOES_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . SOLICITACOES_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . SOLICITACOES_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . SOLICITACOES_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . SOLICITACOES_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . SOLICITACOES_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . SOLICITACOES_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . SOLICITACOES_RELATORIO, ['only' => ['relatorio']]);
 
         $this->model = $solicitacoes;
         $this->path = 'admin.solicitacoes';
