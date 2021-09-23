@@ -333,7 +333,10 @@ class VeiculoSaidaController extends Controller
             return $result->first();
         }
 
-        $result = $result->orderBy('deleted_at')->withTrashed();
+        $result = $result->orderBy('deleted_at', 'ASC')
+            ->orderBy('saida_data', 'DESC')
+            ->orderBy('saida_hora', 'DESC')
+            ->withTrashed();
 
         if ($request->export_pdf == "true")
             return $this->exportPdf($result);

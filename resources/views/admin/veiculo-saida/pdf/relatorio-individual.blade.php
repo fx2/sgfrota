@@ -41,6 +41,13 @@
                 @endif
                 <tr><td><strong class="text-leftzinho">Responsável</strong>: {{ $results->nome_responsavel }}</td></tr>
                 <tr><td><strong class="text-leftzinho">Setor</strong>: {{ $results->setor->nome }}</td></tr>
+                <tr><td><strong class="text-leftzinho">Veículo reserva</strong>: 
+                    @if ($results->veiculo_reserva_entrada_id)
+                        Sim
+                    @else
+                        Não
+                    @endif
+                </td></tr>
             </table>
         </td>
 
@@ -54,6 +61,7 @@
                 <tr><td><strong class="text-leftzinho">CNH</strong>: {{ $results->motorista->cnh }}</td></tr>
                 <tr><td style="color:white;"><strong class="text-leftzinho">RG</strong>: {{ $results->motorista->rg }}</td></tr>
                 <tr><td style="color:white;"><strong class="text-leftzinho">CPF</strong>: {{ $results->motorista->cpf }} </td></tr>
+                                <tr><td><strong class="text-leftzinho" style="color:white;">a</strong> </td></tr>
                                 <tr><td><strong class="text-leftzinho" style="color:white;">a</strong> </td></tr>
 
             </table>
