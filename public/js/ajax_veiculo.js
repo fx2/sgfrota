@@ -51,7 +51,7 @@ async function loadControleFrotum(controle_frota_id = null){
 function verificaVeiculoReserva(controle_frota_id){
     const idList = controle_frota_id.split('-');
 
-    if (idList[1] != "")
+    if (idList[1] != "" && idList[1] !== undefined)
         return `${BASE_URL}/veiculo-reserva-entrada?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${idList[1]}&first=true`;
 
     return `${BASE_URL}/controle-frota?with=tipo_veiculoHasOne,tipo_combustivel,marca,modelo,setor,responsavel&where=id,=,${idList[0]}&first=true`;
