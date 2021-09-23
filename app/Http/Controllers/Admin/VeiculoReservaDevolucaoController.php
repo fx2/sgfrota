@@ -10,6 +10,7 @@ use App\Services\VerificaPerfil;
 use App\Traits\CrudControllerTrait;
 use Illuminate\Http\Request;
 use PDF;
+use App\Services\ControleFrotumKmService;
 
 class VeiculoReservaDevolucaoController extends Controller
 {
@@ -20,11 +21,16 @@ class VeiculoReservaDevolucaoController extends Controller
     private $redirectPath;
 
     /**
+     * @var ControleFrotumKmService $controleFrotumKmService
+     */
+    private $controleFrotumKmService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(VeiculoReservaEntrada $veiculoReservaEntrada)
+    public function __construct(VeiculoReservaEntrada $veiculoReservaEntrada, ControleFrotumKmService $controleFrotumKmService)
     {
         $this->middleware('auth');
         // $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_VISUALIZAR, ['only' => ['index']]);
@@ -33,6 +39,8 @@ class VeiculoReservaDevolucaoController extends Controller
         // $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_DELETAR, ['only' => ['destroy']]);
         // $this->middleware('checksetor:' . VEICULORESERVADEVOLUCAO_RELATORIO, ['only' => ['relatorio']]);
         $this->model = $veiculoReservaEntrada;
+        $this->controleFrotumKmService = $controleFrotumKmService;
+
         $this->saveSetorScope = true;
         $this->path = 'admin.veiculo-reserva-devolucao';
         $this->redirectPath = 'veiculo-reserva-devolucao';
@@ -180,6 +188,13 @@ class VeiculoReservaDevolucaoController extends Controller
 
         $result = $this->model->findOrFail($id);
         $requestData = $request->all();
+
+        $verificaKM = $this->controleFrotumKmService->atualizaKilometragem($result->controle_frota_id, $requestData['devolucao_km_atual']);
+
+        if ($verificaKM !== true){
+            toastr()->error("Kilometragem inicial deve ser maior que {$verificaKM}");
+            return redirect()->back()->withInput();
+        }
 
         if ($this->saveSetorScope){
             if ($userAuth->type !== 'master' AND $userAuth->type !== 'admin'){

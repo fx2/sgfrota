@@ -419,7 +419,7 @@
         <label for="devolucao_data" class="control-label">{{ 'Data' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="devolucao_data" type="date" id="data" value="{{ isset($result->devolucao_data) ? $result->devolucao_data : ''}}" >
+        <input class="form-control" name="devolucao_data" type="date" id="data" value="{{ isset($result->devolucao_data) ? $result->devolucao_data : old('devolucao_data')}}" >
         {!! $errors->first('data', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -437,7 +437,7 @@
         <label for="km_atual" class="control-label">{{ 'Km Atual' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control decimal" name="devolucao_km_atual" type="text" id="devolucao_km_atual" value="{{ isset($result->devolucao_km_atual) ? number_format((float) $result->devolucao_km_atual, 0) : ''}}" >
+        <input class="form-control decimal" name="devolucao_km_atual" type="text" id="devolucao_km_atual" value="{{ isset($result->devolucao_km_atual) ? number_format((float) $result->devolucao_km_atual, 0) :  old('devolucao_km_atual')}}" >
         {!! $errors->first('km_atual', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -446,7 +446,7 @@
         <label for="devolucao_combustivel" class="control-label">{{ 'Combustivel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="devolucao_combustivel" type="text" id="combustivel" value="{{ isset($result->devolucao_combustivel) ? $result->devolucao_combustivel : ''}}" >
+        <input class="form-control" name="devolucao_combustivel" type="text" id="combustivel" value="{{ isset($result->devolucao_combustivel) ? $result->devolucao_combustivel : old('devolucao_combustivel')}}" >
         {!! $errors->first('devolucao_combustivel', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -455,7 +455,7 @@
         <label for="devolucao_recebido_por" class="control-label">{{ 'Recebido Por' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="devolucao_recebido_por" type="text" id="devolucao_recebido_por" value="{{ isset($result->devolucao_recebido_por) ? $result->devolucao_recebido_por : ''}}" >
+        <input class="form-control" name="devolucao_recebido_por" type="text" id="devolucao_recebido_por" value="{{ isset($result->devolucao_recebido_por) ? $result->devolucao_recebido_por : old('devolucao_recebido_por')}}" >
         {!! $errors->first('devolucao_recebido_por', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
