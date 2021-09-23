@@ -31,6 +31,10 @@ class ControleFrotumKmService
             return $findKmAtual;
         }
 
+        if ($findKmAtual == null || $findKmAtual == $kmAtual){
+            return $findKmAtual;
+        }
+
         $km_atual = decimal(str_replace('.', '', str_replace(',', '', $km_atual)));
         $car->km_atual = str_replace('.', '', str_replace(',', '', $km_atual));
         $car->save();
