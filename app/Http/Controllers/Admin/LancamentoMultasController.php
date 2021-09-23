@@ -25,11 +25,11 @@ class LancamentoMultasController extends Controller
     public function __construct(LancamentoMulta $lancamentomultas)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:' . LANCAMENTODEMULTAS_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . LANCAMENTODEMULTAS_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . LANCAMENTODEMULTAS_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . LANCAMENTODEMULTAS_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . LANCAMENTODEMULTAS_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . LANCAMENTODEMULTAS_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . LANCAMENTODEMULTAS_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . LANCAMENTODEMULTAS_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . LANCAMENTODEMULTAS_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . LANCAMENTODEMULTAS_RELATORIO, ['only' => ['relatorio']]);
         $this->model = $lancamentomultas;
         $this->saveSetorScope = true;
         $this->path = 'admin.lancamento-multas';

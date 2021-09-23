@@ -25,11 +25,11 @@ class ManutencaosController extends Controller
     public function __construct(Manutencao $lancamentomultas)
     {
         $this->middleware('auth');
-        $this->middleware('checksetor:' . MANUTENCAODESPESAS_VISUALIZAR, ['only' => ['index']]);
-        $this->middleware('checksetor:' . MANUTENCAODESPESAS_ADICIONAR, ['only' => ['create']]);
-        $this->middleware('checksetor:' . MANUTENCAODESPESAS_EDITAR, ['only' => ['edit']]);
-        $this->middleware('checksetor:' . MANUTENCAODESPESAS_DELETAR, ['only' => ['destroy']]);
-        $this->middleware('checksetor:' . MANUTENCAODESPESAS_RELATORIO, ['only' => ['relatorio']]);
+        // $this->middleware('checksetor:' . MANUTENCAODESPESAS_VISUALIZAR, ['only' => ['index']]);
+        // $this->middleware('checksetor:' . MANUTENCAODESPESAS_ADICIONAR, ['only' => ['create']]);
+        // $this->middleware('checksetor:' . MANUTENCAODESPESAS_EDITAR, ['only' => ['edit']]);
+        // $this->middleware('checksetor:' . MANUTENCAODESPESAS_DELETAR, ['only' => ['destroy']]);
+        // $this->middleware('checksetor:' . MANUTENCAODESPESAS_RELATORIO, ['only' => ['relatorio']]);
         
 
         $this->model = $lancamentomultas;
