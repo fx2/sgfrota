@@ -202,7 +202,7 @@ class VeiculoReservaDevolucaoController extends Controller
         $requestToUpdate['devolucao_combustivel'] = $requestData['devolucao_combustivel'];
         $requestToUpdate['devolucao_recebido_por'] = $requestData['devolucao_recebido_por'];
         $requestToUpdate['devolucao_observacao'] = $requestData['devolucao_observacao'];
-        $requestToUpdate['documento_devolucao'] = $requestData['documento_devolucao'];
+        $requestToUpdate['documento_devolucao'] = $requestData['documento_devolucao'] ?? null;
         $requestToUpdate['devolucao_auth_id'] = $userAuth->id;
 
         $requestToUpdate['tipo'] = VeiculoReservaEntrada::TIPO_DEVOLUCAO;
