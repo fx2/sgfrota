@@ -238,10 +238,9 @@
 <div class="form-group row mb-5 {{ $errors->has('cnh_imagem') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="cnh_imagem" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->cnh_imagem) ? removePublicPath(asset($result->cnh_imagem)) : '' }}" alt="{{ isset($result->cnh_imagem) ? $result->cnh_imagem : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->cnh_imagem) ? $result->cnh_imagem : null
+    ])
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('avisar_antes_qtddias') ? 'has-error' : ''}}">

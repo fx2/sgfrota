@@ -196,10 +196,9 @@
 <div class="form-group row mb-5 {{ $errors->has('foto_multa') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="foto_multa" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->foto_multa) ? removePublicPath($result->foto_multa) : '' }}" alt="{{ isset($result->foto_multa) ? $result->foto_multa : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->foto_multa) ? $result->foto_multa : null
+    ])
 </div>
 
 

@@ -92,10 +92,9 @@
 <div class="form-group row mb-5 {{ $errors->has('foto') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="foto" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->foto) ? removePublicPath(asset($result->foto)) : '' }}" alt="{{ isset($result->foto) ? $result->foto : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->foto) ? $result->foto : null
+    ])
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('qtd_litros') ? 'has-error' : ''}}">

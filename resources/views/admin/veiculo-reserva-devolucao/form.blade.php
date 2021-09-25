@@ -245,10 +245,9 @@
 <div class="form-group row mb-5 {{ $errors->has('dut') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="dut" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" id="img_upload" src="{{ isset($result->dut) ? removePublicPath($result->dut) : '' }}" alt="{{ isset($result->dut) ? $result->dut : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->dut) ? $result->dut : null
+    ])
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('foto') ? 'has-error' : ''}}">
@@ -263,10 +262,9 @@
 <div class="form-group row mb-5 {{ $errors->has('foto') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="foto" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" id="img_upload" src="{{ isset($result->foto) ? removePublicPath($result->foto) : '' }}" alt="{{ isset($result->foto) ? $result->foto : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->foto) ? $result->foto : null
+    ])
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('tipo_responsavel') ? 'has-error' : ''}}">
@@ -399,10 +397,10 @@
     <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
         <div class="col-2">
         </div>
-        <div class="col-10">
-            <label for="documento" class="control-label">{{ '' }}</label>
-            <img class="img-fluid" id="img_upload" src="{{ isset($result->documento) ? removePublicPath($result->documento) : '' }}" alt="{{ isset($result->documento) ? $result->documento : '' }}" >
-        </div>
+        
+        @include('parts.imagem-pdf', [
+            'value' => isset($result->documento) ? $result->documento : null
+        ])
     </div>
 
 {{--</div>--}}
@@ -472,10 +470,9 @@
 <div class="form-group row mb-5 {{ $errors->has('documento_devolucao') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="documento_devolucao" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" id="img_upload" src="{{ isset($result->documento_devolucao) ? removePublicPath($result->documento_devolucao) : '' }}" alt="{{ isset($result->documento_devolucao) ? $result->documento_devolucao : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->documento_devolucao) ? $result->documento_devolucao : null
+    ])
 </div>
 
 <div class="form-group row mb-5 {{ $errors->has('devolucao_observacao') ? 'has-error' : ''}}">

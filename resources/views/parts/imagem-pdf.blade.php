@@ -4,7 +4,7 @@
         <a href="{{ removePublicPath(asset($value)) }}" target="_blank">Veisualizar documento PDF</a>
     @else
         <a href="{{ removePublicPath(asset($value)) }}" target="_blank">
-            <img class="img-fluid" src="{{ isset($value) ? removePublicPath(asset($value)) : '' }}" alt="{{ isset($value) ? $value : '' }}" >
+            <img class="img-fluid" id="{{ $id ?? ''}}" src="{{ isset($value) ? removePublicPath(asset($value)) : '' }}" alt="{{ isset($value) ? $value : '' }}" >
         </a>
     @endif
 </div>
