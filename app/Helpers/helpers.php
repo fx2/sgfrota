@@ -1,5 +1,18 @@
 <?php
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+
+if (! function_exists('verifyImagePDF')) {
+    function verifyImagePDF($text, $word)
+    {
+        $contains = Str::contains($text, $word);
+        
+        if($contains)
+            return true;
+
+        return false;
+    }
+}
 
 if (! function_exists('convertTimestamp')) {
     function convertTimestamp($datetime, $format = "d/m/Y H:i:s")
