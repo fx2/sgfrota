@@ -81,10 +81,7 @@
 <div class="form-group row mb-5 {{ $errors->has('documento') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="documento" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->documento) ? removePublicPath(asset($result->documento)) : '' }}" alt="{{ isset($result->documento) ? $result->documento : '' }}" >
-    </div>
+    @include('parts.imagem-pdf', ['value' => isset($result->documento) ? $result->documento : null])
 </div>
 
 
@@ -133,10 +130,7 @@
     <div class="form-group row mb-5 {{ $errors->has('respondendo_documento') ? 'has-error' : ''}}">
         <div class="col-2">
         </div>
-        <div class="col-10">
-            <label for="respondendo_documento" class="control-label">{{ '' }}</label>
-            <img class="img-fluid" src="{{ isset($result->respondendo_documento) ? removePublicPath(asset($result->respondendo_documento)) : '' }}">
-        </div>
+        @include('parts.imagem-pdf', ['value' => isset($result->respondendo_documento) ? $result->respondendo_documento : null])
     </div>
 
     @if (isset($result->respondendo_auth_id))

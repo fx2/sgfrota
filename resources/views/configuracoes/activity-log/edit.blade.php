@@ -58,7 +58,9 @@
                                 @elseif ($key == 'setor_id')
                                     {{ \App\Models\Setor::find($properties['old'][$key])['nome'] }}
                                 @elseif ($key == 'auth_id')
-                                    {{ \App\Models\User::find($properties['old'][$key])['name'] }}
+                                    @if ($properties['old'][$key])
+                                        {{ \App\Models\User::find($properties['old'][$key])['name'] }}
+                                    @endif
                                 @elseif ($key == 'mecanica')
                                     {{ $properties['old'][$key] == 1 ? 'SIM' : 'NÃO' }}
                                 @elseif ($key == 'eletrica')

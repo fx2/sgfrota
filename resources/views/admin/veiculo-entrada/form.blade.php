@@ -274,10 +274,10 @@
 <div class="form-group row mb-5 {{ $errors->has('document') ? 'has-error' : ''}}">
     <div class="col-2">
     </div>
-    <div class="col-10">
-        <label for="document" class="control-label">{{ '' }}</label>
-        <img class="img-fluid" src="{{ isset($result->document) ? removePublicPath(asset($result->document)) : '' }}" alt="{{ isset($result->document) ? $result->document : '' }}" >
-    </div>
+    
+    @include('parts.imagem-pdf', [
+        'value' => isset($result->document) ? $result->document : null
+    ])
 </div>
 
 @if($formMode != 'create')
