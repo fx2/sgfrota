@@ -101,7 +101,7 @@
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>KM SAIDA</strong>: {{ decimal($results->veiculo_saida->km_inicial) }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Qtd. Combustível</strong>: {{ $results->veiculo_saida->quantidade_combustivel }}</p></td>
@@ -109,7 +109,7 @@
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda">
             <table class="table" style="width: 90%; margin-left: 10px;">
@@ -331,7 +331,7 @@
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Data Entrada</strong>: {{ convertTimestamp($results->entrada_data, 'd/m/Y') }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Horário Entrada</strong>: {{ convertTimestamp($results->entrada_hora, 'H:i') }} </p></td>
@@ -339,20 +339,20 @@
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Qtd. Combustível</strong>: {{ $results->quantidade_combustivel }} </p></td>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Usuário ENTRADA</strong>: {{ $results->userAuth->name  }} </p></td>
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Relatório do Trajeto</strong>: {{ $results->relatorio_trajeto_motorista }} </p></td>
     </tr>
 </table>
 
-<table class="table borda" style="margin-top: 8px;">
+<table class="table borda" style="margin-top: 3px;">
     <tr>
         <td class="borda"><p class="text-leftzinho" style="font-size: 13px;"><strong>Observação</strong>: {{ $results->observacao }} </p></td>
     </tr>
