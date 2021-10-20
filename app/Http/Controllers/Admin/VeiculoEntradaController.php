@@ -86,10 +86,10 @@ class VeiculoEntradaController extends Controller
             'entrada_hora' => 'required',
             'status' => 'required',
         ];
-        $this->pdfFields = [
 
-        ];
-        $this->pdfTitles = ['Data Entrada','Hora Entrada', 'KM', 'Motorista', 'Veículo', 'Setor', 'Responsável', 'Trajeto', 'Data Saída', 'Hora Saída'];
+        $this->pdfFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
+
+        $this->pdfTitles = ['Motorista', 'Veículo', 'Placa', 'Data Entrada', 'Hora Entrada',  'Responsável'];
 
         $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Motorista', 'Veículo', 'Placa', 'Data Entrada', 'Hora Entrada',  'Responsável'];
