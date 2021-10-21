@@ -119,6 +119,12 @@
                     elseif ($val[1] == 'cnh_validade') {
                         $valor = convertTimestamp($valor, 'd/m/Y');
                     }
+                    elseif ($val[1] == 'saida_data') {
+                        $valor = convertTimestamp($valor, 'd/m/Y');
+                    }
+                    elseif ($val[1] == 'saida_hora') {
+                        $valor = convertTimestamp($valor, 'H:i');
+                    }
                   }
 
                   if (!empty($val[2])){
