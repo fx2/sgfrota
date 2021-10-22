@@ -86,10 +86,21 @@ class VeiculoEntradaController extends Controller
             'entrada_hora' => 'required',
             'status' => 'required',
         ];
+//DtSaída/KmSaída/DtEntrada/KmEntrada/Placa/Motorista/Setor/Trajeto
+        $this->pdfFields = [
+            ['veiculo_saida', 'saida_data'],
+            ['veiculo_saida', 'saida_hora'],
+            ['veiculo_saida', 'km_inicial'],
+            ['entrada_data'],
+            ['entrada_hora'],
+            ['km_final'],
+            ['controle_frota', 'placa'],
+            ['motorista', 'nome'],
+            ['setor', 'nome'],
+            ['relatorio_trajeto_motorista']
+        ];
 
-        $this->pdfFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
-
-        $this->pdfTitles = ['Motorista', 'Veículo', 'Placa', 'Data Entrada', 'Hora Entrada',  'Responsável'];
+        $this->pdfTitles = ['Data Saída', 'Hora Saida', 'Km Saída', 'Data Entrada', 'Hora Entrada', 'KM Entrada', 'Placa', 'Motorista', 'Setor', 'Trajeto'];
 
         $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['entrada_data'], ['entrada_hora'], ['nome_responsavel'], ['status']];
         $this->indexTitles = ['Motorista', 'Veículo', 'Placa', 'Data Entrada', 'Hora Entrada',  'Responsável'];
@@ -102,6 +113,7 @@ class VeiculoEntradaController extends Controller
         $this->numbersWithDecimal = ['km_final'];
 
         $this->pdfGeralPath = 'admin/pdf/veiculoEntrada/relatorio-geral';
+        $this->landscape = true;
     }
 
     public function customShowPdf($id)

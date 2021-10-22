@@ -188,6 +188,9 @@ trait CrudControllerTrait
         $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
 
         // return $pdf->download($pdfModelName . '.pdf');
+        if (isset($this->landscape))
+            return $pdf->setPaper('a4', 'landscape')->stream($pdfModelName . '.pdf');
+
         return $pdf->stream($pdfModelName . '.pdf');
     }
 
