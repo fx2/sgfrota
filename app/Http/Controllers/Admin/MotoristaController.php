@@ -30,7 +30,7 @@ class MotoristaController extends Controller
         // $this->middleware('checksetor:' . MOTORISTAS_EDITAR, ['only' => ['edit']]);
         // $this->middleware('checksetor:' . MOTORISTAS_DELETAR, ['only' => ['destroy']]);
         // $this->middleware('checksetor:' . MOTORISTAS_RELATORIO, ['only' => ['relatorio']]);
-        
+
         $this->model = $motorista;
         $this->saveSetorScope = true;
         $this->path = 'admin.motorista';
@@ -61,8 +61,8 @@ class MotoristaController extends Controller
             'cpf' => 'required',
             'data_nascimento' => 'required',
             'email' => 'required',
-            'telefone' => 'required',
-            'celular' => 'required',
+//            'telefone' => 'required',
+//            'celular' => 'required',
             // 'imagem' => 'required',
             'cnh' => 'required',
             'tipo_cnh_id' => 'required',
