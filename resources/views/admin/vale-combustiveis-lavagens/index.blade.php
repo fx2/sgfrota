@@ -241,7 +241,7 @@
                                     @endcan
 
                                     @can('checksetor', VALECOMBUSTIVEISLAVAGENS_DELETAR)
-                                        <button type="submit" data-id="{{ $item->id }}" data-route="/vale-combustiveis-lavagens" class="btnDeletar btn btn-danger btn-sm" title="Deletar ValeCombustiveisLavagen"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button type="submit" data-id="{{ $item->id }}" data-route="/vale-combustiveis-lavagens" class="btnDeletar btn btn-danger btn-sm" title="Deletar Vale combustíveis e Lavagen"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     @endcan
                                 </td>
                             </tr>
