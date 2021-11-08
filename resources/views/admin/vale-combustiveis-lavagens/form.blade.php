@@ -3,10 +3,10 @@
         <label for="controle_frota_id" class="control-label">{{ 'Veículo' }}</label>
     </div>
     <div class="col-10">
-        <select name="controle_frota_id" class="form-control" id="controle_frota_id" 
-            @if ($formMode != 'create')
-                disabled
-            @endif
+        <select name="controle_frota_id" class="form-control" id="controle_frota_id"
+{{--            @if ($formMode != 'create')--}}
+{{--                disabled--}}
+{{--            @endif--}}
         >
             <option value="">Selecione ...</option>
             @foreach ($selectModelFields['ControleFrotum'] as $optionKey => $optionValue)
@@ -28,14 +28,14 @@
     <div class="col-10">
         <div class="radio">
             <label><input name="tipo_vale" type="radio" value="Abastecimento" onclick="tipo_valeFn('Abastecimento')" @if (isset($result)) {{ ('Abastecimento' == $result->tipo_vale) ? 'checked' : '' }} @else {{ 'checked' }} @endif
-                @if ($formMode != 'create')
-                    disabled
-                @endif    
+{{--                @if ($formMode != 'create')--}}
+{{--                    disabled--}}
+{{--                @endif    --}}
             > Abastecimento</label>
             <label><input name="tipo_vale" type="radio" value="Lavagem" onclick="tipo_valeFn('Lavagem')" {{ (isset($result) && 'Lavagem' == $result->tipo_vale) ? 'checked' : '' }}
-                @if ($formMode != 'create')
-                    disabled
-                @endif  
+{{--                @if ($formMode != 'create')--}}
+{{--                    disabled--}}
+{{--                @endif  --}}
             > Lavagem</label>
         </div>
         {!! $errors->first('tipo_vale', '<p class="help-block">:message</p>') !!}
@@ -48,10 +48,10 @@
             <label for="quantidade_litros" class="control-label">{{ 'Quantidade Litros' }}</label>
         </div>
         <div class="col-10">
-            <input class="form-control decimal" name="quantidade_litros" type="text" id="quantidade_litros" value="{{ isset($result->quantidade_litros) ? decimal($result->quantidade_litros) : ''}}" 
-                @if (isset($result->quantidade_litros) && $result->quantidade_litros !== '')
-                    readonly
-                @endif  
+            <input class="form-control decimal" name="quantidade_litros" type="text" id="quantidade_litros" value="{{ isset($result->quantidade_litros) ? decimal($result->quantidade_litros) : ''}}"
+{{--                @if (isset($result->quantidade_litros) && $result->quantidade_litros !== '')--}}
+{{--                    readonly--}}
+{{--                @endif--}}
             >
             {!! $errors->first('quantidade_litros', '<p class="help-block">:message</p>') !!}
         </div>
@@ -61,10 +61,10 @@
             <label for="tipo_combustivel_id" class="control-label">{{ 'Tipo Combustivel' }}</label>
         </div>
         <div class="col-10">
-            <select name="tipo_combustivel_id" class="form-control" id="tipo_combustivel_id" 
-                @if ($formMode != 'create')
-                    disabled
-                @endif 
+            <select name="tipo_combustivel_id" class="form-control" id="tipo_combustivel_id"
+{{--                @if ($formMode != 'create')--}}
+{{--                    disabled--}}
+{{--                @endif --}}
             >
                 <option value="">Selecione ...</option>
                 @foreach ($selectModelFields['TipoCombustivel'] as $optionKey => $optionValue)
@@ -84,10 +84,10 @@
         <label for="data" class="control-label">{{ 'Data' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="data" type="date" id="data" value="{{ isset($result->data) ? $result->data : ''}}" 
-            @if ($formMode != 'create')
-                readonly
-            @endif 
+        <input class="form-control" name="data" type="date" id="data" value="{{ isset($result->data) ? $result->data : ''}}"
+{{--            @if ($formMode != 'create')--}}
+{{--                readonly--}}
+{{--            @endif --}}
         >
         {!! $errors->first('data', '<p class="help-block">:message</p>') !!}
     </div>
@@ -97,10 +97,10 @@
         <label for="hour" class="control-label">{{ 'Hour' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="hour" type="time" id="hour" value="{{ isset($result->hour) ? $result->hour : old('hour')}}" 
-            @if ($formMode != 'create')
-                readonly
-            @endif 
+        <input class="form-control" name="hour" type="time" id="hour" value="{{ isset($result->hour) ? $result->hour : old('hour')}}"
+{{--            @if ($formMode != 'create')--}}
+{{--                readonly--}}
+{{--            @endif --}}
         >
         {!! $errors->first('hour', '<p class="help-block">:message</p>') !!}
     </div>
@@ -110,10 +110,10 @@
         <label for="nome_responsavel" class="control-label">{{ 'Nome Responsavel' }}</label>
     </div>
     <div class="col-10">
-        <input class="form-control" name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : ''}}" 
-            @if ($formMode != 'create')
-                readonly
-            @endif 
+        <input class="form-control" name="nome_responsavel" type="text" id="nome_responsavel" value="{{ isset($result->nome_responsavel) ? $result->nome_responsavel : ''}}"
+{{--            @if ($formMode != 'create')--}}
+{{--                readonly--}}
+{{--            @endif --}}
         >
         {!! $errors->first('nome_responsavel', '<p class="help-block">:message</p>') !!}
     </div>
@@ -123,10 +123,10 @@
         <label for="observacao" class="control-label">{{ 'Observacao' }}</label>
     </div>
     <div class="col-10">
-        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao" 
-            @if ($formMode != 'create')
-                readonly
-            @endif 
+        <textarea class="form-control" rows="5" name="observacao" type="textarea" id="observacao"
+{{--            @if ($formMode != 'create')--}}
+{{--                readonly--}}
+{{--            @endif --}}
         >{{ isset($result->observacao) ? $result->observacao : old('observacao')}}</textarea>
         {!! $errors->first('observacao', '<p class="help-block">:message</p>') !!}
     </div>
