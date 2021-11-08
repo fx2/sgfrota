@@ -10,7 +10,7 @@
     </nav>
 
     <div class="card">
-        <div class="card-header">Cadastrar ValeCombustiveisLavagen</div>
+        <div class="card-header">Cadastrar Vale combustíveis e Lavagen</div>
         <div class="card-body">
             <a href="{{ url('/vale-combustiveis-lavagens') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
             <br />
