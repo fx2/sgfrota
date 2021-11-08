@@ -171,7 +171,7 @@
             hide_show_lavagem.fadeOut();
             quantidade_litros.val(null);
             tipo_combustivel_id.empty().append( // TODO: arrumar isso kkkk
-                `<option value="5">null forçado</option>
+                `<option value="5"></option>
                 <option value="1">Flex</option>
                 <option value="2">Etanol</option>
                 <option value="3">Gasolina</option>
