@@ -232,10 +232,10 @@ class VeiculoEntradaController extends Controller
             $result = $result->where('motorista_id', '=', $requestData['motorista_id']);
 
         if(isset($requestData['data_inicial']))
-            $result = $result->whereDate('entrada_hora', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+            $result = $result->whereDate('entrada_data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
 
         if(isset($requestData['data_final']))
-            $result = $result->whereDate('entrada_hora', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+            $result = $result->whereDate('entrada_data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
 
         if (\Gate::allows('isMasterOrAdmin')){
             if(isset($requestData['setor_id']))

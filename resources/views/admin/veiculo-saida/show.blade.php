@@ -9,7 +9,14 @@
         </ol>
     </nav>
     <div class="card">
-        <div class="card-header">Controle diário de saída </div>
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="">Editar Controle diário de saída</div>
+                <div class="">Sequencial/Ano: <strong>{{ $result->id }}/{{ convertTimestamp($result->created_at, 'Y') }}</strong></div>
+                {{-- <div class="">Data da Saída: <strong>{{ convertTimestamp($result->created_at, 'd/m/Y') }}</strong></div>
+                <div class="">Hora da Saída: <strong>{{ convertTimestamp($result->created_at, 'H:m') }}</strong></div> --}}
+            </div>
+        </div>
         <div class="card-body">
 
             <a href="{{ url('/veiculo-saida') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
