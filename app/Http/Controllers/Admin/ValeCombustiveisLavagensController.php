@@ -9,6 +9,7 @@ use App\Models\ValeCombustiveisLavagen;
 use App\Services\VerificaPerfil;
 use Illuminate\Http\Request;
 use App\Traits\CrudControllerTrait;
+use PDF;
 
 class ValeCombustiveisLavagensController extends Controller
 {
@@ -114,6 +115,23 @@ class ValeCombustiveisLavagensController extends Controller
         }
 
         return $sumLitros;
+    }
+
+    public function exportPdf($result)
+    {
+        $data = [
+            'results' => $result->get(),
+            'fields' => $this->pdfFields,
+            'titles' => $this->pdfTitles,
+            'pdfTitle' => $this->pdfTitle . ' - Litros:' . ' ' . $this->quantidadeLitros($result->get())
+        ];
+
+        $path = 'admin/pdf/valeCombustiveisLavagens/relatorio-geral';
+
+        $pdf = PDF::loadView($path, $data);
+        $pdfModelName = str_replace("admin.", "", $this->path); // TODO: mexer nesse admin. caso mude a pasta
+
+        return $pdf->setPaper('a4', 'landscape')->stream($pdfModelName . '.pdf');
     }
 
 }
