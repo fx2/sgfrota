@@ -57,7 +57,10 @@ class ControleFrotum extends BaseModel
         'tipo_responsavel',
         'tipo_responsavel_id',
         'setor_id',
-        'km_atual'
+        'km_atual',
+        'revisao_com_km',
+        'revisao_com_data',
+        'vencimento_licenciamento',
     ];
 
     public function tipo_veiculoHasOne()

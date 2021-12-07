@@ -30,7 +30,7 @@ class ControleFrotaController extends Controller
         //$this->middleware('checksetor:' . CONTROLEDEFROTAS_EDITAR, ['only' => ['edit']]);
         //$this->middleware('checksetor:' . CONTROLEDEFROTAS_DELETAR, ['only' => ['destroy']]);
         //$this->middleware('checksetor:' . CONTROLEDEFROTAS_RELATORIO, ['only' => ['relatorio']]);
-        
+
         $this->model = $controlefrota;
         $this->saveSetorScope = true;
         $this->path = 'admin.controle-frota';
@@ -80,21 +80,21 @@ class ControleFrotaController extends Controller
             'foto' => 'required',
             'status' => 'required',
         ];
-        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'], 
-            // ['responsavel', 'nome'], 
+        $this->indexFields = [['veiculo'], ['placa'], ['marca', 'nome'], ['modelo', 'modelo'],
+            // ['responsavel', 'nome'],
             ['status']];
-        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo', 
-            // 'Responsável', 
+        $this->indexTitles = ['Veículo', 'Placa', 'Marca', 'Modelo',
+            // 'Responsável',
             'Status'];
 
-        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'], 
-            // ['responsavel', 'nome'], 
+        $this->pdfFields = [['placa'], ['ano_fabricacao'], ['ano_modelo'], ['modelo', 'modelo'],
+            // ['responsavel', 'nome'],
             ['setor', 'nome'], ['tipo_veiculo']];
-        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo', 
-            // 'Responsável', 
+        $this->pdfTitles = ['Placa', 'Ano/Fab', 'Ano/Mod', 'Modelo',
+            // 'Responsável',
             'Setor', 'Tipo'];
         $this->pdfTitle = 'Controle de Frotas';
-        $this->numbersWithDecimal = ['km_inicial']; //'km_atual' tambem
+        $this->numbersWithDecimal = ['km_inicial', 'revisao_com_km']; //'km_atual' tambem
 
     }
 
