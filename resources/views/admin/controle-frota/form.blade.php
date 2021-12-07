@@ -334,6 +334,44 @@
     </div>
 </div>
 
+<div class="form-group row mb-5 {{ $errors->has('revisao_com_data') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="revisao_com_data" class="control-label">{{ 'Revisão KM com: ' }}</label>
+    </div>
+
+    <div class="col-4">
+        KM: <input
+            class="form-control decimal"
+            name="revisao_com_km" type="text"
+            id="revisao_com_km"
+            value="{{ isset($result->revisao_com_km) ? number_format((float) $result->revisao_com_km, 0) : old('revisao_com_km')}}"
+{{--            @if ($formMode != 'create')--}}
+{{--                readonly--}}
+{{--            @endif--}}
+        >
+        {!! $errors->first('revisao_com_km', '<p class="help-block">:message</p>') !!}
+    </div>
+    ou
+
+    <div class="col-1"></div>
+
+    <div class="col-4">
+        Data: <input class="form-control" name="revisao_com_data" type="date" id="revisao_com_data" value="{{ isset($result->revisao_com_data) ? $result->revisao_com_data : old('revisao_com_data')}}" >
+        {!! $errors->first('revisao_com_data', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group row mb-5 {{ $errors->has('vencimento_licenciamento') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="vencimento_licenciamento" class="control-label">{{ 'Vencimento do licenciamento' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="vencimento_licenciamento" type="date" id="vencimento_licenciamento" value="{{ isset($result->vencimento_licenciamento) ? $result->vencimento_licenciamento : old('vencimento_licenciamento')}}" >
+        {!! $errors->first('vencimento_licenciamento', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="status" class="control-label">{{ 'Status' }}</label>
