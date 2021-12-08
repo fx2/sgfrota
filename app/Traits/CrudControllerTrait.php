@@ -256,6 +256,9 @@ trait CrudControllerTrait
     public function formatRemoveDecimal($requestData)
     {
         foreach ($this->numbersWithDecimal as $numbers){
+            if (empty($requestData[$numbers]))
+                continue;
+
             $requestData[$numbers] = str_replace('.', '', str_replace(',', '', $requestData[$numbers]));
         }
 
