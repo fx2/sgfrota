@@ -1,5 +1,18 @@
 @extends('layouts.admin.index')
 
+<style>
+.square {height: 25px;width: 25px}
+
+.orange {background-color: orange;}
+.yellow {background-color: yellow;}
+
+.orange-yellow {
+    height: 100%;
+    background: linear-gradient(90deg, orange 50%, yellow 50%);
+}
+
+</style>
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb back-transparente">
@@ -20,6 +33,11 @@
             <form method="GET" action="{{ url('controle-frota/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <span class="input-group-append">
+                        <div class="square orange"></div> <span class="mr-3">Licenciamento em atraso</span>
+                        <div class="square yellow"></div> <span class="mr-3">Revisão KM em atraso</span>
+                    </span>
+                    <div>
+                        <span class="input-group-append">
                         <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
                           Filtrar
                         </button>
@@ -109,6 +127,7 @@
 
 
                     </span>
+                    </div>
                 </div>
             </form>
 
@@ -130,7 +149,7 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
-                            <tr>
+                            <tr class="{{ revisaoComKmControleFrotum($item) }}">
 {{--                                <td>{{ $loop->iteration }}</td>--}}
                                     @can('isMasterOrAdmin')
                                         <td>{{$item->setor->nome}}</td>

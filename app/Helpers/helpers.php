@@ -6,7 +6,7 @@ if (! function_exists('verifyImagePDF')) {
     function verifyImagePDF($text, $word)
     {
         $contains = Str::contains($text, $word);
-        
+
         if($contains)
             return true;
 
@@ -103,6 +103,51 @@ if (! function_exists('decimalSimples')) {
         $numberWithoutfinalDot = substr($numeroDecimal, 0, strlen($numeroDecimal) - 3);
 
         return $numberWithoutfinalDot;
+    }
+}
+
+if (! function_exists('revisaoComKmControleFrotum')) {
+    function revisaoComKmControleFrotum($controleFrotum) // resolve o problema causado na formatação com jquery com decimais simples
+    {
+        $a_id = $controleFrotum->id;
+        $revisao_com_data = $controleFrotum->revisao_com_data;
+        $revisao_com_km = $controleFrotum->revisao_com_km;
+        $vencimento_licenciamento = $controleFrotum->vencimento_licenciamento;
+
+        $color = '';
+        $count = 0;
+
+        if (!empty($controleFrotum->revisao_com_data)) {
+            $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+            $date2 = new DateTime(date('Y-m-d', strtotime($controleFrotum->revisao_com_data)));
+
+            if ($date1 >= $date2) {
+                $color = 'yellow';
+                $count += 1;
+            }
+        }
+
+        if (!empty($controleFrotum->revisao_com_km) AND $controleFrotum->revisao_com_km < $controleFrotum->km_atual) {
+            $color = 'yellow';
+            $count += 1;
+        }
+
+        if (!empty($controleFrotum->vencimento_licenciamento)) {
+            $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+            $date2 = new DateTime(date('Y-m-d', strtotime($controleFrotum->vencimento_licenciamento)));
+
+            if ($date1 >= $date2) {
+                $count += 1;
+                $color = 'orange';
+            }
+
+            if ($count > 1) {
+                $color = 'orange-yellow';
+            }
+        }
+
+        $count = 0;
+        return $color;
     }
 }
 
