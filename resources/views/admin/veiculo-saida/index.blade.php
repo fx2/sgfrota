@@ -100,8 +100,8 @@
                                     @endcan
                                     <td>{{$item->motorista->nome}}</td>
                                     @if($item->controle_frota_id)
-                                        <td>{{$item->controle_frota->veiculo}}</td>
-                                        <td>{{$item->controle_frota->placa}}</td>
+                                        <td>{{$item->controle_frota->veiculo ?? ''}}</td>
+                                        <td>{{$item->controle_frota->placa ?? ''}}</td>
                                     @else
                                         <td>{{$item->veiculo_reserva_entrada->veiculo}}</td>
                                         <td>{{$item->veiculo_reserva_entrada->placa}}</td>
