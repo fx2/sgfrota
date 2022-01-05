@@ -188,6 +188,13 @@ class VeiculoEntradaController extends Controller
         $veiculo = explode('-', $requestData['controle_frota_id']);
         $requestData['veiculo_saida_id'] = $veiculo[2];
 
+
+        $dataEntrada = $this->veiculoEntradaService->verificaDataEntradaMaiorQueDataSaida($requestData);
+        if ($dataEntrada == false) {
+            toastr()->error("A data de entrada deve ser maior que a data de saida.");
+            return redirect()->back()->withInput();
+        }
+
         if ($veiculo[1] != ''){
             $verificaKM = $this->controleFrotumKmService->atualizaKilometragemVeiculoReserva($veiculo[1], $requestData['km_final']);
             $requestData['controle_frota_id'] = null;

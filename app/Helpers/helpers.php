@@ -80,6 +80,17 @@ if (! function_exists('dateDaysDiff')) {
     }
 }
 
+if (! function_exists('verificaDataSaidaMenorQueEntrada')) {
+    function verificaDataSaidaMenorQueEntrada($dataSaida, $dateEntrada)
+    {
+        if(strtotime($dataSaida) > strtotime($dateEntrada)) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
 if (! function_exists('decimal')) {
     function decimal($numero)
     {

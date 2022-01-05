@@ -25,7 +25,14 @@ class VeiculoEntradaService
 
     public function veiculosDisponiveisEntrada($id = false)
     {
-        $result = $this->veiculoSaida::select('controle_frotas.id', 'controle_frotas.veiculo', 'controle_frotas.placa', 'veiculo_saidas.id as veiculo_saida_id')
+        $result = $this->veiculoSaida::select(
+                'controle_frotas.id', 
+                'controle_frotas.veiculo', 
+                'controle_frotas.placa', 
+                'veiculo_saidas.id as veiculo_saida_id',
+                'veiculo_saidas.saida_data as veiculo_saida_data',
+                'veiculo_saidas.saida_hora as veiculo_saida_hora',
+            )
             ->join('controle_frotas', 'controle_frotas.id', '=', 'veiculo_saidas.controle_frota_id')
             ->whereIn('controle_frotas.id',function($query){
                 $query->select('veiculo_saidas.controle_frota_id')->from('veiculo_saidas')
@@ -68,5 +75,12 @@ class VeiculoEntradaService
         }
 
         return $result;
+    }
+
+    public function verificaDataEntradaMaiorQueDataSaida($requestData)
+    {
+        $saida = VeiculoSaida::select('saida_data')->where('id', $requestData['veiculo_saida_id'])->first();
+       
+        return verificaDataSaidaMenorQueEntrada($saida->saida_data, $requestData['entrada_data']);
     }
 }
