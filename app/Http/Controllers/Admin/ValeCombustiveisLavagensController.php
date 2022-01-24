@@ -59,8 +59,6 @@ class ValeCombustiveisLavagensController extends Controller
         $this->indexTitles = ['Responsável', 'Veículo', 'Tipo de Vale'];
 
         $this->pdfTitle = 'Vale Combustíveis e Lavagens';
-
-        $this->numbersWithDecimal = ['quantidade_litros'];
     }
 
     public function customListagem(Request $request)
