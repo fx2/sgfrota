@@ -48,7 +48,7 @@
             <label for="quantidade_litros" class="control-label">{{ 'Quantidade Litros' }}</label>
         </div>
         <div class="col-10">
-            <input class="form-control decimal" name="quantidade_litros" type="text" id="quantidade_litros" value="{{ isset($result->quantidade_litros) ? decimal($result->quantidade_litros) : ''}}"
+            <input class="form-control decimal" name="quantidade_litros" type="text" id="quantidade_litros" value="{{ isset($result->quantidade_litros) ? $result->quantidade_litros : ''}}"
 {{--                @if (isset($result->quantidade_litros) && $result->quantidade_litros !== '')--}}
 {{--                    readonly--}}
 {{--                @endif--}}
