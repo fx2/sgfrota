@@ -61,6 +61,7 @@ class ControleFrotum extends BaseModel
         'revisao_com_km',
         'revisao_com_data',
         'vencimento_licenciamento',
+        'data_vencimento_seguro'
     ];
 
     public function tipo_veiculoHasOne()
