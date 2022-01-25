@@ -371,6 +371,16 @@
     </div>
 </div>
 
+<div class="form-group row mb-5 {{ $errors->has('data_vencimento_seguro') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="data_vencimento_seguro" class="control-label">{{ 'Vencimento do Seguro do Veículo' }}</label>
+    </div>
+    <div class="col-10">
+        <input class="form-control" name="data_vencimento_seguro" type="date" id="data_vencimento_seguro" value="{{ isset($result->data_vencimento_seguro) ? $result->data_vencimento_seguro : old('data_vencimento_seguro')}}" >
+        {!! $errors->first('data_vencimento_seguro', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 
 <div class="form-group row mb-5 {{ $errors->has('status') ? 'has-error' : ''}}">
     <div class="col-2">

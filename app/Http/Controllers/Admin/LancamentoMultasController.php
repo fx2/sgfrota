@@ -51,7 +51,7 @@ class LancamentoMultasController extends Controller
             'state_id' => ['state', '\App\Models\State'],
             'city_id' => ['cities', '\App\Models\City'],
         ];
-        $this->fileName = ['foto_multa'];
+        $this->fileName = ['foto_multa', 'boleto_pagamento', 'comprovante_pagamento'];
         $this->uploadFilePath = 'images/lancamento-multas';
         $this->validations = [
             'motorista_id' => 'required',

@@ -172,21 +172,10 @@
         {!! $errors->first('valor_multa', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group row mb-5 {{ $errors->has('pago') ? 'has-error' : ''}}">
-    <div class="col-2">
-        <label for="pago" class="control-label">{{ 'Pago' }}</label>
-    </div>
-    <div class="col-10">
-        <div class="radio">
-    <label><input name="pago" type="radio" value="1" @if (isset($result)) {{ (1 == $result->pago) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Sim</label>
-    <label><input name="pago" type="radio" value="0" {{ (isset($result) && 0 == $result->pago) ? 'checked' : '' }}> Não</label>
-</div>
-        {!! $errors->first('pago', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+
 <div class="form-group row mb-5 {{ $errors->has('foto_multa') ? 'has-error' : ''}}">
     <div class="col-2">
-        <label for="foto_multa" class="control-label">{{ 'Foto Multa' }}</label>
+        <label for="foto_multa" class="control-label">{{ 'Notificação Multa' }}</label>
     </div>
     <div class="col-10">
         <input class="form-control" name="foto_multa" type="file" id="foto_multa" value="{{ isset($result->foto_multa) ? $result->foto_multa : old('foto_multa')}}" >
@@ -201,6 +190,65 @@
     ])
 </div>
 
+    <div class="form-group row mb-5 {{ $errors->has('boleto_pagamento') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="boleto_pagamento" class="control-label">{{ 'Boleto de Pagamento' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="boleto_pagamento" type="file" id="boleto_pagamento" value="{{ isset($result->boleto_pagamento) ? $result->boleto_pagamento : old('boleto_pagamento')}}" >
+            {!! $errors->first('boleto_pagamento', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+    <div class="form-group row mb-5 {{ $errors->has('boleto_pagamento') ? 'has-error' : ''}}">
+        <div class="col-2">
+        </div>
+        @include('parts.imagem-pdf', [
+            'value' => isset($result->boleto_pagamento) ? $result->boleto_pagamento : null
+        ])
+    </div>
+
+
+<div class="form-group row mb-5 {{ $errors->has('pago') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="pago" class="control-label">{{ 'Pago' }}</label>
+    </div>
+    <div class="col-10">
+        <div class="radio">
+    <label><input name="pago" onclick="foiPago(1)" type="radio" value="1" {{ (isset($result) && 1 == $result->pago) ? 'checked' : '' }}> Sim</label>
+    <label><input name="pago" onclick="foiPago(0)" type="radio" value="0" @if (isset($result)) {{ (0 == $result->pago) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Não</label>
+</div>
+        {!! $errors->first('pago', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div id="hide_controle_pago">
+    <div class="form-group row mb-5 {{ $errors->has('data_pagamento_boleto') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="data_pagamento_boleto" class="control-label">{{ 'Data do Pagamento da Multa   ' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="data_pagamento_boleto" type="date" id="data_pagamento_boleto" value="{{ isset($result->data_pagamento_boleto) ? $result->data_pagamento_boleto : old('data_pagamento_boleto')}}" >
+            {!! $errors->first('data_pagamento_boleto', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+
+    <div class="form-group row mb-5 {{ $errors->has('comprovante_pagamento') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="comprovante_pagamento" class="control-label">{{ 'Comprovante de Pagamento' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="comprovante_pagamento" type="file" id="comprovante_pagamento" value="{{ isset($result->comprovante_pagamento) ? $result->comprovante_pagamento : old('comprovante_pagamento')}}" >
+            {!! $errors->first('comprovante_pagamento', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+    <div class="form-group row mb-5 {{ $errors->has('comprovante_pagamento') ? 'has-error' : ''}}">
+        <div class="col-2">
+        </div>
+        @include('parts.imagem-pdf', [
+            'value' => isset($result->comprovante_pagamento) ? $result->comprovante_pagamento : null
+        ])
+    </div>
+</div>
 
 <div class="form-group row mb-5 {{ $errors->has('observacao') ? 'has-error' : ''}}">
     <div class="col-2">
@@ -236,6 +284,19 @@
     <script src="{{ asset('js/ajax_motorista.js') }}"></script>
     <script src="{{ asset('js/ajax_veiculoTemporario.js') }}"></script>
 <script>
+    var result = @json($result ?? ["pago" => null]);
+    console.log(result.pago);
+
+    foiPago(result.pago);
+
+    function foiPago(value) {
+        if (value == 1) {
+            $('#hide_controle_pago').fadeIn();
+            return;
+        }
+
+        $('#hide_controle_pago').fadeOut();
+    }
     // var tipoMultaAppend = $('#load-tipomulta');
     //
     // loadTipoMulta(result.tipo_multa_id);
