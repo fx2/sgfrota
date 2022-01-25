@@ -127,6 +127,7 @@ if (! function_exists('revisaoComKmControleFrotum')) {
 
         $color = '';
         $count = 0;
+        $tres = 0;
 
         if (!empty($controleFrotum->revisao_com_data)) {
             $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
@@ -154,6 +155,29 @@ if (! function_exists('revisaoComKmControleFrotum')) {
 
             if ($count > 1) {
                 $color = 'orange-yellow';
+                $tres = 1;
+            }
+        }
+
+        if (!empty($controleFrotum->data_vencimento_seguro)) {
+            $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+            $date2 = new DateTime(date('Y-m-d', strtotime($controleFrotum->data_vencimento_seguro)));
+
+            if ($color == 'yellow') {
+                $color = 'red-yellow';
+            }
+
+            if ($color == 'orange') {
+                $color = 'red-orange';
+            }
+
+            if ($date1 >= $date2 AND $color == '') {
+                $count += 1;
+                $color = 'red';
+            }
+
+            if ($tres > 0) {
+                $color = 'orange-red-yellow';
             }
         }
 

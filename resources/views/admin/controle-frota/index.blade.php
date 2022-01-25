@@ -5,10 +5,26 @@
 
 .orange {background-color: orange;}
 .yellow {background-color: yellow;}
+.red {background-color: red;}
 
 .orange-yellow {
     height: 100%;
     background: linear-gradient(90deg, orange 50%, yellow 50%);
+}
+
+.red-orange {
+    height: 100%;
+    background: linear-gradient(90deg, red 50%, orange 50%);
+}
+
+.red-yellow {
+    height: 100%;
+    background: linear-gradient(90deg, red 50%, yellow 50%);
+}
+
+.orange-red-yellow {
+    background:linear-gradient(to right, orange 0, orange 33%, yellow 33%, yellow 66%, #ff0000 66%, #ff0000 100%);
+    width: 100%;
 }
 
 </style>
@@ -33,6 +49,7 @@
             <form method="GET" action="{{ url('controle-frota/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <span class="input-group-append">
+                        <div class="square red"></div> <span class="mr-3">Seguro Vencido</span>
                         <div class="square orange"></div> <span class="mr-3">Licenciamento em atraso</span>
                         <div class="square yellow"></div> <span class="mr-3">Revisão KM em atraso</span>
                     </span>
