@@ -186,6 +186,24 @@ if (! function_exists('revisaoComKmControleFrotum')) {
     }
 }
 
+if (! function_exists('revisaoVencimentoLancamentoMultas')) {
+    function revisaoVencimentoLancamentoMultas($lancamentoMulta) // resolve o problema causado na formatação com jquery com decimais simples
+    {
+        if ($lancamentoMulta->pago == 1) {
+            return 'green';
+        }
+
+        if (!empty($lancamentoMulta->data_vencimento)) {
+            $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
+            $date2 = new DateTime(date('Y-m-d', strtotime($lancamentoMulta->data_vencimento)));
+
+            if ($date1 >= $date2) {
+                return 'red';
+            }
+        }
+    }
+}
+
 if (! function_exists('verificaDataCNH')) {
     function verificaDataCNH($cnh_validade, $avisar_antes_qtddias)
     {

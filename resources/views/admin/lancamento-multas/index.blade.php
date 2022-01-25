@@ -1,4 +1,10 @@
 @extends('layouts.admin.index')
+<style>
+.square {height: 25px;width: 25px}
+
+.red {background-color: red;}
+.green {background-color: green;}
+</style>
 
 @section('content')
     <nav aria-label="breadcrumb">
@@ -19,6 +25,10 @@
 
             <form method="GET" action="{{ url('/lancamento-multas/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
+                    <span class="input-group-append">
+                        <div class="square red"></div> <span class="mr-3">Vencida</span>
+                        <div class="square green"></div> <span class="mr-3">Paga</span>
+                    </span>
                     <span class="input-group-append">
                         <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
                           Filtrar
@@ -93,7 +103,7 @@
                     </thead>
                     <tbody>
                         @forelse($results as $item)
-                            <tr>
+                            <tr class="{{ revisaoVencimentoLancamentoMultas($item) }}">
 {{--                                <td>{{ $loop->iteration }}</td>--}}
                                 @can('isMasterOrAdmin')
                                     <td>{{$item->setor->nome}}</td>
