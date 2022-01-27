@@ -30,7 +30,7 @@ class ManutencaosController extends Controller
         // $this->middleware('checksetor:' . MANUTENCAODESPESAS_EDITAR, ['only' => ['edit']]);
         // $this->middleware('checksetor:' . MANUTENCAODESPESAS_DELETAR, ['only' => ['destroy']]);
         // $this->middleware('checksetor:' . MANUTENCAODESPESAS_RELATORIO, ['only' => ['relatorio']]);
-        
+
 
         $this->model = $lancamentomultas;
         $this->saveSetorScope = true;
@@ -57,12 +57,12 @@ class ManutencaosController extends Controller
             'controle_frota_id' => 'required',
             'tipo_manutencao_id' => 'required',
             'fornecedor_id' => 'required',
-            'responsavel_retirada' => 'required',
-            'descricao_manutencao' => 'required',
-            'numero_processo' => 'required',
+//            'responsavel_retirada' => 'required',
+//            'descricao_manutencao' => 'required',
+//            'numero_processo' => 'required',
             'data' => 'required',
             'hora' => 'required',
-            'valor' => 'required',
+//            'valor' => 'required',
             'tipo_correcao_id' => 'required',
             'status' => 'required',
         ];
