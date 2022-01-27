@@ -163,21 +163,25 @@ if (! function_exists('revisaoComKmControleFrotum')) {
             $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
             $date2 = new DateTime(date('Y-m-d', strtotime($controleFrotum->data_vencimento_seguro)));
 
-            if ($color == 'yellow') {
-                $color = 'red-yellow';
-            }
+            if ($date1 >= $date2) {
 
-            if ($color == 'orange') {
-                $color = 'red-orange';
-            }
-
-            if ($date1 >= $date2 AND $color == '') {
                 $count += 1;
-                $color = 'red';
-            }
+                if ($color == 'yellow') {
+                    $color = 'red-yellow';
+                }
 
-            if ($tres > 0) {
-                $color = 'orange-red-yellow';
+                if ($color == 'orange') {
+                    $color = 'red-orange';
+                }
+
+                if ($date1 >= $date2 AND $color == '') {
+                    $count += 1;
+                    $color = 'red';
+                }
+
+                if ($tres > 0) {
+                    $color = 'orange-red-yellow';
+                }
             }
         }
 
