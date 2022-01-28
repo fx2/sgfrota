@@ -121,7 +121,7 @@ class ValeCombustiveisLavagensController extends Controller
             'results' => $result->get(),
             'fields' => $this->pdfFields,
             'titles' => $this->pdfTitles,
-            'pdfTitle' => $this->pdfTitle . ' - Litros:' . ' ' . number_format($this->quantidadeLitros($result->get()), 0)
+            'pdfTitle' => $this->pdfTitle . ' - Litros:' . ' ' . $this->quantidadeLitros($result->get())
         ];
 
         $path = 'admin/pdf/valeCombustiveisLavagens/relatorio-geral';
