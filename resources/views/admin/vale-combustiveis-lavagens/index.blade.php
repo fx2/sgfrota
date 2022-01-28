@@ -12,7 +12,11 @@
         <div class="card-header h3">
             <div class="d-flex justify-content-between">
                 <span>Vale de Combustiveis e Lavagens</span>
+                @isset($quantidadeLitros)
+                    <span>Litros: {{ number_format($quantidadeLitros, 0) }} </span>
+                @else
                     <span>Litros: {{ number_format(\App\Models\ValeCombustiveisLavagen::sum('quantidade_litros'), 0) }}</span>
+                @endisset
             </div>
         </div>
         <div class="card-body">
