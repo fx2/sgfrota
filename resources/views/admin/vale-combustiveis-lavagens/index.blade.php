@@ -172,7 +172,7 @@
                                                 $a = $val[0];
                                                 $b = $val[1];
 
-                                                $valor = $item->$a->$b;
+                                                $valor = $item->$a->$b ?? '';
 
                                                 if ($val[1] == 'status') {
                                                     $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
