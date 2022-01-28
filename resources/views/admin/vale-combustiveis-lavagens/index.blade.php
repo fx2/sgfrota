@@ -13,9 +13,9 @@
             <div class="d-flex justify-content-between">
                 <span>Vale de Combustiveis e Lavagens</span>
                 @isset($quantidadeLitros)
-                    <span>Litros: {{ $quantidadeLitros }} </span>
+                    <span>Litros: {{ number_format($quantidadeLitros, 0) }} </span>
                 @else
-                    <span>Litros: {{ \App\Models\ValeCombustiveisLavagen::sum('quantidade_litros') }}</span>
+                    <span>Litros: {{ number_format(\App\Models\ValeCombustiveisLavagen::sum('quantidade_litros'), 0) }}</span>
                 @endisset
             </div>
         </div>
@@ -172,7 +172,7 @@
                                                 $a = $val[0];
                                                 $b = $val[1];
 
-                                                $valor = $item->$a->$b;
+                                                $valor = $item->$a->$b ?? '';
 
                                                 if ($val[1] == 'status') {
                                                     $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
