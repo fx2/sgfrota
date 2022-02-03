@@ -50,7 +50,9 @@ class LancamentoMulta extends BaseModel
         'status',
         'boleto_pagamento',
         'data_pagamento_boleto',
-        'comprovante_pagamento'
+        'comprovante_pagamento',
+        'condutor_identificado',
+        'nome_condutor'
     ];
 
     public function motorista()

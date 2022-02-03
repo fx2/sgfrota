@@ -193,18 +193,33 @@ if (! function_exists('revisaoComKmControleFrotum')) {
 if (! function_exists('revisaoVencimentoLancamentoMultas')) {
     function revisaoVencimentoLancamentoMultas($lancamentoMulta) // resolve o problema causado na formatação com jquery com decimais simples
     {
-        if ($lancamentoMulta->pago == 1) {
-            return 'green';
+        $pago = $lancamentoMulta->pago;
+        $condutor = $lancamentoMulta->condutor_identificado;
+        $data_lancamento = $lancamentoMulta->data_vencimento;
+
+//        dd('pago: ', $pago, 'condutor', $condutor, 'data: ', $data_lancamento );
+
+        if ($pago == 1) {
+            if ($condutor == 1)
+                return 'blue-gray';
+
+            return 'gray';
         }
 
-        if (!empty($lancamentoMulta->data_vencimento)) {
+        if (!empty($data_lancamento)) {
             $date1 = new DateTime(date('Y-m-d', strtotime(date('Y-m-d'))));
             $date2 = new DateTime(date('Y-m-d', strtotime($lancamentoMulta->data_vencimento)));
 
             if ($date1 >= $date2) {
-                return 'red';
+                if ($condutor == 1)
+                    return 'blue-yellow';
+
+                return 'yellow';
             }
         }
+
+        if ($condutor == 1)
+            return 'blue';
     }
 }
 
