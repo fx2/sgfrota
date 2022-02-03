@@ -190,6 +190,31 @@
     ])
 </div>
 
+<div class="form-group row mb-5 {{ $errors->has('condutor_identificado') ? 'has-error' : ''}}">
+    <div class="col-2">
+        <label for="condutor_identificado" class="control-label">{{ 'Condutor Identificado' }}</label>
+    </div>
+    <div class="col-10">
+        <div class="radio">
+    <label><input name="condutor_identificado" onclick="condutorIdentificado(1)" type="radio" value="1" {{ (isset($result) && 1 == $result->condutor_identificado) ? 'checked' : '' }}> Sim</label>
+    <label><input name="condutor_identificado" onclick="condutorIdentificado(0)" type="radio" value="0" @if (isset($result)) {{ (0 == $result->condutor_identificado) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Não</label>
+</div>
+        {!! $errors->first('condutor_identificado', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div id="hide_nome_condutor_identificado">
+    <div class="form-group row mb-5 {{ $errors->has('nome_condutor') ? 'has-error' : ''}}">
+        <div class="col-2">
+            <label for="nome_condutor" class="control-label">{{ 'Nome do Condutor Identificado' }}</label>
+        </div>
+        <div class="col-10">
+            <input class="form-control" name="nome_condutor" type="text" id="nome_condutor" value="{{ isset($result->nome_condutor) ? $result->nome_condutor : old('nome_condutor')}}" >
+            {!! $errors->first('nome_condutor', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+</div>
+
     <div class="form-group row mb-5 {{ $errors->has('boleto_pagamento') ? 'has-error' : ''}}">
         <div class="col-2">
             <label for="boleto_pagamento" class="control-label">{{ 'Boleto de Pagamento' }}</label>
@@ -284,8 +309,7 @@
     <script src="{{ asset('js/ajax_motorista.js') }}"></script>
     <script src="{{ asset('js/ajax_veiculoTemporario.js') }}"></script>
 <script>
-    var result = @json($result ?? ["pago" => null]);
-    console.log(result.pago);
+    result = @json($result ?? ["pago" => null, 'condutor_identificado' => null]);
 
     foiPago(result.pago);
 
@@ -296,6 +320,17 @@
         }
 
         $('#hide_controle_pago').fadeOut();
+    }
+
+    condutorIdentificado(result.condutor_identificado);
+
+    function condutorIdentificado(value) {
+        if (value == 1) {
+            $('#hide_nome_condutor_identificado').fadeIn();
+            return;
+        }
+
+        $('#hide_nome_condutor_identificado').fadeOut();
     }
     // var tipoMultaAppend = $('#load-tipomulta');
     //

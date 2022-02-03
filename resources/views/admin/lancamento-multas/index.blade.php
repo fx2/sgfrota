@@ -2,8 +2,13 @@
 <style>
 .square {height: 25px;width: 25px}
 
-.red {background-color: red;}
-.green {background-color: green;}
+.gray {background-color: #AAAAAA;}
+.yellow {background-color: #FFC926;}
+.blue {background-color: #73B9FF;}
+
+.blue-gray {height: 100%; background: linear-gradient(90deg, #73B9FF 50%, #AAAAAA 50%);}
+
+.blue-yellow {height: 100%; background: linear-gradient(90deg, #73B9FF 50%, #FFC926 50%);}
 </style>
 
 @section('content')
@@ -26,8 +31,9 @@
             <form method="GET" action="{{ url('/lancamento-multas/custom/listagem ') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                 <div class="input-group">
                     <span class="input-group-append">
-                        <div class="square red"></div> <span class="mr-3">Vencida</span>
-                        <div class="square green"></div> <span class="mr-3">Paga</span>
+                        <div class="square yellow"></div> <span class="mr-3">Boleto Vencido</span>
+                        <div class="square gray"></div> <span class="mr-3">Boleto Pago</span>
+                        <div class="square blue"></div> <span class="mr-3">Condutor Identificado</span>
                     </span>
                     <span class="input-group-append">
                         <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#exampleModal">
