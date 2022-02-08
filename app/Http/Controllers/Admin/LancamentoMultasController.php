@@ -73,8 +73,8 @@ class LancamentoMultasController extends Controller
             'status' => 'required',
         ];
 
-        $this->indexFields = [['motorista', 'nome'], ['controle_frota', 'veiculo'], ['tipo_multa', 'tipo'], ['status']];
-        $this->indexTitles = ['Motorista', 'Veículo', 'Tipo', 'Status'];
+        $this->indexFields = [['motorista', 'nome'], ['data_vencimento'], ['controle_frota', 'veiculo'], ['tipo_multa', 'tipo'], ['numero_ait']];
+        $this->indexTitles = ['Motorista', 'Data Venc', 'Veículo', 'Tipo', 'N° AIT'];
 
         $this->pdfFields = [['data_multa'], ['hora_multa'], ['motorista', 'nome'], ['controle_frota', 'placa'],
             ['setor', 'nome'],
@@ -100,6 +100,9 @@ class LancamentoMultasController extends Controller
 
         if($requestData['controle_frota_id'] !== null)
             $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
+
+        if($requestData['numero_ait'] !== null)
+            $result = $result->where('numero_ait', '=', $requestData['numero_ait']);
 
         if($requestData['data_inicial'] !== null)
             $result = $result->whereDate('data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));

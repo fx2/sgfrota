@@ -70,6 +70,8 @@
                                     </div>
 
                                     @include('parts/select-setor-index')
+
+                                    @include('parts/lancamento-multas-search')
                                 </div>
                               </div>
                               <div class="modal-footer">
@@ -125,7 +127,7 @@
                                             if ($val[0] == 'status') {
                                                 $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                             }
-                                            elseif ($val[0] == 'data') {
+                                            elseif ($val[0] == 'data_vencimento') {
                                                 $valor = convertTimestamp($valor, 'd/m/Y');
                                             }
 
@@ -140,7 +142,7 @@
                                             if ($val[1] == 'status') {
                                                 $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                             }
-                                            elseif ($val[1] == 'data') {
+                                            elseif ($val[1] == 'data_vencimento') {
                                                 $valor = convertTimestamp($valor, 'd/m/Y');
                                             }
                                         }
@@ -155,7 +157,7 @@
                                             if ($val[2] == 'status') {
                                                 $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                             }
-                                            elseif ($val[2] == 'data') {
+                                            elseif ($val[2] == 'data_vencimento') {
                                                 $valor = convertTimestamp($valor, 'd/m/Y');
                                             }
                                         }
@@ -171,7 +173,7 @@
                                             if ($val[3] == 'status') {
                                                 $valor = $valor == 1 ? 'Ativo' : 'Bloqueado';
                                             }
-                                            elseif ($val[3] == 'data') {
+                                            elseif ($val[3] == 'data_vencimento') {
                                                 $valor = convertTimestamp($valor, 'd/m/Y');
                                             }
                                         }
