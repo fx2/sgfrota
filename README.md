@@ -1,3 +1,17 @@
+rodar na raiz do projeto apos clonar:
+
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/opt \
+    -w /opt \
+    laravelsail/php80-composer:latest \
+    composer install --ignore-platform-reqs
+
+entao executar o comando ./vendor/bin/sail up -d
+
+
+-------------------------------------
+
 ifconfig docker0 pra pegar o código do XDEBUG_CONFIG=remote_host=172.17.0.1
 
 o localhostXdebu ta nas imagens na pasta public/
