@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
     <label for="numero_ait">Número AIT</label>
     <div class="form-group">
-        <select name="numero_ait" class="form-control inside_modal" id="numero_ait">
+        <select name="numero_ait" class="form-control inside_modal" id="numero_ait"  style="width: 100%;">
             <option value="">Selecione ...</option>
         </select>
     </div>
