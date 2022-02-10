@@ -85,9 +85,9 @@
                                     </div>
 
                                     <div class="col-12 col-sm-6	col-md-6 col-lg-6 col-xl-6 mb-1">
-                                        <div class="form-group">
                                             <label for="exampleFormControlInput1">Responsável</label>
-                                            <select name="tipo_responsavel_id" class="form-control" id="tipo_responsavel_id" >
+                                        <div class="form-group">
+                                            <select name="tipo_responsavel_id" class="form-control inside_modal" id="tipo_responsavel_id" style="width: 100%;">
                                                 <option value="">Selecione ...</option>
                                                 @foreach ($selectModelFields['TipoResponsavel'] as $optionKey => $optionValue)
                                                     <option value="{{ $optionValue->id }}"
