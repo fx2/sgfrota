@@ -139,6 +139,14 @@
 
 @stack('js')
 
+<script>
+    $(document).ready(function() {
+      $(".inside_modal").select2({
+        dropdownParent: $("#exampleModal")
+      });
+    });
+</script>
+
 <script src="{{ asset('js/ajax_solicitacoes_alerta.js') }}"></script>
 
 @toastr_js

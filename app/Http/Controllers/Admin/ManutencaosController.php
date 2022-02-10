@@ -67,8 +67,8 @@ class ManutencaosController extends Controller
             'status' => 'required',
         ];
 
-        $this->indexFields = [['responsavel_retirada'], ['data'], ['hora'], ['status']];
-        $this->indexTitles = ['Responsável', 'Data', 'Hora', 'Status'];
+        $this->indexFields = [['controle_frota', 'veiculo'], ['controle_frota', 'placa'], ['data'], ['tipo_manutencao', 'nome']];
+        $this->indexTitles = ['Veículo', 'Placa', 'Data', 'Manutenção/Despesas'];
 
         $this->pdfFields = [['data'], ['responsavel_retirada'],  ['controle_frota', 'placa'], ['setor', 'nome'], ['tipo_manutencao', 'nome'], ['descricao_manutencao'], ['fornecedor', 'razao_social'], ['valor']];
         $this->pdfTitles = ['Data', 'Responsável', 'Veículo', 'Setor', 'Tipo', 'Descrição', 'Fornecedor', 'Valor R$'];
@@ -76,6 +76,40 @@ class ManutencaosController extends Controller
         $this->pdfTitle = 'Manutenções/Despesas';
 
         $this->numbersWithDecimal = ['valor'];
+    }
+
+    public function customListagem(Request $request)
+    {
+        $limit = $request->all()['limit'] ?? 20;
+
+        $result = $this->model;
+        $requestData = $request->all();
+
+        if($requestData['tipo_manutencao_id'] !== null)
+            $result = $result->where('tipo_manutencao_id', '=', $requestData['tipo_manutencao_id']);
+
+        if($requestData['controle_frota_id'] !== null)
+            $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
+
+        if($requestData['data_inicial'] !== null)
+            $result = $result->whereDate('data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
+
+        if($requestData['data_final'] !== null)
+            $result = $result->whereDate('data', '<=', convertTimestampToBd($requestData['data_final'], 'Y-m-d'));
+
+        if (\Gate::allows('isMasterOrAdmin')){
+            if($requestData['setor_id'] !== null)
+                $result = $result->where('setor_id', '=', $requestData['setor_id']);
+        } else {
+            $result = $result->where('setor_id', '=', auth('api')->user()->setor_id);
+        }
+
+        if ($request->export_pdf == "true")
+            return $this->exportPdf($result);
+
+        $result = $result->paginate($limit);
+
+        return view($this->path.'.index', ['results'=>$result, 'request'=> $requestData, 'selectModelFields' => $this->selectModelFields(), 'fields' => $this->indexFields, 'titles' => $this->indexTitles]);
     }
 
     public function create()

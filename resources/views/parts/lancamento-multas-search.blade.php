@@ -9,11 +9,6 @@
 
 @push('js')
 <script>
-    $(document).ready(function() {
-      $(".inside_modal").select2({
-        dropdownParent: $("#exampleModal")
-      });
-    });
 
     loadAit();
 
