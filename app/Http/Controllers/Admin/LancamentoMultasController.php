@@ -66,7 +66,7 @@ class LancamentoMultasController extends Controller
             'hora_multa' => 'required',
             'orgao_correspondente' => 'required',
             'enquadramento' => 'required',
-            'data_vencimento' => 'required',
+//            'data_vencimento' => 'required',
             'valor_multa' => 'required',
             'pago' => 'required',
             'foto_multa' => 'required',
