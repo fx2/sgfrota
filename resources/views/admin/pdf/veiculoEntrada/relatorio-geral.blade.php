@@ -9,7 +9,7 @@
     <thead>
       <tr>
         @foreach ($titles as $item)
-            <th class="borda" scope="col">{{ $item }}</th>
+              <th class="borda" scope="col"><span class="tdcenter-font10">{{ $item }}</span></th>
         @endforeach
       </tr>
     </thead>
@@ -23,7 +23,11 @@
               <td class="borda" scope="row">{{ convertTimestamp($item->data, 'd/m/Y') }}</td>
             @else
 
-              <td class="borda tdcenter-font13" width="100%" scope="row">
+              @if($val[0] != 'relatorio_trajeto_motorista')
+                  <td class="borda tdcenter-font10" width="30%" scope="row">
+              @else
+                <td class="borda tdcenter-font10" width="100%" scope="row">
+              @endif
                 @php
                 // da pra melhorar esses if e fazer um loop, mas nao quero
                   if (!empty($val[0])){
