@@ -72,10 +72,10 @@ class ValeCombustiveisLavagensController extends Controller
 //            $result = $result->orWhere('nome_responsavel', 'LIKE', "%$requestData[nome_responsavel]%");
 //
         if($requestData['tipo_vale'] !== null)
-            $result = $result->orWhere('tipo_vale', '=', "$requestData[tipo_vale]");
+            $result = $result->where('tipo_vale', '=', "$requestData[tipo_vale]");
 
         if($requestData['controle_frota_id'] !== null)
-            $result = $result->orWhere('controle_frota_id', '=', $requestData['controle_frota_id']);
+            $result = $result->where('controle_frota_id', '=', $requestData['controle_frota_id']);
 
         if($requestData['data_inicial'] !== null)
             $result = $result->whereDate('data', '>=', convertTimestampToBd($requestData['data_inicial'], 'Y-m-d'));
