@@ -1,5 +1,9 @@
 rodar na raiz do projeto apos clonar:
 
+windows:
+docker run --rm --interactive --tty --volume C:/path/to/project:/app composer install --ignore-platform-reqs --no-scripts
+
+Linux:
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/opt \
