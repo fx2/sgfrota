@@ -63,3 +63,6 @@ Route::resource('activity-log', 'App\Http\Controllers\Configuracoes\ActivityLogC
 Route::resource('agenda', 'App\Http\Controllers\Admin\AgendaController');
 Route::resource('solicitacoes', 'App\Http\Controllers\Admin\SolicitacoesController');
 Route::resource('tipo-solicitacao', 'App\Http\Controllers\Admin\TipoSolicitacaoController');
+
+
+Route::resource('/xtests-pdf', 'App\Http\Controllers\TestesPdfController');
