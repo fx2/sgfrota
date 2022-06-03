@@ -1,18 +1,18 @@
 <!DOCTYPE html>
         <html>
             <head>
-                <title>Export Google Chart to PDF using PHP with DomPDF</title>
+                <title></title>
           <link rel="stylesheet" href="{!! asset('css/bootstrap3.min.css') !!}">
 
             </head>
             <body>
                 <br /><br />
                 <div class="container" id="testing">
-                    <h3 align="center">Export Google Chart to PDF using PHP with DomPDF</h3>
+                    <h3 align="center"></h3>
                     <br />
            <div class="panel panel-default">
             <div class="panel-heading">
-             <h3 class="panel-title">Export Google Chart to PDF using PHP with DomPDF</h3>
+             <h3 class="panel-title"></h3>
             </div>
             <div class="panel-body" align="center">
                 <canvas id="demo"  style="width: 50%; max-width:100px; height: 40px; "></canvas>
@@ -25,7 +25,7 @@
            <form method="get" id="make_pdf" action="/download">
                {{csrf_field()}}
             <input type="hidden" name="hidden_html" id="hidden_html" />
-            <button type="button" name="create_pdf" id="create_pdf" class="btn btn-danger btn-xs">Make PDF</button>
+            <button type="button" name="create_pdf" id="create_pdf" class="btn btn-danger btn-xs"></button>
            </form>
           </div>
 
