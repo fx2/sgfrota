@@ -10,7 +10,7 @@
     <div class="container mt-4">
         <div class="row justify-content-between">
             <div class="col-4 offset-1">
-              <img src="{{ asset('images/logo.png') }}" />
+              <img src="" />
             </div>
             <div class="col-5 mt-4">
               <span>Grupo Fenix</span>
@@ -108,7 +108,7 @@
 {{--  Carinhas ruim regular bom otimo   --}}
 
 {{--  gráfico de linha  --}}
-    <div align="center" class="mt-3">
+    <div align="center" class="mt-5">
   <canvas id="myChart" style="width: 100%; max-width:800px; height: 50px;"></canvas>
 </div>
 
@@ -159,18 +159,90 @@
         <p><strong> 1. Como você avalia o serviço de hoje? </strong></p>
         <div class="ml-5">
             <div class="row">
-                <div class="col-2">
+                <div class="col-1">
                   Ótimo
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                          {{'25%'}}CAIO
+                      <div class="progress-bar bg-success" style="width: {{'71.4'}}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                       </div>
                     </div>
                 </div>
-                <div class="col-8">
-                    {{'30 71,4%'}}CAIO
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-1">
+                            {{ '30' }}
+                        </div>
+                        <div class="col-1">
+                            {{ '71,4%' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">
+                  Bom
+                </div>
+                <div class="col-3">
+                    <div class="progress">
+                      <div class="progress-bar bg-info" style="width: {{'19.4'}}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-1">
+                            {{ '8' }}
+                        </div>
+                        <div class="col-1">
+                            {{ '19,0%' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">
+                  Regular
+                </div>
+                <div class="col-3">
+                    <div class="progress">
+                      <div class="progress-bar bg-warning" style="width: {{'4.8'}}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-1">
+                            {{ '2' }}
+                        </div>
+                        <div class="col-1">
+                            {{ '4,8%' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-1">
+                  Ruim
+                </div>
+                <div class="col-3">
+                    <div class="progress">
+                      <div class="progress-bar bg-danger" style="width: {{'4.8'}}%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-1">
+                            {{ '2' }}
+                        </div>
+                        <div class="col-1">
+                            {{ '4,8%' }}
+                        </div>
+                    </div>
                 </div>
             </div>
 
