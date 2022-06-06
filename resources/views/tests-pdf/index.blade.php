@@ -73,7 +73,7 @@
 {{--  Carinhas ruim regular bom otimo   --}}
     <div align="center">
         <div class="row justify-content-between"
-             style="padding: 0px 400px 0px 400px;"
+             style="padding: 0px 200px 0px 200px;"
         />
             <div class="col-3">
                 <span>{{ '5%' }}CAIO</span>
