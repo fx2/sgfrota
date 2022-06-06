@@ -27,7 +27,7 @@
 {{-- gráfico valocimetro --}}
     <div align="center">
         <h4><b>Relatório do dia {{ '21/2/22' }}CAIO</b></h4>
-        <p style="margin-right: 46%;">1. Como você avalia o serviço de hoje?</p>
+        <p style="margin-right: 63%;">1. Como você avalia o serviço de hoje?</p>
         <canvas id="demo" style="width: 100%; max-width:350px; height: 200px;"></canvas>
         <div hidden id="preview-textfield"></div>
         <h5>Satisfação</h5>
@@ -157,6 +157,31 @@
         <hr>
         <h4><strong> Consolidado do dia </strong></h4>
         <p><strong> 1. Como você avalia o serviço de hoje? </strong></p>
+        <div class="ml-5">
+            <div class="row">
+                <div class="col-2">
+                  Ótimo
+                </div>
+                <div class="col">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                          {{'25%'}}CAIO
+                      </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    {{'30 71,4%'}}CAIO
+                </div>
+            </div>
+<h1 style="background-color:Tomato;">Tomato</h1>
+<h1 style="background-color:Orange;">Orange</h1>
+<h1 style="background-color:DodgerBlue;">DodgerBlue</h1>
+<h1 style="background-color:MediumSeaGreen;">MediumSeaGreen</h1>
+<h1 style="background-color:Gray;">Gray</h1>
+<h1 style="background-color:SlateBlue;">SlateBlue</h1>
+<h1 style="background-color:Violet;">Violet</h1>
+<h1 style="background-color:LightGray;">LightGray</h1>
+        </div>
     </div>
 
 </body>
