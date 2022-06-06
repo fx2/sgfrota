@@ -164,7 +164,7 @@
                 </div>
                 <div class="col">
                     <div class="progress">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                           {{'25%'}}CAIO
                       </div>
                     </div>
@@ -173,14 +173,7 @@
                     {{'30 71,4%'}}CAIO
                 </div>
             </div>
-<h1 style="background-color:Tomato;">Tomato</h1>
-<h1 style="background-color:Orange;">Orange</h1>
-<h1 style="background-color:DodgerBlue;">DodgerBlue</h1>
-<h1 style="background-color:MediumSeaGreen;">MediumSeaGreen</h1>
-<h1 style="background-color:Gray;">Gray</h1>
-<h1 style="background-color:SlateBlue;">SlateBlue</h1>
-<h1 style="background-color:Violet;">Violet</h1>
-<h1 style="background-color:LightGray;">LightGray</h1>
+
         </div>
     </div>
 
