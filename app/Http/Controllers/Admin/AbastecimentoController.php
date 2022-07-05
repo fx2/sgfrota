@@ -57,6 +57,7 @@ class AbastecimentoController extends Controller
 //            'foto' => 'required',
 //            'km_atual' => 'required',
 //            'responsavel' => 'required|string',
+        
             'status' => 'required|boolean',
         ];
 
