@@ -15,6 +15,9 @@
         {!! $errors->first('controle_frota_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+@include('parts/select-setor')
+
 <div class="form-group row mb-5 {{ $errors->has('tipo_combustivel_id') ? 'has-error' : ''}}">
     <div class="col-2">
         <label for="tipo_combustivel_id" class="control-label">{{ 'Tipo Combustivel' }}</label>
@@ -149,8 +152,6 @@
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-
-@include('parts/select-setor')
 
 
 <div class="form-group">

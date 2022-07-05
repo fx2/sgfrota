@@ -28,7 +28,7 @@ class AbastecimentoController extends Controller
         // $this->middleware('checksetor:' . ABASTECIMENTOS_EDITAR, ['only' => ['edit']]);
         // $this->middleware('checksetor:' . ABASTECIMENTOS_DELETAR, ['only' => ['destroy']]);
         // $this->middleware('checksetor:' . ABASTECIMENTOS_RELATORIO, ['only' => ['relatorio']]);
-        
+
         $this->model = $abastecimento;
         $this->saveSetorScope = true;
         $this->path = 'admin.abastecimento';
@@ -49,14 +49,14 @@ class AbastecimentoController extends Controller
         $this->fileName = ['foto'];
         $this->uploadFilePath = 'images/abastecimento';
         $this->validations = [
-            'qtd_litros' => 'required',
-            'valor' => 'required',
+//            'qtd_litros' => 'required',
+//            'valor' => 'required',
             'controle_frota_id' => 'required|integer',
-            'tipo_combustivel_id' => 'required|integer',
-            'fornecedor_id' => 'required|integer',
-            'foto' => 'required',
-            'km_atual' => 'required',
-            'responsavel' => 'required|string',
+//            'tipo_combustivel_id' => 'required|integer',
+//            'fornecedor_id' => 'required|integer',
+//            'foto' => 'required',
+//            'km_atual' => 'required',
+//            'responsavel' => 'required|string',
             'status' => 'required|boolean',
         ];
 
