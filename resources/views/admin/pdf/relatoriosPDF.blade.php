@@ -103,11 +103,11 @@
 
                   if (!empty($val[1])){
                     $a = $val[0];
-                    if (isset($val[1])) {
-                        continue;
-                    }
                     $b = $val[1];
 
+                    if (!isset($item->$a->$b)) {
+                        continue;
+                    }
                     $valor = $item->$a->$b;
 
                     if ($val[1] == 'status') {
