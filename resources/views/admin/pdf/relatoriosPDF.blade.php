@@ -103,6 +103,9 @@
 
                   if (!empty($val[1])){
                     $a = $val[0];
+                    if (isset($val[1])) {
+                        continue;
+                    }
                     $b = $val[1];
 
                     $valor = $item->$a->$b;
